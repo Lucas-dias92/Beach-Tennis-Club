@@ -192,7 +192,7 @@ h1,h2,h3{font-family:var(--display)}
 .foot-links button{background:#ffffff12;border:0;color:#d4eaee;padding:9px 15px;border-radius:99px;font-size:13px;font-weight:600;transition:.2s}
 .foot-links button:hover{background:#ffffff26;color:#fff}
 .copy{margin-top:34px;padding-top:22px;border-top:1px solid #ffffff1c;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.page-fade{animation:pagein .5s var(--ease)}
+.page-fade{animation:pagein .5s var(--ease)}#viewbar{background:#fff6e2;border-bottom:1px solid #f6e2b3;position:sticky;top:74px;z-index:15}.vb{border:1.5px solid #e9d49a;background:#fff;color:#7a5f2b;border-radius:99px;padding:6px 14px;font-weight:700;font-size:12.5px;transition:.2s}.vb:hover{background:#fff2c9}.vb.on{background:var(--navy);border-color:var(--navy);color:#fff}
 
 /* MODALS */
 .modal-backdrop{position:fixed;inset:0;background:#06262dcc;backdrop-filter:blur(6px);z-index:30;display:none;align-items:center;justify-content:center;padding:18px}
@@ -242,7 +242,7 @@ h1,h2,h3{font-family:var(--display)}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js"></script></head>
 <body>
-<header class="topbar" id="topbar"><div class="shell nav"><button class="brand" onclick="goPage('inicio')" aria-label="Beach Tennis Club - início"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></button><nav class="navlinks" aria-label="Navegação principal"><button class="active" data-page="inicio">Início</button><button data-page="membros">Membros</button><button data-page="jogos">Meus jogos <span id="game-count"></span></button><button data-page="professores">Aulas e professores</button><button data-page="professor">Área do professor</button></nav><div class="profile" id="profile-box"></div></div></header>
+<header class="topbar" id="topbar"><div class="shell nav"><button class="brand" onclick="goPage('inicio')" aria-label="Beach Tennis Club - início"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></button><nav class="navlinks" aria-label="Navegação principal"><button class="active" data-page="inicio">Início</button><button data-page="membros">Membros</button><button data-page="jogos">Meus jogos <span id="game-count"></span></button><button data-page="professores">Aulas e professores</button><button data-page="professor">Área do professor</button></nav><div class="profile" id="profile-box"></div></div></header><div id="viewbar" style="display:none"></div>
 <main class="shell">
 <section id="page-inicio" class="page active">
 <div class="hero"><div class="hero-grid">
@@ -319,6 +319,10 @@ function fmtDate(iso){return iso?iso.split('-').reverse().join('/'):''}
 function toISO(v){const m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v||'');if(!m)return '';const d=new Date(`${m[3]}-${m[2]}-${m[1]}T12:00:00`);return d.getDate()==+m[1]&&d.getMonth()+1==+m[2]?`${m[3]}-${m[2]}-${m[1]}`:''}
 const prof=id=>S.profiles.find(p=>p.id===id)||{name:'Jogador',rank:0,city:'',level:'Iniciante'};
 const teachersList=()=>S.profiles.filter(p=>p.role==='professor'||(p.is_admin&&p.local));
+let viewAs='admin';try{viewAs=localStorage.getItem('btc-view')||'admin'}catch(e){}
+function eff(){if(!S.me)return null;if(S.me.is_admin)return viewAs;return S.me.role==='professor'?'professor':'aluno'}
+function canTeach(){const v=eff();return v==='admin'||v==='professor'}
+function setView(v){viewAs=v;try{localStorage.setItem('btc-view',v)}catch(e){}renderAll();toast('Agora vendo como: '+({admin:'Administrador',aluno:'Aluno',professor:'Professor'}[v]))}
 function fail(error){if(error){toast('Erro: '+error.message);return true}return false}
 async function run(fn){if(busy)return;busy=true;try{await fn();await refresh()}catch(e){toast('Erro: '+(e.message||e))}busy=false;renderAll()}
 const lockCard=(msg)=>`<div class="empty"><b>🔒</b>${msg}<br><br><button class="btn btn-primary" onclick="openAuth('login')">Entrar / Cadastrar</button></div>`;
@@ -498,9 +502,9 @@ function contestResult(id){run(async()=>{const {error}=await sb.rpc('contest_res
 
 /* ===== ÁREA DO PROFESSOR ===== */
 function renderArea(){
-  const n=$('area-notice'),ag=$('teacher-agenda'),isAdm=!!(S.me&&S.me.is_admin),isT=!!(S.me&&(S.me.role==='professor'||isAdm));
+  const n=$('area-notice'),ag=$('teacher-agenda'),isAdm=eff()==='admin',isT=!!(S.me&&(eff()==='professor'||isAdm));
   if(!S.me){n.style.display='';n.innerHTML='Entre ou cadastre-se como <strong>professor</strong> para usar a agenda e aparecer na lista de aulas. <button class="btn btn-primary" style="margin-left:8px" onclick="openAuth(\'signup\',\'professor\')">Cadastrar como professor</button>'}
-  else if(!isT){n.style.display='';n.innerHTML='Sua conta é de <strong>jogador</strong>. Para dar aulas, crie uma conta de professor com outro e-mail.'}
+  else if(!isT){n.style.display='';n.innerHTML=''+(S.me.is_admin?'Você está vendo como <strong>aluno</strong>. Troque para Administrador ou Professor na barra de teste acima.':'Sua conta é de <strong>jogador</strong>. Para dar aulas, crie uma conta de professor com outro e-mail.')+''}
   else n.style.display='none';
   const pk=$('admin-picker');
   if(pk){if(isAdm){const ts=teachersList().filter(t=>t.id!==S.me.id),cur=activeTeacher();pk.innerHTML=`<label class="small" for="admin-teacher" style="display:block;margin-bottom:6px"><strong>Modo administrador:</strong> escolha de quem é a agenda</label><select class="field" id="admin-teacher" style="width:100%;margin-bottom:14px" onchange="setAdminTeacher(this.value)"><option value="${S.me.id}"${cur===S.me.id?' selected':''}>Minha conta (teste)</option>${ts.map(t=>`<option value="${t.id}"${t.id===cur?' selected':''}>${escapeHtml(t.name)}</option>`).join('')}</select>`}else pk.innerHTML=''}
@@ -510,12 +514,12 @@ function renderArea(){
   const tp=prof(activeTeacher());set('profile-name',tp.name);set('profile-city',tp.city);set('profile-arena',tp.local);set('profile-contact',tp.contact);set('profile-price',tp.price);set('profile-bio',tp.bio);
 }
 let adminTeacher=null;
-function activeTeacher(){if(!S.me)return null;if(!S.me.is_admin)return S.me.id;if(adminTeacher&&(adminTeacher===S.me.id||teachersList().some(t=>t.id===adminTeacher)))return adminTeacher;return S.me.id}
+function activeTeacher(){if(!S.me)return null;if(eff()!=='admin')return S.me.id;if(adminTeacher&&(adminTeacher===S.me.id||teachersList().some(t=>t.id===adminTeacher)))return adminTeacher;return S.me.id}
 function myLessons(){const id=activeTeacher();return S.lessons.filter(l=>l.teacher===id)}
 function setAdminTeacher(id){adminTeacher=id;renderArea()}
 function removeLesson(id){run(async()=>{const {error}=await sb.from('lessons').delete().eq('id',id);fail(error)})}
 function saveTeacherProfile(){
-  if(!S.me||(S.me.role!=='professor'&&!S.me.is_admin)){toast('Entre com uma conta de professor.');return}
+  if(!S.me||!canTeach()){toast('Entre com uma conta de professor.');return}
   const name=$('profile-name').value.trim(),city=$('profile-city').value.trim(),local=$('profile-arena').value.trim(),contact=$('profile-contact').value.replace(/\D/g,''),price=$('profile-price').value,bio=$('profile-bio').value.trim();
   if(!name||!city||!local||!contact){toast('Preencha nome, cidade, local e contato.');return}
   run(async()=>{const {error}=await sb.from('profiles').update({name,city,local,contact,bio,price:price===''?null:Number(price)}).eq('id',activeTeacher());if(!fail(error))toast('Perfil atualizado! Já aparece na lista de professores.')});
@@ -533,7 +537,7 @@ $('invite-form').addEventListener('submit',e=>{e.preventDefault();
   }).then(()=>goPage('membros'));
 });
 $('lesson-form').addEventListener('submit',e=>{e.preventDefault();
-  if(!S.me||(S.me.role!=='professor'&&!S.me.is_admin)){toast('Entre com uma conta de professor.');return}
+  if(!S.me||!canTeach()){toast('Entre com uma conta de professor.');return}
   const f=new FormData(e.target),iso=toISO(f.get('date'));
   if(!iso){toast('Use a data no formato dia/mês/ano, ex.: 20/10/2026.');return}
   run(async()=>{
@@ -548,7 +552,7 @@ $('auth-form').addEventListener('submit',submitAuth);
 function renderProfileBox(){
   const b=$('profile-box');
   if(!S.me){b.innerHTML='<button class="btn btn-primary" onclick="openAuth(\'login\')">Entrar</button>';return}
-  const sub=S.me.is_admin?'Administrador':S.me.role==='professor'?'Professor':(S.me.level||'Iniciante')+' · '+(S.me.rank||0)+' pts';
+  const sub=S.me.is_admin?({admin:'Administrador',aluno:'Vendo como aluno',professor:'Vendo como professor'}[viewAs]):S.me.role==='professor'?'Professor':(S.me.level||'Iniciante')+' · '+(S.me.rank||0)+' pts';
   b.innerHTML=`<div class="avatar">${escapeHtml(ini(S.me.name))}</div><div class="user-label"><strong style="font-size:13px;display:block;color:var(--navy)">${escapeHtml(S.me.name)}</strong><span class="small">${escapeHtml(sub)}</span></div><button class="btn btn-outline" style="padding:8px 12px" onclick="logout()">Sair</button>`;
 }
 function renderStats(){
@@ -560,7 +564,8 @@ function renderStats(){
   $('hero-players-label').textContent=st.players?(st.players===1?'já está na areia':'já estão na areia'):'a entrar na areia';
   $('fc-open').textContent=(st.open||0)===1?'1 quer jogar':(st.open||0)+' querem jogar';
 }
-function renderAll(){renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea()}
+function renderViewBar(){const v=$('viewbar');if(!v)return;if(!S.me||!S.me.is_admin){v.innerHTML='';v.style.display='none';return}v.style.display='';const b=(k,l)=>`<button type="button" class="vb${viewAs===k?' on':''}" onclick="setView('${k}')" aria-pressed="${viewAs===k}">${l}</button>`;v.innerHTML=`<div class="shell" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-top:8px;padding-bottom:8px"><span class="small" style="font-weight:700">🧪 Modo de teste · ver o site como:</span>${b('admin','Administrador')}${b('aluno','Aluno')}${b('professor','Professor')}</div>`}
+function renderAll(){renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea()}
 
 ['member-search','member-location','member-level','member-format','member-sort'].forEach(id=>$(id).addEventListener('input',renderMembers));
 ['teacher-search','teacher-location'].forEach(id=>$(id).addEventListener('input',renderTeachers));
