@@ -9,8 +9,8 @@ self.addEventListener('push', (e) => {
   try { d = e.data.json(); } catch (_) { d = { title: 'Beach Tennis Club', body: e.data ? e.data.text() : '' }; }
   e.waitUntil(self.registration.showNotification(d.title || 'Beach Tennis Club', {
     body: d.body || '',
-    icon: 'logo-icon-192.png',
-    badge: 'logo-icon-192.png',
+    icon: 'logo-icon-192.png?v=2',
+    badge: 'logo-icon-192.png?v=2',
     data: { url: d.url || './' },
     tag: 'btc-' + Date.now(),
     requireInteraction: true,
