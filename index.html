@@ -910,6 +910,7 @@ function setApproval(id,st){run(async()=>{const {error}=await sb.rpc('admin_set_
 function urlB64(s){const p='='.repeat((4-s.length%4)%4),b=(s+p).replace(/-/g,'+').replace(/_/g,'/'),r=atob(b),a=new Uint8Array(r.length);for(let i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
 async function enablePush(){
   if(!S.me){openAuth('login');return}
+  if('Notification' in window&&Notification.permission==='granted'&&'serviceWorker' in navigator){try{const r=await navigator.serviceWorker.getRegistration();const s=r&&await r.pushManager.getSubscription();if(s){await sendTestPush();return}}catch(e){}}
   if(!('serviceWorker' in navigator)||!('PushManager' in window)||!('Notification' in window)){toast('Este navegador não aceita avisos. No iPhone: abra o site no Safari, toque em Compartilhar → Adicionar à Tela de Início e abra por lá.');return}
   try{
     const perm=await Notification.requestPermission();
@@ -919,15 +920,21 @@ async function enablePush(){
     const j=sub.toJSON();
     const {error}=await sb.from('push_subscriptions').upsert({user_id:S.me.id,endpoint:j.endpoint,p256dh:j.keys.p256dh,auth:j.keys.auth},{onConflict:'endpoint'});
     if(fail(error))return;
-    toast('🔔 Avisos ativados neste aparelho! Você receberá pedidos de aula mesmo com o site fechado.');
+    toast('🔔 Avisos ativados! Em instantes deve aparecer uma notificação de teste neste aparelho.');await sendTestPush(true);
   }catch(e){toast('Não foi possível ativar os avisos: '+(e.message||e))}
   renderPushBox();
+}
+async function sendTestPush(silent){
+  if(!S.me){openAuth('login');return}
+  const {error}=await sb.rpc('send_test_push');
+  if(error){toast('Não foi possível enviar o teste: '+error.message);return}
+  if(!silent)toast('Aviso de teste enviado. Se não aparecer em alguns segundos, veja as dicas de "Avisos não aparecem?".');
 }
 function renderPushBox(){
   const b=$('push-box');if(!b)return;
   if(!S.me||!canTeach()){b.innerHTML='';return}
   const ok='Notification' in window&&Notification.permission==='granted';
-  b.innerHTML=`<div class="pushbar"><span>${ok?'🔔 Avisos de novos pedidos ativados neste aparelho.':'🔔 Receba um aviso no celular quando um aluno pedir aula.'}</span><button class="btn ${ok?'btn-outline':'btn-primary'}" onclick="enablePush()">${ok?'Reativar avisos':'Ativar avisos no celular'}</button></div>`;
+  b.innerHTML=`<div class="pushbar"><span>${ok?'🔔 Avisos de novos pedidos ativados neste aparelho.':'🔔 Receba um aviso no celular quando um aluno pedir aula.'}</span><span style="display:flex;gap:8px;flex-wrap:wrap">${ok?'<button class="btn btn-soft" onclick="sendTestPush()">Enviar aviso de teste</button>':''}<button class="btn ${ok?'btn-outline':'btn-primary'}" onclick="enablePush()">${ok?'Reativar avisos':'Ativar avisos no celular'}</button></span></div>`;
 }
 
 /* ===== FORMULÁRIOS ===== */
