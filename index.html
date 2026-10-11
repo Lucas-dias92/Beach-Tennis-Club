@@ -290,6 +290,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .bar-col span{position:absolute;bottom:-20px;font-size:9.5px;color:var(--muted);white-space:nowrap}
 .bars{padding-bottom:0;margin-bottom:22px}
 .req.pay{background:#f1fbf7;border-color:#b9e6d3;border-left-color:#1fa971}
+#pushbar-global{background:#eef7ff;border-bottom:1px solid #c5def5}.bell{font-size:14px;line-height:1}
 /* retângulo neon: pedidos esperando aceite */
 .neon-box{position:relative;border:2.5px solid #39ff14;border-radius:18px;padding:14px;margin:0 0 16px;background:#f4fff1;box-shadow:0 0 10px #39ff14,0 0 26px #39ff1488;animation:neonblink 1.15s ease-in-out infinite}
 .neon-box .req{background:#fff;border-color:#bff5b0;border-left-color:#39ff14}
@@ -358,7 +359,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js"></script></head>
 <body>
-<header class="topbar" id="topbar"><div class="shell nav"><button class="brand" onclick="goPage('inicio')" aria-label="Beach Tennis Club - início"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></button><nav class="navlinks" aria-label="Navegação principal"><button class="active" data-page="inicio">Início</button><button data-page="membros">Membros</button><button data-page="jogos">Meus jogos <span id="game-count"></span></button><button data-page="professores">Aulas e professores</button><button data-page="professor">Área do professor</button></nav><div class="profile" id="profile-box"></div></div></header><div id="viewbar" style="display:none"></div>
+<header class="topbar" id="topbar"><div class="shell nav"><button class="brand" onclick="goPage('inicio')" aria-label="Beach Tennis Club - início"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></button><nav class="navlinks" aria-label="Navegação principal"><button class="active" data-page="inicio">Início</button><button data-page="membros">Membros</button><button data-page="jogos">Meus jogos <span id="game-count"></span></button><button data-page="professores">Aulas e professores</button><button data-page="professor">Área do professor</button></nav><div class="profile" id="profile-box"></div></div></header><div id="viewbar" style="display:none"></div><div id="pushbar-global" style="display:none"></div>
 <main class="shell">
 <section id="page-inicio" class="page active">
 <div class="hero"><div class="hero-grid">
@@ -970,7 +971,7 @@ function renderProfileBox(){
   if(!S.me){b.innerHTML='<button class="btn btn-primary" onclick="openAuth(\'login\')">Entrar</button>';return}
   const sub=S.me.is_admin?({admin:'Administrador',aluno:'Vendo como aluno',professor:'Vendo como professor'}[viewAs]):S.me.role==='professor'?'Professor':(S.me.level||'Iniciante')+' · '+(S.me.rank||0)+' pts';
   const av=S.me.photo_url?`<img class="avatar" style="object-fit:cover" src="${escapeHtml(S.me.photo_url)}" alt="">`:`<div class="avatar">${escapeHtml(ini(S.me.name))}</div>`;
-  b.innerHTML=`${av}<div class="user-label"><strong style="font-size:13px;display:block;color:var(--navy)">${escapeHtml(S.me.name)}</strong><span class="small">${escapeHtml(sub)}</span></div><button class="btn btn-outline" style="padding:8px 12px" onclick="logout()">Sair</button>`;
+  b.innerHTML=`${av}<button class="btn btn-outline bell" style="padding:8px 10px" onclick="enablePush()" title="Avisos no celular" aria-label="Ativar avisos no celular">🔔</button><div class="user-label"><strong style="font-size:13px;display:block;color:var(--navy)">${escapeHtml(S.me.name)}</strong><span class="small">${escapeHtml(sub)}</span></div><button class="btn btn-outline" style="padding:8px 12px" onclick="logout()">Sair</button>`;
 }
 function renderViewBar(){
   const v=$('viewbar');if(!v)return;
@@ -988,7 +989,19 @@ function renderStats(){
   $('hero-players-label').textContent=st.players?(st.players===1?'já está na areia':'já estão na areia'):'a entrar na areia';
   $('fc-open').textContent=(st.open||0)===1?'1 quer jogar':(st.open||0)+' querem jogar';
 }
-function renderAll(){renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderBadges()}
+function isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)}
+function isStandalone(){return window.matchMedia&&matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}
+function pushDismissed(){try{return localStorage.getItem('btc-push-dismiss')==='1'}catch(e){return false}}
+function dismissPush(){try{localStorage.setItem('btc-push-dismiss','1')}catch(e){}renderPushGlobal()}
+function renderPushGlobal(){
+  const el=$('pushbar-global');if(!el)return;
+  const granted='Notification' in window&&Notification.permission==='granted';
+  if(!S.me||granted||pushDismissed()||('Notification' in window&&Notification.permission==='denied')){el.style.display='none';el.innerHTML='';return}
+  const tip=isIOS()&&!isStandalone()?' <strong>No iPhone:</strong> toque em Compartilhar → <em>Adicionar à Tela de Início</em> e abra por lá.':'';
+  el.style.display='';
+  el.innerHTML=`<div class="shell" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between;padding-top:8px;padding-bottom:8px"><span class="small" style="color:#1f5a8a;font-weight:600">🔔 Receba avisos no celular: convites, aulas aceitas e resultados de jogos.${tip}</span><span style="display:flex;gap:8px"><button class="btn btn-primary" style="padding:8px 14px" onclick="enablePush()">Ativar avisos</button><button class="btn btn-outline" style="padding:8px 14px" onclick="dismissPush()">Agora não</button></span></div>`;
+}
+function renderAll(){renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderBadges()}
 
 ['member-search','member-location','member-level','member-format','member-sort'].forEach(id=>$(id).addEventListener('input',renderMembers));
 ['teacher-search','teacher-location'].forEach(id=>$(id).addEventListener('input',renderTeachers));
