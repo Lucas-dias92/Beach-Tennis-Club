@@ -1,0 +1,13 @@
+﻿{
+  "name": "Beach Tennis Club",
+  "short_name": "Beach Tennis",
+  "description": "Encontre sua dupla, marque partidas, suba no ranking e faça aulas.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6fbf8",
+  "theme_color": "#0b4f5a",
+  "icons": [
+    { "src": "logo-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
