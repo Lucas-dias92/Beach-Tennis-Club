@@ -551,7 +551,7 @@ async function submitAuth(e){
 async function forgotPassword(){
   const err=$('auth-err'),email=String($('a-email').value||'').trim().toLowerCase();
   if(!email){err.style.color='';err.textContent='Digite seu e-mail acima e clique em "Esqueci minha senha" de novo.';return}
-  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
+  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin});
   if(error){err.style.color='';err.textContent=error.message;return}
   err.style.color='#0e6b45';err.textContent='Enviamos um link para redefinir a senha no seu e-mail.';
 }async function logout(){await sb.auth.signOut();S.me=null;await refresh();renderAll();toast('Você saiu.');goPage('inicio')}
