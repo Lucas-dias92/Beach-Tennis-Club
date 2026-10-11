@@ -248,6 +248,50 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .cal-c.busy{background:#e6eaf0;color:#6b7a88;border-left:4px solid #b4bfcb;cursor:default}
 .cal-c.mine{outline:2px solid var(--coral);outline-offset:-2px}
 @keyframes pendpulse{50%{filter:brightness(1.08)}}
+/* agenda compacta: cabe inteira na tela, sem rolagem interna */
+.cal-wrap{max-height:none;overflow-y:visible;overflow-x:auto}
+.cal{min-width:620px}
+.cal-h{padding:4px 2px;font-size:10px}
+.cal-h strong{font-size:11.5px}
+.cal-t{height:19px;font-size:9.5px;padding:1px 6px 0 0}
+.cal-c{height:19px;padding:1px 5px;font-size:10px;line-height:17px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.cal-c.conf,.cal-c.pend{border-left-width:3px}
+.cal-c.free{background:#f4fbf8}
+.cal-nav .cal-sel{width:auto;min-width:150px;padding:8px 10px;font-size:13px}
+.cal-nav strong{font-size:13px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.opt{display:block;cursor:pointer}.opt input{position:absolute;opacity:0}
+.opt span{display:flex;flex-direction:column;gap:2px;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;transition:.2s;background:#fff}
+.opt b{font-size:13px;color:var(--navy)}
+.opt strong{font:800 20px var(--display);color:var(--deep)}
+.opt small{color:var(--muted);font-size:11px}
+.opt:hover span{border-color:#bcd9d2}
+.opt input:checked+span{border-color:var(--teal);background:var(--aqua);box-shadow:0 0 0 3px #0a879322}
+.opt input:focus-visible+span{outline:3px solid #ff7a5c88}
+.opt.dis span{opacity:.5;cursor:not-allowed}
+.earn h3{font-size:20px}
+.earn-top{display:flex;gap:16px;flex-wrap:wrap;align-items:stretch;margin-top:6px}
+.earn-total{flex:1 1 260px;background:linear-gradient(135deg,var(--deep),var(--teal));color:#fff;border-radius:18px;padding:16px 20px;display:flex;flex-direction:column;gap:2px;box-shadow:0 18px 30px -16px #0a8793aa}
+.earn-total span{font-size:12px;opacity:.9}.earn-total strong{font:800 34px var(--display);letter-spacing:-1px}.earn-total small{font-size:12px;opacity:.85}
+.earn-filters{flex:1 1 280px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.earn-filters .field{width:auto;min-width:150px;padding:9px 12px;font-size:13px}
+.ptiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.ptile{position:relative;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:10px 12px 10px 16px;display:flex;flex-direction:column;gap:1px;transition:.2s;color:var(--ink);opacity:.55}
+.ptile .dot{position:absolute;left:0;top:10px;bottom:10px;width:5px;border-radius:0 5px 5px 0;background:var(--c)}
+.ptile .pn{font-size:12px;font-weight:700;color:#4f6a72}.ptile strong{font:800 18px var(--display);color:var(--navy)}.ptile small{font-size:11px;color:var(--muted)}
+.ptile.on{opacity:1;border-color:var(--c);box-shadow:0 8px 16px -10px var(--c)}
+.ptile:hover{opacity:1;transform:translateY(-2px)}
+.earn-chart{display:flex;gap:8px;margin-top:16px;padding:14px 12px 8px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(#fff,#f9fcfb)}
+.yax{display:flex;flex-direction:column;justify-content:space-between;height:170px;font-size:10px;color:var(--muted);text-align:right;min-width:62px;padding-bottom:0}
+.bars{flex:1;display:flex;align-items:flex-end;gap:4px;height:196px;overflow-x:auto;border-bottom:1px solid var(--line);min-width:0}
+.bar-col{flex:1;min-width:14px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative}
+.stack{width:100%;max-width:34px;display:flex;flex-direction:column-reverse;border-radius:6px 6px 0 0;overflow:hidden;background:#eef3f1}
+.stack i{display:block;width:100%}
+.bar-col span{position:absolute;bottom:-20px;font-size:9.5px;color:var(--muted);white-space:nowrap}
+.bars{padding-bottom:0;margin-bottom:22px}
+.req.pay{background:#f1fbf7;border-color:#b9e6d3;border-left-color:#1fa971}
+.payopts{display:flex;gap:6px;flex-wrap:wrap}
+@media(max-width:520px){.opts{grid-template-columns:1fr}}
 .field:disabled{background:#f2f6f5;color:#6b8288;cursor:not-allowed}
 .avatar[src]{object-fit:cover}#viewbar{background:#fff6e2;border-bottom:1px solid #f6e2b3;position:sticky;top:74px;z-index:15}.vb{border:1.5px solid #e9d49a;background:#fff;color:#7a5f2b;border-radius:99px;padding:6px 14px;font-weight:700;font-size:12.5px;transition:.2s}.vb:hover{background:#fff2c9}.vb.on{background:var(--navy);border-color:var(--navy);color:#fff}
 
@@ -326,7 +370,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <section id="page-membros" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Comunidade</span><h2>Comunidade de jogadores</h2><p>Descubra quem quer jogar, confira o ranking e envie um convite.</p></div><button class="btn btn-primary" onclick="openModal('invite-modal')">+ Publicar que quero jogar</button></div><div class="filters"><input id="member-search" class="field search" placeholder="🔍  Buscar por nome ou cidade..." aria-label="Buscar jogador"/><select id="member-location" class="field" aria-label="Cidade"><option value="">Todas as cidades</option><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select><select id="member-level" class="field" aria-label="Nível"><option value="">Todos os níveis</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select><select id="member-format" class="field" aria-label="Formato"><option value="">Todos os formatos</option><option value="simples">Simples (2)</option><option value="quarteto">4 pessoas diferentes</option><option value="duplas">2 duplas de 2</option></select><select id="member-sort" class="field" aria-label="Ordenar"><option value="recent">Mais recentes</option><option value="rank">Maior ranking</option></select></div><div class="cards" id="all-members"></div></section>
 <section id="page-jogos" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Agenda</span><h2>Meus jogos</h2><p>Partidas confirmadas e convites que você recebeu.</p></div><button class="btn btn-primary" onclick="openModal('invite-modal')">+ Criar disponibilidade</button></div><div class="panel" style="margin-bottom:18px"><h3>🔔 Convites recebidos <span id="invite-count" class="tag">0 novos</span></h3><div id="received-invites"><div class="small">Você ainda não recebeu convites nesta demonstração.</div></div></div><div class="panel" style="margin-bottom:18px"><h3>🎓 Minhas aulas</h3><div id="my-lessons"></div></div><div class="section-head" style="margin-top:34px"><div><h2>Partidas combinadas</h2><p>Os jogos aceitos aparecem aqui para você se organizar.</p></div></div><div class="table-wrap"><table class="games-table"><thead><tr><th>Jogadores</th><th>Data e horário</th><th>Local</th><th>Ranking</th><th>Status</th></tr></thead><tbody id="games-table-body"><tr><td colspan="5" style="text-align:center;color:#688087;padding:30px">Nenhuma partida confirmada ainda. Convide alguém para começar!</td></tr></tbody></table></div></section>
 <section id="page-professores" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Aulas</span><h2>Aulas e professores</h2><p>Encontre um professor, conheça seu trabalho e combine uma aula.</p></div><button class="btn btn-outline" onclick="goPage('professor')">Sou professor →</button></div><div class="filters"><input id="teacher-search" class="field search" placeholder="🔍  Buscar professor ou cidade..." aria-label="Buscar professor"/><select id="teacher-location" class="field" aria-label="Cidade"><option value="">Todas as cidades</option><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="cards" id="all-teachers"></div></section>
-<section id="page-professor" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Professores</span><h2>Área do professor</h2><p>Organize sua agenda e deixe seus alunos encontrarem você.</p></div><button class="btn btn-primary" id="btn-add-teacher" style="display:none" onclick="openModal('teacher-modal')">+ Cadastrar professor</button></div><div class="notice" id="area-notice"></div><div class="dashboard"><div class="panel"><h3>📅 Agenda de aulas</h3><div id="admin-picker"></div><div id="teacher-agenda"></div><button class="btn btn-soft" style="margin-top:14px" onclick="openModal('lesson-modal')">+ Adicionar aula à agenda</button></div><div class="panel"><h3>👤 Perfil público do professor</h3><div id="profile-panel-body"><div class="photo-row"><div id="photo-preview"></div><div><label class="btn btn-soft" for="photo-file" style="cursor:pointer">📷 Escolher foto</label><input type="file" id="photo-file" accept="image/*" class="sr" onchange="uploadPhoto(this)"><div class="small" style="margin-top:6px">JPG ou PNG. A foto aparece no card do professor.</div></div></div><div class="small" id="profile-lock" style="display:none;margin:0 0 14px;background:#fff6e2;border:1px solid #f6e2b3;border-radius:12px;padding:10px 12px;line-height:1.5">Os dados abaixo só podem ser alterados pelo administrador. Você pode trocar a sua foto e organizar a agenda.</div><div class="form-group"><label for="profile-name">Nome do professor</label><input class="field" id="profile-name" placeholder="Nome"/></div><div class="form-group"><label for="profile-city">Cidade onde dá aula</label><input class="field" id="profile-city" placeholder="Ex.: Caraguatatuba"/></div><div class="form-group"><label for="profile-arena">Local / arena</label><input class="field" id="profile-arena" placeholder="Nome da arena"/></div><div class="form-group"><label for="profile-contact">Contato (WhatsApp)</label><input class="field" id="profile-contact" placeholder="DDD + telefone"/></div><div class="small" style="font-weight:700;margin:4px 0 8px">Valores das aulas (R$)</div><div class="form-grid"><div class="form-group"><label for="profile-i30">Individual · 30 min</label><input class="field" id="profile-i30" type="number" min="0" placeholder="60"/></div><div class="form-group"><label for="profile-i60">Individual · 60 min</label><input class="field" id="profile-i60" type="number" min="0" placeholder="100"/></div><div class="form-group"><label for="profile-g30">Em grupo · 30 min</label><input class="field" id="profile-g30" type="number" min="0" placeholder="40"/></div><div class="form-group"><label for="profile-g60">Em grupo · 60 min</label><input class="field" id="profile-g60" type="number" min="0" placeholder="70"/></div></div><div class="form-group"><label for="profile-bio">Sobre o professor</label><textarea class="field" id="profile-bio" rows="3" placeholder="Experiência, especialidades, público..."></textarea></div><button class="btn btn-primary" id="profile-save" style="width:100%" onclick="saveTeacherProfile()">Salvar dados do professor</button><p class="small" style="line-height:1.6">O perfil aparece para todos na aba Aulas e professores.</p><div id="admin-tools"></div></div></div></div></section>
+<section id="page-professor" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Professores</span><h2>Área do professor</h2><p>Organize sua agenda e deixe seus alunos encontrarem você.</p></div><button class="btn btn-primary" id="btn-add-teacher" style="display:none" onclick="openModal('teacher-modal')">+ Cadastrar professor</button></div><div class="notice" id="area-notice"></div><div class="dashboard"><div class="panel"><h3>📅 Agenda de aulas</h3><div id="admin-picker"></div><div id="teacher-agenda"></div><button class="btn btn-soft" style="margin-top:14px" onclick="openModal('lesson-modal')">+ Adicionar aula à agenda</button></div><div class="panel"><h3>👤 Perfil público do professor</h3><div id="profile-panel-body"><div class="photo-row"><div id="photo-preview"></div><div><label class="btn btn-soft" for="photo-file" style="cursor:pointer">📷 Escolher foto</label><input type="file" id="photo-file" accept="image/*" class="sr" onchange="uploadPhoto(this)"><div class="small" style="margin-top:6px">JPG ou PNG. A foto aparece no card do professor.</div></div></div><div class="small" id="profile-lock" style="display:none;margin:0 0 14px;background:#fff6e2;border:1px solid #f6e2b3;border-radius:12px;padding:10px 12px;line-height:1.5">Os dados abaixo só podem ser alterados pelo administrador. Você pode trocar a sua foto e organizar a agenda.</div><div class="form-group"><label for="profile-name">Nome do professor</label><input class="field" id="profile-name" placeholder="Nome"/></div><div class="form-group"><label for="profile-city">Cidade onde dá aula</label><input class="field" id="profile-city" placeholder="Ex.: Caraguatatuba"/></div><div class="form-group"><label for="profile-arena">Local / arena</label><input class="field" id="profile-arena" placeholder="Nome da arena"/></div><div class="form-group"><label for="profile-contact">Contato (WhatsApp)</label><input class="field" id="profile-contact" placeholder="DDD + telefone"/></div><div class="small" style="font-weight:700;margin:4px 0 8px">Valores das aulas (R$)</div><div class="form-grid"><div class="form-group"><label for="profile-i30">Individual · 30 min</label><input class="field" id="profile-i30" type="number" min="0" placeholder="60"/></div><div class="form-group"><label for="profile-i60">Individual · 60 min</label><input class="field" id="profile-i60" type="number" min="0" placeholder="100"/></div><div class="form-group"><label for="profile-g30">Em grupo · 30 min</label><input class="field" id="profile-g30" type="number" min="0" placeholder="40"/></div><div class="form-group"><label for="profile-g60">Em grupo · 60 min</label><input class="field" id="profile-g60" type="number" min="0" placeholder="70"/></div></div><div class="form-group"><label for="profile-bio">Sobre o professor</label><textarea class="field" id="profile-bio" rows="3" placeholder="Experiência, especialidades, público..."></textarea></div><button class="btn btn-primary" id="profile-save" style="width:100%" onclick="saveTeacherProfile()">Salvar dados do professor</button><p class="small" style="line-height:1.6">O perfil aparece para todos na aba Aulas e professores.</p><div id="admin-tools"></div></div></div></div><div class="panel earn" id="earnings" style="margin-top:18px;display:none"></div></section>
 </main>
 <footer class="footer"><div class="shell"><div class="foot-grid"><div><div class="brand"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></div><p>Feito para quem ama jogar na areia. Conecte-se, jogue e evolua com a comunidade.</p></div><div class="foot-links"><button onclick="goPage('inicio')">Início</button><button onclick="goPage('membros')">Membros</button><button onclick="goPage('jogos')">Meus jogos</button><button onclick="goPage('professores')">Professores</button></div></div><div class="copy"><span>Conecte. Jogue. Evolua.</span><span>🏖 Litoral Norte · SP</span></div></div></footer>
 <div class="modal-backdrop" id="invite-modal"><div class="modal"><div class="modal-head"><h3>Quero jogar 🎾</h3><button class="close" onclick="closeModal('invite-modal')">×</button></div><p class="small" style="line-height:1.6;margin-top:-8px">Publique sua disponibilidade para outros membros enviarem convites.</p><form id="invite-form"><div class="form-grid"><div class="form-group"><label>Dia</label><input class="field" name="date" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" autocomplete="off" required></div><div class="form-group"><label>Horário</label><input class="field" name="time" type="time" required></div><div class="form-group full"><label>Formato do jogo</label><div class="formats"><label class="fmt"><input type="radio" name="format" value="simples"><span><b>🎾 Simples</b><small>1 contra 1 · 2 pessoas</small></span></label><label class="fmt"><input type="radio" name="format" value="quarteto" checked><span><b>👥 4 pessoas diferentes</b><small>Procuro jogadores para formar o jogo</small></span></label><label class="fmt"><input type="radio" name="format" value="duplas"><span><b>🤝 2 duplas de 2</b><small>Já tenho dupla e procuro outra</small></span></label></div></div><div class="form-group full"><label>Local / arena</label><input class="field" name="place" placeholder="Ex.: Arena da Praia" required></div><div class="form-group"><label>Cidade</label><select class="field" name="city"><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="form-group"><label>Nível desejado</label><select class="field" name="level"><option>Qualquer nível</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div><div class="form-group full"><label>Observação (opcional)</label><input class="field" name="note" placeholder="Ex.: jogo leve, dupla ou treino..."/></div></div><button class="btn btn-primary" style="width:100%">Publicar disponibilidade</button></form></div></div>
@@ -363,7 +407,9 @@ const pad=n=>String(n).padStart(2,'0'),DOW=['Seg','Ter','Qua','Qui','Sex','Sáb'
 const toMin=t=>{const p=String(t).split(':').map(Number);return p[0]*60+(p[1]||0)};
 const isoDate=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
 function mondayOf(d){const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x}
-let weekStart=mondayOf(new Date()),viewTeacher=null,tAgenda=[],editingInvite=null,pendingSlot=null;
+function todayStart(){const n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate())}
+let earnPeriod='30d',earnFrom='',earnTo='',earnOn=new Set(['pix','dinheiro','cartao','outro','nao_informado','aguardando']);
+let viewStart=todayStart(),viewDays=8,viewMode='next7',viewTeacher=null,tAgenda=[],editingInvite=null,pendingSlot=null;
 let viewAs='admin';try{viewAs=localStorage.getItem('btc-view')||'admin'}catch(e){}
 const FM={simples:'🎾 Simples · 2',quarteto:'👥 4 pessoas',duplas:'🤝 2 duplas'};
 const LV={'Iniciante':'lv-ini','Intermediário':'lv-int','Avançado':'lv-ava'};
@@ -631,18 +677,30 @@ function deleteInvite(id){
   run(async()=>{const {error}=await sb.from('invites').delete().eq('id',id);if(!fail(error))toast('Disponibilidade excluída.')});
 }
 
-/* ===== CALENDÁRIO SEMANAL (professor e aluno) ===== */
-function weekRangeLabel(){const e=new Date(weekStart);e.setDate(e.getDate()+6);return `Semana de ${pad(weekStart.getDate())}/${pad(weekStart.getMonth()+1)} a ${pad(e.getDate())}/${pad(e.getMonth()+1)}`}
-function calNav(){return `<div class="cal-nav"><button class="btn btn-outline" onclick="shiftWeek(-1)" aria-label="Semana anterior">‹</button><strong>${weekRangeLabel()}</strong><button class="btn btn-outline" onclick="shiftWeek(1)" aria-label="Próxima semana">›</button><button class="btn btn-soft" onclick="thisWeek()">Hoje</button></div>`}
-function shiftWeek(n){weekStart.setDate(weekStart.getDate()+7*n);refreshCalendars()}
-function thisWeek(){weekStart=mondayOf(new Date());refreshCalendars()}
+/* ===== CALENDÁRIO (professor e aluno): hoje + 7 dias, ou filtro ===== */
+const DOWL=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+function setRange(mode,dateStr){
+  const t=todayStart();viewMode=mode;
+  if(mode==='next7'){viewStart=t;viewDays=8}
+  else if(mode==='week'){viewStart=mondayOf(t);viewDays=7}
+  else if(mode==='nextweek'){viewStart=mondayOf(t);viewStart.setDate(viewStart.getDate()+7);viewDays=7}
+  else if(mode==='date'){if(dateStr){const p=dateStr.split('-').map(Number);viewStart=new Date(p[0],p[1]-1,p[2])}viewDays=8}
+  refreshCalendars();
+}
+function shiftRange(n){viewStart.setDate(viewStart.getDate()+n*viewDays);viewMode='date';refreshCalendars()}
 function refreshCalendars(){renderArea();if($('tv-modal').classList.contains('open'))renderTeacherView()}
+function calNav(){
+  const e=new Date(viewStart);e.setDate(e.getDate()+viewDays-1);
+  const lab=`${pad(viewStart.getDate())}/${pad(viewStart.getMonth()+1)} a ${pad(e.getDate())}/${pad(e.getMonth()+1)}`;
+  const opt=(v,l)=>`<option value="${v}"${viewMode===v?' selected':''}>${l}</option>`;
+  return `<div class="cal-nav"><button class="btn btn-outline" onclick="shiftRange(-1)" aria-label="Período anterior">‹</button><strong>${viewMode==='next7'?'Hoje + próximos 7 dias · ':''}${lab}</strong><button class="btn btn-outline" onclick="shiftRange(1)" aria-label="Próximo período">›</button><select class="field cal-sel" onchange="setRange(this.value)" aria-label="Filtrar período">${opt('next7','Hoje + 7 dias')}${opt('week','Esta semana')}${opt('nextweek','Próxima semana')}${opt('date','Dia escolhido')}</select><input class="field cal-sel" type="date" value="${isoDate(viewStart)}" min="${isoDate(todayStart())}" onchange="setRange('date',this.value)" aria-label="Ir para o dia"></div>`;
+}
 const legendHtml='<div class="legend"><span><i style="background:#f3fbf8;border-color:#bfe3d6"></i>Vago</span><span><i style="background:#ffe9a8;border-color:#e8a400"></i>Aguardando aceite</span><span><i style="background:#c9f0dc;border-color:#1fa971"></i>Aula confirmada</span><span><i style="background:repeating-linear-gradient(45deg,#f4f6f6,#f4f6f6 3px,#e2e6e7 3px,#e2e6e7 6px)"></i>Já passou</span></div>';
 function coverOf(items,day,m){return items.filter(l=>l.day===day&&toMin(l.time)<=m&&m<toMin(l.time)+(l.duration||60))}
 function buildGrid(items,mode){
-  const days=[...Array(7)].map((_,i)=>{const d=new Date(weekStart);d.setDate(d.getDate()+i);return d}),now=new Date(),todayIso=isoDate(now);
-  let h='<div class="cal-wrap"><div class="cal" style="grid-template-columns:58px repeat(7,minmax(104px,1fr))"><div class="cal-h cal-corner"></div>';
-  h+=days.map((d,i)=>`<div class="cal-h${isoDate(d)===todayIso?' today':''}"><span>${DOW[i]}</span><strong>${pad(d.getDate())}/${pad(d.getMonth()+1)}</strong></div>`).join('');
+  const days=[...Array(viewDays)].map((_,i)=>{const d=new Date(viewStart);d.setDate(d.getDate()+i);return d}),now=new Date(),todayIso=isoDate(now);
+  let h=`<div class="cal-wrap"><div class="cal" style="grid-template-columns:44px repeat(${viewDays},minmax(0,1fr))"><div class="cal-h cal-corner"></div>`;
+  h+=days.map(d=>`<div class="cal-h${isoDate(d)===todayIso?' today':''}"><span>${isoDate(d)===todayIso?'Hoje':DOWL[d.getDay()]}</span><strong>${pad(d.getDate())}/${pad(d.getMonth()+1)}</strong></div>`).join('');
   for(let m=HS*60;m<HE*60;m+=30){
     const t=pad(Math.floor(m/60))+':'+pad(m%60);
     h+=`<div class="cal-t${m%60?' half':''}">${m%60?'':t}</div>`;
@@ -650,14 +708,14 @@ function buildGrid(items,mode){
       const day=isoDate(d),past=new Date(day+'T'+t+':00')<now,cov=coverOf(items,day,m);
       if(!cov.length){
         if(past){h+='<div class="cal-c past"></div>';return}
-        h+=mode==='teacher'?`<button class="cal-c free" onclick="addAt('${day}','${t}')" aria-label="Vago, ${fmtDate(day)} às ${t}. Adicionar aula"><span>vago</span></button>`:`<button class="cal-c free" onclick="bookSlot('${day}','${t}')" aria-label="Vago, ${fmtDate(day)} às ${t}. Pedir aula"><span>vago</span></button>`;
+        h+=mode==='teacher'?`<button class="cal-c free" onclick="addAt('${day}','${t}')" title="Vago · ${fmtDate(day)} ${t}" aria-label="Vago, ${fmtDate(day)} às ${t}. Adicionar aula"></button>`:`<button class="cal-c free" onclick="bookSlot('${day}','${t}')" title="Vago · ${fmtDate(day)} ${t}" aria-label="Vago, ${fmtDate(day)} às ${t}. Pedir aula"></button>`;
         return;
       }
       const pend=cov.some(l=>l.status==='pendente'),first=cov.some(l=>l.time===t),mine=mode==='student'&&cov.some(l=>l.mine);
       if(!first){h+=`<div class="cal-c ${mode==='student'&&!mine?'busy':pend?'pend':'conf'}${mine?' mine':''}"></div>`;return}
       if(mode==='teacher'){
         const l=cov[0],more=cov.length>1?` +${cov.length-1}`:'';
-        h+=`<button class="cal-c ${pend?'pend':'conf'}" onclick="openSlot('${l.id}')">${pend?'⏳':'✓'} ${escapeHtml(l.student)}${more}<br><small>${pend?'aceitar?':(l.duration||60)+' min · '+(l.kind==='grupo'?'grupo':'indiv.')}</small></button>`;
+        h+=`<button class="cal-c ${pend?'pend':'conf'}" onclick="openSlot('${l.id}')" title="${escapeHtml(l.student)} · ${l.duration||60} min · ${l.kind==='grupo'?'grupo':'individual'}${pend?' · aguardando aceite':''}">${pend?'⏳':'✓'} ${escapeHtml(l.student)}${more}</button>`;
       }else if(mine){
         h+=`<div class="cal-c ${pend?'pend':'conf'} mine">${pend?'⏳ Seu pedido':'✓ Sua aula'}</div>`;
       }else h+=`<div class="cal-c busy">Ocupado</div>`;
@@ -667,15 +725,14 @@ function buildGrid(items,mode){
 }
 function countFree(items){
   let n=0;const now=new Date();
-  for(let i=0;i<7;i++){const d=new Date(weekStart);d.setDate(d.getDate()+i);const day=isoDate(d);
+  for(let i=0;i<viewDays;i++){const d=new Date(viewStart);d.setDate(d.getDate()+i);const day=isoDate(d);
     for(let m=HS*60;m<HE*60;m+=30){if(new Date(day+'T'+pad(Math.floor(m/60))+':'+pad(m%60)+':00')<now)continue;if(!coverOf(items,day,m).length)n++}}
   return n;
-}
-function renderTeacherCalendar(ls){
+}function renderTeacherCalendar(ls){
   const now=new Date(),fut=l=>new Date(l.day+'T'+l.time+':00')>=now;
   const pend=ls.filter(l=>l.status==='pendente'&&fut(l)).sort((a,b)=>(a.day+a.time).localeCompare(b.day+b.time));
   const conf=ls.filter(l=>l.status==='confirmada'&&fut(l));
-  const sum=`<div class="cal-sum"><div class="chip pend"><strong>${pend.length}</strong><span>aguardando<br>aceite</span></div><div class="chip conf"><strong>${conf.length}</strong><span>aulas<br>confirmadas</span></div><div class="chip free"><strong>${countFree(ls)}</strong><span>horários vagos<br>nesta semana</span></div></div>`;
+  const sum=`<div class="cal-sum"><div class="chip pend"><strong>${pend.length}</strong><span>aguardando<br>aceite</span></div><div class="chip conf"><strong>${conf.length}</strong><span>aulas<br>confirmadas</span></div><div class="chip free"><strong>${countFree(ls)}</strong><span>horários vagos<br>no período</span></div></div>`;
   const reqs=pend.length?`<div style="margin:0 0 16px"><div class="small" style="font-weight:700;margin-bottom:8px">⏳ Pedidos para você aceitar</div>${pend.map(l=>`<div class="req"><div><strong>${escapeHtml(l.student)}</strong><div class="small">${fmtDate(l.day)} às ${escapeHtml(l.time)} · ${l.duration||60} min · ${l.kind==='grupo'?'em grupo':'individual'}${l.price!=null?' · '+money(l.price):''}</div></div><div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="acceptLesson('${l.id}')">Aceitar</button><button class="btn btn-outline" onclick="declineLesson('${l.id}')">Recusar</button></div></div>`).join('')}</div>`:'<div class="small" style="margin:0 0 14px">Nenhum pedido esperando aceite.</div>';
   return sum+reqs+legendHtml+calNav()+buildGrid(ls,'teacher')+'<div class="small" style="margin-top:8px">Clique em um horário vago para marcar uma aula, ou em uma aula para ver detalhes.</div>';
 }
@@ -697,7 +754,7 @@ function declineLesson(id){run(async()=>{const {error}=await sb.from('lessons').
 /* ===== ALUNO: ver professor, horários e pedir aula ===== */
 async function loadTAgenda(){const r=await sb.rpc('teacher_agenda',{p_teacher:viewTeacher});tAgenda=r.data||[]}
 async function openTeacherView(id){
-  viewTeacher=id;weekStart=mondayOf(new Date());
+  viewTeacher=id;viewStart=todayStart();viewDays=8;viewMode='next7';
   try{await loadTAgenda()}catch(e){tAgenda=[]}
   renderTeacherView();openModal('tv-modal');
 }
@@ -712,25 +769,23 @@ function bookSlot(day,time){
   if(!S.me){closeModal('tv-modal');openAuth('login');toast('Entre para pedir uma aula.');return}
   pendingSlot={day,time};
   const t=prof(viewTeacher),next=toMin(time)+30,can60=next<HE*60&&!coverOf(tAgenda,day,next).length;
-  $('book-body').innerHTML=`<p style="margin:0 0 12px;line-height:1.6"><strong>${escapeHtml(t.name)}</strong><br>${fmtDate(day)} às ${escapeHtml(time)} · ${escapeHtml(t.local||'')}</p><div class="form-grid"><div class="form-group"><label for="bk-dur">Duração</label><select class="field" id="bk-dur" onchange="updateBookPrice()"><option value="30">30 minutos</option><option value="60"${can60?' selected':' disabled'}>60 minutos${can60?'':' (horário seguinte ocupado)'}</option></select></div><div class="form-group"><label for="bk-kind">Tipo de aula</label><select class="field" id="bk-kind" onchange="updateBookPrice()"><option value="individual">Individual</option><option value="grupo">Em grupo</option></select></div></div><div id="bk-price" style="font:700 20px var(--display);color:var(--navy);margin:4px 0 14px"></div><button class="btn btn-primary" style="width:100%" onclick="submitBooking()">Enviar pedido de aula</button>`;
-  if(!can60)$('bk-dur').value='30';
-  updateBookPrice();openModal('book-modal');
-}
-function updateBookPrice(){
-  const t=prof(viewTeacher),dur=Number($('bk-dur').value),kind=$('bk-kind').value,p=t['price_'+(kind==='grupo'?'grp':'ind')+'_'+dur];
-  $('bk-price').textContent=p!=null?money(p):'Valor a combinar com o professor';
+  const opts=[['individual',30],['individual',60],['grupo',30],['grupo',60]];
+  const first=can60?1:0;
+  const cards=opts.map(([k,d],i)=>{const p=t['price_'+(k==='grupo'?'grp':'ind')+'_'+d],dis=d===60&&!can60;return `<label class="opt${dis?' dis':''}"><input type="radio" name="bk-opt" value="${k}|${d}"${i===first?' checked':''}${dis?' disabled':''}><span><b>${k==='grupo'?'Em grupo':'Individual'} · ${d} min</b><strong>${p!=null?money(p):'A combinar'}</strong>${dis?'<small>horário seguinte ocupado</small>':''}</span></label>`}).join('');
+  $('book-body').innerHTML=`<p style="margin:0 0 14px;line-height:1.6"><strong>${escapeHtml(t.name)}</strong><br>📅 ${fmtDate(day)} às ${escapeHtml(time)} · 🏟 ${escapeHtml(t.local||'A combinar')}</p><div class="small" style="font-weight:700;margin-bottom:8px">Escolha a aula e veja o valor</div><div class="opts">${cards}</div><button class="btn btn-primary" style="width:100%;margin-top:16px" onclick="submitBooking()">Enviar pedido de aula</button><p class="small" style="margin:10px 0 0;line-height:1.5">O professor precisa aceitar. O valor é pago diretamente a ele.</p>`;
+  openModal('book-modal');
 }
 function submitBooking(){
   const {day,time}=pendingSlot||{};if(!day)return;
   if(new Date(day+'T'+time+':00')<new Date()){toast('Esse horário já passou.');return}
-  const dur=Number($('bk-dur').value),kind=$('bk-kind').value,t=prof(viewTeacher),price=t['price_'+(kind==='grupo'?'grp':'ind')+'_'+dur];
+  const sel=document.querySelector('input[name="bk-opt"]:checked');if(!sel){toast('Escolha o tipo e a duração da aula.');return}
+  const [kind,d]=sel.value.split('|'),dur=Number(d),t=prof(viewTeacher),price=t['price_'+(kind==='grupo'?'grp':'ind')+'_'+dur];
   run(async()=>{
     const {error}=await sb.from('lessons').insert({teacher:viewTeacher,day,time,student:S.me.name,student_id:S.me.id,local:t.local||'A combinar',duration:dur,kind,price:price==null?null:price,status:'pendente'});
     if(fail(error))return;
     closeModal('book-modal');await loadTAgenda();toast('Pedido enviado! O professor precisa aceitar a aula.');
   }).then(()=>{if($('tv-modal').classList.contains('open'))renderTeacherView()});
-}
-function renderMyLessons(){
+}function renderMyLessons(){
   const box=$('my-lessons');if(!box)return;
   if(!S.me){box.innerHTML='<div class="small">Entre para ver suas aulas.</div>';return}
   const mine=S.lessons.filter(l=>l.student_id===S.me.id).sort((a,b)=>(a.day+a.time).localeCompare(b.day+b.time));
@@ -744,6 +799,59 @@ function renderBadges(){
   b.innerHTML='Área do professor'+(n?` <span class="tag" style="background:#ffe4a8;color:#7a5200;padding:2px 8px">${n}</span>`:'');
 }
 
+/* ===== GANHOS DO PROFESSOR ===== */
+const PAY={pix:['Pix','#0a8793'],dinheiro:['Dinheiro','#e6a800'],cartao:['Cartão','#7a5af8'],outro:['Outro','#ff7a5c'],nao_informado:['Não informou','#8b9aa1'],aguardando:['Aguardando escolha','#cfd8dc']};
+const PAY_ORDER=['pix','dinheiro','cartao','outro','nao_informado','aguardando'];
+function lessonEnd(l){return new Date(l.day+'T'+l.time+':00').getTime()+(l.duration||60)*60000}
+function payState(l){if(l.payment_method)return l.payment_method;return lessonEnd(l)+48*3600000<Date.now()?'nao_informado':'aguardando'}
+function parseISO(s){const p=s.split('-').map(Number);return new Date(p[0],p[1]-1,p[2])}
+function earnRange(){
+  const t=todayStart();let f=new Date(t),e=new Date(t);
+  if(earnPeriod==='7d')f.setDate(f.getDate()-6);
+  else if(earnPeriod==='30d')f.setDate(f.getDate()-29);
+  else if(earnPeriod==='month')f=new Date(t.getFullYear(),t.getMonth(),1);
+  else if(earnPeriod==='lastmonth'){f=new Date(t.getFullYear(),t.getMonth()-1,1);e=new Date(t.getFullYear(),t.getMonth(),0)}
+  else if(earnPeriod==='custom'){if(earnFrom)f=parseISO(earnFrom);else f.setDate(f.getDate()-29);if(earnTo)e=parseISO(earnTo)}
+  return [f,e];
+}
+function setEarnPeriod(v){earnPeriod=v;renderEarnings()}
+function setEarnDate(k,v){if(k==='from')earnFrom=v;else earnTo=v;earnPeriod='custom';renderEarnings()}
+function toggleEarn(k){if(earnOn.has(k))earnOn.delete(k);else earnOn.add(k);renderEarnings()}
+function earnAll(){PAY_ORDER.forEach(k=>earnOn.add(k));renderEarnings()}
+function setPayment(id,method){run(async()=>{const {error}=await sb.from('lessons').update({payment_method:method}).eq('id',id);if(!fail(error))toast('Pagamento registrado: '+PAY[method][0]+'.')})}
+function removeExamples(){
+  if(!confirm('Remover todas as aulas de exemplo desta agenda?'))return;
+  run(async()=>{const {error}=await sb.from('lessons').delete().eq('teacher',activeTeacher()).ilike('student','%(exemplo)%');if(!fail(error))toast('Aulas de exemplo removidas.')});
+}
+function renderEarnings(){
+  const box=$('earnings');if(!box)return;
+  if(!S.me||!canTeach()){box.style.display='none';return}
+  box.style.display='';
+  const tid=activeTeacher(),now=Date.now(),val=l=>Number(l.price||0);
+  const done=S.lessons.filter(l=>l.teacher===tid&&l.status==='confirmada'&&lessonEnd(l)<=now);
+  const toPick=done.filter(l=>payState(l)==='aguardando').sort((a,b)=>lessonEnd(a)-lessonEnd(b));
+  const [f,e]=earnRange(),fi=isoDate(f),ei=isoDate(e);
+  const inPeriod=done.filter(l=>l.day>=fi&&l.day<=ei);
+  const sel=inPeriod.filter(l=>earnOn.has(payState(l)));
+  const total=sel.reduce((s,l)=>s+val(l),0);
+  const per={};PAY_ORDER.forEach(k=>per[k]={sum:0,n:0});
+  inPeriod.forEach(l=>{const k=payState(l);per[k].sum+=val(l);per[k].n++});
+  // grupos do gráfico: por dia (até 31 dias) ou por semana
+  const days=Math.round((e-f)/86400000)+1,byWeek=days>31,buckets=[],idx={};
+  for(let d=new Date(f);d<=e;d.setDate(d.getDate()+1)){
+    const key=byWeek?isoDate(mondayOf(d)):isoDate(d);
+    if(!(key in idx)){idx[key]=buckets.length;buckets.push({key,label:byWeek?'sem '+pad(parseISO(key).getDate())+'/'+pad(parseISO(key).getMonth()+1):pad(d.getDate())+'/'+pad(d.getMonth()+1),parts:{},total:0})}
+  }
+  sel.forEach(l=>{const d=parseISO(l.day),key=byWeek?isoDate(mondayOf(d)):l.day,b=buckets[idx[key]];if(!b)return;const k=payState(l);b.parts[k]=(b.parts[k]||0)+val(l);b.total+=val(l)});
+  const max=Math.max(1,...buckets.map(b=>b.total)),H=170;
+  const step=Math.ceil(buckets.length/12);
+  const bars=buckets.map((b,i)=>`<div class="bar-col" title="${escapeHtml(b.label)}: ${money(b.total)}${PAY_ORDER.filter(k=>b.parts[k]).map(k=>'\n'+PAY[k][0]+': '+money(b.parts[k])).join('')}"><div class="stack" style="height:${Math.round(H*b.total/max)}px">${PAY_ORDER.filter(k=>b.parts[k]).map(k=>`<i style="height:${Math.max(2,Math.round(H*b.parts[k]/max))}px;background:${PAY[k][1]}"></i>`).join('')}</div><span>${i%step===0?escapeHtml(b.label):''}</span></div>`).join('');
+  const tiles=PAY_ORDER.map(k=>`<button type="button" class="ptile${earnOn.has(k)?' on':''}" onclick="toggleEarn('${k}')" aria-pressed="${earnOn.has(k)}" style="--c:${PAY[k][1]}"><span class="dot"></span><span class="pn">${PAY[k][0]}</span><strong>${money(per[k].sum)}</strong><small>${per[k].n} aula${per[k].n===1?'':'s'}</small></button>`).join('');
+  const opt=(v,l)=>`<option value="${v}"${earnPeriod===v?' selected':''}>${l}</option>`;
+  const pickHtml=toPick.length?`<div class="small" style="font-weight:700;margin:0 0 8px">💳 Como foi o pagamento? <span style="font-weight:500">(${toPick.length} aula${toPick.length===1?'':'s'} para registrar — sem resposta em 48h vira "Não informou")</span></div>${toPick.slice(0,6).map(l=>{const left=Math.max(0,Math.floor((lessonEnd(l)+48*3600000-now)/3600000));return `<div class="req pay"><div><strong>${escapeHtml(l.student)}</strong><div class="small">${fmtDate(l.day)} às ${escapeHtml(l.time)} · ${l.duration||60} min · ${l.kind==='grupo'?'em grupo':'individual'}${l.price!=null?' · <strong>'+money(l.price)+'</strong>':''} · restam ${left}h</div></div><div class="payopts">${['pix','dinheiro','cartao','outro'].map(k=>`<button class="btn btn-outline" style="padding:8px 12px;border-color:${PAY[k][1]}" onclick="setPayment('${l.id}','${k}')">${PAY[k][0]}</button>`).join('')}</div></div>`}).join('')}${toPick.length>6?`<div class="small">+ ${toPick.length-6} outras aulas aguardando.</div>`:''}`:'<div class="small" style="margin:0 0 14px">✅ Nenhuma aula esperando forma de pagamento.</div>';
+  const hasEx=S.lessons.some(l=>l.teacher===tid&&/\(exemplo\)/i.test(l.student||''));
+  box.innerHTML=`<h3>💰 Ganhos</h3>${pickHtml}<div class="earn-top"><div class="earn-total"><span>Total no período (formas selecionadas)</span><strong>${money(total)}</strong><small>${sel.length} aula${sel.length===1?'':'s'} · ${fmtDate(fi)} a ${fmtDate(ei)}</small></div><div class="earn-filters"><label class="small" for="earn-period"><strong>Período</strong></label><select class="field" id="earn-period" onchange="setEarnPeriod(this.value)">${opt('7d','Últimos 7 dias')}${opt('30d','Últimos 30 dias')}${opt('month','Este mês')}${opt('lastmonth','Mês passado')}${opt('custom','Escolher datas')}</select>${earnPeriod==='custom'?`<input class="field" type="date" value="${fi}" onchange="setEarnDate('from',this.value)" aria-label="De"><input class="field" type="date" value="${ei}" onchange="setEarnDate('to',this.value)" aria-label="Até">`:''}<button type="button" class="btn btn-soft" onclick="earnAll()">Todas as formas</button></div></div><div class="small" style="margin:12px 0 6px">Clique em uma forma de pagamento para incluir ou tirar do total e do gráfico:</div><div class="ptiles">${tiles}</div>${sel.length?`<div class="earn-chart" role="img" aria-label="Gráfico de ganhos por ${byWeek?'semana':'dia'}: total ${money(total)}"><div class="yax"><span>${money(max)}</span><span>${money(Math.round(max/2))}</span><span>R$ 0</span></div><div class="bars">${bars}</div></div><div class="small" style="margin-top:6px">Cada coluna é um ${byWeek?'semana':'dia'}. Passe o mouse para ver os valores por forma de pagamento.</div>`:'<div class="empty" style="margin-top:14px"><b>📊</b>Sem aulas realizadas neste período e nas formas selecionadas.</div>'}${hasEx?`<div style="margin-top:14px"><button class="btn btn-outline" onclick="removeExamples()">Remover aulas de exemplo</button> <span class="small">Os dados de exemplo ajudam a ver como o gráfico fica.</span></div>`:''}`;
+}
 /* ===== FORMULÁRIOS ===== */
 $('invite-form').addEventListener('submit',e=>{e.preventDefault();
   if(!S.me){openAuth('login');return}
@@ -803,7 +911,7 @@ function renderStats(){
   $('hero-players-label').textContent=st.players?(st.players===1?'já está na areia':'já estão na areia'):'a entrar na areia';
   $('fc-open').textContent=(st.open||0)===1?'1 quer jogar':(st.open||0)+' querem jogar';
 }
-function renderAll(){renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderBadges()}
+function renderAll(){renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderBadges()}
 
 ['member-search','member-location','member-level','member-format','member-sort'].forEach(id=>$(id).addEventListener('input',renderMembers));
 ['teacher-search','teacher-location'].forEach(id=>$(id).addEventListener('input',renderTeachers));
