@@ -1,0 +1,8 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Beach Tennis Club">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a8793"/><stop offset="1" stop-color="#4fcdb6"/></linearGradient></defs>
+  <rect width="512" height="512" rx="120" fill="url(#g)"/>
+  <g transform="translate(76 76) scale(15.17)" fill="none" stroke="#fff" stroke-width="1.45" stroke-linecap="round">
+    <circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/>
+  </g>
+  <circle cx="404" cy="112" r="26" fill="#ffc857"/>
+</svg>
