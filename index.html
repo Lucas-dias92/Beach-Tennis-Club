@@ -214,6 +214,38 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .prices{display:grid;gap:6px;margin:14px 0 18px}.prices div{display:flex;justify-content:space-between;gap:10px;background:#f2f8f6;padding:8px 12px;border-radius:12px;font-size:12.5px;color:#4f6a72}.prices strong{color:var(--navy)}
 .photo-row{display:flex;gap:14px;align-items:center;margin-bottom:16px}.photo-img{width:84px;height:84px;border-radius:24px;object-fit:cover;box-shadow:0 14px 24px -10px #0b3b4660;border:3px solid #fff;display:grid;place-items:center}.photo-img.ph{background:linear-gradient(140deg,var(--deep),var(--teal));color:#fff;font:800 26px var(--display)}
 .agenda-item.past{opacity:.55}
+.navlinks button{position:relative}
+.navlinks button.pl-green{--pc:34,197,94}
+.navlinks button.pl-yellow{--pc:245,184,0}
+.navlinks button.pl-red{--pc:239,68,68}
+.navlinks button.pl-green,.navlinks button.pl-yellow,.navlinks button.pl-red{animation:plpulse 1.2s ease-in-out infinite;background:rgba(var(--pc),.18);color:var(--navy)}
+.navlinks button.pl-green:after,.navlinks button.pl-yellow:after,.navlinks button.pl-red:after{content:"";position:absolute;top:5px;right:5px;width:9px;height:9px;border-radius:50%;background:rgb(var(--pc));box-shadow:0 0 0 2px #fff}
+@keyframes plpulse{0%,100%{box-shadow:0 0 0 0 rgba(var(--pc),.55);background:rgba(var(--pc),.16)}50%{box-shadow:0 0 0 8px rgba(var(--pc),0);background:rgba(var(--pc),.38)}}
+@media(prefers-reduced-motion:reduce){.navlinks button.pl-green,.navlinks button.pl-yellow,.navlinks button.pl-red{animation:none}}
+.bell{position:relative}
+.cbadge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:#ef4444;color:#fff;font:700 11px/18px Inter,sans-serif;text-align:center;box-shadow:0 0 0 2px #fff}
+#gear-btn.needs:after{content:"";position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;background:#ef4444;box-shadow:0 0 0 2px #fff;animation:plpulse 1.2s infinite;--pc:239,68,68}
+.set-sec{border-top:1px solid var(--line);padding:16px 0}
+.set-sec h4{margin:0 0 8px;font-size:15px;color:var(--navy)}
+#chat-dock{position:fixed;right:18px;bottom:18px;width:340px;max-width:calc(100vw - 24px);height:480px;max-height:calc(100vh - 110px);background:#fff;border-radius:18px;box-shadow:var(--shadow-lg);border:1px solid var(--line);display:none;flex-direction:column;z-index:25;overflow:hidden}
+.ch-head{display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(135deg,var(--deep),var(--teal));color:#fff}
+.ch-x{border:0;background:transparent;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:0 4px}
+.ch-msgs{flex:1;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;background:var(--bg)}
+.cm{display:flex;flex-direction:column;max-width:82%}
+.cm.me{align-self:flex-end;align-items:flex-end}.cm.ot{align-self:flex-start;align-items:flex-start}
+.cb{padding:9px 13px;border-radius:16px;font-size:14px;line-height:1.4;word-break:break-word;white-space:pre-wrap}
+.cm.me .cb{background:var(--teal);color:#fff;border-bottom-right-radius:5px}
+.cm.ot .cb{background:#fff;color:var(--ink);border:1px solid var(--line);border-bottom-left-radius:5px}
+.ct{font-size:10.5px;color:var(--muted);margin-top:3px}
+.ch-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#fff}
+.ch-form .field{flex:1;padding:10px 12px}
+.ch-list{flex:1;overflow:auto;padding:4px 6px}
+.ch-row{display:flex;gap:10px;align-items:center;width:100%;border:0;background:transparent;padding:9px 8px;border-radius:12px;text-align:left;cursor:pointer;position:relative}
+.ch-row:hover{background:var(--aqua)}
+.ch-txt{min-width:0;flex:1;display:flex;flex-direction:column}
+.ch-txt strong{font-size:14px;color:var(--navy)}
+.ch-txt span{font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:600px){#chat-dock{right:0;bottom:0;width:100vw;max-width:100vw;height:78vh;max-height:78vh;border-radius:18px 18px 0 0}}
 .person-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px}
 .person-plan{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .person-plan .field{width:auto;padding:8px 10px;font-size:13px}
@@ -501,6 +533,8 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="modal-backdrop" id="lesson-modal"><div class="modal"><div class="modal-head"><h3>Adicionar aula à agenda</h3><button class="close" onclick="closeModal('lesson-modal')">×</button></div><form id="lesson-form"><div class="form-grid"><div class="form-group"><label>Data</label><input class="field" name="date" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" autocomplete="off" required></div><div class="form-group"><label>Horário</label><input class="field" name="time" type="time" required></div><div class="form-group full"><label>Nome do aluno</label><input class="field" name="student" required></div><div class="form-group"><label>Duração</label><select class="field" name="duration"><option value="30">30 minutos</option><option value="60" selected>60 minutos</option></select></div><div class="form-group"><label>Tipo de aula</label><select class="field" name="kind"><option value="individual">Individual</option><option value="grupo">Em grupo</option></select></div><div class="form-group full"><label>Local</label><input class="field" name="place" required></div></div><p class="small" style="line-height:1.6;margin:0 0 14px">Não dá para marcar em dia ou horário que já passou, nem em dois locais diferentes ao mesmo tempo. No mesmo local, pode ter mais de um aluno.</p><button class="btn btn-primary" style="width:100%">Adicionar aula</button></form></div></div>
 <div class="modal-backdrop" id="tournament-modal"><div class="modal"><div class="modal-head"><h3>Criar torneio</h3><button class="close" onclick="closeModal('tournament-modal')" aria-label="Fechar">×</button></div><form id="tournament-form"><div class="form-group"><label>Nome do torneio</label><input class="field" name="name" required placeholder="Ex.: Open de Verão"></div><div class="form-grid"><div class="form-group"><label>Data</label><input class="field" name="date" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off" required></div><div class="form-group"><label>Horário</label><input class="field" name="time" type="time" required></div><div class="form-group full"><label>Arena / local</label><input class="field" name="arena" required></div><div class="form-group"><label>Cidade</label><select class="field" name="city"><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="form-group"><label>Formato</label><select class="field" name="format"><option value="duplas">Duplas</option><option value="simples">Simples</option></select></div><div class="form-group"><label>Inscrição (R$) — 0 = grátis</label><input class="field" name="fee" type="number" min="0" step="1" value="0"></div><div class="form-group"><label>Vagas</label><input class="field" name="max" type="number" min="2" max="256" value="16"></div><div class="form-group full"><label>Chave Pix para receber as inscrições</label><input class="field" name="pix" placeholder="CPF, e-mail, telefone ou chave aleatória"></div><div class="form-group full"><label>Patrocinador (opcional)</label><input class="field" name="sponsor"></div><div class="form-group full"><label>Descrição (opcional)</label><textarea class="field" name="description" rows="3"></textarea></div></div><button class="btn btn-primary" style="width:100%">Criar torneio</button></form></div></div>
 <div class="modal-backdrop" id="finish-modal"><div class="modal"><div class="modal-head"><h3>Encerrar e premiar</h3><button class="close" onclick="closeModal('finish-modal')" aria-label="Fechar">×</button></div><p class="small" style="line-height:1.6;margin-top:-6px">Escolha os 3 primeiros. Os pontos entram no ranking na hora: 1º +50, 2º +30, 3º +15.</p><div class="form-group"><label for="fin-1">🥇 1º lugar</label><select class="field" id="fin-1"></select></div><div class="form-group"><label for="fin-2">🥈 2º lugar</label><select class="field" id="fin-2"></select></div><div class="form-group"><label for="fin-3">🥉 3º lugar</label><select class="field" id="fin-3"></select></div><button class="btn btn-primary" style="width:100%" onclick="submitFinish()">Encerrar torneio</button></div></div>
+<div class="modal-backdrop" id="settings-modal"><div class="modal" style="max-width:520px"><div class="modal-head"><h3>⚙️ Configurações</h3><button class="close" onclick="closeModal('settings-modal')" aria-label="Fechar">×</button></div><div id="settings-body"></div></div></div>
+<div id="chat-dock" role="dialog" aria-label="Chat"></div>
 <div class="modal-backdrop" id="tutorial-modal"><div class="modal" style="max-width:420px"><div class="modal-head"><h3>Como instalar na tela do celular</h3><button class="close" onclick="closeModal('tutorial-modal')" aria-label="Fechar">×</button></div><video id="tut-video" class="tut-video" controls playsinline preload="none" poster="tutorial-poster.jpg" aria-label="Tutorial de instalação"><source src="tutorial-instalar-app.mp4" type="video/mp4"></video><p class="small" style="margin:12px 0 0;line-height:1.5">Android: Chrome → 3 pontinhos → <strong>Instalar app</strong>. iPhone: Safari → <strong>Compartilhar</strong> → <strong>Adicionar à Tela de Início</strong>.</p></div></div>
 <div class="modal-backdrop" id="reset-modal"><div class="modal"><div class="modal-head"><h3>Criar nova senha</h3><button class="close" onclick="closeModal('reset-modal')" aria-label="Fechar">×</button></div><form id="reset-form"><div class="form-group"><label for="r-pass">Nova senha</label><input class="field" id="r-pass" type="password" minlength="6" required autocomplete="new-password"></div><p id="reset-err" role="alert" style="color:#b3261e;font-weight:700;font-size:13px;min-height:18px;margin:0 0 10px"></p><button class="btn btn-primary" style="width:100%">Salvar nova senha</button></form></div></div>
 <div class="modal-backdrop" id="tv-modal"><div class="modal modal-wide"><div class="modal-head"><h3>Professor</h3><button class="close" onclick="closeModal('tv-modal')" aria-label="Fechar">×</button></div><div id="tv-body"></div></div></div>
@@ -586,7 +620,7 @@ async function refresh(){
   S.games=gm.data||[];
   S.lessons=ls.data||[];
   if(lastGames!==null&&S.games.length>lastGames)toast('Novo jogo marcado! Veja em Meus jogos.');
-  lastGames=S.games.length;
+  lastGames=S.games.length;if(typeof chatLoad==='function')setTimeout(chatLoad,0);
   const pendNow=S.lessons.filter(l=>l.status==='pendente'&&(S.me.is_admin||l.teacher===uid)).length;
   if(lastPending!==null&&pendNow>lastPending){toast('⏳ Novo pedido de aula! Veja na Área do professor.');try{if('Notification' in window&&Notification.permission==='granted')new Notification('Novo pedido de aula',{body:'Abra a Área do professor para aceitar.',icon:'logo-icon-512.png'})}catch(e){}}
   lastPending=pendNow;
@@ -658,7 +692,7 @@ function memberCard(i){
   const o=prof(i.owner),mine=S.me&&i.owner===S.me.id,sent=S.sent.some(s=>s.invite_id===i.id);
   const level=i.level||o.level||'Iniciante',city=i.city||o.city||'';
   const btn=mine?'<button class="btn btn-soft" disabled>Seu convite</button>':sent?'<button class="btn btn-soft" disabled>Convite enviado</button>':`<button class="btn btn-primary" onclick="sendInvite('${i.id}')">Convidar</button>`;
-  return `<article class="card"><div class="member-top"><div class="person-avatar live" style="background:${colorOf(o.name)}">${escapeHtml(ini(o.name))}</div><div style="min-width:0"><div class="person-name">${escapeHtml(o.name)}</div><div class="small">📍 ${escapeHtml(city||'—')}</div><div style="margin-top:7px"><span class="tag live">Quer jogar</span></div></div><div class="rank"><strong>${o.rank||0}</strong><span>pontos</span></div></div><p>“${escapeHtml(i.note||'Disponível para uma partida.')}”</p><div class="details"><span class="lv ${LV[level]||'lv-ini'}">${escapeHtml(level)}</span><span class="fm">${FM[i.format]||FM.quarteto}</span><span class="fm" style="background:${i.ranked===false?'#fff1d1;color:#8c6212':'#e0f7ec;color:#14805a'}">${i.ranked===false?'😎 Amistoso':'🏆 Vale ranking'}</span><span>🕒 ${fmtDate(i.day)}, ${escapeHtml(i.time)}</span><span>🏟 ${escapeHtml(i.local)}</span></div><div class="card-actions">${mine?`<button class="btn btn-outline" onclick="editInvite('${i.id}')">✏️ Editar</button><button class="btn btn-outline" onclick="deleteInvite('${i.id}')">🗑 Excluir</button>`:`<button class="btn btn-outline" onclick="showMember('${i.id}')">Ver perfil</button>`}</div></article>`;
+  return `<article class="card"><div class="member-top"><div class="person-avatar live" style="background:${colorOf(o.name)}">${escapeHtml(ini(o.name))}</div><div style="min-width:0"><div class="person-name">${escapeHtml(o.name)}</div><div class="small">📍 ${escapeHtml(city||'—')}</div><div style="margin-top:7px"><span class="tag live">Quer jogar</span></div></div><div class="rank"><strong>${o.rank||0}</strong><span>pontos</span></div></div><p>“${escapeHtml(i.note||'Disponível para uma partida.')}”</p><div class="details"><span class="lv ${LV[level]||'lv-ini'}">${escapeHtml(level)}</span><span class="fm">${FM[i.format]||FM.quarteto}</span><span class="fm" style="background:${i.ranked===false?'#fff1d1;color:#8c6212':'#e0f7ec;color:#14805a'}">${i.ranked===false?'😎 Amistoso':'🏆 Vale ranking'}</span><span>🕒 ${fmtDate(i.day)}, ${escapeHtml(i.time)}</span><span>🏟 ${escapeHtml(i.local)}</span></div><div class="card-actions">${mine?`<button class="btn btn-outline" onclick="editInvite('${i.id}')">✏️ Editar</button><button class="btn btn-outline" onclick="deleteInvite('${i.id}')">🗑 Excluir</button>`:`<button class="btn btn-outline" onclick="showMember('${i.id}')">Ver perfil</button><button class="btn btn-soft" onclick="openChatWith('${i.owner}')">💬 Conversar</button>`}</div></article>`;
 }
 function filteredInvites(){
   const q=($('member-search')?.value||'').toLowerCase(),loc=$('member-location')?.value||'',lvl=$('member-level')?.value||'',fmt=$('member-format')?.value||'',sort=$('member-sort')?.value||'recent';
@@ -1170,6 +1204,156 @@ function deletePerson(id){
   run(async()=>{const {error}=await sb.rpc('admin_delete_user',{p_id:id});if(!fail(error))toast(p.name+' foi excluído.')});
 }
 
+/* ===== PISCA NA NAVEGAÇÃO: membros (verde), jogos (amarelo), torneios (vermelho) ===== */
+function gdt(g){return new Date(g.day+'T'+String(g.time||'00:00').slice(0,5)+':00')}
+function renderPulses(){
+  const me=S.me,now=new Date(),today=new Date();today.setHours(0,0,0,0);
+  const set=(p,c)=>{const b=document.querySelector('.navlinks button[data-page="'+p+'"]');if(!b)return;b.classList.remove('pl-green','pl-yellow','pl-red');if(c)b.classList.add(c)};
+  const openInv=me?(S.invites||[]).some(i=>i.status==='open'&&i.owner!==me.id&&new Date(i.day+'T00:00:00')>=today):((S.stats&&S.stats.open)||0)>0;
+  set('membros',openInv?'pl-green':'');
+  set('jogos',me&&(S.games||[]).some(g=>!g.done&&(g.a===me.id||g.b===me.id)&&gdt(g)>=new Date(now-2*3600e3))?'pl-yellow':'');
+  const tOpen=(S.tournaments||[]).some(t=>t.status==='aberto'&&t.max_players-tEntries(t.id).length>0&&!(me&&tEntries(t.id).some(e=>e.player_id===me.id)));
+  set('torneios',tOpen?'pl-red':'');
+  const g=$('gear-btn');if(g)g.classList.toggle('needs',!!me&&!('Notification' in window&&Notification.permission==='granted'));
+}
+
+/* ===== CONFIGURAÇÕES (engrenagem) ===== */
+const REMIND_OPTS=[[0,'Desligado'],[30,'30 minutos antes'],[60,'1 hora antes'],[120,'2 horas antes (padrão)'],[180,'3 horas antes'],[1440,'1 dia antes']];
+let myRemind=120,remindOk=true;
+async function pushActive(){try{if(!('serviceWorker' in navigator)||!('Notification' in window)||Notification.permission!=='granted')return false;const r=await navigator.serviceWorker.getRegistration();return !!(r&&await r.pushManager.getSubscription())}catch(e){return false}}
+async function openSettings(){
+  if(!S.me){openAuth('login');return}
+  try{const {data,error}=await sb.from('user_prefs').select('remind_min').maybeSingle();if(error)remindOk=false;else{remindOk=true;myRemind=(data&&data.remind_min!=null)?data.remind_min:120}}catch(e){remindOk=false}
+  await renderSettings();$('settings-modal').classList.add('open');
+}
+async function renderSettings(){
+  const el=$('settings-body');if(!el||!S.me)return;
+  const me=S.me,on=await pushActive(),pr=prof(me.id);
+  const av=me.photo_url?`<img class="photo-img" src="${escapeHtml(me.photo_url)}" alt="Sua foto">`:`<div class="photo-img ph">${escapeHtml(ini(me.name))}</div>`;
+  const lv=['Iniciante','Intermediário','Avançado'].map(x=>`<option${(me.level||'Iniciante')===x?' selected':''}>${x}</option>`).join('');
+  const ro=REMIND_OPTS.map(([v,l])=>`<option value="${v}"${v===myRemind?' selected':''}>${l}</option>`).join('');
+  const wa=String(pr.contact||me.contact||'');
+  el.innerHTML=`
+  <div class="set-sec" style="border-top:0;padding-top:0"><h4>👤 Meu perfil</h4>
+    <div style="display:flex;gap:14px;align-items:center;margin-bottom:12px">${av}<div><label class="btn btn-soft" for="my-photo-file" style="cursor:pointer">📷 Trocar foto</label><input type="file" id="my-photo-file" accept="image/*" class="sr" onchange="uploadMyPhoto(this)"><div class="small" style="margin-top:6px">JPG ou PNG. Aparece no seu perfil.</div></div></div>
+    <form onsubmit="saveSettingsProfile(event)" class="form-grid" style="display:grid;gap:10px">
+      <div class="form-group"><label>Nome</label><input class="field" name="name" value="${escapeHtml(me.name)}" maxlength="60" required></div>
+      <div class="form-group"><label>Cidade</label><select class="field" name="city"></select></div>
+      <div class="form-group"><label>Nível</label><select class="field" name="level">${lv}</select></div>
+      <div class="form-group"><label>WhatsApp (com DDD)</label><input class="field" name="contact" inputmode="numeric" value="${escapeHtml(wa)}" placeholder="11999998888"></div>
+      <button class="btn btn-primary" type="submit">Salvar dados</button>
+    </form></div>
+  <div class="set-sec"><h4>🔔 Avisos no celular</h4>
+    <div class="small" style="margin-bottom:10px">${on?'Ativados neste aparelho: convites, aulas, resultados, lembretes e mensagens.':'Desativados neste aparelho. Ative para receber convites, aulas aceitas, lembretes e mensagens.'}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ${on?'btn-outline':'btn-primary'}" onclick="togglePush()">${on?'Desativar avisos':'Ativar avisos'}</button>${on?'<button class="btn btn-soft" onclick="sendTestPush()">Enviar aviso de teste</button>':''}</div></div>
+  <div class="set-sec"><h4>⏰ Lembrete de jogo</h4>
+    <div class="small" style="margin-bottom:10px">${remindOk?'Você recebe um aviso antes dos seus jogos marcados. Escolha com quanta antecedência.':'Falta ativar os lembretes no banco (SQL chat-lembretes). Avise o administrador.'}</div>
+    <select class="field" id="remind-sel" onchange="saveRemind(this.value)" ${remindOk?'':'disabled'}>${ro}</select></div>
+  <div class="set-sec"><h4>📲 Instalar o app no celular</h4>
+    <div class="small" style="margin-bottom:10px">Veja o passo a passo para colocar o Beach Tennis Club na tela inicial (Android e iPhone).</div>
+    <button class="btn btn-soft" onclick="openTutorial()">▶ Ver vídeo tutorial</button></div>
+  <div class="set-sec"><h4>🔒 Conta</h4>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-outline" onclick="closeModal('settings-modal');$('reset-modal').classList.add('open')">Trocar senha</button><button class="btn btn-outline" onclick="closeModal('settings-modal');logout()">Sair da conta</button></div></div>`;
+  const c=el.querySelector('select[name=city]');if(c){const src=$('a-city');c.innerHTML=src?src.innerHTML:'';c.value=me.city||c.value}
+}
+async function togglePush(){const on=await pushActive();if(on){try{const r=await navigator.serviceWorker.getRegistration();const s=r&&await r.pushManager.getSubscription();if(s){const ep=s.endpoint;await s.unsubscribe();await sb.from('push_subscriptions').delete().eq('endpoint',ep)}toast('Avisos desativados neste aparelho.')}catch(e){toast('Não foi possível desativar: '+(e.message||e))}}else{await enablePush()}await renderSettings();renderPulses()}
+async function saveRemind(v){const n=parseInt(v,10);const {error}=await sb.rpc('set_remind',{p_min:n});if(fail(error))return;myRemind=n;toast(n===0?'Lembretes desligados.':'Lembrete ajustado!')}
+async function saveSettingsProfile(e){
+  e.preventDefault();const f=new FormData(e.target),name=String(f.get('name')).trim(),ct=String(f.get('contact')||'').replace(/\D/g,'');
+  if(name.length<2){toast('Informe seu nome.');return}
+  if(ct&&!/^\d{10,11}$/.test(ct)){toast('WhatsApp com DDD: 10 ou 11 números.');return}
+  const upd={name,city:f.get('city')||null,level:f.get('level')};if(ct)upd.contact=ct;
+  await run(async()=>{const {error}=await sb.from('profiles').update(upd).eq('id',S.me.id);if(!fail(error))toast('Dados atualizados!')});
+  renderSettings();
+}
+async function uploadMyPhoto(input){
+  const file=input.files[0];input.value='';if(!file||!S.me)return;
+  await run(async()=>{await putPhoto(S.me.id,file);toast('Foto atualizada!')});
+  renderSettings();
+}
+
+/* ===== CHAT ===== */
+const CH={open:false,peer:null,all:[],err:false,q:'',unread:0,timer:null,loaded:false};
+function chatConvs(){
+  const me=S.me.id,by={};
+  CH.all.forEach(m=>{const o=m.sender===me?m.receiver:m.sender;(by[o]=by[o]||{id:o,last:m,unread:0});if(m.created_at>by[o].last.created_at)by[o].last=m;if(m.receiver===me&&!m.read_at)by[o].unread++});
+  return Object.values(by).sort((a,b)=>b.last.created_at.localeCompare(a.last.created_at));
+}
+async function chatLoad(){
+  if(!S.me){CH.all=[];CH.unread=0;renderChatBadge();return}
+  try{
+    const {data,error}=await sb.from('dm').select('*').order('created_at',{ascending:false}).limit(400);
+    if(error){CH.err=true;CH.all=[]}else{CH.err=false;CH.all=(data||[]).reverse()}
+  }catch(e){CH.err=true}
+  const before=CH.unread;
+  CH.unread=CH.all.filter(m=>m.receiver===S.me.id&&!m.read_at).length;
+  if(CH.loaded&&CH.unread>before&&!(CH.open&&CH.peer))toast('💬 Você tem mensagem nova no chat.');
+  CH.loaded=true;
+  renderChatBadge();
+  if(CH.open){
+    if(CH.peer&&CH.all.some(m=>m.receiver===S.me.id&&m.sender===CH.peer&&!m.read_at)){try{await sb.rpc('dm_mark_read',{p_other:CH.peer});CH.all.forEach(m=>{if(m.receiver===S.me.id&&m.sender===CH.peer&&!m.read_at)m.read_at=new Date().toISOString()});CH.unread=CH.all.filter(m=>m.receiver===S.me.id&&!m.read_at).length;renderChatBadge()}catch(e){}}
+    renderChat(true);
+  }
+}
+function renderChatBadge(){const b=$('chat-badge');if(!b)return;b.textContent=CH.unread>9?'9+':String(CH.unread||'');b.style.display=CH.unread?'':'none'}
+function toggleChat(){
+  if(!S.me){openAuth('login');return}
+  CH.open=!CH.open;
+  const d=$('chat-dock');if(d)d.style.display=CH.open?'flex':'none';
+  clearInterval(CH.timer);
+  if(CH.open){CH.q='';chatLoad().then(()=>renderChat());renderChat();CH.timer=setInterval(()=>{if(!document.hidden)chatLoad()},4000)}
+}
+function openChatWith(id){
+  if(!S.me){openAuth('login');return}
+  if(id===S.me.id)return;
+  closeModal('message-modal');
+  CH.open=true;CH.peer=id;$('chat-dock').style.display='flex';
+  clearInterval(CH.timer);CH.timer=setInterval(()=>{if(!document.hidden)chatLoad()},4000);
+  renderChat();chatLoad();
+}
+function chatBack(){CH.peer=null;renderChat()}
+function chatPick(id){CH.peer=id;renderChat();chatLoad()}
+function chatTime(s){const d=new Date(s),n=new Date(),hm=d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});return d.toDateString()===n.toDateString()?hm:d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})+' '+hm}
+function renderChat(keepInput){
+  const d=$('chat-dock');if(!d||!CH.open||!S.me)return;
+  const me=S.me.id;
+  if(CH.peer){
+    const p=prof(CH.peer),msgs=CH.all.filter(m=>(m.sender===me&&m.receiver===CH.peer)||(m.sender===CH.peer&&m.receiver===me));
+    const inp=$('chat-input'),draft=inp?inp.value:'',focus=inp&&document.activeElement===inp;
+    const body=msgs.length?msgs.map(m=>`<div class="cm ${m.sender===me?'me':'ot'}"><div class="cb">${escapeHtml(m.body)}</div><div class="ct">${chatTime(m.created_at)}</div></div>`).join(''):'<div class="small" style="text-align:center;margin:30px 12px">Diga um oi 👋 e combine o próximo jogo.</div>';
+    const box=$('chat-msgs'),atEnd=!box||box.scrollHeight-box.scrollTop-box.clientHeight<60;
+    if(!keepInput||!box||box.dataset.peer!==CH.peer){
+      d.innerHTML=`<div class="ch-head"><button class="ch-x" onclick="chatBack()" aria-label="Voltar">‹</button><div class="person-avatar" style="background:${colorOf(p.name)};width:30px;height:30px;border-radius:50%;font-size:11px">${escapeHtml(ini(p.name))}</div><strong style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(p.name)}</strong><button class="ch-x" onclick="toggleChat()" aria-label="Fechar">×</button></div><div class="ch-msgs" id="chat-msgs" data-peer="${CH.peer}">${body}</div><form class="ch-form" onsubmit="sendChat(event)"><input id="chat-input" class="field" placeholder="Escreva uma mensagem..." maxlength="1000" autocomplete="off"><button class="btn btn-primary" type="submit" style="padding:10px 14px">Enviar</button></form>`;
+      const i2=$('chat-input');if(i2){i2.value=draft;if(focus||!keepInput)i2.focus()}
+      const b2=$('chat-msgs');if(b2)b2.scrollTop=b2.scrollHeight;
+    }else{
+      box.innerHTML=body;if(atEnd)box.scrollTop=box.scrollHeight;
+    }
+    return;
+  }
+  const convs=chatConvs(),q=CH.q.trim().toLowerCase();
+  let rows='';
+  if(CH.err)rows='<div class="small" style="padding:18px;text-align:center">O chat ainda não foi ativado no banco de dados. Avise o administrador.</div>';
+  else if(q){
+    const ppl=S.profiles.filter(p=>p.id!==me&&String(p.name).toLowerCase().includes(q)).slice(0,25);
+    rows=ppl.map(p=>`<button class="ch-row" onclick="chatPick('${p.id}')"><div class="person-avatar" style="background:${colorOf(p.name)};width:38px;height:38px;border-radius:50%;font-size:13px">${escapeHtml(ini(p.name))}</div><div class="ch-txt"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.city||(p.role==='professor'?'Professor':'Jogador'))}</span></div></button>`).join('')||'<div class="small" style="padding:18px;text-align:center">Ninguém encontrado.</div>';
+  }else{
+    rows=convs.map(c=>{const p=prof(c.id),m=c.last;return `<button class="ch-row" onclick="chatPick('${c.id}')"><div class="person-avatar" style="background:${colorOf(p.name)};width:38px;height:38px;border-radius:50%;font-size:13px">${escapeHtml(ini(p.name))}</div><div class="ch-txt"><strong>${escapeHtml(p.name)}</strong><span>${m.sender===me?'Você: ':''}${escapeHtml(m.body)}</span></div>${c.unread?`<span class="cbadge" style="position:static">${c.unread}</span>`:''}</button>`}).join('')||'<div class="small" style="padding:22px 16px;text-align:center;line-height:1.6">Nenhuma conversa ainda.<br>Procure alguém pelo nome acima para começar.</div>';
+  }
+  const had=$('chat-q'),f=had&&document.activeElement===had;
+  d.innerHTML=`<div class="ch-head"><strong style="flex:1">💬 Conversas</strong><button class="ch-x" onclick="toggleChat()" aria-label="Fechar">×</button></div><div style="padding:10px 12px 4px"><input id="chat-q" class="field" placeholder="Procurar pessoa pelo nome" value="${escapeHtml(CH.q)}" oninput="CH.q=this.value;renderChat()" autocomplete="off" style="padding:9px 12px"></div><div class="ch-list">${rows}</div>`;
+  if(f||!keepInput){const q2=$('chat-q');if(q2){q2.focus();q2.setSelectionRange(q2.value.length,q2.value.length)}}
+}
+async function sendChat(e){
+  e.preventDefault();const inp=$('chat-input'),text=inp.value.trim();if(!text||!CH.peer||!S.me)return;
+  inp.value='';
+  const row={sender:S.me.id,receiver:CH.peer,body:text};
+  CH.all.push({...row,id:'tmp'+Date.now(),created_at:new Date().toISOString(),read_at:null});renderChat(true);
+  const {error}=await sb.from('dm').insert(row);
+  if(error){toast('Não foi possível enviar: '+error.message);inp.value=text}
+  chatLoad();
+}
+
 /* ===== FORMULÁRIOS ===== */
 $('invite-form').addEventListener('submit',e=>{e.preventDefault();
   if(!S.me){openAuth('login');return}
@@ -1211,7 +1395,7 @@ function renderProfileBox(){
   if(!S.me){b.innerHTML='<button class="btn btn-primary" onclick="openAuth(\'login\')">Entrar</button>';return}
   const sub=S.me.is_admin?({admin:'Administrador',aluno:'Vendo como aluno',professor:'Vendo como professor'}[viewAs]):S.me.role==='professor'?'Professor':(S.me.level||'Iniciante')+' · '+(S.me.rank||0)+' pts';
   const av=S.me.photo_url?`<img class="avatar" style="object-fit:cover" src="${escapeHtml(S.me.photo_url)}" alt="">`:`<div class="avatar">${escapeHtml(ini(S.me.name))}</div>`;
-  b.innerHTML=`${av}<button class="btn btn-outline bell" style="padding:8px 10px" onclick="enablePush()" title="Avisos no celular" aria-label="Ativar avisos no celular">🔔</button><div class="user-label"><strong style="font-size:13px;display:block;color:var(--navy)">${escapeHtml(S.me.name)}</strong><span class="small">${escapeHtml(sub)}</span></div><button class="btn btn-outline" style="padding:8px 12px" onclick="logout()">Sair</button>`;
+  b.innerHTML=`${av}<button class="btn btn-outline bell" style="padding:8px 10px" onclick="toggleChat()" title="Chat" aria-label="Abrir o chat">💬<span class="cbadge" id="chat-badge" style="display:none"></span></button><button class="btn btn-outline bell" id="gear-btn" style="padding:8px 10px" onclick="openSettings()" title="Configurações" aria-label="Configurações">⚙️</button><div class="user-label"><strong style="font-size:13px;display:block;color:var(--navy)">${escapeHtml(S.me.name)}</strong><span class="small">${escapeHtml(sub)}</span></div><button class="btn btn-outline" style="padding:8px 12px" onclick="logout()">Sair</button>`;
 }
 function renderViewBar(){
   const v=$('viewbar');if(!v)return;
@@ -1234,14 +1418,14 @@ function isStandalone(){return window.matchMedia&&matchMedia('(display-mode: sta
 function pushDismissed(){try{return localStorage.getItem('btc-push-dismiss')==='1'}catch(e){return false}}
 function dismissPush(){try{localStorage.setItem('btc-push-dismiss','1')}catch(e){}renderPushGlobal()}
 function renderPushGlobal(){
-  const el=$('pushbar-global');if(!el)return;
+  const el=$('pushbar-global');if(!el)return;el.style.display='none';el.innerHTML='';return;
   const granted='Notification' in window&&Notification.permission==='granted';
   if(!S.me||granted||pushDismissed()||('Notification' in window&&Notification.permission==='denied')){el.style.display='none';el.innerHTML='';return}
   const tip=isIOS()&&!isStandalone()?' <strong>No iPhone:</strong> toque em Compartilhar → <em>Adicionar à Tela de Início</em> e abra por lá.':'';
   el.style.display='';
   el.innerHTML=`<div class="shell" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between;padding-top:8px;padding-bottom:8px"><span class="small" style="color:#1f5a8a;font-weight:600">🔔 Receba avisos no celular: convites, aulas aceitas e resultados de jogos.${tip}</span><span style="display:flex;gap:8px"><button class="btn btn-primary" style="padding:8px 14px" onclick="enablePush()">Ativar avisos</button><button class="btn btn-soft" style="padding:8px 14px" onclick="openTutorial()">Ver tutorial</button><button class="btn btn-outline" style="padding:8px 14px" onclick="dismissPush()">Agora não</button></span></div>`;
 }
-function renderAll(){renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges()}
+function renderAll(){renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges();renderPulses();renderChatBadge()}
 
 ['member-search','member-location','member-level','member-format','member-sort'].forEach(id=>$(id).addEventListener('input',renderMembers));
 ['teacher-search','teacher-location'].forEach(id=>$(id).addEventListener('input',renderTeachers));
