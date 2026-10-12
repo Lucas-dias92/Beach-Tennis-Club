@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beach Tennis Club | Jogue. Conecte. Evolua.</title>
 <meta name="description" content="Encontre sua dupla, marque partidas, suba no ranking e aprenda com os melhores professores de beach tennis do litoral.">
-<meta name="theme-color" content="#0b4f5a"><link rel="manifest" href="manifest.webmanifest?v=2"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2"><link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png?v=2"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
+<meta name="theme-color" content="#0b4f5a"><link rel="manifest" href="manifest.webmanifest?v=2"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=3"><link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png?v=3"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=3">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --navy:#0b3b46;--deep:#0b4f5a;--teal:#0a8793;--aqua:#dff6f2;--mint:#a8ecd9;
@@ -17,7 +17,7 @@
   --ink:#16323a;--muted:#5f7a82;--white:#fff;--line:#e2ece8;--bg:#f6fbf8;
   --shadow-sm:0 2px 10px #0b3b4610;--shadow:0 18px 44px -14px #0b3b4630;--shadow-lg:0 30px 70px -20px #0b3b4655;
   --r:20px;--ease:cubic-bezier(.2,.8,.2,1);
-  --display:'Outfit','Inter',system-ui,sans-serif;
+  --display:'Barlow Condensed','Outfit','Inter',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -214,6 +214,52 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .prices{display:grid;gap:6px;margin:14px 0 18px}.prices div{display:flex;justify-content:space-between;gap:10px;background:#f2f8f6;padding:8px 12px;border-radius:12px;font-size:12.5px;color:#4f6a72}.prices strong{color:var(--navy)}
 .photo-row{display:flex;gap:14px;align-items:center;margin-bottom:16px}.photo-img{width:84px;height:84px;border-radius:24px;object-fit:cover;box-shadow:0 14px 24px -10px #0b3b4660;border:3px solid #fff;display:grid;place-items:center}.photo-img.ph{background:linear-gradient(140deg,var(--deep),var(--teal));color:#fff;font:800 26px var(--display)}
 .agenda-item.past{opacity:.55}
+/* ===== VISUAL ESPORTIVO ===== */
+/* 1) heroi com foto real */
+.hero{background:linear-gradient(96deg,#06262df0 0%,#0a4f5ad0 42%,#0a4f5a40 100%),url("hero-praia.jpg") center 55%/cover!important}
+.hero .sun,.hero .ball,.hero .racket,.hero .waves{display:none!important}
+.hero-art .float-card{box-shadow:0 1px 0 #fff inset,0 24px 50px -12px #000000aa,0 8px 18px -6px #00000066}
+.hero:before,.hero:after{display:none}
+@media(max-width:960px){
+  .hero{background:linear-gradient(180deg,#06262df5 0%,#0a4f5ae6 55%,#06262dcc 100%),url("hero-praia.jpg") 62% 70%/cover!important}
+}
+/* 2) tipografia esportiva */
+.hero h1{font-size:clamp(46px,7.4vw,96px);line-height:.92;letter-spacing:.5px;text-transform:uppercase;font-weight:800}
+.hero h1 span{background:linear-gradient(90deg,var(--sun),#ffa27c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.section-head h2,.cta h2{text-transform:uppercase;letter-spacing:.6px;font-weight:800;line-height:.98}
+.section-head h2{font-size:clamp(30px,4vw,46px)}
+.cta h2{font-size:clamp(36px,5.4vw,60px)}
+.btn,.navlinks button{font-family:var(--display);text-transform:uppercase;letter-spacing:.65px}
+.btn{font-size:15px;font-weight:700}
+.btn-lg{font-size:17px}
+.navlinks button{font-size:15.5px;font-weight:700;letter-spacing:.7px}
+.kicker{font-family:var(--display);font-size:14px;letter-spacing:2px}
+.kicker:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--sun);margin-right:8px;vertical-align:1px;box-shadow:0 0 0 3px #ffc85733}
+.section-head h2:after{content:"";display:block;width:64px;height:5px;border-radius:3px;margin-top:11px;background:linear-gradient(90deg,var(--coral),var(--sun))}
+.brand span{letter-spacing:.8px;font-size:22px;font-weight:800}
+/* 3) placar */
+.stats{gap:0;margin:-44px 28px 10px;background:#0b3b46;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px -26px #0b3b46cc,0 10px 22px -10px #0b3b4699}
+.stats .stat{display:block;text-align:center;background:transparent;border:0;border-radius:0;box-shadow:none!important;padding:22px 26px}
+.stats .stat:hover{transform:none;box-shadow:none!important}
+.stats .stat+.stat{border-left:2px solid #ffffff1f}
+.stats .stat-icon{display:none}
+.stats .stat strong{font-size:44px;line-height:1;color:var(--sun);letter-spacing:.5px}
+.stats .stat span{display:block;margin-top:6px;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;color:#cfe9e4;font-weight:600}
+@media(max-width:600px){
+  .stats{display:grid;grid-template-columns:1fr;margin:-40px 10px 0}
+  .stats .stat{padding:16px 18px;flex-direction:row}
+  .stats .stat+.stat{border-left:0;border-top:2px solid #ffffff1f}
+  .stats .stat strong{font-size:40px}
+  .stats .stat span{font-size:11.5px}
+}
+/* 4) passos como jogos */
+.step:before{content:"JOGO " counter(s);font:800 56px/1 var(--display);letter-spacing:1px;color:#e2f4ee;right:18px;top:12px}
+/* 6) cards com faixa no topo */
+.card{overflow:hidden;border-radius:8px 8px 22px 22px;padding-top:27px}
+.card:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:repeating-linear-gradient(135deg,var(--coral) 0 14px,var(--sun) 14px 28px)}
+/* 7) botao do chat */
+#chat-fab svg{display:block;pointer-events:none}
+
 .brand{white-space:nowrap}
 .brand-mark{margin:3px 0 3px 3px;flex:none}
 @media(max-width:960px){
@@ -507,9 +553,9 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="hero-content"><span class="eyebrow"><i></i>Sua próxima partida começa aqui</span><h1>Encontre sua dupla.<br><span>Entre no jogo.</span></h1><p>Conecte-se com quem joga perto de você, marque partidas, suba no ranking e faça parte da maior comunidade de beach tennis do litoral.</p>
 <div class="hero-cta"><button class="btn btn-lg btn-primary" onclick="openModal('invite-modal')">Quero jogar agora →</button><button class="btn btn-lg btn-ghost" onclick="goPage('membros')">Ver jogadores</button></div>
 <div class="hero-proof"><div class="faces"><span style="background:#d8f4eb">MO</span><span style="background:#fbe4cf">RM</span><span style="background:#e7e4ff">CR</span><span style="background:#fff0c9">BL</span></div><span><strong style="color:#fff" id="hero-players">Seja o primeiro</strong> <span id="hero-players-label">a entrar na areia</span></span></div></div>
-<div class="hero-art" aria-hidden="true"><div class="sun"></div>
+<div class="hero-art"><div class="sun"></div>
 <div class="float-card fc1"><div class="ic">🏆</div><div><strong>Ranking ao vivo</strong>Suba de nível jogando</div></div>
-<div class="float-card fc2"><div class="ic">📍</div><div><strong id="fc-open">0 querem jogar</strong>Perto de você, agora</div></div>
+<div class="float-card fc2" role="button" tabindex="0" style="cursor:pointer" onclick="goPage(&#39;membros&#39;)" onkeydown="if(event.key===&#39;Enter&#39;||event.key===&#39; &#39;){event.preventDefault();goPage(&#39;membros&#39;)}"><div class="ic">📍</div><div><strong id="fc-open">0 querem jogar</strong>Perto de você, agora</div></div>
 <svg class="racket" viewBox="0 0 120 220" fill="none"><defs><linearGradient id="rk" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff9a7e"/><stop offset="1" stop-color="#ff6a4a"/></linearGradient></defs><ellipse cx="60" cy="64" rx="50" ry="58" fill="url(#rk)"/><ellipse cx="60" cy="64" rx="40" ry="48" fill="#fff" opacity=".18"/><g fill="#fff" opacity=".85"><circle cx="45" cy="45" r="4"/><circle cx="60" cy="40" r="4"/><circle cx="75" cy="45" r="4"/><circle cx="38" cy="62" r="4"/><circle cx="52" cy="62" r="4"/><circle cx="68" cy="62" r="4"/><circle cx="82" cy="62" r="4"/><circle cx="45" cy="80" r="4"/><circle cx="60" cy="84" r="4"/><circle cx="75" cy="80" r="4"/></g><rect x="50" y="118" width="20" height="30" fill="#ff6a4a"/><rect x="48" y="146" width="24" height="68" rx="9" fill="#0b3b46"/><g stroke="#ffffff55" stroke-width="2"><path d="M50 160h20M50 172h20M50 184h20M50 196h20"/></g></svg>
 <svg class="ball" viewBox="0 0 100 100"><defs><radialGradient id="bl" cx=".35" cy=".3"><stop stop-color="#fff9c8"/><stop offset=".6" stop-color="#ffe14d"/><stop offset="1" stop-color="#f2b600"/></radialGradient></defs><circle cx="50" cy="50" r="46" fill="url(#bl)"/><path d="M8 36c28 14 56 14 84 0M8 64c28-14 56-14 84 0" stroke="#fff" stroke-width="4" fill="none" opacity=".9"/></svg></div>
 </div>
@@ -557,7 +603,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="modal-backdrop" id="tournament-modal"><div class="modal"><div class="modal-head"><h3>Criar torneio</h3><button class="close" onclick="closeModal('tournament-modal')" aria-label="Fechar">×</button></div><form id="tournament-form"><div class="form-group"><label>Nome do torneio</label><input class="field" name="name" required placeholder="Ex.: Open de Verão"></div><div class="form-grid"><div class="form-group"><label>Data</label><input class="field" name="date" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off" required></div><div class="form-group"><label>Horário</label><input class="field" name="time" type="time" required></div><div class="form-group full"><label>Arena / local</label><input class="field" name="arena" required></div><div class="form-group"><label>Cidade</label><select class="field" name="city"><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="form-group"><label>Formato</label><select class="field" name="format"><option value="duplas">Duplas</option><option value="simples">Simples</option></select></div><div class="form-group"><label>Inscrição (R$) — 0 = grátis</label><input class="field" name="fee" type="number" min="0" step="1" value="0"></div><div class="form-group"><label>Vagas</label><input class="field" name="max" type="number" min="2" max="256" value="16"></div><div class="form-group full"><label>Chave Pix para receber as inscrições</label><input class="field" name="pix" placeholder="CPF, e-mail, telefone ou chave aleatória"></div><div class="form-group full"><label>Patrocinador (opcional)</label><input class="field" name="sponsor"></div><div class="form-group full"><label>Descrição (opcional)</label><textarea class="field" name="description" rows="3"></textarea></div></div><button class="btn btn-primary" style="width:100%">Criar torneio</button></form></div></div>
 <div class="modal-backdrop" id="finish-modal"><div class="modal"><div class="modal-head"><h3>Encerrar e premiar</h3><button class="close" onclick="closeModal('finish-modal')" aria-label="Fechar">×</button></div><p class="small" style="line-height:1.6;margin-top:-6px">Escolha os 3 primeiros. Os pontos entram no ranking na hora: 1º +50, 2º +30, 3º +15.</p><div class="form-group"><label for="fin-1">🥇 1º lugar</label><select class="field" id="fin-1"></select></div><div class="form-group"><label for="fin-2">🥈 2º lugar</label><select class="field" id="fin-2"></select></div><div class="form-group"><label for="fin-3">🥉 3º lugar</label><select class="field" id="fin-3"></select></div><button class="btn btn-primary" style="width:100%" onclick="submitFinish()">Encerrar torneio</button></div></div>
 <div class="modal-backdrop" id="settings-modal"><div class="modal" style="max-width:520px"><div class="modal-head"><h3>⚙️ Configurações</h3><button class="close" onclick="closeModal('settings-modal')" aria-label="Fechar">×</button></div><div id="settings-body"></div></div></div>
-<button id="chat-fab" type="button" aria-label="Abrir o chat" title="Chat (arraste para mudar de lugar)">💬<span class="cbadge" id="chat-badge" style="display:none"></span></button><div id="chat-dock" role="dialog" aria-label="Chat"></div>
+<button id="chat-fab" type="button" aria-label="Abrir o chat" title="Chat (arraste para mudar de lugar)"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.6-.8L3 21l1.9-5.1A8.4 8.4 0 1 1 21 11.5z"/><path d="M8.6 8.3c1.6 1.8 1.6 5.6 0 7.4M15.4 8.3c-1.6 1.8-1.6 5.6 0 7.4" stroke-width="1.6"/></svg><span class="cbadge" id="chat-badge" style="display:none"></span></button><div id="chat-dock" role="dialog" aria-label="Chat"></div>
 <div class="modal-backdrop" id="tutorial-modal"><div class="modal" style="max-width:420px"><div class="modal-head"><h3>Como instalar na tela do celular</h3><button class="close" onclick="closeModal('tutorial-modal')" aria-label="Fechar">×</button></div><video id="tut-video" class="tut-video" controls playsinline preload="none" poster="tutorial-poster.jpg" aria-label="Tutorial de instalação"><source src="tutorial-instalar-app.mp4" type="video/mp4"></video><p class="small" style="margin:12px 0 0;line-height:1.5">Android: Chrome → 3 pontinhos → <strong>Instalar app</strong>. iPhone: Safari → <strong>Compartilhar</strong> → <strong>Adicionar à Tela de Início</strong>.</p></div></div>
 <div class="modal-backdrop" id="reset-modal"><div class="modal"><div class="modal-head"><h3>Criar nova senha</h3><button class="close" onclick="closeModal('reset-modal')" aria-label="Fechar">×</button></div><form id="reset-form"><div class="form-group"><label for="r-pass">Nova senha</label><input class="field" id="r-pass" type="password" minlength="6" required autocomplete="new-password"></div><p id="reset-err" role="alert" style="color:#b3261e;font-weight:700;font-size:13px;min-height:18px;margin:0 0 10px"></p><button class="btn btn-primary" style="width:100%">Salvar nova senha</button></form></div></div>
 <div class="modal-backdrop" id="tv-modal"><div class="modal modal-wide"><div class="modal-head"><h3>Professor</h3><button class="close" onclick="closeModal('tv-modal')" aria-label="Fechar">×</button></div><div id="tv-body"></div></div></div>
