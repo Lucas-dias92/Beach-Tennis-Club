@@ -214,6 +214,48 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .prices{display:grid;gap:6px;margin:14px 0 18px}.prices div{display:flex;justify-content:space-between;gap:10px;background:#f2f8f6;padding:8px 12px;border-radius:12px;font-size:12.5px;color:#4f6a72}.prices strong{color:var(--navy)}
 .photo-row{display:flex;gap:14px;align-items:center;margin-bottom:16px}.photo-img{width:84px;height:84px;border-radius:24px;object-fit:cover;box-shadow:0 14px 24px -10px #0b3b4660;border:3px solid #fff;display:grid;place-items:center}.photo-img.ph{background:linear-gradient(140deg,var(--deep),var(--teal));color:#fff;font:800 26px var(--display)}
 .agenda-item.past{opacity:.55}
+/* ===== RANKING E PERFIL ===== */
+#profile-box .avatar{cursor:pointer}
+.navlinks button{white-space:nowrap}
+.rk-filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin:0 0 18px}
+@media(max-width:700px){.rk-filters{grid-template-columns:1fr}}
+.rk-me{display:flex;gap:18px;align-items:center;flex-wrap:wrap;background:#0b3b46;color:#fff;border-radius:20px;padding:16px 20px;margin-bottom:20px}
+.rk-me .small{color:#bfe3dc}
+.rk-me strong{display:block;font:800 34px/1 var(--display);color:var(--sun)}
+.rk-me b{color:var(--sun)}
+.rk-podium{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:end;margin-bottom:18px}
+.rk-pod{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;border:1px solid var(--line);background:#fff;border-radius:20px;padding:16px 8px;box-shadow:var(--shadow-sm);cursor:pointer;min-width:0;font:inherit;transition:transform .25s var(--ease)}
+.rk-pod:hover{transform:translateY(-4px)}
+.rk-pod strong{font-size:14px;color:var(--navy);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk-pod b{font:800 22px var(--display);color:var(--deep)}
+.rk-pod1{padding-top:26px;padding-bottom:22px;background:linear-gradient(180deg,#fff6d8,#fff);border-color:#f1d98b}
+.rk-pod1 b{color:#b9780a}
+.rk-medal{font-size:28px;line-height:1}
+.rk-list{display:flex;flex-direction:column;gap:8px}
+.rk-row{display:flex;align-items:center;gap:12px;width:100%;border:1px solid var(--line);background:#fff;border-radius:16px;padding:10px 14px;text-align:left;cursor:pointer;font:inherit;transition:transform .2s var(--ease),border-color .2s}
+.rk-row:hover{transform:translateX(3px);border-color:var(--teal)}
+.rk-row.me{border-color:var(--teal);background:var(--aqua)}
+.rk-pos{font:800 20px var(--display);color:var(--muted);width:30px;text-align:center}
+.rk-name{display:flex;flex-direction:column;flex:1;min-width:0}
+.rk-name strong{color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk-pts{font:800 20px var(--display);color:var(--deep)}
+.rk-pts small{font:600 12px Inter,sans-serif;color:var(--muted)}
+@media(max-width:480px){.rk-row .lv{display:none}}
+.pf-head{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.pf-rank{margin-left:auto;text-align:center;background:var(--aqua);border-radius:16px;padding:10px 16px}
+.pf-rank b{display:block;font:800 30px/1 var(--display);color:var(--deep)}
+.pf-rank span{font-size:12px;color:var(--muted)}
+.pf-rank em{display:block;font-style:normal;font-weight:700;font-size:12px;color:var(--teal)}
+.pf-h2h,.pf-last,.pf-ach{margin-top:14px}
+.pf-h2h strong{display:block;font:800 22px var(--display);color:var(--navy)}
+.pf-last>div{display:flex;gap:6px;margin-top:6px}
+.pf-res{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font:800 14px var(--display);color:#fff}
+.pf-res.w{background:#1fb97a}.pf-res.l{background:#ff7a5c}
+.pf-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pf-badge{display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:99px;background:#eef2f1;color:#9bb0b5;font-size:12.5px;filter:grayscale(1);opacity:.7}
+.pf-badge.on{background:#fff6d8;color:#8c6212;filter:none;opacity:1;border:1px solid #f1d98b}
+.pf-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.pf-acts .btn{flex:1;min-width:130px}
 /* ===== VISUAL ESPORTIVO ===== */
 /* 1) heroi com foto real */
 .hero{background:linear-gradient(96deg,#06262df0 0%,#0a4f5ad0 42%,#0a4f5a40 100%),url("hero-praia.jpg") center 55%/cover!important}
@@ -546,7 +588,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <g class="btc-t2"><text font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="56" fill="#4fd1bd"><textPath href="#btcBot" startOffset="50%" text-anchor="middle" textLength="800" lengthAdjust="spacing">JOGUE  •  CONECTE  •  EVOLUA</textPath></text></g>
 </svg></div>
 <script>(function(){var e=document.getElementById('btc-splash');if(!e)return;var seen=false;try{seen=sessionStorage.getItem('btc-splash')==='1';sessionStorage.setItem('btc-splash','1')}catch(_){}function rm(){if(e&&e.parentNode)e.parentNode.removeChild(e);e=null}if(seen){rm();return}e.style.cursor='pointer';e.addEventListener('click',rm);setTimeout(rm,4600)})();</script>
-<header class="topbar" id="topbar"><div class="shell nav"><button class="brand" onclick="goPage('inicio')" aria-label="Beach Tennis Club - início"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></button><nav class="navlinks" aria-label="Navegação principal"><button class="active" data-page="inicio">Início</button><button data-page="membros">Membros</button><button data-page="jogos">Meus jogos <span id="game-count"></span></button><button data-page="professores">Aulas e professores</button><button data-page="torneios">Torneios</button><button data-page="professor">Área do professor</button></nav><div class="profile" id="profile-box"></div></div></header><div id="viewbar" style="display:none"></div><div id="pushbar-global" style="display:none"></div>
+<header class="topbar" id="topbar"><div class="shell nav"><button class="brand" onclick="goPage('inicio')" aria-label="Beach Tennis Club - início"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></button><nav class="navlinks" aria-label="Navegação principal"><button class="active" data-page="inicio">Início</button><button data-page="membros">Membros</button><button data-page="ranking">Ranking</button><button data-page="jogos">Meus jogos <span id="game-count"></span></button><button data-page="professores">Aulas e professores</button><button data-page="torneios">Torneios</button><button data-page="professor">Área do professor</button></nav><div class="profile" id="profile-box"></div></div></header><div id="viewbar" style="display:none"></div><div id="pushbar-global" style="display:none"></div>
 <main class="shell">
 <section id="page-inicio" class="page active">
 <div class="hero"><div class="hero-grid">
@@ -571,6 +613,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="cta reveal"><h2>A areia está te esperando.</h2><p>Publique sua disponibilidade em menos de um minuto e receba convites de quem joga perto de você.</p><button class="btn btn-lg btn-white" onclick="openModal('invite-modal')">+ Quero jogar</button></div>
 </section>
 <section id="page-membros" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Comunidade</span><h2>Comunidade de jogadores</h2><p>Descubra quem quer jogar, confira o ranking e envie um convite.</p></div><button class="btn btn-primary" onclick="openModal('invite-modal')">+ Publicar que quero jogar</button></div><div class="filters"><input id="member-search" class="field search" placeholder="🔍  Buscar por nome ou cidade..." aria-label="Buscar jogador"/><select id="member-location" class="field" aria-label="Cidade"><option value="">Todas as cidades</option><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select><select id="member-level" class="field" aria-label="Nível"><option value="">Todos os níveis</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select><select id="member-format" class="field" aria-label="Formato"><option value="">Todos os formatos</option><option value="simples">Simples (2)</option><option value="quarteto">4 pessoas diferentes</option><option value="duplas">2 duplas de 2</option></select><select id="member-sort" class="field" aria-label="Ordenar"><option value="recent">Mais recentes</option><option value="rank">Maior ranking</option></select></div><div class="cards" id="all-members"></div></section>
+<section id="page-ranking" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Classificação</span><h2>Ranking</h2><p>Quem está dominando a areia. Jogue partidas que valem ranking e suba na tabela.</p></div></div><div class="rk-filters"><input class="field" id="rk-q" placeholder="Buscar jogador" aria-label="Buscar jogador"><select class="field" id="rk-city" aria-label="Cidade"><option value="">Todas as cidades</option><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select><select class="field" id="rk-level" aria-label="Nível"><option value="">Todos os níveis</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div><div id="ranking-body"></div></section>
 <section id="page-jogos" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Agenda</span><h2>Meus jogos</h2><p>Partidas confirmadas e convites que você recebeu.</p></div><button class="btn btn-primary" onclick="openModal('invite-modal')">+ Criar disponibilidade</button></div><div class="panel" style="margin-bottom:18px"><h3>🔔 Convites recebidos <span id="invite-count" class="tag">0 novos</span></h3><div id="received-invites"><div class="small">Você ainda não recebeu convites nesta demonstração.</div></div></div><div class="panel" style="margin-bottom:18px"><h3>🎓 Minhas aulas</h3><div id="my-lessons"></div></div><div class="panel" id="rank-chart-panel" style="margin-bottom:18px"></div><div class="section-head" style="margin-top:34px"><div><h2>Partidas combinadas</h2><p>Os jogos aceitos aparecem aqui para você se organizar.</p></div></div><div class="table-wrap"><table class="games-table"><thead><tr><th>Jogadores</th><th>Data e horário</th><th>Local</th><th>Ranking</th><th>Status</th></tr></thead><tbody id="games-table-body"><tr><td colspan="5" style="text-align:center;color:#688087;padding:30px">Nenhuma partida confirmada ainda. Convide alguém para começar!</td></tr></tbody></table></div></section>
 <section id="page-professores" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Aulas</span><h2>Aulas e professores</h2><p>Encontre um professor, conheça seu trabalho e combine uma aula.</p></div><button class="btn btn-outline" onclick="goPage('professor')">Sou professor →</button></div><div class="filters"><input id="teacher-search" class="field search" placeholder="🔍  Buscar professor ou cidade..." aria-label="Buscar professor"/><select id="teacher-location" class="field" aria-label="Cidade"><option value="">Todas as cidades</option><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="cards" id="all-teachers"></div></section>
 <section id="page-torneios" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Competição</span><h2>Torneios</h2><p>Inscreva-se, pague por Pix e acompanhe o resultado. Os pontos entram no seu ranking: 1º +50, 2º +30, 3º +15.</p></div><button class="btn btn-primary" id="btn-new-tournament" style="display:none" onclick="openModal('tournament-modal')">+ Criar torneio</button></div><div class="cards" id="tournaments"></div></section>
@@ -602,6 +645,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="modal-backdrop" id="lesson-modal"><div class="modal"><div class="modal-head"><h3>Adicionar aula à agenda</h3><button class="close" onclick="closeModal('lesson-modal')">×</button></div><form id="lesson-form"><div class="form-grid"><div class="form-group"><label>Data</label><input class="field" name="date" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" autocomplete="off" required></div><div class="form-group"><label>Horário</label><input class="field" name="time" type="time" required></div><div class="form-group full"><label>Nome do aluno</label><input class="field" name="student" required></div><div class="form-group"><label>Duração</label><select class="field" name="duration"><option value="30">30 minutos</option><option value="60" selected>60 minutos</option></select></div><div class="form-group"><label>Tipo de aula</label><select class="field" name="kind"><option value="individual">Individual</option><option value="grupo">Em grupo</option></select></div><div class="form-group full"><label>Local</label><input class="field" name="place" required></div></div><p class="small" style="line-height:1.6;margin:0 0 14px">Não dá para marcar em dia ou horário que já passou, nem em dois locais diferentes ao mesmo tempo. No mesmo local, pode ter mais de um aluno.</p><button class="btn btn-primary" style="width:100%">Adicionar aula</button></form></div></div>
 <div class="modal-backdrop" id="tournament-modal"><div class="modal"><div class="modal-head"><h3>Criar torneio</h3><button class="close" onclick="closeModal('tournament-modal')" aria-label="Fechar">×</button></div><form id="tournament-form"><div class="form-group"><label>Nome do torneio</label><input class="field" name="name" required placeholder="Ex.: Open de Verão"></div><div class="form-grid"><div class="form-group"><label>Data</label><input class="field" name="date" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off" required></div><div class="form-group"><label>Horário</label><input class="field" name="time" type="time" required></div><div class="form-group full"><label>Arena / local</label><input class="field" name="arena" required></div><div class="form-group"><label>Cidade</label><select class="field" name="city"><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="form-group"><label>Formato</label><select class="field" name="format"><option value="duplas">Duplas</option><option value="simples">Simples</option></select></div><div class="form-group"><label>Inscrição (R$) — 0 = grátis</label><input class="field" name="fee" type="number" min="0" step="1" value="0"></div><div class="form-group"><label>Vagas</label><input class="field" name="max" type="number" min="2" max="256" value="16"></div><div class="form-group full"><label>Chave Pix para receber as inscrições</label><input class="field" name="pix" placeholder="CPF, e-mail, telefone ou chave aleatória"></div><div class="form-group full"><label>Patrocinador (opcional)</label><input class="field" name="sponsor"></div><div class="form-group full"><label>Descrição (opcional)</label><textarea class="field" name="description" rows="3"></textarea></div></div><button class="btn btn-primary" style="width:100%">Criar torneio</button></form></div></div>
 <div class="modal-backdrop" id="finish-modal"><div class="modal"><div class="modal-head"><h3>Encerrar e premiar</h3><button class="close" onclick="closeModal('finish-modal')" aria-label="Fechar">×</button></div><p class="small" style="line-height:1.6;margin-top:-6px">Escolha os 3 primeiros. Os pontos entram no ranking na hora: 1º +50, 2º +30, 3º +15.</p><div class="form-group"><label for="fin-1">🥇 1º lugar</label><select class="field" id="fin-1"></select></div><div class="form-group"><label for="fin-2">🥈 2º lugar</label><select class="field" id="fin-2"></select></div><div class="form-group"><label for="fin-3">🥉 3º lugar</label><select class="field" id="fin-3"></select></div><button class="btn btn-primary" style="width:100%" onclick="submitFinish()">Encerrar torneio</button></div></div>
+<div class="modal-backdrop" id="player-modal"><div class="modal" style="max-width:500px"><div class="modal-head"><h3>Perfil do jogador</h3><button class="close" onclick="closeModal('player-modal')" aria-label="Fechar">×</button></div><div id="player-body"></div></div></div>
 <div class="modal-backdrop" id="settings-modal"><div class="modal" style="max-width:520px"><div class="modal-head"><h3>⚙️ Configurações</h3><button class="close" onclick="closeModal('settings-modal')" aria-label="Fechar">×</button></div><div id="settings-body"></div></div></div>
 <button id="chat-fab" type="button" aria-label="Abrir o chat" title="Chat (arraste para mudar de lugar)"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.6-.8L3 21l1.9-5.1A8.4 8.4 0 1 1 21 11.5z"/><path d="M8.6 8.3c1.6 1.8 1.6 5.6 0 7.4M15.4 8.3c-1.6 1.8-1.6 5.6 0 7.4" stroke-width="1.6"/></svg><span class="cbadge" id="chat-badge" style="display:none"></span></button><div id="chat-dock" role="dialog" aria-label="Chat"></div>
 <div class="modal-backdrop" id="tutorial-modal"><div class="modal" style="max-width:420px"><div class="modal-head"><h3>Como instalar na tela do celular</h3><button class="close" onclick="closeModal('tutorial-modal')" aria-label="Fechar">×</button></div><video id="tut-video" class="tut-video" controls playsinline preload="none" poster="tutorial-poster.jpg" aria-label="Tutorial de instalação"><source src="tutorial-instalar-app.mp4" type="video/mp4"></video><p class="small" style="margin:12px 0 0;line-height:1.5">Android: Chrome → 3 pontinhos → <strong>Instalar app</strong>. iPhone: Safari → <strong>Compartilhar</strong> → <strong>Adicionar à Tela de Início</strong>.</p></div></div>
@@ -761,7 +805,7 @@ function memberCard(i){
   const o=prof(i.owner),mine=S.me&&i.owner===S.me.id,sent=S.sent.some(s=>s.invite_id===i.id);
   const level=i.level||o.level||'Iniciante',city=i.city||o.city||'';
   const btn=mine?'<button class="btn btn-soft" disabled>Seu convite</button>':sent?'<button class="btn btn-soft" disabled>Convite enviado</button>':`<button class="btn btn-primary" onclick="sendInvite('${i.id}')">Convidar</button>`;
-  return `<article class="card"><div class="member-top"><div class="person-avatar live" style="background:${colorOf(o.name)}">${escapeHtml(ini(o.name))}</div><div style="min-width:0"><div class="person-name">${escapeHtml(o.name)}</div><div class="small">📍 ${escapeHtml(city||'—')}</div><div style="margin-top:7px"><span class="tag live">Quer jogar</span></div></div><div class="rank"><strong>${o.rank||0}</strong><span>pontos</span></div></div><p>“${escapeHtml(i.note||'Disponível para uma partida.')}”</p><div class="details"><span class="lv ${LV[level]||'lv-ini'}">${escapeHtml(level)}</span><span class="fm">${FM[i.format]||FM.quarteto}</span><span class="fm" style="background:${i.ranked===false?'#fff1d1;color:#8c6212':'#e0f7ec;color:#14805a'}">${i.ranked===false?'😎 Amistoso':'🏆 Vale ranking'}</span><span>🕒 ${fmtDate(i.day)}, ${escapeHtml(i.time)}</span><span>🏟 ${escapeHtml(i.local)}</span></div><div class="card-actions">${mine?`<button class="btn btn-outline" onclick="editInvite('${i.id}')">✏️ Editar</button><button class="btn btn-outline" onclick="deleteInvite('${i.id}')">🗑 Excluir</button>`:`<button class="btn btn-outline" onclick="showMember('${i.id}')">Ver perfil</button><button class="btn btn-soft" onclick="openChatWith('${i.owner}')">💬 Conversar</button>`}</div></article>`;
+  return `<article class="card"><div class="member-top"><div class="person-avatar live" style="background:${colorOf(o.name)}">${escapeHtml(ini(o.name))}</div><div style="min-width:0"><div class="person-name">${escapeHtml(o.name)}</div><div class="small">📍 ${escapeHtml(city||'—')}</div><div style="margin-top:7px"><span class="tag live">Quer jogar</span></div></div><div class="rank"><strong>${o.rank||0}</strong><span>pontos</span></div></div><p>“${escapeHtml(i.note||'Disponível para uma partida.')}”</p><div class="details"><span class="lv ${LV[level]||'lv-ini'}">${escapeHtml(level)}</span><span class="fm">${FM[i.format]||FM.quarteto}</span><span class="fm" style="background:${i.ranked===false?'#fff1d1;color:#8c6212':'#e0f7ec;color:#14805a'}">${i.ranked===false?'😎 Amistoso':'🏆 Vale ranking'}</span><span>🕒 ${fmtDate(i.day)}, ${escapeHtml(i.time)}</span><span>🏟 ${escapeHtml(i.local)}</span></div><div class="card-actions">${mine?`<button class="btn btn-outline" onclick="editInvite('${i.id}')">✏️ Editar</button><button class="btn btn-outline" onclick="deleteInvite('${i.id}')">🗑 Excluir</button><button class="btn btn-soft" onclick="shareInvite('${i.id}')">📲 Divulgar</button>`:`<button class="btn btn-outline" onclick="showPlayer('${i.owner}')">Ver perfil</button><button class="btn btn-soft" onclick="openChatWith('${i.owner}')">💬 Conversar</button>`}</div></article>`;
 }
 function filteredInvites(){
   const q=($('member-search')?.value||'').toLowerCase(),loc=$('member-location')?.value||'',lvl=$('member-level')?.value||'',fmt=$('member-format')?.value||'',sort=$('member-sort')?.value||'recent';
@@ -1480,6 +1524,69 @@ function renderRankChart(){
   el.innerHTML=`<h3>📈 Minha evolução no ranking</h3><div class="small">Seus pontos ao longo dos jogos que valeram ranking.</div>${stats}${chart}`;
 }
 
+/* ===== RANKING (classificacao geral) ===== */
+function rkBoard(){return (S.profiles||[]).filter(p=>p.role!=='professor'&&!p.is_admin).sort((a,b)=>((b.rank||0)-(a.rank||0))||String(a.name).localeCompare(String(b.name)))}
+function rkPos(board,id){const p=board.find(x=>x.id===id);if(!p)return 0;return 1+board.filter(x=>(x.rank||0)>(p.rank||0)).length}
+function rkAvatar(p,size){return p.photo_url?`<img src="${escapeHtml(p.photo_url)}" alt="" style="width:${size}px;height:${size}px;border-radius:50%;object-fit:cover">`:`<div class="person-avatar" style="background:${colorOf(p.name)};width:${size}px;height:${size}px;border-radius:50%;font-size:${Math.round(size*.34)}px">${escapeHtml(ini(p.name))}</div>`}
+function renderRanking(){
+  const el=$('ranking-body');if(!el)return;
+  const all=rkBoard(),q=($('rk-q')?.value||'').trim().toLowerCase(),city=$('rk-city')?.value||'',lvl=$('rk-level')?.value||'';
+  const list=all.filter(p=>(!city||p.city===city)&&(!lvl||p.level===lvl)&&(!q||String(p.name).toLowerCase().includes(q)));
+  if(!all.length){el.innerHTML='<div class="empty"><b>🏆</b>Ainda não há jogadores no ranking.</div>';return}
+  let me='';
+  if(S.me&&!S.me.is_admin&&S.me.role!=='professor'){
+    const pos=rkPos(all,S.me.id),above=all.filter(x=>(x.rank||0)>(S.me.rank||0)).slice(-1)[0];
+    me=`<div class="rk-me"><div><span class="small">Sua posição</span><strong>#${pos}</strong></div><div><span class="small">Pontos</span><strong>${S.me.rank||0}</strong></div><div style="flex:2;min-width:180px"><span class="small">${above?`Faltam <b>${(above.rank||0)-(S.me.rank||0)+1} pts</b> para passar ${escapeHtml(above.name)}`:'Você lidera o ranking! 🏆'}</span></div><button class="btn btn-soft" onclick="showPlayer('${S.me.id}')">Meu perfil</button></div>`;
+  }
+  const top=list.slice(0,3);
+  const pod=top.length?`<div class="rk-podium">${[1,0,2].filter(i=>top[i]).map(i=>{const p=top[i],pos=rkPos(all,p.id);return `<button class="rk-pod rk-pod${i+1}" onclick="showPlayer('${p.id}')"><span class="rk-medal">${['🥇','🥈','🥉'][i]}</span>${rkAvatar(p,i===0?64:54)}<strong>${escapeHtml(p.name)}</strong><span class="small">${escapeHtml(p.city||'—')}</span><b>${p.rank||0} pts</b></button>`}).join('')}</div>`:'';
+  const rows=list.slice(3).map(p=>{const pos=rkPos(all,p.id),mine=S.me&&p.id===S.me.id;return `<button class="rk-row${mine?' me':''}" onclick="showPlayer('${p.id}')"><span class="rk-pos">${pos}</span>${rkAvatar(p,40)}<span class="rk-name"><strong>${escapeHtml(p.name)}</strong><span class="small">${escapeHtml(p.city||'—')}</span></span><span class="lv ${LV[p.level]||'lv-ini'}">${escapeHtml(p.level||'Iniciante')}</span><b class="rk-pts">${p.rank||0}<small> pts</small></b></button>`}).join('');
+  el.innerHTML=me+(list.length?pod+`<div class="rk-list">${rows}</div>`:'<div class="empty"><b>🔎</b>Nenhum jogador com esses filtros.</div>');
+}
+['rk-q','rk-city','rk-level'].forEach(id=>{const e=$(id);if(e)e.addEventListener('input',renderRanking)});
+
+/* ===== PERFIL DO JOGADOR ===== */
+async function showPlayer(id){
+  if(!S.me){openAuth('login');toast('Entre para ver o perfil dos jogadores.');return}
+  const p=prof(id);if(!p||!p.id)return;
+  const body=$('player-body');
+  body.innerHTML='<div class="small" style="padding:30px;text-align:center">Carregando perfil...</div>';
+  $('player-modal').classList.add('open');
+  let st=null;
+  try{const {data,error}=await sb.rpc('player_stats',{p_id:id});if(!error)st=data}catch(e){}
+  const board=rkBoard(),pos=rkPos(board,id),isMe=id===S.me.id;
+  const badge=(on,ic,t,d)=>`<div class="pf-badge${on?' on':''}" title="${escapeHtml(d)}"><span>${ic}</span><b>${t}</b></div>`;
+  let stats='',ach='',extra='';
+  if(st){
+    const g=st.games||0,w=st.wins||0,l=st.losses||0,pct=g?Math.round(w*100/g)+'%':'—';
+    stats=`<div class="rk-stats"><div class="rk-stat"><b>${g}</b><span>jogos</span></div><div class="rk-stat"><b>${w}</b><span>vitórias</span></div><div class="rk-stat"><b>${l}</b><span>derrotas</span></div><div class="rk-stat"><b>${pct}</b><span>aproveitamento</span></div><div class="rk-stat"><b>${st.streak||0}${(st.streak||0)>=3?' 🔥':''}</b><span>vitórias seguidas</span></div></div>`;
+    const hw=st.h2h_wins||0,hl=st.h2h_losses||0;
+    if(!isMe&&(hw+hl)>0)extra+=`<div class="pf-h2h"><span class="small">Confronto direto</span><strong>Você ${hl} × ${hw} ${escapeHtml(p.name.split(' ')[0])}</strong></div>`;
+    const last=(st.last||[]);
+    if(last.length)extra+=`<div class="pf-last"><span class="small">Últimos jogos</span><div>${last.map(m=>`<span class="pf-res ${m.win?'w':'l'}" title="${m.win?'Vitória':'Derrota'} vs ${escapeHtml(prof(m.opp).name||'')} em ${fmtDate(m.day)}${m.ranked===false?' (amistoso)':''}">${m.win?'V':'D'}</span>`).join('')}</div></div>`;
+    ach=`<div class="pf-ach"><span class="small">Conquistas</span><div class="pf-badges">${badge(g>=1,'🎾','Estreou','Jogou a primeira partida')}${badge(w>=1,'🏅','1ª vitória','Ganhou a primeira partida')}${badge((st.streak||0)>=3,'🔥','Em chamas','3 vitórias seguidas')}${badge(g>=10,'💪','10 jogos','Jogou 10 partidas')}${badge(w>=10,'🏆','10 vitórias','Ganhou 10 partidas')}${badge(pos>0&&pos<=3&&(p.rank||0)>0,'🥇','Top 3','Entre os 3 primeiros do ranking')}</div></div>`;
+  }else{
+    stats='<div class="small" style="margin:14px 0">As estatísticas detalhadas aparecem depois que o administrador ativar o recurso no banco de dados.</div>';
+  }
+  const inv=(S.invites||[]).find(i=>i.owner===id&&i.status==='open'&&!isMe);
+  const acts=isMe?`<button class="btn btn-soft" onclick="closeModal('player-modal');openSettings()">⚙️ Editar meu perfil</button><button class="btn btn-outline" onclick="shareProfile()">📲 Compartilhar</button>`:`<button class="btn btn-primary" onclick="closeModal('player-modal');openChatWith('${id}')">💬 Conversar</button>${inv?`<button class="btn btn-soft" onclick="closeModal('player-modal');sendInvite('${inv.id}')">🎾 Convidar para jogar</button>`:''}${p.contact?`<button class="btn btn-outline" onclick="waPerson('${id}')">WhatsApp ↗</button>`:''}`;
+  body.innerHTML=`<div class="pf-head">${rkAvatar(p,76)}<div style="min-width:0"><h3 style="margin:0;font-size:24px">${escapeHtml(p.name)}</h3><div class="small">📍 ${escapeHtml(p.city||'—')} · <span class="lv ${LV[p.level]||'lv-ini'}" style="padding:3px 9px">${escapeHtml(p.level||'Iniciante')}</span></div></div><div class="pf-rank"><b>${p.rank||0}</b><span>pontos</span><em>${pos?'#'+pos+' no ranking':''}</em></div></div>${stats}${extra}${ach}<div class="pf-acts">${acts}</div>`;
+}
+function shareProfile(){
+  const board=rkBoard(),pos=rkPos(board,S.me.id);
+  const txt=`🎾 Estou em #${pos} no ranking do Beach Tennis Club com ${S.me.rank||0} pontos! Vem jogar comigo: https://beachtennisclub.vercel.app`;
+  shareText(txt);
+}
+function shareText(txt){
+  if(navigator.share){navigator.share({text:txt}).catch(()=>{});return}
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank','noopener');
+}
+function shareInvite(id){
+  const i=S.invites.find(x=>x.id===id);if(!i)return;
+  shareText(`🎾 Quero jogar beach tennis ${fmtDate(i.day)} às ${i.time} em ${i.local}${i.city?' ('+i.city+')':''}. ${i.ranked===false?'Jogo amistoso':'Vale ranking'}. Entra no Beach Tennis Club e me chama: https://beachtennisclub.vercel.app`);
+}
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('#profile-box .avatar');if(a&&S.me)showPlayer(S.me.id)});
+
 /* ===== FORMULÁRIOS ===== */
 $('invite-form').addEventListener('submit',e=>{e.preventDefault();
   if(!S.me){openAuth('login');return}
@@ -1551,7 +1658,7 @@ function renderPushGlobal(){
   el.style.display='';
   el.innerHTML=`<div class="shell" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between;padding-top:8px;padding-bottom:8px"><span class="small" style="color:#1f5a8a;font-weight:600">🔔 Receba avisos no celular: convites, aulas aceitas e resultados de jogos.${tip}</span><span style="display:flex;gap:8px"><button class="btn btn-primary" style="padding:8px 14px" onclick="enablePush()">Ativar avisos</button><button class="btn btn-soft" style="padding:8px 14px" onclick="openTutorial()">Ver tutorial</button><button class="btn btn-outline" style="padding:8px 14px" onclick="dismissPush()">Agora não</button></span></div>`;
 }
-function renderAll(){renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges();renderPulses();renderChatBadge();renderRankChart()}
+function renderAll(){renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges();renderPulses();renderChatBadge();renderRankChart();renderRanking()}
 
 ['member-search','member-location','member-level','member-format','member-sort'].forEach(id=>$(id).addEventListener('input',renderMembers));
 ['teacher-search','teacher-location'].forEach(id=>$(id).addEventListener('input',renderTeachers));
