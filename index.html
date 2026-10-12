@@ -214,6 +214,19 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .prices{display:grid;gap:6px;margin:14px 0 18px}.prices div{display:flex;justify-content:space-between;gap:10px;background:#f2f8f6;padding:8px 12px;border-radius:12px;font-size:12.5px;color:#4f6a72}.prices strong{color:var(--navy)}
 .photo-row{display:flex;gap:14px;align-items:center;margin-bottom:16px}.photo-img{width:84px;height:84px;border-radius:24px;object-fit:cover;box-shadow:0 14px 24px -10px #0b3b4660;border:3px solid #fff;display:grid;place-items:center}.photo-img.ph{background:linear-gradient(140deg,var(--deep),var(--teal));color:#fff;font:800 26px var(--display)}
 .agenda-item.past{opacity:.55}
+.pm{display:grid;grid-template-columns:minmax(104px,1.15fr) 1fr 1fr;gap:8px;margin:12px 0 16px}
+.pm-h{background:var(--deep);color:#fff;border-radius:12px;padding:8px 6px;font-weight:800;font-size:13px;text-align:center}
+.pm-h0{background:transparent}
+.pm-r{display:flex;align-items:center;gap:8px;font-weight:800;font-size:13.5px;color:var(--navy);background:var(--aqua);border-radius:12px;padding:10px 12px}
+.pm-c{display:flex;align-items:center;justify-content:center;background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px 6px;font:800 21px var(--display);color:var(--deep);letter-spacing:-.4px}
+.pm-c.none{color:#9bb0b5;font-size:17px;font-weight:600}
+.teacher-card .pm{margin:10px 0 14px}.teacher-card .pm-c{font-size:18px;padding:8px 4px}.teacher-card .pm-r{font-size:12.5px;padding:8px 10px}.teacher-card .pm-h{font-size:12px}
+.tv-sec{margin:16px 0 4px}.tv-sec h4{margin:0 0 4px;font:800 18px var(--display);color:var(--navy)}
+.tv-steps{display:flex;gap:10px;flex-wrap:wrap;list-style:none;padding:0;margin:10px 0 4px;counter-reset:st}
+.tv-steps li{counter-increment:st;display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:6px 14px 6px 6px;font-size:13px;font-weight:600;color:#4f6a72}
+.tv-steps li:before{content:counter(st);width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:800;font-size:12px;flex:none}
+.vago{background:#d8f4eb;color:#0e6b45;border-radius:6px;padding:1px 8px;font-weight:800}
+@media(max-width:520px){.pm{grid-template-columns:minmax(92px,1fr) 1fr 1fr}.pm-c{font-size:18px}.pm-r{font-size:12.5px;padding:8px}}
 .dashboard{grid-template-columns:minmax(0,1.9fr) minmax(300px,.7fr)}
 @media(max-width:960px){.dashboard{grid-template-columns:1fr}}
 .modal.modal-wide{width:min(100%,1120px)}
@@ -674,11 +687,16 @@ function sendInvite(id){
 }
 
 /* ===== PROFESSORES ===== */
+function priceMatrix(t){
+  const v=k=>(t[k]!=null&&t[k]!=='')?`<div class="pm-c">${money(t[k])}</div>`:'<div class="pm-c none" aria-label="sem valor">—</div>';
+  if(!PRICE_KEYS.some(([k])=>t[k]!=null&&t[k]!==''))return '';
+  return `<div class="pm" role="table" aria-label="Valores das aulas"><div class="pm-h pm-h0"></div><div class="pm-h">⏱ 30 min</div><div class="pm-h">⏱ 60 min</div><div class="pm-r">👤 Individual</div>${v('price_ind_30')}${v('price_ind_60')}<div class="pm-r">👥 Em grupo</div>${v('price_grp_30')}${v('price_grp_60')}</div>`;
+}
 function priceRows(t){return PRICE_KEYS.filter(([k])=>t[k]!=null&&t[k]!=='').map(([k,l])=>`<div><span>${l}</span><strong>${money(t[k])}</strong></div>`).join('')}
 function teacherCard(t){
   const rows=priceRows(t);
   const pic=t.photo_url?`<img class="teacher-photo" src="${escapeHtml(t.photo_url)}" alt="Foto de ${escapeHtml(t.name)}" loading="lazy">`:`<div class="teacher-icon">${escapeHtml(ini(t.name))}</div>`;
-  return `<article class="card teacher-card"><div class="teacher-header">${pic}<div><h3>${escapeHtml(t.name)}</h3><div class="small">📍 ${escapeHtml(t.city||'—')}</div><div style="margin-top:7px"><span class="tag">✓ Professor cadastrado</span>${t.featured?'<span class="tag" style="background:#ffe9a8;color:#7a5200;margin-left:6px">★ Destaque</span>':''}${isPro(t)?'<span class="tag" style="background:#e7e4ff;color:#4a4fa8;margin-left:6px">Pro</span>':''}</div></div></div><p>${escapeHtml(t.bio||'Professor de beach tennis.')}</p><div class="teacher-meta"><span>🏟 ${escapeHtml(t.local||'A informar')}</span></div>${rows?`<div class="prices">${rows}</div>`:'<div class="small" style="margin:14px 0">Consulte os valores com o professor.</div>'}<div class="card-actions" style="margin-top:auto"><button class="btn btn-primary" onclick="openTeacherView('${t.id}')">Ver horários e valores</button><button class="btn btn-soft" onclick="contactTeacher('${t.id}')" aria-label="WhatsApp">WhatsApp ↗</button></div></article>`;
+  return `<article class="card teacher-card"><div class="teacher-header">${pic}<div><h3>${escapeHtml(t.name)}</h3><div class="small">📍 ${escapeHtml(t.city||'—')}</div><div style="margin-top:7px"><span class="tag">✓ Professor cadastrado</span>${t.featured?'<span class="tag" style="background:#ffe9a8;color:#7a5200;margin-left:6px">★ Destaque</span>':''}${isPro(t)?'<span class="tag" style="background:#e7e4ff;color:#4a4fa8;margin-left:6px">Pro</span>':''}</div></div></div><p>${escapeHtml(t.bio||'Professor de beach tennis.')}</p><div class="teacher-meta"><span>🏟 ${escapeHtml(t.local||'A informar')}</span></div>${rows?`${priceMatrix(t)}`:'<div class="small" style="margin:14px 0">Consulte os valores com o professor.</div>'}<div class="card-actions" style="margin-top:auto"><button class="btn btn-primary" onclick="openTeacherView('${t.id}')">Ver horários e valores</button><button class="btn btn-soft" onclick="contactTeacher('${t.id}')" aria-label="WhatsApp">WhatsApp ↗</button></div></article>`;
 }
 function renderTeachers(){
   const q=($('teacher-search')?.value||'').toLowerCase(),loc=$('teacher-location')?.value||'';
@@ -887,7 +905,7 @@ function renderTeacherView(){
   const rows=priceRows(t);
   const pic=t.photo_url?`<img class="teacher-photo" style="width:84px;height:84px" src="${escapeHtml(t.photo_url)}" alt="Foto de ${escapeHtml(t.name)}">`:`<div class="teacher-icon" style="width:84px;height:84px">${escapeHtml(ini(t.name))}</div>`;
   const num=String(t.contact||'').replace(/\D/g,'');
-  $('tv-body').innerHTML=`<div class="tv-head">${pic}<div style="flex:1;min-width:0"><h3 style="margin:0;font-size:22px;color:var(--navy)">${escapeHtml(t.name)}</h3><div class="small">📍 ${escapeHtml(t.city||'—')} · 🏟 ${escapeHtml(t.local||'A informar')}</div><p style="margin:8px 0 0;font-size:13.5px;color:#4f6a72;line-height:1.5">${escapeHtml(t.bio||'Professor de beach tennis.')}</p></div>${num?`<button class="btn btn-soft" onclick="contactTeacher('${t.id}')">WhatsApp ↗</button>`:''}</div>${rows?`<div class="small" style="font-weight:700;margin-bottom:6px">Valores</div><div class="prices" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">${rows}</div>`:''}<div class="small" style="font-weight:700;margin:6px 0 0">Horários — escolha um horário vago para pedir a aula</div>${legendHtml}${calNav()}${buildGrid(tAgenda,'student')}<div class="small" style="margin-top:8px">O professor precisa aceitar o pedido. Você acompanha em <strong>Meus jogos → Minhas aulas</strong>.</div>`;
+  $('tv-body').innerHTML=`<div class="tv-head">${pic}<div style="flex:1;min-width:0"><h3 style="margin:0;font-size:22px;color:var(--navy)">${escapeHtml(t.name)}</h3><div class="small">📍 ${escapeHtml(t.city||'—')} · 🏟 ${escapeHtml(t.local||'A informar')}</div><p style="margin:8px 0 0;font-size:13.5px;color:#4f6a72;line-height:1.5">${escapeHtml(t.bio||'Professor de beach tennis.')}</p></div>${num?`<button class="btn btn-soft" onclick="contactTeacher('${t.id}')">WhatsApp ↗</button>`:''}</div>${rows?`<div class="tv-sec"><h4>💰 Valores por aula</h4><div class="small">Você escolhe o tipo e a duração na hora de pedir a aula.</div>${priceMatrix(t)}</div>`:''}<div class="tv-sec"><h4>📅 Horários disponíveis</h4><ol class="tv-steps"><li>Toque num horário <span class="vago">vago</span></li><li>Escolha 30 ou 60 min e o tipo</li><li>O professor confirma</li></ol></div>${legendHtml}${calNav()}${buildGrid(tAgenda,'student')}<div class="small" style="margin-top:8px">O professor precisa aceitar o pedido. Você acompanha em <strong>Meus jogos → Minhas aulas</strong>.</div>`;
 }
 function bookSlot(day,time){
   if(!S.me){closeModal('tv-modal');openAuth('login');toast('Entre para pedir uma aula.');return}
