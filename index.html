@@ -536,7 +536,8 @@ async function refresh(){
   const st=await sb.rpc('public_stats');if(st.data)S.stats=st.data;
   const {data:{session}}=await sb.auth.getSession();
   if(session){await sb.rpc('finalize_expired')}
-  const pr=await sb.from('profiles').select('*');S.profiles=pr.data||[];
+  const pr=await sb.from('profiles').select('id,name,role,rank,local,bio,price,created_at,city,level,photo_url,price_ind_30,price_ind_60,price_grp_30,price_grp_60,is_admin,approval');S.profiles=pr.data||[];
+  try{const ct=await sb.rpc('get_contacts');const cm={};(ct.data||[]).forEach(r=>{cm[r.id]=r.contact});S.profiles.forEach(p=>{p.contact=cm[p.id]||null})}catch(e){}
   S.me=session?S.profiles.find(p=>p.id===session.user.id)||null:null;
   if(!S.me){Object.assign(S,{invites:[],incoming:[],sent:[],games:[],lessons:[]});lastGames=null;lastPending=null;return}
   const uid=S.me.id;
@@ -599,7 +600,7 @@ async function submitAuth(e){
     if(pf&&!arena){err.textContent='Professor: informe a arena onde dá aula.';return}
     const meta={name,role:authRole,city:f.get('city')||'',contact,level:pf?'':(f.get('level')||'Iniciante'),local:pf?arena:'',bio:pf?String(f.get('bio')||'').trim():'',price_ind_30:pf?String(f.get('p_i30')||''):'',price_ind_60:pf?String(f.get('p_i60')||''):'',price_grp_30:pf?String(f.get('p_g30')||''):'',price_grp_60:pf?String(f.get('p_g60')||''):''};
     const {data,error}=await sb.auth.signUp({email,password,options:{data:meta}});
-    if(error){err.textContent=error.message;return}
+    if(error){err.textContent=/Database error|WhatsApp/i.test(error.message)?'Confira o WhatsApp (com DDD, sÃ³ nÃºmeros) e tente de novo.':error.message;return}
     if(!data.session){closeModal('auth-modal');toast(pf?'Cadastro enviado! Confirme seu e-mail; depois o administrador vai analisar.':'Cadastro feito! Confirme seu e-mail e depois entre.');return}
     closeModal('auth-modal');e.target.reset();await refresh();renderAll();
     toast(pf?'Cadastro enviado! O administrador vai analisar e você será liberado.':'Bem-vindo, '+name+'! Seu rank começa em 0.');
