@@ -214,6 +214,50 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .prices{display:grid;gap:6px;margin:14px 0 18px}.prices div{display:flex;justify-content:space-between;gap:10px;background:#f2f8f6;padding:8px 12px;border-radius:12px;font-size:12.5px;color:#4f6a72}.prices strong{color:var(--navy)}
 .photo-row{display:flex;gap:14px;align-items:center;margin-bottom:16px}.photo-img{width:84px;height:84px;border-radius:24px;object-fit:cover;box-shadow:0 14px 24px -10px #0b3b4660;border:3px solid #fff;display:grid;place-items:center}.photo-img.ph{background:linear-gradient(140deg,var(--deep),var(--teal));color:#fff;font:800 26px var(--display)}
 .agenda-item.past{opacity:.55}
+/* ===== QUADRAS, CHAVE, PACOTES, FEED ===== */
+.tabs-sm{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}
+.tabs-sm button{border:1.5px solid var(--line);background:#fff;color:var(--navy);padding:9px 16px;border-radius:99px;font:700 15px var(--display);letter-spacing:.6px;text-transform:uppercase;cursor:pointer}
+.tabs-sm button.on{background:var(--deep);border-color:var(--deep);color:#fff}
+.bk-days{display:flex;gap:8px;overflow:auto;padding-bottom:6px;margin-bottom:12px;scrollbar-width:thin}
+.bk-day{flex:none;min-width:62px;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--navy);font:inherit}
+.bk-day b{font:800 15px var(--display);text-transform:uppercase;letter-spacing:.5px}
+.bk-day span{font-size:11.5px;color:var(--muted)}
+.bk-day.on{background:var(--deep);border-color:var(--deep);color:#fff}
+.bk-day.on span{color:#cfe9e4}
+.bk-grid{display:flex;flex-direction:column;gap:6px;max-height:48vh;overflow:auto}
+.bk-row{display:grid;grid-template-columns:54px repeat(auto-fit,minmax(86px,1fr));gap:6px;align-items:center}
+.bk-head{position:sticky;top:0;background:#fff;z-index:1;font:700 13px var(--display);text-transform:uppercase;letter-spacing:.5px;color:var(--muted);text-align:center;padding-bottom:4px}
+.bk-time{font:800 16px var(--display);color:var(--navy)}
+.bk-slot{border:1.5px solid #bfe7da;background:#e7f8f1;color:#0e6b45;border-radius:12px;padding:10px 6px;font:700 13px Inter,sans-serif;cursor:pointer}
+.bk-slot:hover{background:#d3f2e6}
+.bk-slot.busy{background:#f1f4f4;border-color:#e3e9e8;color:#a3b3b6;cursor:not-allowed}
+.bk-slot.mine{background:#fff3cf;border-color:#f1d98b;color:#7a5200;cursor:default}
+.bk-slot.sel{background:var(--deep);border-color:var(--deep);color:#fff}
+.bk-confirm{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:14px;padding:12px 14px;background:var(--aqua);border-radius:16px}
+.br-cols{display:flex;gap:18px;overflow:auto;padding-bottom:8px}
+.br-col{min-width:215px;flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:12px}
+.br-col h4{margin:0 0 4px;font:800 16px var(--display);text-transform:uppercase;letter-spacing:.8px;color:var(--muted);text-align:center}
+.br-match{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:6px;box-shadow:var(--shadow-sm)}
+.br-p{padding:8px 10px;border-radius:9px;font-size:13.5px;font-weight:600;color:var(--navy);display:flex;justify-content:space-between;gap:6px}
+.br-p+.br-p{border-top:1px dashed var(--line)}
+.br-p.win{background:#e1f8ec;color:#0e6b45;font-weight:800}
+.br-p.lose{color:#9bb0b5;text-decoration:line-through}
+.br-tbd{color:#9bb0b5;font-weight:500;font-style:italic}
+.br-score{font-size:11.5px;color:var(--muted);text-align:center;padding:2px 0 4px}
+.br-ctl{display:flex;gap:6px;padding:4px 2px 2px}
+.br-ctl button{flex:1;border:1.5px solid var(--line);background:var(--bg);border-radius:9px;padding:6px 4px;font:700 12px Inter,sans-serif;color:var(--deep);cursor:pointer}
+.br-ctl button:hover{background:var(--aqua)}
+.br-champ{background:linear-gradient(90deg,#fff6d8,#fff);border:1px solid #f1d98b;border-radius:16px;padding:12px 16px;margin-bottom:14px;font-size:16px}
+.pk-bar{height:8px;border-radius:99px;background:#e8f0ee;margin:8px 0 6px;overflow:hidden}
+.pk-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),#4fcdb6);border-radius:99px}
+.pf-pk{margin-top:16px}
+.pf-pk-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 12px;border:1.5px solid var(--line);border-radius:14px;margin-top:8px;background:var(--bg)}
+.feed-list{display:flex;flex-direction:column;gap:10px}
+.feed-item{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.feed-av{border:0;background:none;padding:0;cursor:pointer;flex:none}
+.cheer{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:8px 14px;font:700 14px Inter,sans-serif;cursor:pointer;color:var(--navy)}
+.cheer.on{background:#fff3cf;border-color:#f1d98b;color:#7a5200}
+@media(max-width:760px){.pkg-form{grid-template-columns:1fr 1fr!important}.pkg-form .form-group:first-child{grid-column:1/-1}.pkg-form button{grid-column:1/-1}}
 /* ===== RANKING E PERFIL ===== */
 #profile-box .avatar{cursor:pointer}
 .navlinks button{white-space:nowrap}
@@ -588,7 +632,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <g class="btc-t2"><text font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="56" fill="#4fd1bd"><textPath href="#btcBot" startOffset="50%" text-anchor="middle" textLength="800" lengthAdjust="spacing">JOGUE  •  CONECTE  •  EVOLUA</textPath></text></g>
 </svg></div>
 <script>(function(){var e=document.getElementById('btc-splash');if(!e)return;var seen=false;try{seen=sessionStorage.getItem('btc-splash')==='1';sessionStorage.setItem('btc-splash','1')}catch(_){}function rm(){if(e&&e.parentNode)e.parentNode.removeChild(e);e=null}if(seen){rm();return}e.style.cursor='pointer';e.addEventListener('click',rm);setTimeout(rm,4600)})();</script>
-<header class="topbar" id="topbar"><div class="shell nav"><button class="brand" onclick="goPage('inicio')" aria-label="Beach Tennis Club - início"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></button><nav class="navlinks" aria-label="Navegação principal"><button class="active" data-page="inicio">Início</button><button data-page="membros">Membros</button><button data-page="ranking">Ranking</button><button data-page="jogos">Meus jogos <span id="game-count"></span></button><button data-page="professores">Aulas e professores</button><button data-page="torneios">Torneios</button><button data-page="professor">Área do professor</button></nav><div class="profile" id="profile-box"></div></div></header><div id="viewbar" style="display:none"></div><div id="pushbar-global" style="display:none"></div>
+<header class="topbar" id="topbar"><div class="shell nav"><button class="brand" onclick="goPage('inicio')" aria-label="Beach Tennis Club - início"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></button><nav class="navlinks" aria-label="Navegação principal"><button class="active" data-page="inicio">Início</button><button data-page="membros">Membros</button><button data-page="ranking">Ranking</button><button data-page="quadras">Quadras</button><button data-page="jogos">Meus jogos <span id="game-count"></span></button><button data-page="professores">Aulas e professores</button><button data-page="torneios">Torneios</button><button data-page="professor">Área do professor</button></nav><div class="profile" id="profile-box"></div></div></header><div id="viewbar" style="display:none"></div><div id="pushbar-global" style="display:none"></div>
 <main class="shell">
 <section id="page-inicio" class="page active">
 <div class="hero"><div class="hero-grid">
@@ -613,11 +657,12 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="cta reveal"><h2>A areia está te esperando.</h2><p>Publique sua disponibilidade em menos de um minuto e receba convites de quem joga perto de você.</p><button class="btn btn-lg btn-white" onclick="openModal('invite-modal')">+ Quero jogar</button></div>
 </section>
 <section id="page-membros" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Comunidade</span><h2>Comunidade de jogadores</h2><p>Descubra quem quer jogar, confira o ranking e envie um convite.</p></div><button class="btn btn-primary" onclick="openModal('invite-modal')">+ Publicar que quero jogar</button></div><div class="filters"><input id="member-search" class="field search" placeholder="🔍  Buscar por nome ou cidade..." aria-label="Buscar jogador"/><select id="member-location" class="field" aria-label="Cidade"><option value="">Todas as cidades</option><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select><select id="member-level" class="field" aria-label="Nível"><option value="">Todos os níveis</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select><select id="member-format" class="field" aria-label="Formato"><option value="">Todos os formatos</option><option value="simples">Simples (2)</option><option value="quarteto">4 pessoas diferentes</option><option value="duplas">2 duplas de 2</option></select><select id="member-sort" class="field" aria-label="Ordenar"><option value="recent">Mais recentes</option><option value="rank">Maior ranking</option></select></div><div class="cards" id="all-members"></div></section>
-<section id="page-ranking" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Classificação</span><h2>Ranking</h2><p>Quem está dominando a areia. Jogue partidas que valem ranking e suba na tabela.</p></div></div><div class="rk-filters"><input class="field" id="rk-q" placeholder="Buscar jogador" aria-label="Buscar jogador"><select class="field" id="rk-city" aria-label="Cidade"><option value="">Todas as cidades</option><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select><select class="field" id="rk-level" aria-label="Nível"><option value="">Todos os níveis</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div><div id="ranking-body"></div></section>
-<section id="page-jogos" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Agenda</span><h2>Meus jogos</h2><p>Partidas confirmadas e convites que você recebeu.</p></div><button class="btn btn-primary" onclick="openModal('invite-modal')">+ Criar disponibilidade</button></div><div class="panel" style="margin-bottom:18px"><h3>🔔 Convites recebidos <span id="invite-count" class="tag">0 novos</span></h3><div id="received-invites"><div class="small">Você ainda não recebeu convites nesta demonstração.</div></div></div><div class="panel" style="margin-bottom:18px"><h3>🎓 Minhas aulas</h3><div id="my-lessons"></div></div><div class="panel" id="rank-chart-panel" style="margin-bottom:18px"></div><div class="section-head" style="margin-top:34px"><div><h2>Partidas combinadas</h2><p>Os jogos aceitos aparecem aqui para você se organizar.</p></div></div><div class="table-wrap"><table class="games-table"><thead><tr><th>Jogadores</th><th>Data e horário</th><th>Local</th><th>Ranking</th><th>Status</th></tr></thead><tbody id="games-table-body"><tr><td colspan="5" style="text-align:center;color:#688087;padding:30px">Nenhuma partida confirmada ainda. Convide alguém para começar!</td></tr></tbody></table></div></section>
+<section id="page-ranking" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Classificação</span><h2>Ranking</h2><p>Quem está dominando a areia. Jogue partidas que valem ranking e suba na tabela.</p></div></div><div class="tabs-sm" id="rk-tabs"><button class="on" data-t="rank" onclick="setRkTab('rank')">🏆 Classificação</button><button data-t="feed" onclick="setRkTab('feed')">📰 Feed da comunidade</button></div><div class="rk-filters"><input class="field" id="rk-q" placeholder="Buscar jogador" aria-label="Buscar jogador"><select class="field" id="rk-city" aria-label="Cidade"><option value="">Todas as cidades</option><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select><select class="field" id="rk-level" aria-label="Nível"><option value="">Todos os níveis</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div><div id="ranking-body"></div><div id="feed-body" style="display:none"></div></section>
+<section id="page-quadras" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Reserve</span><h2>Quadras e arenas</h2><p>Escolha a arena, o dia e o horário. A reserva fica confirmada na hora.</p></div><button class="btn btn-primary" id="btn-new-arena" style="display:none" onclick="editArena(null)">+ Cadastrar arena</button></div><div class="panel" id="my-bookings" style="margin-bottom:18px;display:none"></div><div class="cards" id="arenas-list"></div></section>
+<section id="page-jogos" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Agenda</span><h2>Meus jogos</h2><p>Partidas confirmadas e convites que você recebeu.</p></div><button class="btn btn-primary" onclick="openModal('invite-modal')">+ Criar disponibilidade</button></div><div class="panel" style="margin-bottom:18px"><h3>🔔 Convites recebidos <span id="invite-count" class="tag">0 novos</span></h3><div id="received-invites"><div class="small">Você ainda não recebeu convites nesta demonstração.</div></div></div><div class="panel" style="margin-bottom:18px"><h3>🎓 Minhas aulas</h3><div id="my-lessons"></div></div><div class="panel" id="my-packages" style="margin-bottom:18px;display:none"></div><div class="panel" id="rank-chart-panel" style="margin-bottom:18px"></div><div class="section-head" style="margin-top:34px"><div><h2>Partidas combinadas</h2><p>Os jogos aceitos aparecem aqui para você se organizar.</p></div></div><div class="table-wrap"><table class="games-table"><thead><tr><th>Jogadores</th><th>Data e horário</th><th>Local</th><th>Ranking</th><th>Status</th></tr></thead><tbody id="games-table-body"><tr><td colspan="5" style="text-align:center;color:#688087;padding:30px">Nenhuma partida confirmada ainda. Convide alguém para começar!</td></tr></tbody></table></div></section>
 <section id="page-professores" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Aulas</span><h2>Aulas e professores</h2><p>Encontre um professor, conheça seu trabalho e combine uma aula.</p></div><button class="btn btn-outline" onclick="goPage('professor')">Sou professor →</button></div><div class="filters"><input id="teacher-search" class="field search" placeholder="🔍  Buscar professor ou cidade..." aria-label="Buscar professor"/><select id="teacher-location" class="field" aria-label="Cidade"><option value="">Todas as cidades</option><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="cards" id="all-teachers"></div></section>
 <section id="page-torneios" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Competição</span><h2>Torneios</h2><p>Inscreva-se, pague por Pix e acompanhe o resultado. Os pontos entram no seu ranking: 1º +50, 2º +30, 3º +15.</p></div><button class="btn btn-primary" id="btn-new-tournament" style="display:none" onclick="openModal('tournament-modal')">+ Criar torneio</button></div><div class="cards" id="tournaments"></div></section>
-<section id="page-professor" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Professores</span><h2>Área do professor</h2><p>Organize sua agenda e deixe seus alunos encontrarem você.</p></div><button class="btn btn-primary" id="btn-add-teacher" style="display:none" onclick="openModal('teacher-modal')">+ Cadastrar professor</button></div><div class="notice" id="area-notice"></div><div id="approvals"></div><div id="push-box"></div><div class="dashboard"><div class="panel"><h3>📅 Agenda de aulas</h3><div id="admin-picker"></div><div id="teacher-agenda"></div><button class="btn btn-soft" style="margin-top:14px" onclick="openModal('lesson-modal')">+ Adicionar aula à agenda</button></div><div class="panel"><h3>👤 Perfil público do professor</h3><div id="profile-panel-body"><div class="photo-row"><div id="photo-preview"></div><div><label class="btn btn-soft" for="photo-file" style="cursor:pointer">📷 Escolher foto</label><input type="file" id="photo-file" accept="image/*" class="sr" onchange="uploadPhoto(this)"><div class="small" style="margin-top:6px">JPG ou PNG. A foto aparece no card do professor.</div></div></div><div class="small" id="profile-lock" style="display:none;margin:0 0 14px;background:#fff6e2;border:1px solid #f6e2b3;border-radius:12px;padding:10px 12px;line-height:1.5">Os dados abaixo só podem ser alterados pelo administrador. Você pode trocar a sua foto e organizar a agenda.</div><div class="form-group"><label for="profile-name">Nome do professor</label><input class="field" id="profile-name" placeholder="Nome"/></div><div class="form-group"><label for="profile-city">Cidade onde dá aula</label><input class="field" id="profile-city" placeholder="Ex.: Caraguatatuba"/></div><div class="form-group"><label for="profile-arena">Local / arena</label><input class="field" id="profile-arena" placeholder="Nome da arena"/></div><div class="form-group"><label for="profile-contact">Contato (WhatsApp)</label><input class="field" id="profile-contact" placeholder="DDD + telefone"/></div><div class="small" style="font-weight:700;margin:4px 0 8px">Valores das aulas (R$)</div><div class="form-grid"><div class="form-group"><label for="profile-i30">Individual · 30 min</label><input class="field" id="profile-i30" type="number" min="0" placeholder="60"/></div><div class="form-group"><label for="profile-i60">Individual · 60 min</label><input class="field" id="profile-i60" type="number" min="0" placeholder="100"/></div><div class="form-group"><label for="profile-g30">Em grupo · 30 min</label><input class="field" id="profile-g30" type="number" min="0" placeholder="40"/></div><div class="form-group"><label for="profile-g60">Em grupo · 60 min</label><input class="field" id="profile-g60" type="number" min="0" placeholder="70"/></div></div><div class="form-group"><label for="profile-bio">Sobre o professor</label><textarea class="field" id="profile-bio" rows="3" placeholder="Experiência, especialidades, público..."></textarea></div><button class="btn btn-primary" id="profile-save" style="width:100%" onclick="saveTeacherProfile()">Salvar dados do professor</button><p class="small" style="line-height:1.6">O perfil aparece para todos na aba Aulas e professores.</p><div id="admin-tools"></div></div></div></div><div class="panel earn" id="earnings" style="margin-top:18px;display:none"></div><div class="panel" id="pro-panel" style="margin-top:18px;display:none"></div><div class="panel" id="admin-people" style="margin-top:18px;display:none"></div></section>
+<section id="page-professor" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Professores</span><h2>Área do professor</h2><p>Organize sua agenda e deixe seus alunos encontrarem você.</p></div><button class="btn btn-primary" id="btn-add-teacher" style="display:none" onclick="openModal('teacher-modal')">+ Cadastrar professor</button></div><div class="notice" id="area-notice"></div><div id="approvals"></div><div id="push-box"></div><div class="dashboard"><div class="panel"><h3>📅 Agenda de aulas</h3><div id="admin-picker"></div><div id="teacher-agenda"></div><button class="btn btn-soft" style="margin-top:14px" onclick="openModal('lesson-modal')">+ Adicionar aula à agenda</button></div><div class="panel"><h3>👤 Perfil público do professor</h3><div id="profile-panel-body"><div class="photo-row"><div id="photo-preview"></div><div><label class="btn btn-soft" for="photo-file" style="cursor:pointer">📷 Escolher foto</label><input type="file" id="photo-file" accept="image/*" class="sr" onchange="uploadPhoto(this)"><div class="small" style="margin-top:6px">JPG ou PNG. A foto aparece no card do professor.</div></div></div><div class="small" id="profile-lock" style="display:none;margin:0 0 14px;background:#fff6e2;border:1px solid #f6e2b3;border-radius:12px;padding:10px 12px;line-height:1.5">Os dados abaixo só podem ser alterados pelo administrador. Você pode trocar a sua foto e organizar a agenda.</div><div class="form-group"><label for="profile-name">Nome do professor</label><input class="field" id="profile-name" placeholder="Nome"/></div><div class="form-group"><label for="profile-city">Cidade onde dá aula</label><input class="field" id="profile-city" placeholder="Ex.: Caraguatatuba"/></div><div class="form-group"><label for="profile-arena">Local / arena</label><input class="field" id="profile-arena" placeholder="Nome da arena"/></div><div class="form-group"><label for="profile-contact">Contato (WhatsApp)</label><input class="field" id="profile-contact" placeholder="DDD + telefone"/></div><div class="small" style="font-weight:700;margin:4px 0 8px">Valores das aulas (R$)</div><div class="form-grid"><div class="form-group"><label for="profile-i30">Individual · 30 min</label><input class="field" id="profile-i30" type="number" min="0" placeholder="60"/></div><div class="form-group"><label for="profile-i60">Individual · 60 min</label><input class="field" id="profile-i60" type="number" min="0" placeholder="100"/></div><div class="form-group"><label for="profile-g30">Em grupo · 30 min</label><input class="field" id="profile-g30" type="number" min="0" placeholder="40"/></div><div class="form-group"><label for="profile-g60">Em grupo · 60 min</label><input class="field" id="profile-g60" type="number" min="0" placeholder="70"/></div></div><div class="form-group"><label for="profile-bio">Sobre o professor</label><textarea class="field" id="profile-bio" rows="3" placeholder="Experiência, especialidades, público..."></textarea></div><button class="btn btn-primary" id="profile-save" style="width:100%" onclick="saveTeacherProfile()">Salvar dados do professor</button><p class="small" style="line-height:1.6">O perfil aparece para todos na aba Aulas e professores.</p><div id="admin-tools"></div></div></div></div><div class="panel earn" id="earnings" style="margin-top:18px;display:none"></div><div class="panel" id="pro-panel" style="margin-top:18px;display:none"></div><div class="panel" id="pkg-panel" style="margin-top:18px;display:none"></div><div class="panel" id="admin-people" style="margin-top:18px;display:none"></div></section>
 </main>
 <footer class="footer"><div class="shell"><div class="foot-grid"><div><div class="brand"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></div><p>Feito para quem ama jogar na areia. Conecte-se, jogue e evolua com a comunidade.</p></div><div class="foot-links"><button onclick="goPage('inicio')">Início</button><button onclick="goPage('membros')">Membros</button><button onclick="goPage('jogos')">Meus jogos</button><button onclick="goPage('professores')">Professores</button><button onclick="goPage('torneios')">Torneios</button><button onclick="openTutorial()">📲 Instalar no celular</button></div></div><div class="copy"><span>Conecte. Jogue. Evolua.</span><span>🏖 Litoral Norte · SP</span></div></div></footer>
 <div class="modal-backdrop" id="invite-modal"><div class="modal"><div class="modal-head"><h3>Quero jogar 🎾</h3><button class="close" onclick="closeModal('invite-modal')">×</button></div><p class="small" style="line-height:1.6;margin-top:-8px">Publique sua disponibilidade para outros membros enviarem convites.</p><form id="invite-form"><div class="form-grid"><div class="form-group"><label>Dia</label><input class="field" name="date" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" autocomplete="off" required></div><div class="form-group"><label>Horário</label><input class="field" name="time" type="time" required></div><div class="form-group full"><label>Formato do jogo</label><div class="formats"><label class="fmt"><input type="radio" name="format" value="simples"><span><b>🎾 Simples</b><small>1 contra 1 · 2 pessoas</small></span></label><label class="fmt"><input type="radio" name="format" value="quarteto" checked><span><b>👥 4 pessoas diferentes</b><small>Procuro jogadores para formar o jogo</small></span></label><label class="fmt"><input type="radio" name="format" value="duplas"><span><b>🤝 2 duplas de 2</b><small>Já tenho dupla e procuro outra</small></span></label></div></div><div class="form-group full"><label>Esse jogo vale ranking?</label><div class="formats"><label class="fmt"><input type="radio" name="ranked" value="true" checked><span><b>🏆 Vale ranking</b><small>O resultado conta pontos para os dois jogadores</small></span></label><label class="fmt"><input type="radio" name="ranked" value="false"><span><b>😎 Amistoso</b><small>Só por diversão: não muda o ranking</small></span></label></div></div><div class="form-group full"><label>Local / arena</label><input class="field" name="place" placeholder="Ex.: Arena da Praia" required></div><div class="form-group"><label>Cidade</label><select class="field" name="city"><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="form-group"><label>Nível desejado</label><select class="field" name="level"><option>Qualquer nível</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div><div class="form-group full"><label>Observação (opcional)</label><input class="field" name="note" placeholder="Ex.: jogo leve, dupla ou treino..."/></div></div><button class="btn btn-primary" style="width:100%">Publicar disponibilidade</button></form></div></div>
@@ -646,6 +691,10 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="modal-backdrop" id="tournament-modal"><div class="modal"><div class="modal-head"><h3>Criar torneio</h3><button class="close" onclick="closeModal('tournament-modal')" aria-label="Fechar">×</button></div><form id="tournament-form"><div class="form-group"><label>Nome do torneio</label><input class="field" name="name" required placeholder="Ex.: Open de Verão"></div><div class="form-grid"><div class="form-group"><label>Data</label><input class="field" name="date" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off" required></div><div class="form-group"><label>Horário</label><input class="field" name="time" type="time" required></div><div class="form-group full"><label>Arena / local</label><input class="field" name="arena" required></div><div class="form-group"><label>Cidade</label><select class="field" name="city"><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="form-group"><label>Formato</label><select class="field" name="format"><option value="duplas">Duplas</option><option value="simples">Simples</option></select></div><div class="form-group"><label>Inscrição (R$) — 0 = grátis</label><input class="field" name="fee" type="number" min="0" step="1" value="0"></div><div class="form-group"><label>Vagas</label><input class="field" name="max" type="number" min="2" max="256" value="16"></div><div class="form-group full"><label>Chave Pix para receber as inscrições</label><input class="field" name="pix" placeholder="CPF, e-mail, telefone ou chave aleatória"></div><div class="form-group full"><label>Patrocinador (opcional)</label><input class="field" name="sponsor"></div><div class="form-group full"><label>Descrição (opcional)</label><textarea class="field" name="description" rows="3"></textarea></div></div><button class="btn btn-primary" style="width:100%">Criar torneio</button></form></div></div>
 <div class="modal-backdrop" id="finish-modal"><div class="modal"><div class="modal-head"><h3>Encerrar e premiar</h3><button class="close" onclick="closeModal('finish-modal')" aria-label="Fechar">×</button></div><p class="small" style="line-height:1.6;margin-top:-6px">Escolha os 3 primeiros. Os pontos entram no ranking na hora: 1º +50, 2º +30, 3º +15.</p><div class="form-group"><label for="fin-1">🥇 1º lugar</label><select class="field" id="fin-1"></select></div><div class="form-group"><label for="fin-2">🥈 2º lugar</label><select class="field" id="fin-2"></select></div><div class="form-group"><label for="fin-3">🥉 3º lugar</label><select class="field" id="fin-3"></select></div><button class="btn btn-primary" style="width:100%" onclick="submitFinish()">Encerrar torneio</button></div></div>
 <div class="modal-backdrop" id="player-modal"><div class="modal" style="max-width:500px"><div class="modal-head"><h3>Perfil do jogador</h3><button class="close" onclick="closeModal('player-modal')" aria-label="Fechar">×</button></div><div id="player-body"></div></div></div>
+<div class="modal-backdrop" id="arena-modal"><div class="modal" style="max-width:560px"><div class="modal-head"><h3 id="arena-modal-title">Cadastrar arena</h3><button class="close" onclick="closeModal('arena-modal')" aria-label="Fechar">×</button></div><form id="arena-form" onsubmit="saveArena(event)" class="form-grid"><input type="hidden" name="id"><div class="form-group full"><label>Nome da arena</label><input class="field" name="name" maxlength="80" required></div><div class="form-group"><label>Cidade</label><select class="field" name="city"><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="form-group"><label>WhatsApp da arena</label><input class="field" name="whatsapp" inputmode="numeric" placeholder="12999998888"></div><div class="form-group full"><label>Endereço</label><input class="field" name="address" placeholder="Rua, número, praia"></div><div class="form-group"><label>Valor por hora (R$)</label><input class="field" name="price_hour" type="number" min="0" step="0.01" placeholder="80"></div><div class="form-group"><label>Quantidade de quadras</label><input class="field" name="courts" type="number" min="1" max="20" value="2"></div><div class="form-group"><label>Abre às</label><input class="field" name="open_time" type="time" value="06:00" required></div><div class="form-group"><label>Fecha às</label><input class="field" name="close_time" type="time" value="22:00" required></div><div class="form-group"><label>Duração de cada horário</label><select class="field" name="slot_min"><option value="30">30 minutos</option><option value="60" selected>1 hora</option><option value="90">1h30</option><option value="120">2 horas</option></select></div><div class="form-group" id="arena-owner-group"><label>Gestor da arena</label><select class="field" name="owner"></select></div><div class="form-group full"><label>Observações</label><textarea class="field" name="note" rows="2" placeholder="Ex.: vestiário, estacionamento, aluguel de raquete"></textarea></div><div class="form-group full"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="active" checked> Aceitando reservas</label></div><div class="form-group full"><button class="btn btn-primary" type="submit" style="width:100%">Salvar arena</button></div></form></div></div>
+<div class="modal-backdrop" id="book-court-modal"><div class="modal" style="max-width:640px"><div class="modal-head"><h3 id="book-court-title">Reservar quadra</h3><button class="close" onclick="closeModal('book-court-modal');BK=null" aria-label="Fechar">×</button></div><div id="book-court-body"></div></div></div>
+<div class="modal-backdrop" id="arena-bookings-modal"><div class="modal" style="max-width:560px"><div class="modal-head"><h3 id="arena-bookings-title">Reservas</h3><button class="close" onclick="closeModal('arena-bookings-modal')" aria-label="Fechar">×</button></div><div id="arena-bookings-body"></div></div></div>
+<div class="modal-backdrop" id="bracket-modal"><div class="modal modal-wide"><div class="modal-head"><h3 id="bracket-title">Chave</h3><button class="close" onclick="closeModal('bracket-modal')" aria-label="Fechar">×</button></div><div id="bracket-body"></div></div></div>
 <div class="modal-backdrop" id="settings-modal"><div class="modal" style="max-width:520px"><div class="modal-head"><h3>⚙️ Configurações</h3><button class="close" onclick="closeModal('settings-modal')" aria-label="Fechar">×</button></div><div id="settings-body"></div></div></div>
 <button id="chat-fab" type="button" aria-label="Abrir o chat" title="Chat (arraste para mudar de lugar)"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.6-.8L3 21l1.9-5.1A8.4 8.4 0 1 1 21 11.5z"/><path d="M8.6 8.3c1.6 1.8 1.6 5.6 0 7.4M15.4 8.3c-1.6 1.8-1.6 5.6 0 7.4" stroke-width="1.6"/></svg><span class="cbadge" id="chat-badge" style="display:none"></span></button><div id="chat-dock" role="dialog" aria-label="Chat"></div>
 <div class="modal-backdrop" id="tutorial-modal"><div class="modal" style="max-width:420px"><div class="modal-head"><h3>Como instalar na tela do celular</h3><button class="close" onclick="closeModal('tutorial-modal')" aria-label="Fechar">×</button></div><video id="tut-video" class="tut-video" controls playsinline preload="none" poster="tutorial-poster.jpg" aria-label="Tutorial de instalação"><source src="tutorial-instalar-app.mp4" type="video/mp4"></video><p class="small" style="margin:12px 0 0;line-height:1.5">Android: Chrome → 3 pontinhos → <strong>Instalar app</strong>. iPhone: Safari → <strong>Compartilhar</strong> → <strong>Adicionar à Tela de Início</strong>.</p></div></div>
@@ -718,7 +767,7 @@ async function refresh(){
     S.tournaments=tr.data||[];S.entries=en.data||[];S.settings={};(st.data||[]).forEach(r=>{S.settings[r.key]=r.value});
   }catch(e){S.tournaments=S.tournaments||[];S.entries=S.entries||[];S.settings=S.settings||{}}
   S.me=session?S.profiles.find(p=>p.id===session.user.id)||null:null;
-  if(!S.me){Object.assign(S,{invites:[],incoming:[],sent:[],games:[],lessons:[]});lastGames=null;lastPending=null;return}
+  if(!S.me){Object.assign(S,{invites:[],incoming:[],sent:[],games:[],lessons:[]});lastGames=null;lastPending=null;await loadExtras();return}
   const uid=S.me.id;
   const [inv,rq,gm,ls]=await Promise.all([
     sb.from('invites').select('*').eq('status','open').order('day').order('time'),
@@ -733,7 +782,7 @@ async function refresh(){
   S.games=gm.data||[];
   S.lessons=ls.data||[];
   if(lastGames!==null&&S.games.length>lastGames)toast('Novo jogo marcado! Veja em Meus jogos.');
-  lastGames=S.games.length;if(typeof chatLoad==='function')setTimeout(chatLoad,0);
+  lastGames=S.games.length;if(typeof chatLoad==='function')setTimeout(chatLoad,0);await loadExtras();
   const pendNow=S.lessons.filter(l=>l.status==='pendente'&&(S.me.is_admin||l.teacher===uid)).length;
   if(lastPending!==null&&pendNow>lastPending){toast('⏳ Novo pedido de aula! Veja na Área do professor.');try{if('Notification' in window&&Notification.permission==='granted')new Notification('Novo pedido de aula',{body:'Abra a Área do professor para aceitar.',icon:'logo-icon-512.png'})}catch(e){}}
   lastPending=pendNow;
@@ -848,7 +897,7 @@ function priceRows(t){return PRICE_KEYS.filter(([k])=>t[k]!=null&&t[k]!=='').map
 function teacherCard(t){
   const rows=priceRows(t);
   const pic=t.photo_url?`<img class="teacher-photo" src="${escapeHtml(t.photo_url)}" alt="Foto de ${escapeHtml(t.name)}" loading="lazy">`:`<div class="teacher-icon">${escapeHtml(ini(t.name))}</div>`;
-  return `<article class="card teacher-card"><div class="teacher-header">${pic}<div><h3>${escapeHtml(t.name)}</h3><div class="small">📍 ${escapeHtml(t.city||'—')}</div><div style="margin-top:7px"><span class="tag">✓ Professor cadastrado</span>${t.featured?'<span class="tag" style="background:#ffe9a8;color:#7a5200;margin-left:6px">★ Destaque</span>':''}${isPro(t)?'<span class="tag" style="background:#e7e4ff;color:#4a4fa8;margin-left:6px">Pro</span>':''}</div></div></div><p>${escapeHtml(t.bio||'Professor de beach tennis.')}</p><div class="teacher-meta"><span>🏟 ${escapeHtml(t.local||'A informar')}</span></div>${rows?`${priceMatrix(t)}`:'<div class="small" style="margin:14px 0">Consulte os valores com o professor.</div>'}<div class="card-actions" style="margin-top:auto"><button class="btn btn-primary" onclick="openTeacherView('${t.id}')">Ver horários e valores</button><button class="btn btn-soft" onclick="contactTeacher('${t.id}')" aria-label="WhatsApp">WhatsApp ↗</button></div></article>`;
+  return `<article class="card teacher-card"><div class="teacher-header">${pic}<div><h3>${escapeHtml(t.name)}</h3><div class="small">📍 ${escapeHtml(t.city||'—')}</div><div style="margin-top:7px"><span class="tag">✓ Professor cadastrado</span>${t.featured?'<span class="tag" style="background:#ffe9a8;color:#7a5200;margin-left:6px">★ Destaque</span>':''}${isPro(t)?'<span class="tag" style="background:#e7e4ff;color:#4a4fa8;margin-left:6px">Pro</span>':''}</div></div></div><p>${escapeHtml(t.bio||'Professor de beach tennis.')}</p><div class="teacher-meta"><span>🏟 ${escapeHtml(t.local||'A informar')}</span></div>${rows?`${priceMatrix(t)}`:'<div class="small" style="margin:14px 0">Consulte os valores com o professor.</div>'}<div class="card-actions" style="margin-top:auto"><button class="btn btn-primary" onclick="openTeacherView('${t.id}')">Ver horários e valores</button><button class="btn btn-soft" onclick="contactTeacher('${t.id}')" aria-label="WhatsApp">WhatsApp ↗</button>${pkgBtn(t.id)}</div></article>`;
 }
 function renderTeachers(){
   const q=($('teacher-search')?.value||'').toLowerCase(),loc=$('teacher-location')?.value||'';
@@ -1246,7 +1295,7 @@ function renderTournaments(){
     }
     const pod=t.status==='encerrado'?`<div class="podium">${[['🥇',t.first],['🥈',t.second],['🥉',t.third]].filter(x=>x[1]).map(x=>`<span>${x[0]} ${escapeHtml(prof(x[1]).name)}</span>`).join('')}</div>`:'';
     const admBtns=adm?`<div class="card-actions" style="margin-top:10px;flex-wrap:wrap">${open?`<button class="btn btn-soft" onclick="openFinish('${t.id}')">Encerrar e premiar</button>`:''}<button class="btn btn-outline" onclick="adminToggleEntries('${t.id}')">Inscritos e pagamentos</button><button class="btn btn-outline" onclick="deleteTournament('${t.id}')">Excluir</button></div><div id="adm-en-${t.id}" class="hidden" style="margin-top:10px">${es.map(e=>`<div class="agenda-item"><div style="flex:1"><strong style="font-size:13px">${escapeHtml(prof(e.player_id).name)}</strong><div class="small">${e.paid?'Pago':'Pagamento pendente'}</div></div><button class="btn btn-outline" style="padding:6px 12px" onclick="togglePaid('${e.id}',${e.paid?'false':'true'})">${e.paid?'Desmarcar':'Marcar pago'}</button></div>`).join('')||'<div class="small">Ninguém inscrito ainda.</div>'}</div>`:'';
-    return `<article class="card"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">${st}<span class="tag">${t.fee>0?money(t.fee):'Gratuito'}</span></div><h3 style="margin:12px 0 6px;font-size:21px;color:var(--navy)">${escapeHtml(t.name)}</h3><div class="details" style="margin:0 0 10px"><span>📅 ${fmtDate(t.day)} às ${escapeHtml(t.time)}</span><span>🏟 ${escapeHtml(t.arena)}${t.city?', '+escapeHtml(t.city):''}</span><span>👥 ${es.length}/${t.max_players} inscritos</span><span>${t.format==='simples'?'Simples':'Duplas'}</span></div>${t.description?`<div class="small" style="margin:0 0 10px;line-height:1.6">${escapeHtml(t.description)}</div>`:''}${t.sponsor?`<div class="small" style="margin-bottom:8px">🤝 Patrocínio: <strong>${escapeHtml(t.sponsor)}</strong></div>`:''}${pod}${names?`<div class="small" style="margin:8px 0 4px;font-weight:700">Inscritos</div><div class="chips">${names}</div>`:''}<div class="card-actions" style="margin-top:14px;flex-wrap:wrap">${act}</div>${admBtns}</article>`;
+    return `<article class="card"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">${st}<span class="tag">${t.fee>0?money(t.fee):'Gratuito'}</span></div><h3 style="margin:12px 0 6px;font-size:21px;color:var(--navy)">${escapeHtml(t.name)}</h3><div class="details" style="margin:0 0 10px"><span>📅 ${fmtDate(t.day)} às ${escapeHtml(t.time)}</span><span>🏟 ${escapeHtml(t.arena)}${t.city?', '+escapeHtml(t.city):''}</span><span>👥 ${es.length}/${t.max_players} inscritos</span><span>${t.format==='simples'?'Simples':'Duplas'}</span></div>${t.description?`<div class="small" style="margin:0 0 10px;line-height:1.6">${escapeHtml(t.description)}</div>`:''}${t.sponsor?`<div class="small" style="margin-bottom:8px">🤝 Patrocínio: <strong>${escapeHtml(t.sponsor)}</strong></div>`:''}${pod}${names?`<div class="small" style="margin:8px 0 4px;font-weight:700">Inscritos</div><div class="chips">${names}</div>`:''}<div class="card-actions" style="margin-top:14px;flex-wrap:wrap">${act}${bracketBtn(t)}</div>${admBtns}</article>`;
   }).join('');
 }
 function joinTournament(id){if(!S.me){openAuth('login');return}run(async()=>{const {error}=await sb.from('tournament_entries').insert({tournament_id:id,player_id:S.me.id});if(!fail(error))toast('Inscrição feita! Se tiver taxa, pague por Pix para confirmar.')})}
@@ -1587,6 +1636,273 @@ function shareInvite(id){
 }
 document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('#profile-box .avatar');if(a&&S.me)showPlayer(S.me.id)});
 
+/* ===== EXTRAS: quadras, chave de torneio, pacotes, amigos e feed ===== */
+const X={arenas:[],book:[],matches:[],pkgs:[],spk:[],follows:new Set(),feed:[],feedMode:'all',feedErr:false,ok:{}};
+function isoDay(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+async function xq(p){try{const r=await p;return r.error?null:(r.data||[])}catch(e){return null}}
+async function loadExtras(){
+  const [ar,mt,pk]=await Promise.all([xq(sb.from('arenas').select('*').order('name')),xq(sb.from('tournament_matches').select('*')),xq(sb.from('lesson_packages').select('*').order('lessons'))]);
+  X.ok.arenas=ar!==null;if(ar)X.arenas=ar;
+  if(mt)X.matches=mt;
+  if(pk)X.pkgs=pk;
+  if(!S.me){X.book=[];X.spk=[];X.follows=new Set();return}
+  const [bk,sp,fl]=await Promise.all([xq(sb.from('court_bookings').select('*').eq('status','confirmada').gte('day',isoDay(new Date())).order('day').order('time')),xq(sb.from('student_packages').select('*').order('created_at',{ascending:false})),xq(sb.from('follows').select('followee'))]);
+  if(bk)X.book=bk;
+  if(sp)X.spk=sp;
+  if(fl)X.follows=new Set(fl.map(r=>r.followee));
+}
+function xRefresh(){return run(async()=>{})}
+
+/* ----- QUADRAS / ARENAS ----- */
+function arenaManager(a){return !!S.me&&((S.me.is_admin&&eff()==='admin')||a.owner===S.me.id)}
+function renderArenas(){
+  const el=$('arenas-list');if(!el)return;
+  const nb=$('btn-new-arena');if(nb)nb.style.display=(S.me&&eff()==='admin')?'':'none';
+  if(X.ok.arenas===false){el.innerHTML='<div class="empty"><b>🏟️</b>As quadras ainda não foram ativadas no banco de dados.<br>Avise o administrador.</div>';return}
+  const list=X.arenas.filter(a=>a.active||arenaManager(a));
+  if(!list.length){el.innerHTML='<div class="empty"><b>🏟️</b>Nenhuma arena cadastrada ainda.'+((S.me&&eff()==='admin')?'<br>Cadastre a primeira no botão acima.':'<br>Em breve você reserva sua quadra por aqui.')+'</div>';return}
+  el.innerHTML=list.map(a=>{
+    const mgr=arenaManager(a),adm=S.me&&eff()==='admin',num=String(a.whatsapp||'').replace(/\D/g,'');
+    return `<article class="card"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">${a.active?'<span class="tag live">Reservas abertas</span>':'<span class="tag" style="background:#eceff0;color:#5f7a82">Pausada</span>'}<span class="tag">${a.price_hour>0?money(a.price_hour)+' / hora':'Consulte o valor'}</span></div><h3 style="margin:12px 0 6px;font-size:21px;color:var(--navy)">${escapeHtml(a.name)}</h3><div class="small">📍 ${escapeHtml([a.address,a.city].filter(Boolean).join(' · ')||'—')}</div><div class="details" style="margin:12px 0"><span>🎾 ${a.courts} quadra${a.courts>1?'s':''}</span><span>🕒 ${escapeHtml(a.open_time)} às ${escapeHtml(a.close_time)}</span><span>⏱ ${a.slot_min} min</span></div>${a.note?`<div class="small" style="line-height:1.6;margin-bottom:10px">${escapeHtml(a.note)}</div>`:''}<div class="card-actions" style="flex-wrap:wrap"><button class="btn btn-primary" onclick="openBooking('${a.id}')">Reservar horário</button>${num?`<button class="btn btn-soft" onclick="openWhatsApp('${num}','Olá! Vi a ${escapeHtml(a.name)} no Beach Tennis Club.')">WhatsApp ↗</button>`:''}${mgr?`<button class="btn btn-outline" onclick="openArenaBookings('${a.id}')">📋 Reservas</button><button class="btn btn-outline" onclick="editArena('${a.id}')">✏️ Editar</button>`:''}${adm?`<button class="btn btn-outline" style="border-color:#d9534f;color:#b3261e" onclick="deleteArena('${a.id}')">Excluir</button>`:''}</div></article>`;
+  }).join('');
+}
+function myBookings(){return S.me?X.book.filter(b=>b.user_id===S.me.id):[]}
+function renderMyBookings(){
+  const el=$('my-bookings');if(!el)return;
+  const mine=myBookings();
+  if(!S.me||!mine.length){el.style.display='none';return}
+  el.style.display='';
+  el.innerHTML='<h3>📅 Minhas reservas</h3>'+mine.map(b=>{const a=X.arenas.find(x=>x.id===b.arena)||{name:'Arena'};return `<div class="agenda-item"><div style="flex:1"><strong style="font-size:14px">${escapeHtml(a.name)}</strong><div class="small">${fmtDate(b.day)} às ${escapeHtml(b.time)} · Quadra ${b.court}</div></div><button class="btn btn-outline" style="padding:8px 14px" onclick="cancelBooking('${b.id}')">Cancelar</button></div>`}).join('');
+}
+function cancelBooking(id){
+  if(!confirm('Cancelar essa reserva?'))return;
+  run(async()=>{const {error}=await sb.rpc('cancel_booking',{p_id:id});if(!fail(error)){toast('Reserva cancelada.');await loadExtras();if(BK)await loadBusy();const m=$('arena-bookings-modal');if(m&&m.classList.contains('open')&&ABK)renderArenaBookings()}});
+}
+let BK=null;
+function slotsOf(a){const t=s=>{const p=String(s).split(':').map(Number);return p[0]*60+(p[1]||0)};const o=[];for(let m=t(a.open_time);m+a.slot_min<=t(a.close_time);m+=a.slot_min)o.push(String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'));return o}
+async function openBooking(id){
+  if(!S.me){openAuth('login');toast('Entre para reservar.');return}
+  const a=X.arenas.find(x=>x.id===id);if(!a)return;
+  BK={a,day:isoDay(new Date()),sel:null,busy:[]};
+  $('book-court-modal').classList.add('open');
+  renderBooking();await loadBusy();
+}
+async function loadBusy(){
+  if(!BK)return;const day=BK.day,aid=BK.a.id;BK.sel=null;
+  let rows=[];try{const {data}=await sb.rpc('arena_busy',{p_arena:aid,p_day:day});rows=data||[]}catch(e){}
+  if(!BK||BK.day!==day||BK.a.id!==aid)return;
+  BK.busy=rows;renderBooking();
+}
+function bkSetDay(d){BK.day=d;BK.sel=null;BK.busy=[];renderBooking();loadBusy()}
+function bkPick(court,time){BK.sel={court,time};renderBooking()}
+function renderBooking(){
+  const el=$('book-court-body');if(!el||!BK)return;
+  const a=BK.a,wd=['dom','seg','ter','qua','qui','sex','sáb'],now=new Date(),days=[];
+  for(let i=0;i<14;i++){const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i);days.push({iso:isoDay(d),l:i===0?'Hoje':i===1?'Amanhã':wd[d.getDay()],s:String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')})}
+  const chips=days.map(d=>`<button type="button" class="bk-day${d.iso===BK.day?' on':''}" onclick="bkSetDay('${d.iso}')"><b>${d.l}</b><span>${d.s}</span></button>`).join('');
+  const today=BK.day===isoDay(now),nowM=now.getHours()*60+now.getMinutes();
+  const mineSet=new Set(myBookings().filter(b=>b.arena===a.id&&b.day===BK.day).map(b=>b.court+'|'+b.time));
+  const busySet=new Set(BK.busy.map(b=>b.court+'|'+b.time));
+  const courts=[];for(let c=1;c<=a.courts;c++)courts.push(c);
+  const rows=slotsOf(a).map(tm=>{
+    const mins=parseInt(tm.slice(0,2),10)*60+parseInt(tm.slice(3,5),10),past=today&&mins<=nowM;
+    return `<div class="bk-row"><div class="bk-time">${tm}</div>${courts.map(c=>{
+      const k=c+'|'+tm;
+      if(mineSet.has(k))return `<button class="bk-slot mine" disabled>Sua reserva</button>`;
+      if(busySet.has(k))return `<button class="bk-slot busy" disabled>Ocupada</button>`;
+      if(past)return `<button class="bk-slot busy" disabled>—</button>`;
+      const on=BK.sel&&BK.sel.court===c&&BK.sel.time===tm;
+      return `<button class="bk-slot${on?' sel':''}" onclick="bkPick(${c},'${tm}')">${on?'✓ ':''}Livre</button>`}).join('')}</div>`}).join('');
+  const head=`<div class="bk-row bk-head"><div class="bk-time"></div>${courts.map(c=>`<div>Quadra ${c}</div>`).join('')}</div>`;
+  const sel=BK.sel?`<div class="bk-confirm"><div><strong>${escapeHtml(a.name)}</strong><div class="small">Quadra ${BK.sel.court} · ${fmtDate(BK.day)} às ${BK.sel.time}${a.price_hour>0?' · '+money(a.price_hour*a.slot_min/60):''}</div></div><button class="btn btn-primary" onclick="bookNow()">Confirmar reserva</button></div>`:'<div class="small" style="margin-top:12px">Toque em um horário livre para reservar. O pagamento é combinado direto com a arena.</div>';
+  el.innerHTML=`<div class="bk-days">${chips}</div><div class="bk-grid">${head}${rows||'<div class="small">Sem horários configurados.</div>'}</div>${sel}`;
+  const t=$('book-court-title');if(t)t.textContent='Reservar · '+a.name;
+}
+async function bookNow(){
+  if(!BK||!BK.sel)return;
+  const s=BK.sel,a=BK.a,day=BK.day;
+  const {error}=await sb.rpc('book_court',{p_arena:a.id,p_court:s.court,p_day:day,p_time:s.time});
+  if(fail(error)){await loadBusy();return}
+  toast('Reserva confirmada! ✅ '+fmtDate(day)+' às '+s.time+' · Quadra '+s.court);
+  await loadExtras();await loadBusy();renderAll();
+}
+function editArena(id){
+  if(!S.me)return;
+  const a=id?X.arenas.find(x=>x.id===id):null,F=$('arena-form').elements,adm=eff()==='admin';
+  $('arena-modal-title').textContent=a?'Editar arena':'Cadastrar arena';
+  F.id.value=a?a.id:'';F.name.value=a?a.name:'';F.city.value=a?(a.city||''):'Caraguatatuba';F.address.value=a?(a.address||''):'';F.whatsapp.value=a?(a.whatsapp||''):'';
+  F.price_hour.value=a?a.price_hour:'';F.courts.value=a?a.courts:2;F.open_time.value=a?a.open_time:'06:00';F.close_time.value=a?a.close_time:'22:00';F.slot_min.value=a?a.slot_min:60;F.note.value=a?(a.note||''):'';F.active.checked=a?a.active:true;
+  const og=$('arena-owner-group');og.style.display=adm?'':'none';
+  F.owner.innerHTML='<option value="">Sem gestor (só o administrador)</option>'+S.profiles.filter(p=>!p.is_admin).map(p=>`<option value="${p.id}">${escapeHtml(p.name)}${p.role==='professor'?' · professor':''}</option>`).join('');
+  F.owner.value=a&&a.owner?a.owner:'';
+  $('arena-modal').classList.add('open');
+}
+async function saveArena(e){
+  e.preventDefault();
+  const f=new FormData(e.target),id=f.get('id'),adm=eff()==='admin';
+  const name=String(f.get('name')).trim(),ot=String(f.get('open_time')),ct=String(f.get('close_time'));
+  if(name.length<2){toast('Informe o nome da arena.');return}
+  if(!/^\d{2}:\d{2}$/.test(ot)||!/^\d{2}:\d{2}$/.test(ct)||ct<=ot){toast('Confira os horários de abertura e fechamento.');return}
+  const row={name,city:f.get('city')||null,address:String(f.get('address')||'').trim()||null,whatsapp:String(f.get('whatsapp')||'').replace(/\D/g,'')||null,price_hour:Number(f.get('price_hour'))||0,courts:Math.max(1,Math.min(20,parseInt(f.get('courts'),10)||1)),open_time:ot,close_time:ct,slot_min:parseInt(f.get('slot_min'),10)||60,note:String(f.get('note')||'').trim()||null,active:!!f.get('active')};
+  if(adm)row.owner=f.get('owner')||null;
+  await run(async()=>{
+    const {error}=id?await sb.from('arenas').update(row).eq('id',id):await sb.from('arenas').insert(row);
+    if(!fail(error)){closeModal('arena-modal');toast('Arena salva!')}
+  });
+}
+function deleteArena(id){
+  const a=X.arenas.find(x=>x.id===id);if(!a)return;
+  if(!confirm('Excluir a arena "'+a.name+'" e todas as reservas dela? Não dá para desfazer.'))return;
+  run(async()=>{const {error}=await sb.from('arenas').delete().eq('id',id);if(!fail(error))toast('Arena excluída.')});
+}
+let ABK=null;
+function openArenaBookings(id){ABK=id;renderArenaBookings();$('arena-bookings-modal').classList.add('open')}
+function renderArenaBookings(){
+  const a=X.arenas.find(x=>x.id===ABK),el=$('arena-bookings-body');if(!a||!el)return;
+  $('arena-bookings-title').textContent='Reservas · '+a.name;
+  const list=X.book.filter(b=>b.arena===ABK);
+  el.innerHTML=list.length?list.map(b=>{const u=prof(b.user_id),num=String(u.contact||'').replace(/\D/g,'');return `<div class="agenda-item"><div style="flex:1"><strong style="font-size:14px">${fmtDate(b.day)} às ${escapeHtml(b.time)} · Quadra ${b.court}</strong><div class="small">${escapeHtml(u.name||'Jogador')}</div></div>${num?`<button class="btn btn-soft" style="padding:8px 12px" onclick="openWhatsApp('${num}','Olá! Sobre sua reserva de ${fmtDate(b.day)} às ${escapeHtml(b.time)}.')">WhatsApp</button>`:''}<button class="btn btn-outline" style="padding:8px 12px" onclick="cancelBooking('${b.id}')">Cancelar</button></div>`}).join(''):'<div class="small">Nenhuma reserva futura.</div>';
+}
+
+/* ----- CHAVE DO TORNEIO ----- */
+function bracketBtn(t){
+  const has=X.matches.some(m=>m.tournament===t.id),adm=S.me&&eff()==='admin';
+  let h='';
+  if(has)h+=`<button class="btn btn-soft" onclick="openBracket('${t.id}')">🏁 Ver chave</button>`;
+  if(adm&&t.status==='aberto')h+=`<button class="btn btn-outline" onclick="genBracket('${t.id}')">${has?'🔄 Refazer chave':'⚙️ Gerar chave'}</button>`;
+  return h;
+}
+function genBracket(id){
+  const has=X.matches.some(m=>m.tournament===id);
+  if(!confirm(has?'Refazer a chave? Os resultados lançados serão apagados.':'Gerar a chave com os inscritos? Os melhores do ranking pegam os caminhos mais fáceis.'))return;
+  run(async()=>{const {error}=await sb.rpc('admin_generate_bracket',{p_t:id});if(!fail(error)){await loadExtras();toast('Chave gerada! 🏁')}});
+}
+let BRT=null;
+function openBracket(id){BRT=id;renderBracket();$('bracket-modal').classList.add('open')}
+function renderBracket(){
+  const el=$('bracket-body'),t=S.tournaments.find(x=>x.id===BRT);if(!el||!t)return;
+  $('bracket-title').textContent='Chave · '+t.name;
+  const ms=X.matches.filter(m=>m.tournament===BRT).sort((a,b)=>a.round-b.round||a.pos-b.pos);
+  if(!ms.length){el.innerHTML='<div class="empty"><b>🏁</b>A chave ainda não foi gerada.</div>';return}
+  const rounds=[...new Set(ms.map(m=>m.round))].sort((a,b)=>a-b),R=rounds.length,adm=S.me&&eff()==='admin';
+  const rn=r=>r===R?'Final':r===R-1?'Semifinal':r===R-2?'Quartas de final':r===R-3?'Oitavas de final':'Rodada '+r;
+  const nm=id=>id?escapeHtml(prof(id).name||'—'):'<span class="br-tbd">A definir</span>';
+  const box=m=>{
+    const line=(pid)=>`<div class="br-p${m.winner&&m.winner===pid?' win':''}${m.winner&&pid&&m.winner!==pid?' lose':''}">${nm(pid)}${m.winner&&m.winner===pid?' <span>✓</span>':''}</div>`;
+    const bye=m.score==='bye';
+    let ctl='';
+    if(adm&&m.p1&&m.p2&&!bye)ctl=`<div class="br-ctl"><button onclick="setMatchWinner('${m.id}','${m.p1}')">${m.winner===m.p1?'✓ ':''}${escapeHtml((prof(m.p1).name||'').split(' ')[0])}</button><button onclick="setMatchWinner('${m.id}','${m.p2}')">${m.winner===m.p2?'✓ ':''}${escapeHtml((prof(m.p2).name||'').split(' ')[0])}</button></div>`;
+    return `<div class="br-match">${line(m.p1)}${line(m.p2)}${m.score&&!bye?`<div class="br-score">${escapeHtml(m.score)}</div>`:''}${bye?'<div class="br-score">avançou direto</div>':''}${ctl}</div>`;
+  };
+  const fin=ms.filter(m=>m.round===R)[0];
+  const champ=fin&&fin.winner?`<div class="br-champ">🏆 Campeão: <strong>${escapeHtml(prof(fin.winner).name)}</strong></div>`:'';
+  el.innerHTML=champ+`<div class="br-cols">${rounds.map(r=>`<div class="br-col"><h4>${rn(r)}</h4>${ms.filter(m=>m.round===r).map(box).join('')}</div>`).join('')}</div>${adm?'<div class="small" style="margin-top:12px">Toque no nome do vencedor para lançar o resultado.</div>':''}`;
+}
+function setMatchWinner(mid,pid){
+  const sc=prompt('Placar (opcional). Ex.: 6-3 6-4','');
+  if(sc===null)return;
+  run(async()=>{const {error}=await sb.rpc('admin_set_match_winner',{p_match:mid,p_winner:pid,p_score:sc||null});if(!fail(error)){await loadExtras();toast('Resultado lançado!')}}).then(()=>renderBracket());
+}
+
+/* ----- PACOTES DE AULA ----- */
+function pkgsOf(t){return X.pkgs.filter(p=>p.teacher===t)}
+function pkgBtn(tid){const n=pkgsOf(tid).filter(p=>p.active).length;return n?`<button class="btn btn-outline" onclick="showPlayer('${tid}')">📦 Pacotes</button>`:''}
+function renderPkgPanel(){
+  const el=$('pkg-panel');if(!el)return;
+  if(!S.me||!canTeach()){el.style.display='none';return}
+  el.style.display='';
+  const tid=activeTeacher(),mine=pkgsOf(tid),sold=X.spk.filter(s=>s.teacher===tid);
+  el.innerHTML=`<h3>📦 Pacotes de aula</h3><div class="small" style="margin-bottom:12px">Venda pacotes (ex.: 4 aulas por mês). O aluno contrata aqui e você controla as aulas usadas, a reposição e o pagamento.</div>
+  <form onsubmit="createPackage(event)" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:8px;align-items:end" class="pkg-form">
+    <div class="form-group"><label>Nome do pacote</label><input class="field" name="name" placeholder="Ex.: 4 aulas individuais" maxlength="60" required></div>
+    <div class="form-group"><label>Aulas</label><input class="field" name="lessons" type="number" min="1" max="100" value="4" required></div>
+    <div class="form-group"><label>Preço (R$)</label><input class="field" name="price" type="number" min="0" step="0.01" placeholder="300" required></div>
+    <div class="form-group"><label>Validade (dias)</label><input class="field" name="days" type="number" min="7" max="365" value="60" required></div>
+    <button class="btn btn-primary" type="submit">Criar</button>
+  </form>
+  <div style="margin-top:14px">${mine.map(p=>`<div class="agenda-item"><div style="flex:1"><strong style="font-size:14px">${escapeHtml(p.name)}</strong><div class="small">${p.lessons} aulas · ${money(p.price)} · validade ${p.validity_days} dias${p.active?'':' · <b>pausado</b>'}</div></div><button class="btn btn-outline" style="padding:8px 12px" onclick="togglePackage('${p.id}',${p.active?'false':'true'})">${p.active?'Pausar':'Ativar'}</button><button class="btn btn-outline" style="padding:8px 12px;color:#b3261e;border-color:#d9534f" onclick="deletePackage('${p.id}')">Excluir</button></div>`).join('')||'<div class="small">Você ainda não criou pacotes.</div>'}</div>
+  <h4 style="margin:18px 0 8px;font-size:15px;color:var(--navy)">Alunos com pacote</h4>
+  ${sold.map(s=>{const u=prof(s.student),left=s.total-s.used,num=String(u.contact||'').replace(/\D/g,'');return `<div class="agenda-item"><div style="flex:1;min-width:170px"><strong style="font-size:14px">${escapeHtml(u.name||'Aluno')}</strong><div class="small">${escapeHtml(s.name)} · <b>${s.used}/${s.total}</b> usadas · vence ${fmtDate(s.expires)}</div><div class="small">${s.paid?'✅ Pago':'⏳ Pagamento pendente'}${s.status==='encerrado'?' · encerrado':''}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-outline" style="padding:7px 11px" title="Reposição: devolve uma aula" onclick="adjustPackage('${s.id}',-1)">−1</button><button class="btn btn-soft" style="padding:7px 11px" ${left<=0?'disabled':''} onclick="adjustPackage('${s.id}',1)">+1 aula dada</button><button class="btn btn-outline" style="padding:7px 11px" onclick="paidPackage('${s.id}',${s.paid?'false':'true'})">${s.paid?'Desmarcar pago':'Marcar pago'}</button>${num?`<button class="btn btn-outline" style="padding:7px 11px" onclick="openWhatsApp('${num}','Olá, ${escapeHtml((u.name||'').split(' ')[0])}! Sobre seu pacote de aulas.')">WhatsApp</button>`:''}</div></div>`}).join('')||'<div class="small">Nenhum aluno contratou ainda.</div>'}`;
+}
+function createPackage(e){
+  e.preventDefault();const f=new FormData(e.target),tid=activeTeacher();
+  const row={teacher:tid,name:String(f.get('name')).trim(),lessons:parseInt(f.get('lessons'),10),price:Number(f.get('price')),validity_days:parseInt(f.get('days'),10)};
+  if(!row.name||!(row.lessons>0)||!(row.price>=0)){toast('Confira os dados do pacote.');return}
+  run(async()=>{const {error}=await sb.from('lesson_packages').insert(row);if(!fail(error)){await loadExtras();toast('Pacote criado!')}});
+}
+function togglePackage(id,on){run(async()=>{const {error}=await sb.from('lesson_packages').update({active:on}).eq('id',id);if(!fail(error))await loadExtras()})}
+function deletePackage(id){if(!confirm('Excluir este pacote? Os alunos que já contrataram mantêm o saldo.'))return;run(async()=>{const {error}=await sb.from('lesson_packages').delete().eq('id',id);if(!fail(error))await loadExtras()})}
+function adjustPackage(id,d){run(async()=>{const {error}=await sb.rpc('pkg_adjust',{p_sp:id,p_delta:d});if(!fail(error)){await loadExtras();toast(d>0?'Aula descontada do pacote.':'Aula devolvida ao pacote.')}})}
+function paidPackage(id,v){run(async()=>{const {error}=await sb.rpc('pkg_set_paid',{p_sp:id,p_paid:v});if(!fail(error))await loadExtras()})}
+function buyPackage(id){
+  if(!S.me){openAuth('login');return}
+  const p=X.pkgs.find(x=>x.id===id);if(!p)return;
+  if(!confirm('Contratar "'+p.name+'" por '+money(p.price)+'? O pagamento é combinado direto com o professor.'))return;
+  run(async()=>{const {error}=await sb.rpc('buy_package',{p_pkg:id});if(!fail(error)){await loadExtras();closeModal('player-modal');toast('Pacote contratado! 📦 Combine o pagamento com o professor.')}});
+}
+function renderMyPackages(){
+  const el=$('my-packages');if(!el)return;
+  const mine=S.me?X.spk.filter(s=>s.student===S.me.id):[];
+  if(!mine.length){el.style.display='none';return}
+  el.style.display='';
+  el.innerHTML='<h3>📦 Meus pacotes de aula</h3>'+mine.map(s=>{const t=prof(s.teacher),left=s.total-s.used,pct=Math.round(s.used*100/s.total),num=String(t.contact||'').replace(/\D/g,'');return `<div class="agenda-item" style="flex-wrap:wrap"><div style="flex:1;min-width:200px"><strong style="font-size:14px">${escapeHtml(s.name)}</strong> <span class="small">com ${escapeHtml(t.name||'professor')}</span><div class="pk-bar"><i style="width:${pct}%"></i></div><div class="small"><b>${left}</b> de ${s.total} aulas restantes · vence ${fmtDate(s.expires)} · ${s.paid?'✅ pago':'⏳ pagamento pendente'}${s.status==='encerrado'?' · encerrado':''}</div></div>${num?`<button class="btn btn-soft" style="padding:8px 12px" onclick="openWhatsApp('${num}','Olá! Sobre meu pacote de aulas.')">WhatsApp</button>`:''}</div>`}).join('');
+}
+
+/* ----- SEGUIR E FEED ----- */
+const _showPlayerBase=showPlayer;
+showPlayer=async function(id){
+  await _showPlayerBase(id);
+  try{augmentPlayer(id)}catch(e){}
+};
+function augmentPlayer(id){
+  const body=$('player-body');if(!body||!S.me)return;
+  const acts=body.querySelector('.pf-acts');if(!acts)return;
+  const p=prof(id);
+  if(id!==S.me.id){const f=X.follows.has(id);acts.insertAdjacentHTML('afterbegin',`<button class="btn ${f?'btn-outline':'btn-soft'}" onclick="toggleFollow('${id}')">${f?'✓ Seguindo':'⭐ Seguir'}</button>`)}
+  if(p.role==='professor'){
+    const pk=pkgsOf(id).filter(x=>x.active);
+    if(pk.length)acts.insertAdjacentHTML('beforebegin',`<div class="pf-pk"><span class="small">Pacotes de aula</span>${pk.map(x=>`<div class="pf-pk-row"><div><strong>${escapeHtml(x.name)}</strong><div class="small">${x.lessons} aulas · validade ${x.validity_days} dias</div></div><div style="text-align:right"><b>${money(x.price)}</b><br><button class="btn btn-primary" style="padding:6px 12px;margin-top:4px" onclick="buyPackage('${x.id}')">Contratar</button></div></div>`).join('')}</div>`);
+  }
+}
+async function toggleFollow(id){
+  if(!S.me)return;
+  const on=X.follows.has(id);
+  const {error}=on?await sb.from('follows').delete().eq('follower',S.me.id).eq('followee',id):await sb.from('follows').insert({follower:S.me.id,followee:id});
+  if(fail(error))return;
+  if(on)X.follows.delete(id);else X.follows.add(id);
+  toast(on?'Você deixou de seguir.':'Agora você segue '+prof(id).name+'.');
+  showPlayer(id);
+}
+function setRkTab(t){
+  document.querySelectorAll('#rk-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  const f=document.querySelector('.rk-filters'),rb=$('ranking-body'),fb=$('feed-body');
+  if(f)f.style.display=t==='rank'?'':'none';if(rb)rb.style.display=t==='rank'?'':'none';if(fb)fb.style.display=t==='feed'?'':'none';
+  if(t==='feed')loadFeed();
+}
+async function loadFeed(){
+  const el=$('feed-body');if(!el)return;
+  if(!S.me){X.feed=[];renderFeed();return}
+  try{const {data,error}=await sb.rpc('community_feed',{p_following:X.feedMode==='following',p_limit:40});X.feedErr=!!error;X.feed=data||[]}catch(e){X.feedErr=true}
+  renderFeed();
+}
+function setFeedMode(m){X.feedMode=m;loadFeed()}
+function renderFeed(){
+  const el=$('feed-body');if(!el)return;
+  if(!S.me){el.innerHTML='<div class="empty"><b>📰</b>Entre para ver os jogos da comunidade.<br><br><button class="btn btn-primary" onclick="openAuth(\'login\')">Entrar / Cadastrar</button></div>';return}
+  const tabs=`<div class="tabs-sm" style="margin-bottom:14px"><button class="${X.feedMode==='all'?'on':''}" onclick="setFeedMode('all')">Toda a comunidade</button><button class="${X.feedMode==='following'?'on':''}" onclick="setFeedMode('following')">Quem eu sigo</button></div>`;
+  if(X.feedErr){el.innerHTML=tabs+'<div class="empty"><b>📰</b>O feed ainda não foi ativado no banco de dados.</div>';return}
+  if(!X.feed.length){el.innerHTML=tabs+`<div class="empty"><b>📰</b>${X.feedMode==='following'?'Siga jogadores pelo perfil deles para ver os jogos aqui.':'Os resultados dos jogos aparecem aqui.'}</div>`;return}
+  el.innerHTML=tabs+'<div class="feed-list">'+X.feed.map(g=>{
+    const w=prof(g.winner),l=prof(g.winner===g.a?g.b:g.a);
+    return `<div class="feed-item"><button class="feed-av" onclick="showPlayer('${g.winner}')">${rkAvatar(w,44)}</button><div style="flex:1;min-width:0"><div><b>${escapeHtml(w.name||'?')}</b> venceu <b>${escapeHtml(l.name||'?')}</b></div><div class="small">${fmtDate(g.day)} · ${g.ranked===false?'😎 Amistoso':'🏆 Vale ranking'}</div></div><button class="cheer${g.cheered?' on':''}" onclick="cheerGame('${g.id}')">👏 <span>${g.cheers||0}</span></button></div>`}).join('')+'</div>';
+}
+async function cheerGame(id){
+  const g=X.feed.find(x=>x.id===id);if(!g||!S.me)return;
+  const {data,error}=await sb.rpc('toggle_cheer',{p_game:id});
+  if(fail(error))return;
+  g.cheered=!!data;g.cheers=Math.max(0,(g.cheers||0)+(data?1:-1));renderFeed();
+}
+
 /* ===== FORMULÁRIOS ===== */
 $('invite-form').addEventListener('submit',e=>{e.preventDefault();
   if(!S.me){openAuth('login');return}
@@ -1658,7 +1974,7 @@ function renderPushGlobal(){
   el.style.display='';
   el.innerHTML=`<div class="shell" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between;padding-top:8px;padding-bottom:8px"><span class="small" style="color:#1f5a8a;font-weight:600">🔔 Receba avisos no celular: convites, aulas aceitas e resultados de jogos.${tip}</span><span style="display:flex;gap:8px"><button class="btn btn-primary" style="padding:8px 14px" onclick="enablePush()">Ativar avisos</button><button class="btn btn-soft" style="padding:8px 14px" onclick="openTutorial()">Ver tutorial</button><button class="btn btn-outline" style="padding:8px 14px" onclick="dismissPush()">Agora não</button></span></div>`;
 }
-function renderAll(){renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges();renderPulses();renderChatBadge();renderRankChart();renderRanking()}
+function renderAll(){renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges();renderPulses();renderChatBadge();renderRankChart();renderRanking();renderArenas();renderMyBookings();renderPkgPanel();renderMyPackages()}
 
 ['member-search','member-location','member-level','member-format','member-sort'].forEach(id=>$(id).addEventListener('input',renderMembers));
 ['teacher-search','teacher-location'].forEach(id=>$(id).addEventListener('input',renderTeachers));
