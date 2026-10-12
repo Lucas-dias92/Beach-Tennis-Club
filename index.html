@@ -450,7 +450,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
 
 #btc-splash{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;
-  background:radial-gradient(90% 60% at 50% 40%,#0d4a58,#062a33 60%,#031a20);animation:btcOut .5s ease-in 3.0s forwards}
+  background:radial-gradient(90% 60% at 50% 40%,#0d4a58,#062a33 60%,#031a20);animation:btcOut .5s ease-in 4.0s forwards}
 #btc-splash svg{width:min(78vmin,420px);height:min(78vmin,420px);overflow:visible;filter:drop-shadow(0 20px 50px rgba(0,0,0,.45))}
 @keyframes btcOut{to{opacity:0;visibility:hidden}}
 .btc-glow{transform-origin:500px 500px;animation:btcGlow 1.6s ease-out .1s both}
@@ -470,7 +470,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 @keyframes btcTxt{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .btc-shine{opacity:0;animation:btcShine 1s ease-in-out 2.0s both}
 @keyframes btcShine{0%{opacity:0;transform:translateX(-300px)}40%{opacity:.5}100%{opacity:0;transform:translateX(300px)}}
-@media (prefers-reduced-motion:reduce){#btc-splash *{animation-duration:.01s!important;animation-delay:0s!important}#btc-splash{animation-delay:1.2s}}
+@media (prefers-reduced-motion:reduce){#btc-splash *{animation-duration:.01s!important;animation-delay:0s!important}#btc-splash{animation-delay:2.2s}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js"></script></head>
 <body>
 <div id="btc-splash" aria-hidden="true">
@@ -499,7 +499,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <g class="btc-t1"><text font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="68" fill="#fff"><textPath href="#btcTop" startOffset="50%" text-anchor="middle" textLength="800" lengthAdjust="spacing">BEACH TENNIS CLUB</textPath></text></g>
 <g class="btc-t2"><text font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="56" fill="#4fd1bd"><textPath href="#btcBot" startOffset="50%" text-anchor="middle" textLength="800" lengthAdjust="spacing">JOGUE  •  CONECTE  •  EVOLUA</textPath></text></g>
 </svg></div>
-<script>(function(){var e=document.getElementById('btc-splash');if(!e)return;var seen=false;try{seen=sessionStorage.getItem('btc-splash')==='1';sessionStorage.setItem('btc-splash','1')}catch(_){}function rm(){if(e&&e.parentNode)e.parentNode.removeChild(e);e=null}if(seen){rm();return}e.style.cursor='pointer';e.addEventListener('click',rm);setTimeout(rm,3600)})();</script>
+<script>(function(){var e=document.getElementById('btc-splash');if(!e)return;var seen=false;try{seen=sessionStorage.getItem('btc-splash')==='1';sessionStorage.setItem('btc-splash','1')}catch(_){}function rm(){if(e&&e.parentNode)e.parentNode.removeChild(e);e=null}if(seen){rm();return}e.style.cursor='pointer';e.addEventListener('click',rm);setTimeout(rm,4600)})();</script>
 <header class="topbar" id="topbar"><div class="shell nav"><button class="brand" onclick="goPage('inicio')" aria-label="Beach Tennis Club - início"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></button><nav class="navlinks" aria-label="Navegação principal"><button class="active" data-page="inicio">Início</button><button data-page="membros">Membros</button><button data-page="jogos">Meus jogos <span id="game-count"></span></button><button data-page="professores">Aulas e professores</button><button data-page="torneios">Torneios</button><button data-page="professor">Área do professor</button></nav><div class="profile" id="profile-box"></div></div></header><div id="viewbar" style="display:none"></div><div id="pushbar-global" style="display:none"></div>
 <main class="shell">
 <section id="page-inicio" class="page active">
