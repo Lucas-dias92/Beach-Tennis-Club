@@ -1139,6 +1139,8 @@ function renderPeople(){
   box.innerHTML=`<h3>👥 Pessoas e planos</h3><div class="small" style="margin-bottom:10px">Troque o plano, transforme professor em aluno (ou o contrário) e exclua contas.</div><input class="field" id="people-q" placeholder="Buscar por nome ou cidade" value="${escapeHtml(peopleQ)}" oninput="peopleQ=this.value;renderPeopleList()" aria-label="Buscar pessoa"><div id="people-list" style="margin-top:12px"></div>`;
   renderPeopleList();
 }
+function fmtPhone(v){const d=String(v||'').replace(/\D/g,'');if(d.length===11)return `(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;if(d.length===10)return `(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`;return d||'—'}
+function waPerson(id){const p=prof(id),num=String(p.contact||'').replace(/\D/g,'');if(!num){toast('Essa pessoa não tem WhatsApp cadastrado.');return}openWhatsApp(num,`Olá, ${p.name}! Aqui é do Beach Tennis Club.`)}
 function renderPeopleList(){
   const el=$('people-list');if(!el)return;
   const q=peopleQ.trim().toLowerCase();
@@ -1148,8 +1150,8 @@ function renderPeopleList(){
     const isT=p.role==='professor';
     const ap=isT?(p.approval==='pendente'?'<span class="tag" style="background:#ffe9a8;color:#7a5200">Em análise</span>':p.approval==='recusado'?'<span class="tag" style="background:#ffe2da;color:#b3432a">Recusado</span>':''):'';
     const plan=isT?`<div class="person-plan"><select class="field" id="pl-${p.id}" aria-label="Plano"><option value="free"${p.plan!=='pro'?' selected':''}>Plano Free</option><option value="pro"${p.plan==='pro'?' selected':''}>Plano Pro</option></select><label><input type="checkbox" id="ft-${p.id}"${p.featured?' checked':''}> Destaque</label><button class="btn btn-soft" onclick="savePlanFor('${p.id}')">Salvar plano</button></div>`:'';
-    const act=`<div class="person-act">${isT?`<button class="btn btn-outline" onclick="changeRole('${p.id}','jogador')">Tornar aluno</button>`:`<button class="btn btn-outline" onclick="changeRole('${p.id}','professor')">Tornar professor</button>`}<button class="btn btn-outline" style="border-color:#d9534f;color:#b3261e" onclick="deletePerson('${p.id}')">Excluir</button></div>`;
-    return `<div class="person-row"><div class="person-avatar" style="background:${colorOf(p.name)};width:44px;height:44px;border-radius:14px;font-size:15px">${escapeHtml(ini(p.name))}</div><div style="flex:1;min-width:170px"><strong>${escapeHtml(p.name)}</strong><div class="small">${isT?'Professor':'Aluno'} · ${escapeHtml(p.city||'—')} · ${p.rank||0} pts ${ap}</div></div>${plan}${act}</div>`;
+    const act=`<div class="person-act">${isT?`<button class="btn btn-outline" onclick="changeRole('${p.id}','jogador')">Tornar aluno</button>`:`<button class="btn btn-outline" onclick="changeRole('${p.id}','professor')">Tornar professor</button>`}${p.contact?`<button class="btn btn-soft" onclick="waPerson('${p.id}')">WhatsApp ↗</button>`:''}<button class="btn btn-outline" style="border-color:#d9534f;color:#b3261e" onclick="deletePerson('${p.id}')">Excluir</button></div>`;
+    return `<div class="person-row"><div class="person-avatar" style="background:${colorOf(p.name)};width:44px;height:44px;border-radius:14px;font-size:15px">${escapeHtml(ini(p.name))}</div><div style="flex:1;min-width:170px"><strong>${escapeHtml(p.name)}</strong><div class="small">${isT?'Professor':'Aluno'} · ${escapeHtml(p.city||'—')} · ${p.rank||0} pts ${ap}</div><div class="small" style="margin-top:3px">${p.contact?('📱 <strong>'+fmtPhone(p.contact)+'</strong>'):'<span style="color:#b3261e">📱 sem WhatsApp cadastrado</span>'}</div></div>${plan}${act}</div>`;
   }).join('');
 }
 function savePlanFor(id){run(async()=>{const {error}=await sb.rpc('admin_set_plan',{p_id:id,p_plan:$('pl-'+id).value,p_featured:$('ft-'+id).checked});if(!fail(error))toast('Plano atualizado.')})}
