@@ -1452,6 +1452,7 @@ async function renderSettings(){
   const lv=['Iniciante','Intermediário','Avançado'].map(x=>`<option${(me.level||'Iniciante')===x?' selected':''}>${x}</option>`).join('');
   const ro=REMIND_OPTS.map(([v,l])=>`<option value="${v}"${v===myRemind?' selected':''}>${l}</option>`).join('');
   const wa=String(pr.contact||me.contact||'');
+  const demoSec=(me.is_admin&&eff()==='admin')?`<div class="set-sec"><h4>🧪 Dados de teste</h4><div class="small" style="margin-bottom:10px">Veja o app cheio: 30 alunos, 5 professores, jogos, ranking, torneios, quadras, pacotes e conversas. Os perfis fictícios não conseguem entrar no app.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="demoSeed()">🎲 Carregar base fictícia</button><button class="btn btn-outline" onclick="demoRemove()">Remover só a base fictícia</button></div><div class="small" style="margin:16px 0 8px;color:#b3261e"><b>Zona de perigo.</b> Apaga todos os alunos e professores e tudo ligado a eles (jogos, ranking, aulas, torneios, reservas e mensagens). Administradores ficam.</div><button class="btn btn-outline" style="border-color:#d9534f;color:#b3261e" onclick="demoWipe()">🧹 Limpar tudo e começar do zero</button></div>`:'';
   el.innerHTML=`
   <div class="set-sec" style="border-top:0;padding-top:0"><h4>👤 Meu perfil</h4>
     <div style="display:flex;gap:14px;align-items:center;margin-bottom:12px">${av}<div><label class="btn btn-soft" for="my-photo-file" style="cursor:pointer">📷 Trocar foto</label><input type="file" id="my-photo-file" accept="image/*" class="sr" onchange="uploadMyPhoto(this)"><div class="small" style="margin-top:6px">JPG ou PNG. Aparece no seu perfil.</div></div></div>
@@ -1471,6 +1472,7 @@ async function renderSettings(){
   <div class="set-sec"><h4>📲 Instalar o app no celular</h4>
     <div class="small" style="margin-bottom:10px">Veja o passo a passo para colocar o Beach Tennis Club na tela inicial (Android e iPhone).</div>
     <button class="btn btn-soft" onclick="openTutorial()">▶ Ver vídeo tutorial</button></div>
+  ${demoSec}
   <div class="set-sec"><h4>🔒 Conta</h4>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-outline" onclick="closeModal('settings-modal');$('reset-modal').classList.add('open')">Trocar senha</button><button class="btn btn-outline" onclick="closeModal('settings-modal');logout()">Sair da conta</button></div></div>`;
   const c=el.querySelector('select[name=city]');if(c){const src=$('a-city');c.innerHTML=src?src.innerHTML:'';c.value=me.city||c.value}
@@ -1958,6 +1960,27 @@ async function cheerGame(id){
   const {data,error}=await sb.rpc('toggle_cheer',{p_game:id});
   if(fail(error))return;
   g.cheered=!!data;g.cheers=Math.max(0,(g.cheers||0)+(data?1:-1));renderFeed();
+}
+
+/* ===== DADOS DE TESTE (administrador) ===== */
+function demoErr(error){
+  if(!error)return false;
+  if(/schema cache|could not find|PGRST202|function .* does not exist/i.test(error.message||'')){toast('Falta rodar o SQL da base fictícia no Supabase.');return true}
+  return fail(error);
+}
+async function demoSeed(){
+  if(!confirm('Carregar a base fictícia? Serão criados 30 alunos, 5 professores, jogos, torneios, arenas, pacotes e conversas de exemplo.'))return;
+  await run(async()=>{const {data,error}=await sb.rpc('admin_seed_demo');if(!demoErr(error)){closeModal('settings-modal');toast('Base fictícia carregada: '+(data.alunos||30)+' alunos, '+(data.professores||5)+' professores, '+(data.jogos||0)+' jogos e '+(data.torneios||3)+' torneios.')}});
+}
+async function demoRemove(){
+  if(!confirm('Remover só a base fictícia? Os cadastros reais ficam.'))return;
+  await run(async()=>{const {data,error}=await sb.rpc('admin_remove_demo');if(!demoErr(error)){closeModal('settings-modal');toast('Base fictícia removida ('+(data.pessoas||0)+' perfis).')}});
+}
+async function demoWipe(){
+  const t=prompt('ATENÇÃO: isso apaga TODOS os alunos e professores e tudo ligado a eles (jogos, ranking, aulas, torneios, reservas e mensagens). Não dá para desfazer.\n\nPara confirmar, digite LIMPAR:');
+  if(t===null)return;
+  if(String(t).trim()!=='LIMPAR'){toast('Cancelado: a palavra não confere.');return}
+  await run(async()=>{const {data,error}=await sb.rpc('admin_wipe_all',{p_confirm:'LIMPAR'});if(!demoErr(error)){closeModal('settings-modal');toast('Tudo limpo. Começando do zero ('+(data.pessoas||0)+' perfis removidos).')}});
 }
 
 /* ===== FORMULÁRIOS ===== */
