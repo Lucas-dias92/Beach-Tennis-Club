@@ -258,6 +258,10 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .cheer{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:8px 14px;font:700 14px Inter,sans-serif;cursor:pointer;color:var(--navy)}
 .cheer.on{background:#fff3cf;border-color:#f1d98b;color:#7a5200}
 @media(max-width:760px){.pkg-form{grid-template-columns:1fr 1fr!important}.pkg-form .form-group:first-child{grid-column:1/-1}.pkg-form button{grid-column:1/-1}}
+.teacher-card .card-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.teacher-card .card-actions .btn{width:100%;min-width:0;white-space:normal;text-align:center}
+.teacher-card .card-actions .btn:first-child{grid-column:1/-1}
+.teacher-card .card-actions .btn:nth-child(2):last-child{grid-column:1/-1}
 /* ===== AJUSTES PARA CELULAR ===== */
 .dashboard>*,.panel,.cards>*,.page{min-width:0}
 @media(max-width:960px){.dashboard{grid-template-columns:minmax(0,1fr)}}
@@ -430,13 +434,15 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .navlinks button.pl-green{--pc:34,197,94}
 .navlinks button.pl-yellow{--pc:245,184,0}
 .navlinks button.pl-red{--pc:239,68,68}
-.navlinks button.pl-green,.navlinks button.pl-yellow,.navlinks button.pl-red{animation:plpulse 1.2s ease-in-out infinite;background:rgba(var(--pc),.18);color:var(--navy)}
-.navlinks button.pl-green:after,.navlinks button.pl-yellow:after,.navlinks button.pl-red:after{content:"";position:absolute;top:5px;right:5px;width:9px;height:9px;border-radius:50%;background:rgb(var(--pc));box-shadow:0 0 0 2px #fff}
+.navlinks button.pl-blue{--pc:37,99,235}
+.navlinks button.pl-orange{--pc:249,115,22}
+.navlinks button.pl-green,.navlinks button.pl-yellow,.navlinks button.pl-red,.navlinks button.pl-blue,.navlinks button.pl-orange{animation:plpulse 2.6s ease-in-out infinite;background:rgba(var(--pc),.18);color:var(--navy)}
+.navlinks button.pl-green:after,.navlinks button.pl-yellow:after,.navlinks button.pl-red:after,.navlinks button.pl-blue:after,.navlinks button.pl-orange:after{content:"";position:absolute;top:5px;right:5px;width:9px;height:9px;border-radius:50%;background:rgb(var(--pc));box-shadow:0 0 0 2px #fff}
 @keyframes plpulse{0%,100%{box-shadow:0 0 0 0 rgba(var(--pc),.55);background:rgba(var(--pc),.16)}50%{box-shadow:0 0 0 8px rgba(var(--pc),0);background:rgba(var(--pc),.38)}}
-@media(prefers-reduced-motion:reduce){.navlinks button.pl-green,.navlinks button.pl-yellow,.navlinks button.pl-red{animation:none}}
+@media(prefers-reduced-motion:reduce){.navlinks button.pl-green,.navlinks button.pl-yellow,.navlinks button.pl-red,.navlinks button.pl-blue,.navlinks button.pl-orange{animation:none}}
 .bell{position:relative}
 .cbadge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:#ef4444;color:#fff;font:700 11px/18px Inter,sans-serif;text-align:center;box-shadow:0 0 0 2px #fff}
-#gear-btn.needs:after{content:"";position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;background:#ef4444;box-shadow:0 0 0 2px #fff;animation:plpulse 1.2s infinite;--pc:239,68,68}
+#gear-btn.needs:after{content:"";position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;background:#ef4444;box-shadow:0 0 0 2px #fff;animation:plpulse 2.6s infinite;--pc:239,68,68}
 .set-sec{border-top:1px solid var(--line);padding:16px 0}
 .set-sec h4{margin:0 0 8px;font-size:15px;color:var(--navy)}
 #chat-dock{position:fixed;right:18px;bottom:18px;width:340px;max-width:calc(100vw - 24px);height:480px;max-height:calc(100vh - 110px);background:#fff;border-radius:18px;box-shadow:var(--shadow-lg);border:1px solid var(--line);display:none;flex-direction:column;z-index:25;overflow:hidden}
@@ -570,7 +576,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 #tutorial-modal .tut-video{max-height:70vh;margin:0 auto;display:block}
 @media(max-width:760px){.tutorial{grid-template-columns:1fr;padding:18px}.tut-video{max-width:300px}}.bell{font-size:14px;line-height:1}
 /* retângulo neon: pedidos esperando aceite */
-.neon-box{position:relative;border:2.5px solid #39ff14;border-radius:18px;padding:14px;margin:0 0 16px;background:#f4fff1;box-shadow:0 0 10px #39ff14,0 0 26px #39ff1488;animation:neonblink 1.15s ease-in-out infinite}
+.neon-box{position:relative;border:2.5px solid #39ff14;border-radius:18px;padding:14px;margin:0 0 16px;background:#f4fff1;box-shadow:0 0 10px #39ff14,0 0 26px #39ff1488;animation:neonblink 2.4s ease-in-out infinite}
 .neon-box .req{background:#fff;border-color:#bff5b0;border-left-color:#39ff14}
 @keyframes neonblink{0%,100%{box-shadow:0 0 6px #39ff1488,0 0 14px #39ff1455;border-color:#7dff62}50%{box-shadow:0 0 16px #39ff14,0 0 42px #39ff14aa;border-color:#39ff14}}
 .pushbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:#eef7ff;border:1px solid #c5def5;border-radius:16px;padding:10px 14px;margin:0 0 16px;font-size:13px;color:#1f5a8a;font-weight:600}
@@ -1423,14 +1429,28 @@ function deletePerson(id){
   run(async()=>{const {error}=await sb.rpc('admin_delete_user',{p_id:id});if(!fail(error))toast(p.name+' foi excluído.')});
 }
 
-/* ===== PISCA NA NAVEGAÇÃO: membros (verde), jogos (amarelo), torneios (vermelho) ===== */
+/* ===== PISCA NA NAVEGAÇÃO: membros (verde), jogos (azul/laranja/vermelho), torneios (vermelho) ===== */
 function gdt(g){return new Date(g.day+'T'+String(g.time||'00:00').slice(0,5)+':00')}
 function renderPulses(){
   const me=S.me,now=new Date(),today=new Date();today.setHours(0,0,0,0);
-  const set=(p,c)=>{const b=document.querySelector('.navlinks button[data-page="'+p+'"]');if(!b)return;b.classList.remove('pl-green','pl-yellow','pl-red');if(c)b.classList.add(c)};
+  const set=(p,c)=>{const b=document.querySelector('.navlinks button[data-page="'+p+'"]');if(!b)return;b.classList.remove('pl-green','pl-yellow','pl-red','pl-blue','pl-orange');if(c)b.classList.add(c)};
   const openInv=me?(S.invites||[]).some(i=>i.status==='open'&&i.owner!==me.id&&new Date(i.day+'T00:00:00')>=today):((S.stats&&S.stats.open)||0)>0;
   set('membros',openInv?'pl-green':'');
-  set('jogos',me&&(S.games||[]).some(g=>!g.done&&(g.a===me.id||g.b===me.id)&&gdt(g)>=new Date(now-2*3600e3))?'pl-yellow':'');
+  /* Meus jogos: azul = há convite/resultado esperando você; laranja = jogo confirmado em menos de 2 h;
+     vermelho = jogo (ou convite ainda sem resposta) começando em menos de 1 h. Vermelho > laranja > azul. */
+  let lvl='';
+  if(me){
+    const mins=d=>(d-now)/60000,soon=(m,h)=>m>=-60&&m<=h*60;
+    const mine=(S.games||[]).filter(g=>!g.done&&(g.a===me.id||g.b===me.id));
+    const gm=mine.map(g=>mins(gdt(g)));
+    const inc=(S.incoming||[]).filter(r=>r.invite);
+    const im=inc.map(r=>mins(gdt(r.invite)));
+    const toConfirm=mine.some(g=>g.winner&&g.reported_by&&g.reported_by!==me.id);
+    if(gm.some(m=>soon(m,1))||im.some(m=>soon(m,1)))lvl='pl-red';
+    else if(gm.some(m=>soon(m,2)))lvl='pl-orange';
+    else if(inc.length||toConfirm)lvl='pl-blue';
+  }
+  set('jogos',lvl);
   const tOpen=(S.tournaments||[]).some(t=>t.status==='aberto'&&t.max_players-tEntries(t.id).length>0&&!(me&&tEntries(t.id).some(e=>e.player_id===me.id)));
   set('torneios',tOpen?'pl-red':'');
   const g=$('gear-btn');if(g)g.classList.toggle('needs',!!me&&!('Notification' in window&&Notification.permission==='granted'));
