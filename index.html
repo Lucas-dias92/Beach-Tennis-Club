@@ -1070,7 +1070,8 @@ function money(v){return 'R$ '+Number(v).toLocaleString('pt-BR')}
 function toISO(v){const m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v||'');if(!m)return '';const d=new Date(`${m[3]}-${m[2]}-${m[1]}T12:00:00`);return d.getDate()==+m[1]&&d.getMonth()+1==+m[2]?`${m[3]}-${m[2]}-${m[1]}`:''}
 const prof=id=>S.profiles.find(p=>p.id===id)||{name:'Jogador',rank:0,city:'',level:'Iniciante'};
 const teachersList=()=>S.profiles.filter(p=>(p.role==='professor'&&p.approval==='aprovado')||(p.is_admin&&p.local)).sort((a,b)=>(b.featured?1:0)-(a.featured?1:0));
-function fail(error){if(error){toast(error.message||String(error));return true}return false}
+function fail(error){if(error){const m=String(error.message||error);toast(/profiles_name_unique|duplicate key/i.test(m)&&/name/i.test(m)?'Já existe alguém com esse nome. Acrescente o sobrenome ou outro nome.':(error.message||m));return true}return false}
+async function nameFree(n,except){try{const {data,error}=await sb.rpc('name_available',{p_name:n,p_except:except||null});if(error)return true;return data!==false}catch(e){return true}}
 async function run(fn){if(busy)return;busy=true;try{await fn();await refresh()}catch(e){toast('Erro: '+(e.message||e))}busy=false;renderAll()}
 const lockCard=(msg)=>`<div class="empty"><b>🔒</b>${msg}<br><br><button class="btn btn-primary" onclick="openAuth('login')">Entrar / Cadastrar</button></div>`;
 
@@ -1149,6 +1150,7 @@ async function submitAuth(e){
   if(authMode==='signup'){
     const name=String(f.get('name')||'').trim(),contact=normPhone(f.get('contact')),pf=authRole==='professor';
     if(!name){err.textContent='Informe seu nome.';return}
+    if(!(await nameFree(name))){err.textContent='Já existe alguém com esse nome. Acrescente seu sobrenome ou outro nome para diferenciar.';return}
     if(!/\/[A-Za-z]{2}$/.test(String(f.get('city')||''))){err.textContent='Informe o estado e o município onde você joga.';return}
     if(!f.get('terms')){err.textContent='Para criar a conta, aceite os Termos de uso e a Política de Privacidade.';return}
     if(contact.length<10||contact.length>11){err.textContent='Informe seu WhatsApp com DDD (ex.: 12999999999).';return}
@@ -1845,6 +1847,7 @@ async function saveRemind(v){const n=parseInt(v,10);const {error}=await sb.rpc('
 async function saveSettingsProfile(e){
   e.preventDefault();const f=new FormData(e.target),name=String(f.get('name')).trim(),ct=String(f.get('contact')||'').replace(/\D/g,'');
   if(name.length<2){toast('Informe seu nome.');return}
+  if(!(await nameFree(name,S.me.id))){toast('Já existe alguém com esse nome. Acrescente o sobrenome.');return}
   if(ct&&!/^\d{10,11}$/.test(ct)){toast('WhatsApp com DDD: 10 ou 11 números.');return}
   const upd={name,city:f.get('city')||null,level:f.get('level')};if(ct)upd.contact=ct;
   await run(async()=>{const {error}=await sb.from('profiles').update(upd).eq('id',S.me.id);if(!fail(error))toast('Dados atualizados!')});
@@ -2459,6 +2462,7 @@ $('teacher-form').addEventListener('submit',e=>{e.preventDefault();
   if(eff()!=='admin'){toast('Só o administrador cadastra professores.');return}
   const f=new FormData(e.target),num=k=>{const v=String(f.get(k)||'').trim();return v===''?null:Number(v)},file=$('t-photo').files[0];
   run(async()=>{
+    if(!(await nameFree(String(f.get('name')).trim()))){toast('Já existe alguém com esse nome. Acrescente o sobrenome.');return}
     const {data,error}=await sb.rpc('admin_create_teacher',{p_name:String(f.get('name')).trim(),p_city:f.get('city'),p_local:String(f.get('arena')).trim(),p_contact:String(f.get('contact')).replace(/\D/g,''),p_bio:String(f.get('bio')||'').trim(),p_i30:num('i30'),p_i60:num('i60'),p_g30:num('g30'),p_g60:num('g60')});
     if(fail(error))return;
     if(file){try{await putPhoto(data,file)}catch(err){toast('Professor cadastrado, mas a foto falhou: '+err.message)}}
@@ -2520,7 +2524,7 @@ const HELP={
     intro:'Este app serve para você encontrar gente para jogar tênis perto de você, marcar a partida, registrar o resultado e acompanhar o seu ranking. É grátis e funciona no celular.',
     flow:[['📝','Crie sua conta','Informe nome, estado, município e nível. Assim as listas já mostram a sua cidade.'],['🎾','Marque um jogo','Em Membros, publique que quer jogar ou convide alguém para formar a dupla.'],['🏆','Jogue e registre','Depois da partida, informe o placar. O adversário confirma e o ranking atualiza.']],
     mock:[['btn-primary','Quero jogar agora','Leva para a lista de quem procura partida.'],['btn-outline','Ver jogadores','Mostra quem está na sua cidade.']],
-    rules:['Seus dados (cidade, nível e WhatsApp) ficam no seu perfil, na engrenagem ⚙️.','Para receber avisos de convite e resultado, ative os avisos nas configurações.','No iPhone, instale o app na tela inicial para os avisos funcionarem.']},
+    rules:['Seus dados (cidade, nível e WhatsApp) ficam no seu perfil, na engrenagem ⚙️.','Cada nome é único no app. Se o seu já existir, acrescente o sobrenome.','Para receber avisos de convite e resultado, ative os avisos nas configurações.','No iPhone, instale o app na tela inicial para os avisos funcionarem.']},
   membros:{t:'Membros: quem quer jogar',
     intro:'Aqui estão os jogadores da sua cidade que querem partida. Você pode convidar alguém ou publicar o seu próprio horário.',
     flow:[['👀','Encontre alguém','Use os filtros de nível, formato e cidade. Toque em Ver perfil para conhecer a pessoa.'],['📨','Envie o convite','Toque em Convidar para jogar. A pessoa recebe um aviso.'],['✅','Aguarde a resposta','Quando ela aceitar, o jogo aparece em Meus jogos.']],
