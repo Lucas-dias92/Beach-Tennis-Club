@@ -305,6 +305,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .rk-delta{font:800 15px var(--display);padding:3px 10px;border-radius:99px}
 .rk-delta.up{background:#e0f7ec;color:#14805a}.rk-delta.down{background:#fde8e6;color:#b3261e}
 .rk-why{color:var(--muted)}
+.feed-nm{background:none;border:0;padding:0;font:inherit;font-weight:700;color:inherit;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}.feed-nm:hover{color:var(--green,#14805a)}.feed-line span{font-weight:700}
 /* ===== AJUSTES PARA CELULAR ===== */
 .dashboard>*,.panel,.cards>*,.page{min-width:0}
 @media(max-width:960px){.dashboard{grid-template-columns:minmax(0,1fr)}}
@@ -2568,8 +2569,11 @@ function renderFeed(){
   if(X.feedErr){el.innerHTML=tabs+'<div class="empty"><b>📰</b>O feed ainda não foi ativado no banco de dados.</div>';return}
   if(!X.feed.length){el.innerHTML=tabs+`<div class="empty"><b>📰</b>${X.feedMode==='following'?'Siga jogadores pelo perfil deles para ver os jogos aqui.':'Os resultados dos jogos aparecem aqui.'}</div>`;return}
   el.innerHTML=tabs+'<div class="feed-list">'+X.feed.map(g=>{
-    const w=prof(g.winner),l=prof(g.winner===g.a?g.b:g.a);
-    return `<div class="feed-item"><button class="feed-av" onclick="showPlayer('${g.winner}')">${rkAvatar(w,44)}</button><div style="flex:1;min-width:0"><div><b>${escapeHtml(w.name||'?')}</b> venceu <b>${escapeHtml(l.name||'?')}</b></div><div class="small">${fmtDate(g.day)} · ${g.ranked===false?'😎 Amistoso':'🏆 Vale ranking'}</div></div><button class="cheer${g.cheered?' on':''}" onclick="cheerGame('${g.id}')">👏 <span>${g.cheers||0}</span></button></div>`}).join('')+'</div>';
+    const wa=g.winner===g.a,w=prof(g.winner);
+    const side=(p1,p2,n2)=>{const nm=(id,txt)=>id?`<button class="feed-nm" onclick="showPlayer('${id}')">${escapeHtml(prof(id).name||'?')}</button>`:`<span>${escapeHtml(txt||'?')}</span>`;return p2||n2?nm(p1)+' e '+nm(p2,n2):nm(p1)};
+    const W=wa?side(g.a,g.a2,g.a2_name):side(g.b,g.b2,g.b2_name),L=wa?side(g.b,g.b2,g.b2_name):side(g.a,g.a2,g.a2_name);
+    const dupla=!!(g.a2||g.b2||g.a2_name||g.b2_name);
+    return `<div class="feed-item"><button class="feed-av" onclick="showPlayer('${g.winner}')">${rkAvatar(w,44)}</button><div style="flex:1;min-width:0"><div class="feed-line"><b>${W}</b> venceu <b>${L}</b></div><div class="small">${fmtDate(g.day)} · ${dupla?'👥 Duplas · ':''}${g.ranked===false?'😎 Amistoso':'🏆 Vale ranking'}${g.score?' · <span class="scoreline">'+escapeHtml(g.score)+'</span>':''}</div></div><button class="cheer${g.cheered?' on':''}" onclick="cheerGame('${g.id}')">👏 <span>${g.cheers||0}</span></button></div>`}).join('')+'</div>';
 }
 async function cheerGame(id){
   const g=X.feed.find(x=>x.id===id);if(!g||!S.me)return;
