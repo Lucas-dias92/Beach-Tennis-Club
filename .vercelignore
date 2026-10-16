@@ -1,9 +1,6 @@
+banco-de-dados/
+documentos/
+_arquivados/
 *.sql
 *.md
-index.backup-*.html
-index.original-demo.html
-abertura-*.html
-push-lesson.function*.ts
 *.py
-_arquivados/
-sql/

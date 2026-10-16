@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://beachtennisclub.vercel.app/sitemap.xml

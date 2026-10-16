@@ -1,0 +1,27 @@
+{
+  "headers": [
+    {
+      "source": "/assets/sw.js",
+      "headers": [
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/robots.txt",
+      "destination": "/assets/seo/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/assets/seo/sitemap.xml"
+    }
+  ]
+}
