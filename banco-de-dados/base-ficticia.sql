@@ -146,7 +146,7 @@ begin
   end loop;
 
   -- pontos de ranking a partir dos resultados
-  update public.profiles p set rank = coalesce((
+  update public.profiles p set rank = public._base_rating(p.level) + coalesce((
       select sum(case when g.winner = p.id then 25 else 5 end)::int from public.games g
        where g.done and coalesce(g.ranked, true) and (g.a = p.id or g.b = p.id)), 0)
    where p.id = any(students);
