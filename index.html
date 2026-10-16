@@ -1680,7 +1680,7 @@ function renderTournaments(){
 }
 function shareArena(id){
   const a=X.arenas.find(x=>x.id===id);if(!a)return;
-  shareText(`🏟️ Quadra de tênis: ${a.name}${a.city?' ('+a.city+')':''}. Veja horários e reserve pelo Beach Tennis Club: ${siteLink('quadra',a.id)}`);
+  shareText(`🏖️ Arena de beach tennis: ${a.name}${a.city?' ('+a.city+')':''}. Veja horários e reserve pelo Beach Tennis Club: ${siteLink('quadra',a.id)}`);
 }
 function shareTournament(id){
   const t=S.tournaments.find(x=>x.id===id);if(!t)return;
@@ -2628,7 +2628,7 @@ function partnerChip(row){
 /* ===== AJUDA EM CADA ABA ===== */
 const HELP={
   inicio:{t:'Bem-vindo ao Beach Tennis Club',
-    intro:'Este app serve para você encontrar gente para jogar tênis perto de você, marcar a partida, registrar o resultado e acompanhar o seu ranking. É grátis e funciona no celular.',
+    intro:'Este app serve para você encontrar gente para jogar beach tennis perto de você, marcar a partida, registrar o resultado e acompanhar o seu ranking. É grátis e funciona no celular.',
     flow:[['📝','Crie sua conta','Informe nome, estado, município e nível. Assim as listas já mostram a sua cidade.'],['🎾','Marque um jogo','Em Membros, publique que quer jogar ou convide alguém para formar a dupla.'],['🏆','Jogue e registre','Depois da partida, informe o placar. O adversário confirma e o ranking atualiza.']],
     mock:[['btn-primary','Quero jogar agora','Leva para a lista de quem procura partida.'],['btn-outline','Ver jogadores','Mostra quem está na sua cidade.']],
     rules:['Seus dados (cidade, nível e WhatsApp) ficam no seu perfil, na engrenagem ⚙️.','Cada nome é único no app. Se o seu já existir, acrescente o sobrenome.','Para receber avisos de convite e resultado, ative os avisos nas configurações.','No iPhone, instale o app na tela inicial para os avisos funcionarem.']},
