@@ -292,6 +292,19 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .pp-sel{display:flex;align-items:center;gap:10px;border:2px solid var(--teal);background:var(--aqua);border-radius:14px;padding:10px 12px}
 .pp-empty{font-size:13px;color:var(--muted);padding:6px 2px;line-height:1.5}
 .pp-guest{display:grid;gap:8px}
+.sc-ctl{display:grid;gap:4px;margin-bottom:12px}
+.rk-tabs{flex-wrap:wrap}
+.rk-filters{flex-wrap:wrap}
+.rk-mv{font:700 12px var(--body);min-width:34px;text-align:center;color:var(--muted)}
+.rk-mv.up{color:#14805a}.rk-mv.down{color:#b3261e}
+.rk-note{margin:14px 2px 0;line-height:1.5}
+.rk-duo{display:flex}.rk-duo>*+*{margin-left:-10px;border:2px solid var(--white);border-radius:50%}
+.rk-game{border:1px solid var(--line);background:var(--white);border-radius:14px;padding:12px 14px;margin-bottom:8px;display:grid;gap:4px}
+.rk-game.rev{opacity:.6}
+.rk-g-top{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.rk-delta{font:800 15px var(--display);padding:3px 10px;border-radius:99px}
+.rk-delta.up{background:#e0f7ec;color:#14805a}.rk-delta.down{background:#fde8e6;color:#b3261e}
+.rk-why{color:var(--muted)}
 /* ===== AJUSTES PARA CELULAR ===== */
 .dashboard>*,.panel,.cards>*,.page{min-width:0}
 @media(max-width:960px){.dashboard{grid-template-columns:minmax(0,1fr)}}
@@ -887,7 +900,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <svg class="ball" viewBox="0 0 100 100"><defs><radialGradient id="bl" cx=".35" cy=".3"><stop stop-color="#fff9c8"/><stop offset=".6" stop-color="#ffe14d"/><stop offset="1" stop-color="#f2b600"/></radialGradient></defs><circle cx="50" cy="50" r="46" fill="url(#bl)"/><path d="M8 36c28 14 56 14 84 0M8 64c28-14 56-14 84 0" stroke="#fff" stroke-width="4" fill="none" opacity=".9"/></svg></div>
 </div>
 <div class="waves"><svg viewBox="0 0 1440 84" preserveAspectRatio="none"><path fill="#f6fbf8" d="M0 44c120 30 240 30 360 0s240-30 360 0 240 30 360 0 240-30 360 0v40H0z"/><path fill="#f6fbf8" opacity=".5" d="M0 58c120 20 240 20 360 0s240-20 360 0 240 20 360 0 240-20 360 0v26H0z"/></svg></div></div>
-<div class="stats"><div class="stat"><div class="stat-icon">🎾</div><div><strong id="stat-members">0</strong><span>Jogadores na comunidade</span></div></div><div class="stat go" role="link" tabindex="0" aria-label="Ver quem quer jogar agora" onclick="goPage('membros')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goPage('membros')}"><div class="stat-icon">📍</div><div><strong id="stat-open">0</strong><span>Querem jogar agora</span></div></div><div class="stat"><div class="stat-icon">🏆</div><div><strong id="stat-rank">—</strong><span>Seu ranking atual</span></div></div></div>
+<div class="stats"><div class="stat"><div class="stat-icon">🏖</div><div><strong id="stat-members">0</strong><span>Jogadores na comunidade</span></div></div><div class="stat go" role="link" tabindex="0" aria-label="Ver quem quer jogar agora" onclick="goPage('membros')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goPage('membros')}"><div class="stat-icon">📍</div><div><strong id="stat-open">0</strong><span>Querem jogar agora</span></div></div><div class="stat"><div class="stat-icon">🏆</div><div><strong id="stat-rank">—</strong><span>Seu ranking atual</span></div></div></div>
 
 <div class="section-head reveal"><div><span class="kicker">Como funciona</span><h2>Da areia ao jogo em 3 passos</h2><p>Simples, rápido e feito para quem quer jogar mais.</p></div></div>
 <div class="steps reveal"><div class="step"><div class="ic">📝</div><h3>Publique sua vontade</h3><p>Diga dia, horário, arena e nível. Quem estiver por perto vê na hora.</p></div><div class="step"><div class="ic">🤝</div><h3>Combine com a dupla</h3><p>Envie e receba convites. Aceite o que combina com a sua agenda.</p></div><div class="step"><div class="ic">🏆</div><h3>Jogue e suba no ranking</h3><p>Cada partida conta pontos. Evolua e desafie jogadores de nível maior.</p></div></div>
@@ -898,7 +911,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="cta reveal"><h2>A areia está te esperando.</h2><p>Publique sua disponibilidade em menos de um minuto e receba convites de quem joga perto de você.</p><button class="btn btn-lg btn-white" onclick="openModal('invite-modal')">+ Quero jogar</button></div>
 </section>
 <section id="page-membros" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Comunidade</span><h2>Comunidade de jogadores</h2><p>Descubra quem quer jogar, confira o ranking e envie um convite.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-soft" onclick="shareGroup()">📲 Chamar meu grupo</button><button class="btn btn-primary" onclick="openModal('invite-modal')">+ Publicar que quero jogar</button></div></div><div class="filters"><input id="member-search" class="field search" placeholder="🔍  Buscar por nome ou cidade..." aria-label="Buscar jogador"/><select id="member-location" class="field" aria-label="Cidade"><option value="">Todas as cidades</option></select><select id="member-level" class="field" aria-label="Nível"><option value="">Todos os níveis</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select><select id="member-format" class="field" aria-label="Formato"><option value="">Todos os formatos</option><option value="simples">Simples (2)</option><option value="quarteto">4 pessoas diferentes</option><option value="duplas">2 duplas de 2</option></select><select id="member-sort" class="field" aria-label="Ordenar"><option value="recent">Mais recentes</option><option value="rank">Maior ranking</option></select></div><div class="cards" id="all-members"></div></section>
-<section id="page-ranking" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Classificação</span><h2>Ranking</h2><p>Quem está dominando a areia. Jogue partidas que valem ranking e suba na tabela.</p></div></div><div class="tabs-sm" id="rk-tabs"><button class="on" data-t="rank" onclick="setRkTab('rank')">🏆 Classificação</button><button data-t="feed" onclick="setRkTab('feed')">📰 Feed da comunidade</button></div><div class="rk-filters"><input class="field" id="rk-q" placeholder="Buscar jogador" aria-label="Buscar jogador"><select class="field" id="rk-city" aria-label="Cidade"><option value="">Todas as cidades</option></select><select class="field" id="rk-level" aria-label="Nível"><option value="">Todos os níveis</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div><div id="ranking-body"></div><div id="feed-body" style="display:none"></div></section>
+<section id="page-ranking" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Classificação</span><h2>Ranking</h2><p>Quem está dominando a areia. Jogue partidas que valem ranking e suba na tabela.</p></div></div><div class="tabs-sm rk-tabs" id="rk-tabs"><button class="on" data-t="rank" onclick="setRkTab('rank')">🏆 Individual</button><button data-t="duplas" onclick="setRkTab('duplas')">👥 Duplas</button><button data-t="pairs" onclick="setRkTab('pairs')">🤝 Duplas fixas</button><button data-t="mine" onclick="setRkTab('mine')">📋 Minhas partidas</button><button data-t="hist" onclick="setRkTab('hist')">📈 Meu histórico</button><button data-t="feed" onclick="setRkTab('feed')">📰 Feed</button></div><div class="rk-filters" id="rk-filters"><input class="field" id="rk-q" data-for="rank duplas pairs" placeholder="Buscar jogador" aria-label="Buscar jogador"><select class="field" id="rk-mod" data-for="duplas" aria-label="Modalidade de duplas"><option value="geral">Duplas: geral</option><option value="masc">Duplas masculinas</option><option value="fem">Duplas femininas</option><option value="mista">Duplas mistas</option></select><select class="field" id="rk-hmod" data-for="hist" aria-label="Modalidade"><option value="individual">Individual</option><option value="duplas">Duplas: geral</option><option value="duplas_masc">Duplas masculinas</option><option value="duplas_fem">Duplas femininas</option><option value="duplas_mista">Duplas mistas</option></select><select class="field" id="rk-city" data-for="rank duplas pairs" aria-label="Cidade"><option value="">Todas as cidades</option></select><select class="field" id="rk-level" data-for="rank duplas" aria-label="Categoria"><option value="">Todas as categorias</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select><select class="field" id="rk-days" data-for="rank duplas" aria-label="Período"><option value="">Todo o período</option><option value="30">Últimos 30 dias</option><option value="90">Últimos 90 dias</option><option value="365">Último ano</option></select></div><div id="ranking-body"></div><div id="feed-body" style="display:none"></div></section>
 <section id="page-quadras" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Reserve</span><h2>Quadras e arenas</h2><p>Escolha a arena, o dia e o horário. A reserva fica confirmada na hora.</p></div><button class="btn btn-primary" id="btn-new-arena" style="display:none" onclick="editArena(null)">+ Cadastrar arena</button></div><div class="panel" id="my-bookings" style="margin-bottom:18px;display:none"></div><div class="filters"><select id="arena-location" class="field" aria-label="Cidade"><option value="">Todas as cidades</option></select></div><div class="cards" id="arenas-list"></div></section>
 <section id="page-jogos" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Agenda</span><h2>Meus jogos</h2><p>Partidas confirmadas e convites que você recebeu.</p></div><button class="btn btn-primary" onclick="openModal('invite-modal')">+ Criar disponibilidade</button></div><div class="panel" style="margin-bottom:18px"><h3>🔔 Convites recebidos <span id="invite-count" class="tag">0 novos</span></h3><div id="received-invites"><div class="small">Você ainda não recebeu convites nesta demonstração.</div></div></div><div class="panel" style="margin-bottom:18px"><h3>🎓 Minhas aulas</h3><div id="my-lessons"></div></div><div class="panel" id="my-packages" style="margin-bottom:18px;display:none"></div><div class="panel" id="rank-chart-panel" style="margin-bottom:18px"></div><div class="section-head" style="margin-top:34px"><div><h2>Partidas combinadas</h2><p>Os jogos aceitos aparecem aqui para você se organizar.</p></div></div><div class="table-wrap"><table class="games-table"><thead><tr><th>Jogadores</th><th>Data e horário</th><th>Local</th><th>Ranking</th><th>Status</th></tr></thead><tbody id="games-table-body"><tr><td colspan="5" style="text-align:center;color:#688087;padding:30px">Nenhuma partida confirmada ainda. Convide alguém para começar!</td></tr></tbody></table></div></section>
 <section id="page-professores" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Aulas</span><h2>Aulas e professores</h2><p>Encontre um professor, conheça seu trabalho e combine uma aula.</p></div><button class="btn btn-outline" onclick="goPage('professor')">Sou professor →</button></div><div class="filters"><input id="teacher-search" class="field search" placeholder="🔍  Buscar professor ou cidade..." aria-label="Buscar professor"/><select id="teacher-location" class="field" aria-label="Cidade"><option value="">Todas as cidades</option></select></div><div class="cards" id="all-teachers"></div></section>
@@ -906,7 +919,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <section id="page-professor" class="page"><div class="section-head" style="margin-top:36px"><div><span class="kicker">Professores</span><h2>Área do professor</h2><p>Organize sua agenda e deixe seus alunos encontrarem você.</p></div><button class="btn btn-primary" id="btn-add-teacher" style="display:none" onclick="openModal('teacher-modal')">+ Cadastrar professor</button></div><div class="notice" id="area-notice"></div><div id="approvals"></div><div id="push-box"></div><div class="dashboard"><div class="panel"><h3>📅 Agenda de aulas</h3><div id="admin-picker"></div><div id="teacher-agenda"></div><button class="btn btn-soft" style="margin-top:14px" onclick="openModal('lesson-modal')">+ Adicionar aula à agenda</button></div><div class="panel"><h3>👤 Perfil público do professor</h3><div id="profile-panel-body"><div class="photo-row"><div id="photo-preview"></div><div><label class="btn btn-soft" for="photo-file" style="cursor:pointer">📷 Escolher foto</label><input type="file" id="photo-file" accept="image/*" class="sr" onchange="uploadPhoto(this)"><div class="small" style="margin-top:6px">JPG ou PNG. A foto aparece no card do professor.</div></div></div><div class="small" id="profile-lock" style="display:none;margin:0 0 14px;background:#fff6e2;border:1px solid #f6e2b3;border-radius:12px;padding:10px 12px;line-height:1.5">Os dados abaixo só podem ser alterados pelo administrador. Você pode trocar a sua foto e organizar a agenda.</div><div class="form-group"><label for="profile-name">Nome do professor</label><input class="field" id="profile-name" placeholder="Nome"/></div><div class="form-group"><label for="profile-city">Cidade onde dá aula</label><input class="field" id="profile-city" placeholder="Ex.: Caraguatatuba"/></div><div class="form-group"><label for="profile-arena">Local / arena</label><input class="field" id="profile-arena" placeholder="Nome da arena"/></div><div class="form-group"><label for="profile-contact">Contato (WhatsApp)</label><input class="field" id="profile-contact" placeholder="DDD + telefone"/></div><div class="small" style="font-weight:700;margin:4px 0 8px">Valores das aulas (R$)</div><div class="form-grid"><div class="form-group"><label for="profile-i30">Individual · 30 min</label><input class="field" id="profile-i30" type="number" min="0" placeholder="60"/></div><div class="form-group"><label for="profile-i60">Individual · 60 min</label><input class="field" id="profile-i60" type="number" min="0" placeholder="100"/></div><div class="form-group"><label for="profile-g30">Em grupo · 30 min</label><input class="field" id="profile-g30" type="number" min="0" placeholder="40"/></div><div class="form-group"><label for="profile-g60">Em grupo · 60 min</label><input class="field" id="profile-g60" type="number" min="0" placeholder="70"/></div></div><div class="form-group"><label for="profile-bio">Sobre o professor</label><textarea class="field" id="profile-bio" rows="3" placeholder="Experiência, especialidades, público..."></textarea></div><button class="btn btn-primary" id="profile-save" style="width:100%" onclick="saveTeacherProfile()">Salvar dados do professor</button><p class="small" style="line-height:1.6">O perfil aparece para todos na aba Aulas e professores.</p><div id="admin-tools"></div></div></div></div><div class="panel earn" id="earnings" style="margin-top:18px;display:none"></div><div class="panel" id="pro-panel" style="margin-top:18px;display:none"></div><div class="panel" id="pkg-panel" style="margin-top:18px;display:none"></div><div class="panel" id="admin-people" style="margin-top:18px;display:none"></div></section>
 </main>
 <footer class="footer"><div class="shell"><div class="foot-grid"><div><div class="brand"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M3 9c6 3 12 3 18 0M3 15c6-3 12-3 18 0"/></svg></div><span>BEACH TENNIS <em>CLUB</em></span></div><p>Feito para quem ama jogar na areia. Conecte-se, jogue e evolua com a comunidade.</p></div><div class="foot-links"><button onclick="goPage('inicio')">Início</button><button onclick="goPage('membros')">Membros</button><button onclick="goPage('jogos')">Meus jogos</button><button onclick="goPage('professores')">Professores</button><button onclick="goPage('torneios')">Torneios</button><button onclick="openTutorial()">📲 Instalar no celular</button></div></div><div class="copy"><span>Conecte. Jogue. Evolua.</span><span class="legal"><a href="paginas/termos.html">Termos de uso</a> · <a href="paginas/privacidade.html">Privacidade</a></span><span>🏖 Litoral Norte · SP</span></div></div></footer>
-<div class="modal-backdrop" id="invite-modal"><div class="modal"><div class="modal-head"><h3>Quero jogar 🎾</h3><button class="close" onclick="closeModal('invite-modal')">×</button></div><p class="small" style="line-height:1.6;margin-top:-8px">Publique sua disponibilidade para outros membros enviarem convites.</p><form id="invite-form"><div class="form-grid"><div class="form-group"><label>Dia</label><input class="field" name="date" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" autocomplete="off" required></div><div class="form-group"><label>Horário</label><input class="field" name="time" type="time" required></div><div class="form-group full"><label>Formato do jogo</label><div class="formats"><label class="fmt"><input type="radio" name="format" value="simples"><span><b>🎾 Simples</b><small>1 contra 1 · 2 pessoas</small></span></label><label class="fmt"><input type="radio" name="format" value="quarteto" checked><span><b>👥 4 pessoas diferentes</b><small>Procuro jogadores para formar o jogo</small></span></label><label class="fmt"><input type="radio" name="format" value="duplas"><span><b>🤝 2 duplas de 2</b><small>Já tenho dupla e procuro outra</small></span></label></div></div><div class="form-group full hidden" id="inv-partner"><label>Seu parceiro(a) da dupla</label><div id="inv-pp"></div></div>
+<div class="modal-backdrop" id="invite-modal"><div class="modal"><div class="modal-head"><h3>Quero jogar 🏖</h3><button class="close" onclick="closeModal('invite-modal')">×</button></div><p class="small" style="line-height:1.6;margin-top:-8px">Publique sua disponibilidade para outros membros enviarem convites.</p><form id="invite-form"><div class="form-grid"><div class="form-group"><label>Dia</label><input class="field" name="date" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" autocomplete="off" required></div><div class="form-group"><label>Horário</label><input class="field" name="time" type="time" required></div><div class="form-group full"><label>Formato do jogo</label><div class="formats"><label class="fmt"><input type="radio" name="format" value="simples"><span><b>🏖 Simples</b><small>1 contra 1 · 2 pessoas</small></span></label><label class="fmt"><input type="radio" name="format" value="quarteto" checked><span><b>👥 4 pessoas diferentes</b><small>Procuro jogadores para formar o jogo</small></span></label><label class="fmt"><input type="radio" name="format" value="duplas"><span><b>🤝 2 duplas de 2</b><small>Já tenho dupla e procuro outra</small></span></label></div></div><div class="form-group full hidden" id="inv-partner"><label>Seu parceiro(a) da dupla</label><div id="inv-pp"></div></div>
 <div class="form-group full"><label>Esse jogo vale ranking?</label><div class="formats"><label class="fmt"><input type="radio" name="ranked" value="true" checked><span><b>🏆 Vale ranking</b><small>O resultado conta pontos para os dois jogadores</small></span></label><label class="fmt"><input type="radio" name="ranked" value="false"><span><b>😎 Amistoso</b><small>Só por diversão: não muda o ranking</small></span></label></div></div><div class="form-group full"><label>Local / arena</label><input class="field" name="place" placeholder="Ex.: Arena da Praia" required></div><div class="form-group"><label>Cidade</label><select class="field" name="city"><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="form-group"><label>Nível desejado</label><select class="field" name="level"><option>Qualquer nível</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div><div class="form-group full"><label>Observação (opcional)</label><input class="field" name="note" placeholder="Ex.: jogo leve, dupla ou treino..."/></div></div><button class="btn btn-primary" style="width:100%">Publicar disponibilidade</button></form></div></div>
 <div class="modal-backdrop" id="teacher-modal"><div class="modal"><div class="modal-head"><h3>Cadastrar professor</h3><button class="close" onclick="closeModal('teacher-modal')" aria-label="Fechar">×</button></div><form id="teacher-form"><div class="form-group"><label>Nome completo</label><input class="field" name="name" required></div><div class="form-grid"><div class="form-group"><label>Cidade</label><select class="field" name="city"><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div><div class="form-group"><label>WhatsApp (com DDD)</label><input class="field" name="contact" placeholder="12999999999" required></div><div class="form-group full"><label>Arena / local das aulas</label><input class="field" name="arena" required></div><div class="form-group"><label>Individual · 30 min (R$)</label><input class="field" name="i30" type="number" min="0" placeholder="60"></div><div class="form-group"><label>Individual · 60 min (R$)</label><input class="field" name="i60" type="number" min="0" placeholder="100"></div><div class="form-group"><label>Em grupo · 30 min (R$)</label><input class="field" name="g30" type="number" min="0" placeholder="40"></div><div class="form-group"><label>Em grupo · 60 min (R$)</label><input class="field" name="g60" type="number" min="0" placeholder="70"></div><div class="form-group full"><label>Sobre o professor</label><textarea class="field" name="bio" rows="3" placeholder="Experiência, especialidades, público..."></textarea></div><div class="form-group full"><label for="t-photo">Foto (opcional)</label><input class="field" id="t-photo" type="file" accept="image/*"></div></div><button class="btn btn-primary" style="width:100%">Cadastrar professor</button></form></div></div>
 <div class="modal-backdrop" id="auth-modal"><div class="modal"><div class="modal-head"><h3 id="auth-title">Entrar</h3><button class="close" onclick="closeModal('auth-modal')" aria-label="Fechar">×</button></div>
@@ -915,10 +928,11 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="form-group f-signup hidden"><label for="a-name">Nome completo</label><input class="field" id="a-name" name="name" autocomplete="name"></div>
 <div class="form-group"><label for="a-email">E-mail</label><input class="field" id="a-email" name="email" type="email" required autocomplete="email"></div>
 <div class="form-group"><label for="a-pass">Senha</label><input class="field" id="a-pass" name="password" type="password" required minlength="6" autocomplete="current-password"></div>
-<div class="form-group" id="role-login-hide"><label>Eu sou</label><div style="display:flex;gap:8px"><button type="button" class="btn btn-soft" id="role-player" onclick="setAuthRole('jogador')" style="flex:1">🎾 Jogador</button><button type="button" class="btn btn-outline" id="role-teacher" onclick="setAuthRole('professor')" style="flex:1">👨‍🏫 Professor</button></div></div>
+<div class="form-group" id="role-login-hide"><label>Eu sou</label><div style="display:flex;gap:8px"><button type="button" class="btn btn-soft" id="role-player" onclick="setAuthRole('jogador')" style="flex:1">🏖 Jogador</button><button type="button" class="btn btn-outline" id="role-teacher" onclick="setAuthRole('professor')" style="flex:1">👨‍🏫 Professor</button></div></div>
 <div class="form-grid">
 <div class="form-group f-signup hidden"><label for="a-city">Estado e município</label><select class="field" id="a-city" name="city"><option>Caraguatatuba</option><option>São Sebastião</option><option>Ubatuba</option><option>São Paulo</option></select></div>
 <div class="form-group f-player hidden"><label for="a-level">Seu nível</label><select class="field" id="a-level" name="level"><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div>
+<div class="form-group f-player hidden"><label for="a-gender">Gênero (opcional)</label><select class="field" id="a-gender" name="gender"><option value="">Prefiro não informar</option><option value="M">Masculino</option><option value="F">Feminino</option></select><div class="small" style="margin-top:4px;line-height:1.4">Usado só para separar o ranking de duplas masculinas, femininas e mistas.</div></div>
 <div class="form-group full f-signup hidden terms-box"><label class="terms-line"><input type="checkbox" id="a-terms" name="terms" value="1"><span>Li e aceito os <a href="paginas/termos.html" target="_blank" rel="noopener">Termos de uso</a> e a <a href="paginas/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label></div>
 <div class="form-group full f-signup hidden"><label for="a-contact">WhatsApp (com DDD)</label><input class="field" id="a-contact" name="contact" inputmode="tel" placeholder="12999999999" autocomplete="tel"></div>
 <div class="form-group full f-teacher hidden"><label for="a-arena">Arena / local das aulas</label><input class="field" id="a-arena" name="arena"></div>
@@ -938,7 +952,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="modal-backdrop" id="book-court-modal"><div class="modal" style="max-width:640px"><div class="modal-head"><h3 id="book-court-title">Reservar quadra</h3><button class="close" onclick="closeModal('book-court-modal');BK=null" aria-label="Fechar">×</button></div><div id="book-court-body"></div></div></div>
 <div class="modal-backdrop" id="arena-bookings-modal"><div class="modal" style="max-width:560px"><div class="modal-head"><h3 id="arena-bookings-title">Reservas</h3><button class="close" onclick="closeModal('arena-bookings-modal')" aria-label="Fechar">×</button></div><div id="arena-bookings-body"></div></div></div>
 <div class="modal-backdrop" id="bracket-modal"><div class="modal modal-wide"><div class="modal-head"><h3 id="bracket-title">Chave</h3><button class="close" onclick="closeModal('bracket-modal')" aria-label="Fechar">×</button></div><div id="bracket-body"></div></div></div>
-<div class="modal-backdrop" id="score-modal"><div class="modal" style="max-width:460px"><div class="modal-head"><h3>Placar da partida</h3><button class="close" onclick="closeModal('score-modal');SC=null" aria-label="Fechar">×</button></div><div id="score-body"></div></div></div>
+<div class="modal-backdrop" id="score-modal" style="z-index:50"><div class="modal"><div class="modal-head"><h3 id="score-title">Placar da partida</h3><button class="close" onclick="closeModal('score-modal')" aria-label="Fechar">×</button></div><p class="small" id="score-sub" style="line-height:1.6;margin:-6px 0 12px"></p><div id="score-body"></div><div class="sc-foot"><div id="score-preview" class="sc-preview"></div><div class="sc-actions"><button class="btn btn-primary" onclick="saveScore()">Lançar resultado</button><button class="btn btn-outline" onclick="saveScore(true)">Sem placar</button></div></div></div></div>
 <div class="modal-backdrop" id="settings-modal"><div class="modal" style="max-width:520px"><div class="modal-head"><h3>⚙️ Configurações</h3><button class="close" onclick="closeModal('settings-modal')" aria-label="Fechar">×</button></div><div id="settings-body"></div></div></div>
 <button id="chat-fab" type="button" aria-label="Abrir o chat" title="Chat (arraste para mudar de lugar)"><svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M12 3.4c5 0 9 3 9 7s-4 7-9 7c-1 0-2-.1-2.9-.4L5 19.6l.9-3.5C4.1 14.8 3 12.8 3 10.4c0-4 4-7 9-7z" fill="#fff" stroke="#0b3b46" stroke-width="2" stroke-linejoin="round"/><circle cx="8.2" cy="10.4" r="1.3" fill="#0a8793"/><circle cx="12" cy="10.4" r="1.3" fill="#0a8793"/><circle cx="15.8" cy="10.4" r="1.3" fill="#0a8793"/></svg><span class="cbadge" id="chat-badge" style="display:none"></span></button><div id="chat-dock" role="dialog" aria-label="Chat"></div>
 <div class="modal-backdrop" id="tutorial-modal"><div class="modal" style="max-width:420px"><div class="modal-head"><h3>Como instalar na tela do celular</h3><button class="close" onclick="closeModal('tutorial-modal')" aria-label="Fechar">×</button></div><video id="tut-video" class="tut-video" controls playsinline preload="none" poster="assets/imagens/tutorial-poster.jpg" aria-label="Tutorial de instalação"><source src="assets/video/tutorial-instalar-app.mp4" type="video/mp4"></video><p class="small" style="margin:12px 0 0;line-height:1.5">Android: Chrome → 3 pontinhos → <strong>Instalar app</strong>. iPhone: Safari → <strong>Compartilhar</strong> → <strong>Adicionar à Tela de Início</strong>.</p></div></div>
@@ -966,7 +980,7 @@ const VAPID_PUBLIC='BOjTnSTagPCZbnuK2fdoQmdFstdZ-oNGnHXjcIo3ArDYH-ZwMHPzysPegtP9
 let earnPeriod='30d',earnFrom='',earnTo='',earnOn=new Set(['pix','dinheiro','cartao','outro','nao_informado','aguardando']);
 let viewStart=todayStart(),viewDays=8,viewMode='next7',viewTeacher=null,tAgenda=[],editingInvite=null,pendingSlot=null;
 let viewAs='admin';try{viewAs=localStorage.getItem('btc-view')||'admin'}catch(e){}
-const FM={simples:'🎾 Simples · 2',quarteto:'👥 4 pessoas',duplas:'🤝 2 duplas'};
+const FM={simples:'🏖 Simples · 2',quarteto:'👥 4 pessoas',duplas:'🤝 2 duplas'};
 const LV={'Iniciante':'lv-ini','Intermediário':'lv-int','Avançado':'lv-ava'};
 const COLORS=['#d8f4eb','#fbe4cf','#e7e4ff','#ffe6e1','#e3edff','#fff0c9'];
 const PRICE_KEYS=[['price_ind_30','Individual · 30 min'],['price_ind_60','Individual · 60 min'],['price_grp_30','Em grupo · 30 min'],['price_grp_60','Em grupo · 60 min']];
@@ -975,7 +989,7 @@ const PRICE_KEYS=[['price_ind_30','Individual · 30 min'],['price_ind_60','Indiv
 const $=id=>document.getElementById(id);
 function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function toast(s){$('toast').textContent=s;$('toast').classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>$('toast').classList.remove('show'),4200)}
-function inviteModalTitle(edit){document.querySelector('#invite-modal h3').textContent=edit?'Editar disponibilidade':'Quero jogar 🎾';document.querySelector('#invite-form .btn-primary').textContent=edit?'Salvar alterações':'Publicar disponibilidade'}
+function inviteModalTitle(edit){document.querySelector('#invite-modal h3').textContent=edit?'Editar disponibilidade':'Quero jogar 🏖';document.querySelector('#invite-form .btn-primary').textContent=edit?'Salvar alterações':'Publicar disponibilidade'}
 function openModal(id,keep){if(id==='invite-modal'&&!S.me){openAuth('login');toast('Entre para publicar que quer jogar.');return}if(id==='teacher-modal'&&eff()!=='admin'){toast('Só o administrador cadastra professores.');return}if(id==='invite-modal'&&!keep){editingInvite=null;inviteModalTitle(false);ppInit('inv-pp');invPartnerToggle();const ic=document.querySelector('#invite-form select[name=city]');if(ic&&ic._setCity&&userCity())ic._setCity(userCity())}$(id).classList.add('open')}
 function closeModal(id){$(id).classList.remove('open');if(id==='tutorial-modal'){const v=$('tut-video');if(v)v.pause()}}
 function openTutorial(){const hv=$('tut-video-home');if(hv)hv.pause();$('tutorial-modal').classList.add('open');const v=$('tut-video');if(v){v.currentTime=0;v.play().catch(()=>{})}}
@@ -1100,7 +1114,7 @@ async function refresh(){
   const st=await sb.rpc('public_stats');if(st.data)S.stats=st.data;
   const {data:{session}}=await sb.auth.getSession();
   if(session){await sb.rpc('finalize_expired');if(Date.now()-(window.__lastCleanup||0)>60000){window.__lastCleanup=Date.now();try{await sb.rpc('cleanup_expired')}catch(e){}}}
-  const pr=await sb.from('profiles').select('id,name,role,rank,local,bio,price,created_at,city,level,photo_url,price_ind_30,price_ind_60,price_grp_30,price_grp_60,is_admin,approval,plan,featured');S.profiles=pr.data||[];
+  const pr=await sb.from('profiles').select('id,name,role,rank,local,bio,price,created_at,city,level,photo_url,price_ind_30,price_ind_60,price_grp_30,price_grp_60,is_admin,approval,plan,featured,gender,category,best_pos');S.profiles=pr.data||[];
   try{const ct=await sb.rpc('get_contacts');const cm={};(ct.data||[]).forEach(r=>{cm[r.id]=r.contact});S.profiles.forEach(p=>{p.contact=cm[p.id]||null})}catch(e){}
   try{
     const [tr,en,st]=await Promise.all([sb.from('tournaments').select('*').order('day'),sb.from('tournament_entries').select('*'),sb.from('app_settings').select('*')]);
@@ -1167,6 +1181,7 @@ async function submitAuth(e){
     if(!f.get('terms')){err.textContent='Para criar a conta, aceite os Termos de uso e a Política de Privacidade.';return}
     if(contact.length<10||contact.length>11){err.textContent='Informe seu WhatsApp com DDD (ex.: 12999999999).';return}
     if(password.length<6){err.textContent='A senha precisa ter pelo menos 6 caracteres.';return}
+    try{if(f.get('gender'))localStorage.setItem('btc-gender',f.get('gender'))}catch(e){}
     const arena=String(f.get('arena')||'').trim();
     if(pf&&!arena){err.textContent='Professor: informe a arena onde dá aula.';return}
     const meta={name,role:authRole,city:f.get('city')||'',contact,level:pf?'':(f.get('level')||'Iniciante'),local:pf?arena:'',bio:pf?String(f.get('bio')||'').trim():'',price_ind_30:pf?String(f.get('p_i30')||''):'',price_ind_60:pf?String(f.get('p_i60')||''):'',price_grp_30:pf?String(f.get('p_g30')||''):'',price_grp_60:pf?String(f.get('p_g60')||''):''};
@@ -1213,7 +1228,7 @@ async function logout(){await sb.auth.signOut();S.me=null;await refresh();render
 function memberCard(i){
   const o=prof(i.owner),mine=S.me&&i.owner===S.me.id,sent=S.sent.some(s=>s.invite_id===i.id);
   const level=i.level||o.level||'Iniciante',city=i.city||o.city||'';
-  const btn=mine?'<button class="btn btn-soft" disabled>Seu convite</button>':sent?'<button class="btn btn-soft" disabled>✓ Convite enviado</button>':`<button class="btn btn-primary" onclick="sendInvite('${i.id}')">🎾 Convidar para jogar</button>`;
+  const btn=mine?'<button class="btn btn-soft" disabled>Seu convite</button>':sent?'<button class="btn btn-soft" disabled>✓ Convite enviado</button>':`<button class="btn btn-primary" onclick="sendInvite('${i.id}')">🏖 Convidar para jogar</button>`;
   return `<article class="card"><div class="member-top"><div class="person-avatar live" style="background:${colorOf(o.name)}">${escapeHtml(ini(o.name))}</div><div style="min-width:0"><div class="person-name">${escapeHtml(o.name)}</div><div class="small">📍 ${escapeHtml(city||'—')}</div><div style="margin-top:7px"><span class="tag live">Quer jogar</span></div></div><div class="rank"><strong>${o.rank||0}</strong><span>pontos</span></div></div><p>“${escapeHtml(i.note||'Disponível para uma partida.')}”</p><div class="details"><span class="lv ${LV[level]||'lv-ini'}">${escapeHtml(level)}</span><span class="fm">${FM[i.format]||FM.quarteto}</span>${partnerChip(i)}<span class="fm" style="background:${i.ranked===false?'#fff1d1;color:#8c6212':'#e0f7ec;color:#14805a'}">${i.ranked===false?'😎 Amistoso':'🏆 Vale ranking'}</span><span>🕒 ${fmtDate(i.day)}, ${escapeHtml(i.time)}</span><span>🏟 ${escapeHtml(i.local)}</span></div><div class="card-actions${mine?'':' ma'}">${mine?`<button class="btn btn-outline" onclick="editInvite('${i.id}')">✏️ Editar</button><button class="btn btn-outline" onclick="deleteInvite('${i.id}')">🗑 Excluir</button><button class="btn btn-soft" onclick="shareInvite('${i.id}')">📲 Divulgar</button>`:`${btn}<button class="btn btn-outline" onclick="showPlayer('${i.owner}')">Ver perfil</button><button class="btn btn-soft" onclick="openChatWith('${i.owner}')">💬 Conversar</button>`}</div></article>`;
 }
 function filteredInvites(){
@@ -1264,8 +1279,8 @@ function teacherCard(t){
 function renderTeachers(){
   const q=($('teacher-search')?.value||'').toLowerCase(),loc=$('teacher-location')?.value||'';
   const all=teachersList(),arr=all.filter(t=>(t.name+' '+(t.city||'')+' '+(t.local||'')).toLowerCase().includes(q)&&(!loc||sameCity(t.city,loc)));
-  $('all-teachers').innerHTML=arr.length?arr.map(teacherCard).join(''):'<div class="empty"><b>🎾</b>Nenhum professor encontrado ainda.</div>';
-  const uc2=userCity(),near=uc2?all.filter(t=>sameCity(t.city,uc2)):all;$('home-teachers').innerHTML=near.slice(0,3).map(teacherCard).join('')||'<div class="empty"><b>🎾</b>Os professores cadastrados aparecerão aqui.</div>';
+  $('all-teachers').innerHTML=arr.length?arr.map(teacherCard).join(''):'<div class="empty"><b>🏖</b>Nenhum professor encontrado ainda.</div>';
+  const uc2=userCity(),near=uc2?all.filter(t=>sameCity(t.city,uc2)):all;$('home-teachers').innerHTML=near.slice(0,3).map(teacherCard).join('')||'<div class="empty"><b>🏖</b>Os professores cadastrados aparecerão aqui.</div>';
 }
 function contactTeacher(id){
   const t=S.profiles.find(x=>x.id===id);if(!t)return;
@@ -1286,16 +1301,25 @@ function fbBox(g){
   return `<div class="fb-box"><span class="small">Como foi com ${escapeHtml(opp)}?</span><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"><button class="btn btn-soft" onclick="rateGame('${g.id}',true)">👍 Tudo certo</button><button class="btn btn-outline" onclick="rateGame('${g.id}',false)">🚫 Não compareceu</button></div></div>`;
 }
 function rateGame(id,showed){run(async()=>{const {error}=await sb.rpc('rate_game',{g:id,p_showed:showed});if(!fail(error)){X.fb.set(id,showed);toast('Obrigado! Sua avaliação ajuda a comunidade.');renderGames()}})}
+function outTag(g){return g.outcome==='wo'?' · W.O.':g.outcome==='desistencia'?' · desistência':g.outcome==='void'?' · interrompida (sem pontos)':''}
 function gameCell(g){
   const cap=!S.me||g.a===S.me.id||g.b===S.me.id;
+  if(g.cancelled)return `<span class="status" style="background:#eceff0;color:#5f7a82">Anulada pelo administrador</span>`;
   if(!cap&&!g.done)return `<span class="status">O capitão da sua dupla informa o resultado</span>`;
-  if(g.done){const w=teamLabel(g,g.winner===g.a?'a':'b');return `<span class="status">Encerrado</span><div class="small" style="margin-top:6px">Vencedor: ${escapeHtml(w)}${g.ranked===false?' · amistoso (sem pontos)':''}</div>${g.score?`<div class="scoreline">${escapeHtml(g.score)}</div>`:''}${fbBox(g)}`}
+  if(g.done){
+    const w=teamLabel(g,g.winner===g.a?'a':'b'),d=S.me&&g.deltas&&g.deltas[S.me.id]!=null?g.deltas[S.me.id]:null;
+    return `<span class="status">Encerrado</span><div class="small" style="margin-top:6px">Vencedor: ${escapeHtml(w)}${g.ranked===false?' · amistoso (sem pontos)':''}${outTag(g)}</div>${g.score?`<div class="scoreline">${escapeHtml(g.score)}</div>`:''}${d!=null?`<div class="small" style="margin-top:4px"><b style="color:${d>=0?'#14805a':'#b3261e'}">${d>0?'+':''}${d} pts</b> para você</div>`:''}${(g.suspicious&&S.me&&S.me.is_admin)?'<div class="small">🚩 marcada como suspeita</div>':''}${fbBox(g)}`;
+  }
+  if(g.disputed){
+    const eu=g.disputed_by===(S.me&&S.me.id);
+    return `<span class="status" style="background:#ffe9d6;color:#8a4b00">⚖️ Em análise pelo administrador</span><div class="small" style="margin-top:6px">${eu?'Você contestou':'O adversário contestou'} o resultado${g.dispute_note?': “'+escapeHtml(g.dispute_note)+'”':''}. Ninguém pontua até a decisão.</div>${(S.me&&g.reported_by===S.me.id)?`<button class="btn btn-outline" style="margin-top:8px" onclick="retractResult('${g.id}')">Retirar meu resultado</button>`:''}`;
+  }
   if(!g.winner)return `<div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-primary" onclick="reportWin('${g.id}')">Eu ganhei</button><button class="btn btn-outline" onclick="reportLoss('${g.id}')">Eu perdi</button></div>`;
   const w=escapeHtml(teamLabel(g,g.winner===g.a?'a':'b'));
   const lim=g.reported_at?new Date(new Date(g.reported_at).getTime()+48*3600*1000):null;
   const prazo=lim?`<div class="small" style="margin-top:6px">Sem resposta até ${lim.toLocaleDateString('pt-BR')} ${lim.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}, vale o informado.</div>`:'';
-  if(g.reported_by===S.me.id)return `<span class="status" style="background:#fff1d1;color:#8c6212">Aguardando adversário</span><div class="small" style="margin-top:6px">Você informou: ${w} venceu.</div>${g.score?`<div class="scoreline">${escapeHtml(g.score)}</div>`:''}${prazo}`;
-  return `<div class="small" style="margin-bottom:8px"><strong>${escapeHtml(prof(g.reported_by).name)}</strong> informou que <strong>${w}</strong> venceu${g.score?' <span class="scoreline">'+escapeHtml(g.score)+'</span>':''}. Está certo?</div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-primary" onclick="confirmResult('${g.id}')">Confirmar</button><button class="btn btn-outline" onclick="contestResult('${g.id}')">Contestar</button></div>${prazo}`;
+  if(g.reported_by===S.me.id)return `<span class="status" style="background:#fff1d1;color:#8c6212">Aguardando adversário</span><div class="small" style="margin-top:6px">Você informou: ${w} venceu${outTag(g)}.</div>${g.score?`<div class="scoreline">${escapeHtml(g.score)}</div>`:''}${prazo}<button class="btn btn-outline" style="margin-top:8px" onclick="retractResult('${g.id}')">Retirar meu resultado</button>`;
+  return `<div class="small" style="margin-bottom:8px"><strong>${escapeHtml(prof(g.reported_by).name)}</strong> informou que <strong>${w}</strong> venceu${outTag(g)}${g.score?' <span class="scoreline">'+escapeHtml(g.score)+'</span>':''}. Está certo?</div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-primary" onclick="confirmResult('${g.id}')">Confirmar</button><button class="btn btn-outline" onclick="contestResult('${g.id}')">Contestar</button></div>${prazo}`;
 }
 function renderGames(){
   const body=$('games-table-body'),box=$('received-invites');
@@ -1319,7 +1343,7 @@ function acceptInvite2(reqId,mine){
   run(async()=>{
     const i=r.invite;
     const gp={a:S.me.id,b:r.from_user,day:i.day,time:i.time,local:i.local,format:i.format,city:i.city,ranked:i.ranked!==false};
-    if(i.format==='duplas'||i.format==='quarteto'){const mp=mine||{partner:i.partner||null,partner_name:i.partner_name||null,partner_level:i.partner_level||null};gp.a2=mp.partner;gp.a2_name=mp.partner_name;gp.a2_level=mp.partner_level;gp.b2=r.partner||null;gp.b2_name=r.partner_name||null;gp.b2_level=r.partner_level||null}let g=await sb.from('games').insert(gp);if(g.error&&/ranked/i.test(g.error.message||'')){delete gp.ranked;g=await sb.from('games').insert(gp)}
+    if(i.format==='duplas'||i.format==='quarteto'){const mp=mine||{partner:i.partner||null,partner_name:i.partner_name||null,partner_level:i.partner_level||null,partner_gender:i.partner_gender||null};gp.a2=mp.partner;gp.a2_name=mp.partner_name;gp.a2_level=mp.partner_level;gp.a2_gender=mp.partner_gender||null;gp.b2=r.partner||null;gp.b2_name=r.partner_name||null;gp.b2_level=r.partner_level||null;gp.b2_gender=r.partner_gender||null}let g=await sb.from('games').insert(gp);if(g.error&&/ranked/i.test(g.error.message||'')){delete gp.ranked;g=await sb.from('games').insert(gp)}
     if(fail(g.error))return;
     await sb.from('requests').update({status:'accepted'}).eq('id',r.id);
     await sb.from('invites').update({status:'matched'}).eq('id',i.id);
@@ -1330,7 +1354,15 @@ function declineInvite(reqId){run(async()=>{const {error}=await sb.from('request
 function reportWin(id){const g=S.games.find(x=>x.id===id);if(!g||!S.me)return;openGameScore(id,S.me.id)}
 function reportLoss(id){const g=S.games.find(x=>x.id===id);if(!g||!S.me)return;openGameScore(id,g.a===S.me.id?g.b:g.a)}
 function confirmResult(id){run(async()=>{const {error}=await sb.rpc('confirm_result',{g:id});if(!fail(error)){const gg=S.games.find(x=>x.id===id);toast(gg&&gg.ranked===false?'Resultado confirmado (amistoso: sem pontos).':'Resultado confirmado! O rank foi atualizado.')}})}
-function contestResult(id){run(async()=>{const {error}=await sb.rpc('contest_result',{g:id});if(!fail(error))toast('Resultado contestado. Os dois podem informar de novo.')})}
+function contestResult(id){
+  $('message-title').textContent='Contestar resultado';
+  $('message-text').innerHTML='<div class="small" style="line-height:1.55;margin-bottom:8px">O resultado vai para a análise do administrador e <b>ninguém pontua</b> até ele decidir. Conte rapidamente o que está errado:</div><textarea class="field" id="ct-note" rows="3" maxlength="300" placeholder="Ex.: o placar foi 6-4 6-3, não 6-0 6-0"></textarea>';
+  const a=$('message-actions');a.innerHTML='';
+  const b=document.createElement('button');b.className='btn btn-primary';b.style.width='100%';b.textContent='Enviar contestação';
+  b.onclick=()=>{const n=($('ct-note').value||'').trim();closeModal('message-modal');run(async()=>{const {error}=await sb.rpc('contest_result',{g:id,p_note:n||null});if(!fail(error))toast('Contestação enviada. O administrador vai analisar.')})};
+  a.appendChild(b);openModal('message-modal');
+}
+function retractResult(id){run(async()=>{const {error}=await sb.rpc('retract_result',{g:id});if(!fail(error))toast('Resultado retirado. Informem de novo.')})}
 
 /* ===== ÁREA DO PROFESSOR ===== */
 const PROFILE_FIELDS=['profile-name','profile-city','profile-arena','profile-contact','profile-bio','profile-i30','profile-i60','profile-g30','profile-g60'];
@@ -1643,7 +1675,7 @@ function remindStudent(id){
   const p=prof(l.student_id),num=String(p.contact||'').replace(/\D/g,'');
   if(!num){toast('Esse aluno não informou o WhatsApp.');return}
   const t=prof(l.teacher);
-  openWhatsApp(num,`Olá, ${l.student}! Lembrando da sua aula de beach tennis com ${t.name} em ${fmtDate(l.day)} às ${l.time} (${l.duration||60} min)${l.local?', em '+l.local:''}. Até lá! 🎾`);
+  openWhatsApp(num,`Olá, ${l.student}! Lembrando da sua aula de beach tennis com ${t.name} em ${fmtDate(l.day)} às ${l.time} (${l.duration||60} min)${l.local?', em '+l.local:''}. Até lá! 🏖`);
 }
 async function payLessonPix(id){
   const l=S.lessons.find(x=>x.id===id);if(!l)return;
@@ -1744,7 +1776,7 @@ function renderPeople(){
   const box=$('admin-people');if(!box)return;
   if(!S.me||eff()!=='admin'){box.style.display='none';return}
   box.style.display='';
-  box.innerHTML=metricsHtml()+reportsHtml()+`<h3>👥 Pessoas e planos</h3><div class="small" style="margin-bottom:10px">Troque o plano, transforme professor em aluno (ou o contrário) e exclua contas.</div><input class="field" id="people-q" placeholder="Buscar por nome ou cidade" value="${escapeHtml(peopleQ)}" oninput="peopleQ=this.value;renderPeopleList()" aria-label="Buscar pessoa"><div id="people-list" style="margin-top:12px"></div>`;
+  box.innerHTML=metricsHtml()+reviewHtml()+catsHtml()+reportsHtml()+auditHtml()+`<h3>👥 Pessoas e planos</h3><div class="small" style="margin-bottom:10px">Troque o plano, transforme professor em aluno (ou o contrário) e exclua contas.</div><input class="field" id="people-q" placeholder="Buscar por nome ou cidade" value="${escapeHtml(peopleQ)}" oninput="peopleQ=this.value;renderPeopleList()" aria-label="Buscar pessoa"><div id="people-list" style="margin-top:12px"></div>`;
   renderPeopleList();
 }
 function fmtPhone(v){const d=String(v||'').replace(/\D/g,'');if(d.length===11)return `(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;if(d.length===10)return `(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`;return d||'—'}
@@ -1833,6 +1865,7 @@ async function openSettings(){
   await renderSettings();$('settings-modal').classList.add('open');
 }
 async function renderSettings(){
+  const lvLocked=!!(S.me&&(S.games||[]).some(g=>g.done&&!g.cancelled&&inG(g,S.me.id)));
   const el=$('settings-body');if(!el||!S.me)return;
   const me=S.me,on=await pushActive(),pr=prof(me.id);
   const av=me.photo_url?`<img class="photo-img" src="${escapeHtml(me.photo_url)}" alt="Sua foto">`:`<div class="photo-img ph">${escapeHtml(ini(me.name))}</div>`;
@@ -1846,7 +1879,8 @@ async function renderSettings(){
     <form onsubmit="saveSettingsProfile(event)" class="form-grid" style="display:grid;gap:10px">
       <div class="form-group"><label>Nome</label><input class="field" name="name" value="${escapeHtml(me.name)}" maxlength="60" required></div>
       <div class="form-group"><label>Cidade</label><select class="field" name="city"></select></div>
-      <div class="form-group"><label>Nível</label><select class="field" name="level">${lv}</select></div>
+      <div class="form-group"><label>Nível</label><select class="field" name="level"${lvLocked?' disabled':''}>${lv}</select>${lvLocked?'<div class="small" style="margin-top:4px;line-height:1.4">O nível agora segue o seu ranking. Se precisar corrigir, fale com o administrador.</div>':''}</div>
+      <div class="form-group"><label>Gênero (opcional)</label><select class="field" name="gender"><option value=""${!me.gender?' selected':''}>Prefiro não informar</option><option value="M"${me.gender==='M'?' selected':''}>Masculino</option><option value="F"${me.gender==='F'?' selected':''}>Feminino</option></select></div>
       <div class="form-group"><label>WhatsApp (com DDD)</label><input class="field" name="contact" inputmode="numeric" value="${escapeHtml(wa)}" placeholder="11999998888"></div>
       <button class="btn btn-primary" type="submit">Salvar dados</button>
     </form></div>
@@ -1872,7 +1906,7 @@ async function saveSettingsProfile(e){
   if(name.length<2){toast('Informe seu nome.');return}
   if(!(await nameFree(name,S.me.id))){toast('Já existe alguém com esse nome. Acrescente o sobrenome.');return}
   if(ct&&!/^\d{10,11}$/.test(ct)){toast('WhatsApp com DDD: 10 ou 11 números.');return}
-  const upd={name,city:f.get('city')||null,level:f.get('level')};if(ct)upd.contact=ct;
+  const upd={name,city:f.get('city')||null};if(f.get('level'))upd.level=f.get('level');upd.gender=f.get('gender')||null;if(ct)upd.contact=ct;
   await run(async()=>{const {error}=await sb.from('profiles').update(upd).eq('id',S.me.id);if(!fail(error))toast('Dados atualizados!')});
   renderSettings();
 }
@@ -2025,7 +2059,86 @@ function renderRankChart(){
 function rkBoard(){return (S.profiles||[]).filter(p=>p.role!=='professor'&&!p.is_admin).sort((a,b)=>((b.rank||0)-(a.rank||0))||String(a.name).localeCompare(String(b.name)))}
 function rkPos(board,id){const p=board.find(x=>x.id===id);if(!p)return 0;return 1+board.filter(x=>(x.rank||0)>(p.rank||0)).length}
 function rkAvatar(p,size){return p.photo_url?`<img src="${escapeHtml(p.photo_url)}" alt="" style="width:${size}px;height:${size}px;border-radius:50%;object-fit:cover">`:`<div class="person-avatar" style="background:${colorOf(p.name)};width:${size}px;height:${size}px;border-radius:50%;font-size:${Math.round(size*.34)}px">${escapeHtml(ini(p.name))}</div>`}
-function renderRanking(){
+/* ===== RANKING v2: abas, modalidades, período, duplas fixas e histórico ===== */
+const RK={tab:'rank',req:0,cats:null};
+const RK_MODS={geral:'duplas',masc:'duplas_masc',fem:'duplas_fem',mista:'duplas_mista'};
+async function rkLoadCats(){
+  if(RK.cats)return;
+  try{const {data}=await sb.from('categories').select('name,min_points,sort,active').order('sort');RK.cats=(data||[]).filter(c=>c.active!==false)}catch(e){RK.cats=[]}
+  const sel=$('rk-level');if(sel&&RK.cats.length){const cur=sel.value;sel.innerHTML='<option value="">Todas as categorias</option>'+RK.cats.map(c=>`<option>${escapeHtml(c.name)}</option>`).join('');sel.value=cur}
+}
+function rkQ(){return {city:$('rk-city')?.value||null,cat:$('rk-level')?.value||null,days:Number($('rk-days')?.value)||null,q:($('rk-q')?.value||'').trim().toLowerCase()}}
+function rkMove(r){const p=r.prev_pos;if(p==null||p===r.pos)return '<span class="rk-mv">–</span>';const d=p-r.pos;return d>0?`<span class="rk-mv up" title="Subiu ${d} desde a última atualização">▲${d}</span>`:`<span class="rk-mv down" title="Caiu ${-d} desde a última atualização">▼${-d}</span>`}
+function rkInactive(r){if(!r.last_game)return true;return (Date.now()-new Date(r.last_game+'T00:00:00').getTime())/864e5>=90}
+function rkEmpty(ic,t){return `<div class="empty"><b>${ic}</b>${t}</div>`}
+async function renderRanking(){
+  const el=$('ranking-body');if(!el)return;
+  const pg=$('page-ranking');if(!pg||!pg.classList.contains('active'))return;
+  const t=RK.tab;if(t==='feed')return;
+  rkLoadCats();
+  if(t==='mine')return rkMine();
+  if(!S.me){el.innerHTML=lockCard('Entre para ver o ranking e o seu histórico.');return}
+  const my=++RK.req;
+  if(t==='rank'||t==='duplas')return rkBoard2(t,my);
+  if(t==='pairs')return rkPairs(my);
+  if(t==='hist')return rkHist(my);
+}
+async function rkBoard2(t,my){
+  const el=$('ranking-body'),Q=rkQ(),mod=t==='rank'?'individual':(RK_MODS[$('rk-mod')?.value||'geral']||'duplas');
+  const {data,error}=await sb.rpc('ranking_board',{p_mod:mod,p_cat:Q.cat,p_city:Q.city,p_days:Q.days,p_limit:200});
+  if(my!==RK.req)return;
+  if(error){if(t==='rank'){renderRankingLegacy();return}el.innerHTML=rkEmpty('👥','O ranking de duplas será ativado em breve.');return}
+  const all=data||[],list=all.filter(r=>!Q.q||String(r.name).toLowerCase().includes(Q.q));
+  if(!all.length){el.innerHTML=rkEmpty('🏆',t==='duplas'?'Ainda não há partidas de duplas confirmadas nesta modalidade.':(Q.days?'Ninguém pontuou neste período.':'Ainda não há jogadores no ranking.'));return}
+  const mine=S.me&&all.find(r=>r.id===S.me.id);
+  let me='';
+  if(mine){const ahead=all.filter(r=>r.pos<mine.pos).slice(-1)[0];me=`<div class="rk-me"><div><span class="small">Sua posição</span><strong>#${mine.pos}</strong></div><div><span class="small">${Q.days?'Pontos no período':'Pontos'}</span><strong>${mine.pts}</strong></div><div style="flex:2;min-width:180px"><span class="small">${ahead?`Faltam <b>${Math.max(1,ahead.pts-mine.pts+1)} pts</b> para passar ${escapeHtml(ahead.name)}`:'Você lidera o ranking! 🏆'}</span></div><button class="btn btn-soft" onclick="showPlayer('${S.me.id}')">Meu perfil</button></div>`}
+  const top=list.slice(0,3);
+  const pod=top.length?`<div class="rk-podium">${[1,0,2].filter(i=>top[i]).map(i=>{const p=top[i];return `<button class="rk-pod rk-pod${i+1}" onclick="showPlayer('${p.id}')"><span class="rk-medal">${['🥇','🥈','🥉'][i]}</span>${rkAvatar(p,i===0?64:54)}<strong>${escapeHtml(p.name)}</strong><span class="small">${escapeHtml(p.city||'—')}</span><b>${p.pts} pts</b></button>`}).join('')}</div>`:'';
+  const rows=list.slice(3).map(r=>{const mineRow=S.me&&r.id===S.me.id;return `<button class="rk-row${mineRow?' me':''}" onclick="showPlayer('${r.id}')"><span class="rk-pos">${r.pos}</span>${rkAvatar(r,40)}<span class="rk-name"><strong>${escapeHtml(r.name)}</strong><span class="small">${escapeHtml(r.city||'—')} · ${r.wins}V ${r.losses}D${rkInactive(r)?' · 💤 inativo':''}</span></span><span class="lv ${LV[r.category]||'lv-ini'}">${escapeHtml(r.category||r.level||'Iniciante')}</span>${rkMove(r)}<b class="rk-pts">${r.pts}<small> pts</small></b></button>`}).join('');
+  el.innerHTML=me+(list.length?pod+`<div class="rk-list">${rows}</div>`:rkEmpty('🔎','Nenhum jogador com esses filtros.'))+'<div class="small rk-note">Os pontos são a soma das partidas confirmadas e não expiram. 💤 inativo = 90 dias sem jogar. Desempate: pontos, depois força interna, vitórias e nome.</div>';
+}
+async function rkPairs(my){
+  const el=$('ranking-body'),Q=rkQ();
+  const {data,error}=await sb.rpc('pair_board',{p_city:Q.city,p_limit:200});
+  if(my!==RK.req)return;
+  if(error){el.innerHTML=rkEmpty('🤝','As duplas fixas serão ativadas em breve.');return}
+  const list=(data||[]).filter(r=>!Q.q||(r.name_a+' '+r.name_b).toLowerCase().includes(Q.q));
+  if(!list.length){el.innerHTML=rkEmpty('🤝','Ainda não há duplas com partidas confirmadas. Jogue em dupla com um parceiro cadastrado e a sua dupla aparece aqui.');return}
+  el.innerHTML=`<div class="small rk-note" style="margin-top:0">Cada combinação de dois jogadores tem o seu próprio ranking. Se um parceiro muda, a nova dupla começa do zero.</div><div class="rk-list">${list.map(r=>`<div class="rk-row"><span class="rk-pos">${r.pos}</span><span class="rk-duo">${rkAvatar({name:r.name_a,photo_url:r.photo_a},34)}${rkAvatar({name:r.name_b,photo_url:r.photo_b},34)}</span><span class="rk-name"><strong>${escapeHtml(r.name_a)} + ${escapeHtml(r.name_b)}</strong><span class="small">${r.games} jogos · ${r.wins}V ${r.losses}D · ${r.win_pct}% de vitórias</span></span><b class="rk-pts">${r.points}<small> pts</small></b></div>`).join('')}</div>`;
+}
+function rkMine(){
+  const el=$('ranking-body');
+  if(!S.me){el.innerHTML=lockCard('Entre para ver as suas partidas.');return}
+  const list=(S.games||[]).filter(g=>inG(g,S.me.id)).sort((a,b)=>(b.day+b.time).localeCompare(a.day+a.time));
+  if(!list.length){el.innerHTML=rkEmpty('📋','Você ainda não tem partidas. Convide alguém em Membros para começar.');return}
+  el.innerHTML=`<div class="rk-list">${list.map(g=>{
+    const d=g.deltas&&g.deltas[S.me.id]!=null?g.deltas[S.me.id]:null;
+    const st=g.cancelled?'Anulada':g.disputed?'⚖️ Em análise':g.done?(g.ranked===false?'Amistoso':'Confirmada'):g.winner?'Aguardando confirmação':'Marcada';
+    const won=g.done&&g.winner&&!g.cancelled?teamWon(g,S.me.id):null;
+    return `<div class="rk-game"><div class="rk-g-top"><b>${escapeHtml(teamLabel(g,'a'))} × ${escapeHtml(teamLabel(g,'b'))}</b><span class="tag">${st}</span></div><div class="small">${fmtDate(g.day)} · ${escapeHtml(g.time)} · ${escapeHtml(g.local||'')}${outTag(g)}</div>${g.score?`<div class="scoreline">${escapeHtml(g.score)}</div>`:''}${won!==null?`<div class="small"><b style="color:${won?'#14805a':'#b3261e'}">${won?'Vitória':'Derrota'}</b>${d!=null?` · ${d>0?'+':''}${d} pts`:''}</div>`:''}</div>`}).join('')}</div>`;
+}
+async function rkHist(my){
+  const el=$('ranking-body'),mod=$('rk-hmod')?.value||'individual';
+  const {data,error}=await sb.rpc('my_history',{p_mod:mod,p_limit:80});
+  if(my!==RK.req)return;
+  if(error){el.innerHTML=rkEmpty('📈','O histórico detalhado será ativado em breve.');return}
+  const list=data||[];
+  if(!list.length){el.innerHTML=rkEmpty('📈','Ainda não há partidas confirmadas nesta modalidade. Depois de cada resultado confirmado você vê aqui quanto ganhou ou perdeu e por quê.');return}
+  el.innerHTML=`<div class="rk-list">${list.map(r=>`<div class="rk-game${r.reverted?' rev':''}"><div class="rk-g-top"><b>${escapeHtml(fmtDate(r.day))} · ${escapeHtml(r.time||'')}</b><span class="rk-delta ${r.delta>=0?'up':'down'}">${r.delta>0?'+':''}${r.delta} pts</span></div><div class="small">${r.won?'Vitória':'Derrota'} contra <b>${escapeHtml(r.opp||'adversário')}</b>${(r.partner||r.partner_guest)?' · com <b>'+escapeHtml(r.partner||r.partner_guest)+'</b>':''}${r.score?' · '+escapeHtml(r.score):''}</div><div class="small">Antes: <b>${r.points_before}</b> → Depois: <b>${r.points_after}</b></div><div class="small rk-why">${escapeHtml(r.reason||'')}${r.reverted?' · <b>anulada pelo administrador</b>':''}${r.suspicious?' · 🚩 em observação':''}</div></div>`).join('')}</div>`;
+}
+function setRkTab(t){
+  RK.tab=t;
+  document.querySelectorAll('#rk-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  const rb=$('ranking-body'),fb=$('feed-body'),fl=$('rk-filters');
+  document.querySelectorAll('#rk-filters [data-for]').forEach(e=>{e.style.display=e.dataset.for.split(' ').includes(t)?'':'none'});
+  const any=[...document.querySelectorAll('#rk-filters [data-for]')].some(e=>e.style.display!=='none');
+  if(fl)fl.style.display=any?'':'none';
+  if(rb)rb.style.display=t==='feed'?'none':'';
+  if(fb)fb.style.display=t==='feed'?'':'none';
+  if(t==='feed')loadFeed();else renderRanking();
+}
+function renderRankingLegacy(){
   const el=$('ranking-body');if(!el)return;
   const all=rkBoard(),q=($('rk-q')?.value||'').trim().toLowerCase(),city=$('rk-city')?.value||'',lvl=$('rk-level')?.value||'';
   const list=all.filter(p=>(!city||sameCity(p.city,city))&&(!lvl||p.level===lvl)&&(!q||String(p.name).toLowerCase().includes(q)));
@@ -2040,13 +2153,14 @@ function renderRanking(){
   const rows=list.slice(3).map(p=>{const pos=rkPos(all,p.id),mine=S.me&&p.id===S.me.id;return `<button class="rk-row${mine?' me':''}" onclick="showPlayer('${p.id}')"><span class="rk-pos">${pos}</span>${rkAvatar(p,40)}<span class="rk-name"><strong>${escapeHtml(p.name)}</strong><span class="small">${escapeHtml(p.city||'—')}</span></span><span class="lv ${LV[p.level]||'lv-ini'}">${escapeHtml(p.level||'Iniciante')}</span><b class="rk-pts">${p.rank||0}<small> pts</small></b></button>`}).join('');
   el.innerHTML=me+(list.length?pod+`<div class="rk-list">${rows}</div>`:'<div class="empty"><b>🔎</b>Nenhum jogador com esses filtros.</div>');
 }
-['rk-q','rk-city','rk-level'].forEach(id=>{const e=$(id);if(e)e.addEventListener('input',renderRanking)});
+['rk-q','rk-city','rk-level','rk-mod','rk-hmod','rk-days'].forEach(id=>{const e=$(id);if(e)e.addEventListener('input',renderRanking)});
+setTimeout(()=>{try{setRkTab('rank')}catch(e){}},0);
 
 /* ===== PERFIL DO JOGADOR ===== */
 function pfAccept(id,isMe,inv){
   if(isMe||!S.me)return '';
   const r=(S.incoming||[]).find(x=>x.from_user===id);
-  if(!r)return inv?`<div class="pf-accept"><button class="btn btn-primary" onclick="closeModal('player-modal');sendInvite('${inv.id}')">🎾 Convidar para jogar</button></div>`:'';
+  if(!r)return inv?`<div class="pf-accept"><button class="btn btn-primary" onclick="closeModal('player-modal');sendInvite('${inv.id}')">🏖 Convidar para jogar</button></div>`:'';
   const i=r.invite;
   return `<div class="pf-accept"><span class="small">Convidou você${i?' para '+fmtDate(i.day)+' às '+escapeHtml(i.time):''}</span><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="closeModal('player-modal');acceptInvite('${r.id}')">✅ Aceitar convite</button><button class="btn btn-outline" onclick="closeModal('player-modal');declineInvite('${r.id}')">Recusar</button></div></div>`;
 }
@@ -2084,21 +2198,21 @@ async function showPlayer(id){
       if((st.votes||0)>0){const ok=st.votes-(st.noshows||0);extra+=`<div class="pf-fair"><span class="small">Fair play</span><strong>${Math.round(ok*100/st.votes)}%</strong><span class="small">${st.votes} ${st.votes===1?'avaliação':'avaliações'}${st.noshows?' · '+st.noshows+(st.noshows===1?' falta':' faltas'):' · nenhuma falta'}</span></div>`}
       extra+=`<div class="pf-hist"><span class="small">Histórico de jogos</span><div class="pf-games">${rows}</div></div>`;
     }
-    ach=`<div class="pf-ach"><span class="small">Conquistas</span><div class="pf-badges">${badge(g>=1,'🎾','Estreou','Jogou a primeira partida')}${badge(w>=1,'🏅','1ª vitória','Ganhou a primeira partida')}${badge((st.streak||0)>=3,'🔥','Em chamas','3 vitórias seguidas')}${badge(g>=10,'💪','10 jogos','Jogou 10 partidas')}${badge(w>=10,'🏆','10 vitórias','Ganhou 10 partidas')}${badge(pos>0&&pos<=3&&(p.rank||0)>0,'🥇','Top 3','Entre os 3 primeiros do ranking')}${badge((st.referrals||0)>=3,'🤝','Embaixador','Chamou 3 amigos para o clube')}</div></div>`;
+    ach=`<div class="pf-ach"><span class="small">Conquistas</span><div class="pf-badges">${badge(g>=1,'🏖','Estreou','Jogou a primeira partida')}${badge(w>=1,'🏅','1ª vitória','Ganhou a primeira partida')}${badge((st.streak||0)>=3,'🔥','Em chamas','3 vitórias seguidas')}${badge(g>=10,'💪','10 jogos','Jogou 10 partidas')}${badge(w>=10,'🏆','10 vitórias','Ganhou 10 partidas')}${badge(pos>0&&pos<=3&&(p.rank||0)>0,'🥇','Top 3','Entre os 3 primeiros do ranking')}${badge((st.referrals||0)>=3,'🤝','Embaixador','Chamou 3 amigos para o clube')}</div></div>`;
   }else{
     stats='<div class="small" style="margin:14px 0">As estatísticas detalhadas aparecem depois que o administrador ativar o recurso no banco de dados.</div>';
   }
   const inv=(S.invites||[]).find(i=>i.owner===id&&i.status==='open'&&!isMe);
   const acts=isMe?`<button class="btn btn-soft" onclick="closeModal('player-modal');openSettings()">⚙️ Editar meu perfil</button><button class="btn btn-outline" onclick="shareProfile()">📲 Compartilhar</button>`:`<button class="btn btn-primary" onclick="closeModal('player-modal');openChatWith('${id}')">💬 Conversar</button>${p.contact?`<button class="btn btn-outline" onclick="waPerson('${id}')">WhatsApp ↗</button>`:''}<button class="btn btn-outline" onclick="openReport('${id}')">🚩 Denunciar</button>`;
-  body.innerHTML=`<div class="pf-head">${rkAvatar(p,76)}<div style="min-width:0"><h3 style="margin:0;font-size:24px">${escapeHtml(p.name)}</h3><div class="small">📍 ${escapeHtml(p.city||'—')} · <span class="lv ${LV[p.level]||'lv-ini'}" style="padding:3px 9px">${escapeHtml(p.level||'Iniciante')}</span></div></div></div><div class="pf-row">${pfAccept(id,isMe,inv)}<div class="pf-rank"><b>${p.rank||0}</b><span>pontos</span><em>${pos?'#'+pos+' no ranking':''}</em></div></div>${stats}${extra}${ach}<div class="pf-acts">${acts}</div>`;
+  body.innerHTML=`<div class="pf-head">${rkAvatar(p,76)}<div style="min-width:0"><h3 style="margin:0;font-size:24px">${escapeHtml(p.name)}</h3><div class="small">📍 ${escapeHtml(p.city||'—')} · <span class="lv ${LV[p.level]||'lv-ini'}" style="padding:3px 9px">${escapeHtml(p.level||'Iniciante')}</span></div></div></div><div class="pf-row">${pfAccept(id,isMe,inv)}<div class="pf-rank"><b>${p.rank||0}</b><span>pontos</span><em>${pos?'#'+pos+' no ranking':''}${p.best_pos&&pos&&p.best_pos<pos?' · melhor #'+p.best_pos:''}</em></div></div>${stats}${extra}${ach}<div class="pf-acts">${acts}</div>`;
 }
 function shareProfile(){
   const board=rkBoard(),pos=rkPos(board,S.me.id);
-  const txt=`🎾 Estou em #${pos} no ranking do Beach Tennis Club com ${S.me.rank||0} pontos! Vem jogar comigo: ${siteLink('jogador',S.me.id)}`;
+  const txt=`🏖 Estou em #${pos} no ranking do Beach Tennis Club com ${S.me.rank||0} pontos! Vem jogar comigo: ${siteLink('jogador',S.me.id)}`;
   shareText(txt);
 }
 function shareGroup(){
-  shareText(`🎾 Estou usando o Beach Tennis Club para marcar jogos, ver o ranking e achar professor. Entra comigo, é grátis: ${location.origin}/${S.me?'?ref='+encodeURIComponent(S.me.id):''}`);
+  shareText(`🏖 Estou usando o Beach Tennis Club para marcar jogos, ver o ranking e achar professor. Entra comigo, é grátis: ${location.origin}/${S.me?'?ref='+encodeURIComponent(S.me.id):''}`);
 }
 function shareText(txt){
   if(navigator.share){navigator.share({text:txt}).catch(()=>{});return}
@@ -2106,12 +2220,12 @@ function shareText(txt){
 }
 function shareInvite(id){
   const i=S.invites.find(x=>x.id===id);if(!i)return;
-  shareText(`🎾 Quero jogar beach tennis ${fmtDate(i.day)} às ${i.time} em ${i.local}${i.city?' ('+i.city+')':''}. ${i.ranked===false?'Jogo amistoso':'Vale ranking'}. Toque para ver o convite e responder: ${siteLink('convite',i.id)}`);
+  shareText(`🏖 Quero jogar beach tennis ${fmtDate(i.day)} às ${i.time} em ${i.local}${i.city?' ('+i.city+')':''}. ${i.ranked===false?'Jogo amistoso':'Vale ranking'}. Toque para ver o convite e responder: ${siteLink('convite',i.id)}`);
 }
 document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('#profile-box .avatar');if(a&&S.me)showPlayer(S.me.id)});
 
 /* ===== EXTRAS: quadras, chave de torneio, pacotes, amigos e feed ===== */
-const X={arenas:[],book:[],matches:[],pkgs:[],spk:[],follows:new Set(),fb:new Map(),reports:[],metrics:null,feed:[],feedMode:'all',feedErr:false,ok:{}};
+const X={arenas:[],book:[],matches:[],pkgs:[],spk:[],follows:new Set(),fb:new Map(),reports:[],metrics:null,review:[],audit:[],cats:[],feed:[],feedMode:'all',feedErr:false,ok:{}};
 function isoDay(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 async function xq(p){try{const r=await p;return r.error?null:(r.data||[])}catch(e){return null}}
 async function loadExtras(){
@@ -2123,7 +2237,7 @@ async function loadExtras(){
   xq(sb.from('game_feedback').select('game,showed')).then(r=>{if(r){X.fb=new Map(r.map(x=>[x.game,x.showed]));if(typeof renderGames==='function')renderGames()}});
   const rpP=S.me.is_admin?xq(sb.from('player_reports').select('*').eq('resolved',false).order('created_at',{ascending:false})):Promise.resolve([]);
   rpP.then(r=>{if(r){X.reports=r;if(typeof renderPeople==='function')renderPeople()}});
-  if(S.me.is_admin)loadMetrics();
+  if(S.me.is_admin){loadMetrics();loadReview()}
   const [bk,sp,fl]=await Promise.all([xq(sb.from('court_bookings').select('*').eq('status','confirmada').gte('day',isoDay(new Date())).order('day').order('time')),xq(sb.from('student_packages').select('*').order('created_at',{ascending:false})),xq(sb.from('follows').select('followee'))]);
   if(bk)X.book=bk;
   if(sp)X.spk=sp;
@@ -2141,7 +2255,7 @@ function renderArenas(){
   if(!list.length){el.innerHTML='<div class="empty"><b>🏟️</b>Nenhuma arena cadastrada ainda.'+((S.me&&eff()==='admin')?'<br>Cadastre a primeira no botão acima.':'<br>Em breve você reserva sua quadra por aqui.')+'</div>';return}
   el.innerHTML=list.map(a=>{
     const mgr=arenaManager(a),adm=S.me&&eff()==='admin',num=String(a.whatsapp||'').replace(/\D/g,'');
-    return `<article class="card" id="a-${a.id}"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">${a.active?'<span class="tag live">Reservas abertas</span>':'<span class="tag" style="background:#eceff0;color:#5f7a82">Pausada</span>'}<span class="tag">${a.price_hour>0?money(a.price_hour)+' / hora':'Consulte o valor'}</span></div><h3 style="margin:12px 0 6px;font-size:21px;color:var(--navy)">${escapeHtml(a.name)}</h3><div class="small">📍 ${escapeHtml([a.address,a.city].filter(Boolean).join(' · ')||'—')}</div><div class="details" style="margin:12px 0"><span>🎾 ${a.courts} quadra${a.courts>1?'s':''}</span><span>🕒 ${escapeHtml(a.open_time)} às ${escapeHtml(a.close_time)}</span><span>⏱ ${a.slot_min} min</span></div>${a.note?`<div class="small" style="line-height:1.6;margin-bottom:10px">${escapeHtml(a.note)}</div>`:''}<div class="card-actions" style="flex-wrap:wrap"><button class="btn btn-primary" onclick="openBooking('${a.id}')">Reservar horário</button><button class="btn btn-soft" onclick="shareArena('${a.id}')">📲 Divulgar</button>${num?`<button class="btn btn-soft" onclick="openWhatsApp('${num}','Olá! Vi a ${escapeHtml(a.name)} no Beach Tennis Club.')">WhatsApp ↗</button>`:''}${mgr?`<button class="btn btn-outline" onclick="openArenaBookings('${a.id}')">📋 Reservas</button><button class="btn btn-outline" onclick="editArena('${a.id}')">✏️ Editar</button>`:''}${adm?`<button class="btn btn-outline" style="border-color:#d9534f;color:#b3261e" onclick="deleteArena('${a.id}')">Excluir</button>`:''}</div></article>`;
+    return `<article class="card" id="a-${a.id}"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">${a.active?'<span class="tag live">Reservas abertas</span>':'<span class="tag" style="background:#eceff0;color:#5f7a82">Pausada</span>'}<span class="tag">${a.price_hour>0?money(a.price_hour)+' / hora':'Consulte o valor'}</span></div><h3 style="margin:12px 0 6px;font-size:21px;color:var(--navy)">${escapeHtml(a.name)}</h3><div class="small">📍 ${escapeHtml([a.address,a.city].filter(Boolean).join(' · ')||'—')}</div><div class="details" style="margin:12px 0"><span>🏖 ${a.courts} quadra${a.courts>1?'s':''}</span><span>🕒 ${escapeHtml(a.open_time)} às ${escapeHtml(a.close_time)}</span><span>⏱ ${a.slot_min} min</span></div>${a.note?`<div class="small" style="line-height:1.6;margin-bottom:10px">${escapeHtml(a.note)}</div>`:''}<div class="card-actions" style="flex-wrap:wrap"><button class="btn btn-primary" onclick="openBooking('${a.id}')">Reservar horário</button><button class="btn btn-soft" onclick="shareArena('${a.id}')">📲 Divulgar</button>${num?`<button class="btn btn-soft" onclick="openWhatsApp('${num}','Olá! Vi a ${escapeHtml(a.name)} no Beach Tennis Club.')">WhatsApp ↗</button>`:''}${mgr?`<button class="btn btn-outline" onclick="openArenaBookings('${a.id}')">📋 Reservas</button><button class="btn btn-outline" onclick="editArena('${a.id}')">✏️ Editar</button>`:''}${adm?`<button class="btn btn-outline" style="border-color:#d9534f;color:#b3261e" onclick="deleteArena('${a.id}')">Excluir</button>`:''}</div></article>`;
   }).join('');
 }
 function myBookings(){return S.me?X.book.filter(b=>b.user_id===S.me.id):[]}
@@ -2276,15 +2390,32 @@ function renderBracket(){
   const champ=fin&&fin.winner?`<div class="br-champ">🏆 Campeão: <strong>${escapeHtml(prof(fin.winner).name)}</strong></div>`:'';
   el.innerHTML=champ+`<div class="br-cols">${rounds.map(r=>`<div class="br-col"><h4>${rn(r)}</h4>${ms.filter(m=>m.round===r).map(box).join('')}</div>`).join('')}</div>${adm?'<div class="small" style="margin-top:12px">Toque no nome do vencedor para lançar o resultado.</div>':''}`;
 }
-/* placar por toque: escolhe o resultado de cada set (com tie-break), sem digitar */
+/* placar por toque: formato, desfecho e resultado de cada set (com tie-break), sem digitar */
 let SCORE=null;
-const SC_WIN=['6-0','6-1','6-2','6-3','6-4','7-5','7-6'],SC_LOSE=['0-6','1-6','2-6','3-6','4-6','5-7','6-7'];
-const SC_QUICK=[['6-0','6-0'],['6-1','6-1'],['6-2','6-2'],['6-3','6-3'],['6-4','6-4'],['6-2','6-4'],['6-3','6-4'],['7-5','6-4'],['7-6','7-6']];
+const FMTS={
+  melhor_de_3:{n:'Melhor de 3 sets (tie-break em 6-6)',S:2,G:6,sup:false},
+  melhor_de_3_super:{n:'Melhor de 3 sets, 3º set em super tie-break de 10',S:2,G:6,sup:true},
+  set_unico:{n:'Set único até 6 games',S:1,G:6,sup:false},
+  set_curto:{n:'Set curto até 4 games',S:1,G:4,sup:false},
+  match_tb_10:{n:'Match tie-break de 10 pontos',S:1,G:0,sup:true}
+};
+const OUTS=[['normal','Jogo normal'],['desistencia','Desistência (alguém parou no meio)'],['wo','W.O. (o adversário não apareceu)'],['void','Interrompida (não vale pontos)']];
 const ST_WIN=['10-0','10-1','10-2','10-3','10-4','10-5','10-6','10-7','10-8','11-9'],ST_LOSE=['0-10','1-10','2-10','3-10','4-10','5-10','6-10','7-10','8-10','9-11'];
-const isTb=v=>v==='7-6'||v==='6-7';
-function setMatchWinner(mid,pid){SCORE={kind:'bracket',id:mid,pid,sets:[null,null,null],tb:[null,null,null]};renderScore();openModal('score-modal')}
-function openGameScore(gid,winnerId){SCORE={kind:'game',id:gid,pid:winnerId,sets:[null,null,null],tb:[null,null,null]};renderScore();openModal('score-modal')}
+function scFmt(){return FMTS[SCORE&&SCORE.fmt]||FMTS.melhor_de_3}
+function scWins(){return scFmt().G===4?['4-0','4-1','4-2','5-3','5-4']:['6-0','6-1','6-2','6-3','6-4','7-5','7-6']}
+function scLoses(){return scWins().map(x=>x.split('-').reverse().join('-'))}
+function isTb(v){const G=scFmt().G;return !!G&&(v===(G+1)+'-'+G||v===G+'-'+(G+1))}
+function scQuick(){const F=scFmt();if(F.G===0)return [];if(F.S===1)return scWins().map(x=>[x]);return [['6-0','6-0'],['6-1','6-1'],['6-2','6-2'],['6-3','6-3'],['6-4','6-4'],['6-2','6-4'],['6-3','6-4'],['7-5','6-4'],['7-6','7-6']]}
+function scNew(kind,id,pid){let f='melhor_de_3';try{const x=localStorage.getItem('btc-fmt');if(FMTS[x])f=x}catch(e){}return {kind,id,pid,sets:[null,null,null],tb:[null,null,null],st:[false,false,false],fmt:f,outcome:'normal'}}
+function setMatchWinner(mid,pid){SCORE=scNew('bracket',mid,pid);renderScore();openModal('score-modal')}
+function openGameScore(gid,winnerId){
+  SCORE=scNew('game',gid,winnerId);
+  const g=(S.games||[]).find(x=>x.id===gid);
+  if(g&&FMTS[g.match_format]&&g.match_format!=='melhor_de_3')SCORE.fmt=g.match_format;
+  renderScore();openModal('score-modal');
+}
 function scoreCheck(){
+  const F=scFmt();
   const sets=SCORE.sets.map((v,i)=>{
     if(!v)return null;
     if(SCORE.st[i])return '['+v+']';
@@ -2292,26 +2423,39 @@ function scoreCheck(){
     return v;
   }).filter(Boolean);
   const won=sets.filter(x=>{const m=/(\d+)-(\d+)/.exec(x);return m&&+m[1]>+m[2]}).length,lost=sets.length-won;
-  return {sets,won,lost,ok:sets.length>0&&won>lost};
+  const partial=SCORE.outcome==='desistencia';
+  return {sets,won,lost,ok:sets.length>0&&(partial?won>=lost:(won===F.S&&lost<F.S)),need:F.S};
 }
 function renderScore(){
   const el=$('score-body');if(!el||!SCORE)return;
-  if(!SCORE.st)SCORE.st=[false,false,false];
-  const nm=prof(SCORE.pid).name||'Vencedor',first=nm.split(' ')[0];
+  const F=scFmt(),nm=prof(SCORE.pid).name||'Vencedor',first=nm.split(' ')[0],pv=$('score-preview');
   $('score-title').textContent=SCORE.kind==='game'?'Placar do jogo':'Placar da partida';
-  $('score-sub').innerHTML='Vencedor: <strong>'+escapeHtml(nm)+'</strong>. Toque no resultado de cada set, sempre do ponto de vista de <strong>'+escapeHtml(first)+'</strong>. Se teve tie-break, aparece a opção para marcar os pontos.';
+  $('score-sub').innerHTML='Vencedor: <strong>'+escapeHtml(nm)+'</strong>. Escolha o formato, como terminou e o resultado de cada set, sempre do ponto de vista de <strong>'+escapeHtml(first)+'</strong>.';
+  const ctl=`<div class="sc-ctl"><label class="small" for="sc-fmt">Formato da partida</label><select class="field" id="sc-fmt" onchange="scSetFmt(this.value)">${Object.entries(FMTS).map(([k,f])=>`<option value="${k}"${k===SCORE.fmt?' selected':''}>${escapeHtml(f.n)}</option>`).join('')}</select><label class="small" for="sc-out" style="margin-top:8px">Como terminou</label><select class="field" id="sc-out" onchange="scSetOut(this.value)">${OUTS.map(([k,l])=>`<option value="${k}"${k===SCORE.outcome?' selected':''}>${l}</option>`).join('')}</select></div>`;
+  if(SCORE.outcome==='wo'||SCORE.outcome==='void'){
+    el.innerHTML=ctl+`<div class="small" style="line-height:1.6;margin-top:10px">${SCORE.outcome==='wo'?'O W.O. conta como vitória com peso reduzido (50%). Não precisa de placar.':'Partida interrompida não vale pontos para ninguém.'}</div>`;
+    pv.className='sc-preview';pv.textContent=SCORE.outcome==='wo'?'W.O.':'Interrompida';
+    return;
+  }
   const chip=(i,v,cls,st)=>`<button type="button" class="sc-chip ${cls}${SCORE.sets[i]===v&&!!SCORE.st[i]===!!st?' on':''}" onclick="pickSet(${i},'${v}',${st?1:0})">${v}</button>`;
-  const quick=`<div class="sc-quick"><b>Placares rápidos</b><div class="sc-chips">${SC_QUICK.map((q,k)=>`<button type="button" class="sc-chip q" onclick="pickQuick(${k})">${q.join(' ')}</button>`).join('')}</div></div>`;
-  const sets=[0,1,2].map(i=>{
-    const v=SCORE.sets[i],tbRow=(isTb(v)&&!SCORE.st[i])?`<div class="sc-tb"><span class="sc-lab">Tie-break</span><span class="small">pontos de quem perdeu o tie-break</span><div class="sc-chips">${[0,1,2,3,4,5,6,7,8,9].map(n=>`<button type="button" class="sc-chip t${SCORE.tb[i]===n?' on':''}" onclick="pickTb(${i},${n})">${n}</button>`).join('')}</div></div>`:'';
-    const sup=i===2?`<div class="sc-chips"><span class="sc-lab">Super tie-break</span>${ST_WIN.map(x=>chip(i,x,'w',true)).join('')}</div><div class="sc-chips"><span class="sc-lab"></span>${ST_LOSE.map(x=>chip(i,x,'l',true)).join('')}</div>`:'';
-    return `<div class="sc-set"><b>Set ${i+1}${i===2?' <span class="small">(só se teve)</span>':''}</b><div class="sc-chips"><span class="sc-lab">Ganhou</span>${SC_WIN.map(x=>chip(i,x,'w',false)).join('')}</div><div class="sc-chips"><span class="sc-lab">Perdeu</span>${SC_LOSE.map(x=>chip(i,x,'l',false)).join('')}</div>${tbRow}${sup}</div>`;
+  const q=scQuick();
+  const quick=q.length?`<div class="sc-quick"><b>Placares rápidos</b><div class="sc-chips">${q.map((x,k)=>`<button type="button" class="sc-chip q" onclick="pickQuick(${k})">${x.join(' ')}</button>`).join('')}</div></div>`:'';
+  const nSets=(F.G===0||F.S===1)?1:3;
+  const sets=[...Array(nSets).keys()].map(i=>{
+    const v=SCORE.sets[i],onlySuper=F.G===0||(F.sup&&i===2);
+    const tbRow=(!onlySuper&&isTb(v))?`<div class="sc-tb"><span class="sc-lab">Tie-break</span><span class="small">pontos de quem perdeu o tie-break</span><div class="sc-chips">${[0,1,2,3,4,5,6,7,8,9].map(n=>`<button type="button" class="sc-chip t${SCORE.tb[i]===n?' on':''}" onclick="pickTb(${i},${n})">${n}</button>`).join('')}</div></div>`:'';
+    const normal=onlySuper?'':`<div class="sc-chips"><span class="sc-lab">Ganhou</span>${scWins().map(x=>chip(i,x,'w',false)).join('')}</div><div class="sc-chips"><span class="sc-lab">Perdeu</span>${scLoses().map(x=>chip(i,x,'l',false)).join('')}</div>`;
+    const sup=onlySuper?`<div class="sc-chips"><span class="sc-lab">${F.G===0?'Match tie-break':'Super tie-break'}</span>${ST_WIN.map(x=>chip(i,x,'w',true)).join('')}</div><div class="sc-chips"><span class="sc-lab"></span>${ST_LOSE.map(x=>chip(i,x,'l',true)).join('')}</div>`:'';
+    const lab=F.G===0?'Match tie-break':'Set '+(i+1)+(i===2?' <span class="small">(só se teve)</span>':'');
+    return `<div class="sc-set"><b>${lab}</b>${normal}${tbRow}${sup}</div>`;
   }).join('');
-  el.innerHTML=quick+sets;
-  const c=scoreCheck(),pv=$('score-preview');
-  pv.className='sc-preview'+(c.sets.length&&!c.ok?' bad':'');
-  pv.textContent=!c.sets.length?'Escolha o placar de cada set':c.ok?c.sets.join('   '):'Esse placar não bate com o vencedor: ele precisa ganhar mais sets do que perdeu.';
+  el.innerHTML=ctl+quick+sets;
+  const c=scoreCheck();
+  pv.className='sc-preview'+(c.sets.length&&!c.ok&&SCORE.outcome==='normal'?' bad':'');
+  pv.textContent=!c.sets.length?'Escolha o placar de cada set':c.ok?c.sets.join('   '):(c.won<c.need?'Faltam sets: o vencedor precisa ganhar '+c.need+(c.need>1?' sets.':' set.'):'Esse placar não bate com o vencedor.');
 }
+function scSetFmt(v){SCORE.fmt=v;SCORE.sets=[null,null,null];SCORE.tb=[null,null,null];SCORE.st=[false,false,false];try{localStorage.setItem('btc-fmt',v)}catch(e){}renderScore()}
+function scSetOut(v){SCORE.outcome=v;renderScore()}
 function pickSet(i,v,st){
   const same=SCORE.sets[i]===v&&!!SCORE.st[i]===!!st;
   SCORE.sets[i]=same?null:v;SCORE.st[i]=same?false:!!st;
@@ -2319,19 +2463,22 @@ function pickSet(i,v,st){
   renderScore();
 }
 function pickTb(i,n){SCORE.tb[i]=SCORE.tb[i]===n?null:n;renderScore()}
-function pickQuick(k){SCORE.sets=[SC_QUICK[k][0],SC_QUICK[k][1],null];SCORE.tb=[null,null,null];SCORE.st=[false,false,false];renderScore()}
+function pickQuick(k){const q=scQuick()[k];SCORE.sets=[q[0]||null,q[1]||null,null];SCORE.tb=[null,null,null];SCORE.st=[false,false,false];renderScore()}
 function saveScore(noScore){
   if(!SCORE)return;
   let sc=null;
-  if(!noScore){
+  const oc=SCORE.outcome;
+  if(oc==='normal'||oc==='desistencia'){
     const c=scoreCheck();
-    if(!c.sets.length){toast('Escolha o placar ou toque em "Sem placar".');return}
-    if(!c.ok){toast('O placar não bate com o vencedor. Confira os sets.');return}
-    sc=c.sets.join(' ');
+    if(!noScore||c.sets.length){
+      if(!c.sets.length&&oc==='normal'){toast('Escolha o placar ou toque em "Sem placar".');return}
+      if(!c.ok&&oc==='normal'){toast(c.won<c.need?'Faltam sets no placar.':'O placar não bate com o vencedor. Confira os sets.');return}
+      sc=c.sets.length?c.sets.join(' '):null;
+    }
   }
-  const {kind,id,pid}=SCORE;closeModal('score-modal');
+  const {kind,id,pid,fmt}=SCORE;closeModal('score-modal');
   if(kind==='game'){
-    run(async()=>{const {error}=await sb.rpc('report_result',{g:id,w:pid,p_score:sc});if(!fail(error))toast('Resultado enviado. Falta o adversário confirmar.')});
+    run(async()=>{const {error}=await sb.rpc('report_result',{g:id,w:pid,p_score:sc,p_outcome:oc,p_format:fmt});if(!fail(error))toast(oc==='void'?'Registrado: partida interrompida, sem pontos.':'Resultado enviado. Falta o adversário confirmar.')});
     return;
   }
   run(async()=>{const {error}=await sb.rpc('admin_set_match_winner',{p_match:id,p_winner:pid,p_score:sc});if(!fail(error)){await loadExtras();toast('Resultado lançado!')}}).then(()=>renderBracket());
@@ -2406,12 +2553,6 @@ async function toggleFollow(id){
   if(on)X.follows.delete(id);else X.follows.add(id);
   toast(on?'Você deixou de seguir.':'Agora você segue '+prof(id).name+'.');
   showPlayer(id);
-}
-function setRkTab(t){
-  document.querySelectorAll('#rk-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
-  const f=document.querySelector('.rk-filters'),rb=$('ranking-body'),fb=$('feed-body');
-  if(f)f.style.display=t==='rank'?'':'none';if(rb)rb.style.display=t==='rank'?'':'none';if(fb)fb.style.display=t==='feed'?'':'none';
-  if(t==='feed')loadFeed();
 }
 async function loadFeed(){
   const el=$('feed-body');if(!el)return;
@@ -2539,8 +2680,8 @@ function renderOnboard(){
   const mine=S.me?(S.games||[]).some(g=>inG(g,S.me.id)):true;
   if(!S.me||S.me.is_admin||S.me.role==='professor'||off||mine){el.innerHTML='';return}
   const uc=userCity(),near=uc?(S.invites||[]).filter(i=>i.owner!==S.me.id&&sameCity(i.city||prof(i.owner).city,uc)).length:0;
-  const nearTxt=near>0?`<p class="onb-n">🎾 <b>${near} ${near===1?'pessoa':'pessoas'}</b> da sua cidade ${near===1?'quer':'querem'} jogar agora. Convide e marque a sua primeira partida.</p>`:`<p class="onb-n">🌱 Você pode ser o primeiro da sua cidade. Publique o seu horário e chame seu grupo.</p>`;
-  el.innerHTML=`<div class="onb"><button class="onb-x" aria-label="Fechar" onclick="closeOnboard()">×</button><h3>Bem-vindo! Comece em 3 passos</h3><ol><li><b>Complete seu perfil</b> <span class="small">com cidade, nível e WhatsApp</span></li><li><b>Diga que quer jogar</b> <span class="small">escolha dia, hora e quadra</span></li><li><b>Convide alguém</b> <span class="small">ou aceite o convite de outro jogador</span></li></ol>${nearTxt}<div class="onb-b"><button class="btn btn-primary" onclick="openModal('invite-modal')">🎾 Quero jogar</button><button class="btn btn-soft" onclick="goPage('membros')">👥 Ver jogadores</button><button class="btn btn-outline" onclick="openSettings()">⚙️ Meu perfil</button></div></div>`;
+  const nearTxt=near>0?`<p class="onb-n">🏖 <b>${near} ${near===1?'pessoa':'pessoas'}</b> da sua cidade ${near===1?'quer':'querem'} jogar agora. Convide e marque a sua primeira partida.</p>`:`<p class="onb-n">🌱 Você pode ser o primeiro da sua cidade. Publique o seu horário e chame seu grupo.</p>`;
+  el.innerHTML=`<div class="onb"><button class="onb-x" aria-label="Fechar" onclick="closeOnboard()">×</button><h3>Bem-vindo! Comece em 3 passos</h3><ol><li><b>Complete seu perfil</b> <span class="small">com cidade, nível e WhatsApp</span></li><li><b>Diga que quer jogar</b> <span class="small">escolha dia, hora e quadra</span></li><li><b>Convide alguém</b> <span class="small">ou aceite o convite de outro jogador</span></li></ol>${nearTxt}<div class="onb-b"><button class="btn btn-primary" onclick="openModal('invite-modal')">🏖 Quero jogar</button><button class="btn btn-soft" onclick="goPage('membros')">👥 Ver jogadores</button><button class="btn btn-outline" onclick="openSettings()">⚙️ Meu perfil</button></div></div>`;
 }
 function closeOnboard(){try{localStorage.setItem('btc-onb-'+S.me.id,'1')}catch(e){}renderOnboard()}
 
@@ -2564,7 +2705,7 @@ function ppSetFromRow(box,row){
   else PP[box].sel=null;
   ppRender(box);
 }
-function ppGet(box){const s=PP[box]&&PP[box].sel;return s?{partner:s.partner||null,partner_name:s.partner?null:s.partner_name,partner_level:s.partner?null:(s.partner_level||'Intermediário')}:null}
+function ppGet(box){const s=PP[box]&&PP[box].sel;return s?{partner:s.partner||null,partner_name:s.partner?null:s.partner_name,partner_level:s.partner?null:(s.partner_level||'Intermediário'),partner_gender:s.partner?null:(s.partner_gender||null)}:null}
 function ppItem(box,p){
   return `<button type="button" class="pp-item" onclick="ppPick('${box}','${p.id}')"><span class="person-avatar" style="background:${colorOf(p.name)};width:36px;height:36px;border-radius:12px;font-size:13px;flex:0 0 36px">${escapeHtml(ini(p.name))}</span><span style="min-width:0"><b>${escapeHtml(p.name)}</b><span>${escapeHtml(p.city||'')}${p.level?' · '+escapeHtml(p.level):''} · ${p.rank||0} pts</span></span></button>`;
 }
@@ -2590,7 +2731,7 @@ function ppRender(box){
   const tab=(m,l)=>`<button type="button" class="${st.mode===m?'on':''}" onclick="ppMode('${box}','${m}')">${l}</button>`;
   let body='';
   if(st.mode==='guest'){
-    body=`<div class="pp-guest"><input class="field" id="${box}-gn" placeholder="Nome e sobrenome do parceiro(a)" value="${escapeHtml(st.gname)}" oninput="PP['${box}'].gname=this.value" autocomplete="off"><select class="field" id="${box}-gl" onchange="PP['${box}'].glevel=this.value"><option${st.glevel==='Iniciante'?' selected':''}>Iniciante</option><option${st.glevel==='Intermediário'?' selected':''}>Intermediário</option><option${st.glevel==='Avançado'?' selected':''}>Avançado</option></select><div class="small" style="line-height:1.5">Quem não tem cadastro não ganha nem perde pontos. O nível dele só entra na conta dos pontos da dupla.</div><button type="button" class="btn btn-soft" onclick="ppGuestOk('${box}')">Usar este jogador</button></div>`;
+    body=`<div class="pp-guest"><input class="field" id="${box}-gn" placeholder="Nome e sobrenome do parceiro(a)" value="${escapeHtml(st.gname)}" oninput="PP['${box}'].gname=this.value" autocomplete="off"><select class="field" id="${box}-gg" onchange="PP['${box}'].ggender=this.value"><option value=""${!st.ggender?' selected':''}>Gênero (opcional)</option><option value="M"${st.ggender==='M'?' selected':''}>Masculino</option><option value="F"${st.ggender==='F'?' selected':''}>Feminino</option></select><select class="field" id="${box}-gl" onchange="PP['${box}'].glevel=this.value"><option${st.glevel==='Iniciante'?' selected':''}>Iniciante</option><option${st.glevel==='Intermediário'?' selected':''}>Intermediário</option><option${st.glevel==='Avançado'?' selected':''}>Avançado</option></select><div class="small" style="line-height:1.5">Quem não tem cadastro não ganha nem perde pontos. O nível dele só entra na conta dos pontos da dupla.</div><button type="button" class="btn btn-soft" onclick="ppGuestOk('${box}')">Usar este jogador</button></div>`;
   }else{
     body=`${st.mode==='search'?`<input class="field" id="${box}-q" placeholder="🔎 Digite o nome" value="${escapeHtml(st.q)}" oninput="ppSearch('${box}',this.value)" autocomplete="off">`:''}<div class="pp-list" id="${box}-list">${ppList(box)}</div>`;
   }
@@ -2605,7 +2746,7 @@ function ppGuestOk(box){
   if(name.length<2){toast('Escreva o nome do parceiro(a).');return}
   const hit=(S.profiles||[]).find(p=>ppNorm(p.name)===ppNorm(name));
   if(hit){toast('Esse jogador já tem cadastro. Escolha ele na lista.');st.mode='search';st.q=name;ppRender(box);return}
-  st.sel={partner:null,partner_name:name,partner_level:st.glevel||'Intermediário'};ppRender(box);
+  st.sel={partner:null,partner_name:name,partner_level:st.glevel||'Intermediário',partner_gender:st.ggender||null};ppRender(box);
 }
 function invPartnerToggle(){
   const f=$('invite-form');if(!f)return;
@@ -2625,23 +2766,60 @@ function partnerChip(row){
   return n?`<span class="fm">👥 com ${escapeHtml(n)}</span>`:'';
 }
 
+/* ===== ADMINISTRADOR: revisão de resultados, categorias e auditoria ===== */
+async function loadReview(){
+  try{
+    const [q,a,c]=await Promise.all([sb.rpc('admin_review_queue'),sb.from('audit_log').select('at,action,entity,entity_id,detail').order('at',{ascending:false}).limit(40),sb.from('categories').select('*').order('sort')]);
+    if(!q.error)X.review=q.data||[];if(!a.error)X.audit=a.data||[];if(!c.error)X.cats=c.data||[];
+    renderPeople();
+  }catch(e){}
+}
+function reviewHtml(){
+  const l=X.review||[];if(!l.length)return '';
+  return `<h3>⚖️ Resultados para revisar (${l.length})</h3><div style="display:grid;gap:8px;margin-bottom:18px">${l.map(g=>`<div class="agenda-item" style="flex-wrap:wrap"><div style="flex:1;min-width:200px"><strong style="font-size:13px">${escapeHtml(teamLabel(g,'a'))} × ${escapeHtml(teamLabel(g,'b'))}</strong><div class="small">${fmtDate(g.day)} ${escapeHtml(g.time)} · ${g.disputed?'⚖️ contestado':'🚩 suspeita de repetição'} · informado: ${escapeHtml(g.winner?prof(g.winner).name:'—')}${g.score?' ('+escapeHtml(g.score)+')':''}</div>${g.dispute_note?`<div class="small">“${escapeHtml(g.dispute_note)}”</div>`:''}</div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-soft" onclick="adminResolve('${g.id}','confirmar')">Confirmar</button><button class="btn btn-outline" onclick="adminFix('${g.id}')">Corrigir</button><button class="btn btn-outline danger-btn" onclick="adminResolve('${g.id}','anular')">Anular</button></div></div>`).join('')}</div>`;
+}
+function adminResolve(id,action,extra){
+  if(action==='anular'&&!confirm('Anular esta partida? Os pontos dela serão desfeitos para todos.'))return;
+  run(async()=>{const {error}=await sb.rpc('admin_resolve_game',Object.assign({p_game:id,p_action:action},extra||{}));if(!fail(error)){toast(action==='anular'?'Partida anulada.':'Resultado aplicado.');await loadReview()}});
+}
+function adminFix(id){
+  const g=(X.review||[]).find(x=>x.id===id)||(S.games||[]).find(x=>x.id===id);if(!g)return;
+  $('message-title').textContent='Corrigir resultado';
+  $('message-text').innerHTML=`<div class="small" style="margin-bottom:8px">Escolha quem venceu e o placar do ponto de vista do vencedor (ex.: 6-4 7-5).</div><select class="field" id="fx-w" style="margin-bottom:8px"><option value="${g.a}">${escapeHtml(teamLabel(g,'a'))}</option><option value="${g.b}">${escapeHtml(teamLabel(g,'b'))}</option></select><input class="field" id="fx-s" placeholder="Placar (opcional)" value="${escapeHtml(g.score||'')}" style="margin-bottom:8px"><input class="field" id="fx-n" placeholder="Motivo da correção (fica na auditoria)">`;
+  const a=$('message-actions');a.innerHTML='';
+  const b=document.createElement('button');b.className='btn btn-primary';b.style.width='100%';b.textContent='Aplicar correção';
+  b.onclick=()=>{const w=$('fx-w').value,sc=$('fx-s').value.trim(),n=$('fx-n').value.trim();closeModal('message-modal');adminResolve(id,'corrigir',{p_winner:w,p_score:sc||null,p_note:n||null})};
+  a.appendChild(b);openModal('message-modal');
+}
+function catsHtml(){
+  const l=X.cats||[];if(!l.length)return '';
+  return `<h3>🏅 Categorias</h3><div class="small" style="margin-bottom:8px">Faixas por pontos. A categoria de cada jogador acompanha os pontos depois de 5 partidas confirmadas e só muda após 2 partidas seguidas na nova faixa.</div><div style="display:grid;gap:8px;margin-bottom:10px">${l.map(c=>`<div class="agenda-item" style="align-items:center;flex-wrap:wrap"><strong style="flex:1;min-width:120px">${escapeHtml(c.name)}</strong><label class="small">a partir de <input class="field" style="width:90px;display:inline-block" type="number" min="0" id="cat-m-${c.id}" value="${c.min_points}"> pts</label><label class="small"><input type="checkbox" id="cat-a-${c.id}"${c.active?' checked':''}> ativa</label><button class="btn btn-soft" onclick="saveCat('${escapeHtml(c.name)}',${c.id},${c.sort})">Salvar</button></div>`).join('')}</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px"><input class="field" id="cat-new-n" placeholder="Nova categoria" style="max-width:200px"><input class="field" id="cat-new-m" type="number" min="0" placeholder="a partir de (pts)" style="max-width:150px"><button class="btn btn-outline" onclick="addCat()">+ Adicionar</button></div>`;
+}
+function saveCat(name,id,sort){const m=Number($('cat-m-'+id).value),a=$('cat-a-'+id).checked;run(async()=>{const {error}=await sb.rpc('admin_save_category',{p_name:name,p_min:m,p_sort:sort,p_active:a});if(!fail(error)){toast('Categoria salva.');await loadReview()}})}
+function addCat(){const n=($('cat-new-n').value||'').trim(),m=Number($('cat-new-m').value||0);if(!n){toast('Dê um nome à categoria.');return}run(async()=>{const {error}=await sb.rpc('admin_save_category',{p_name:n,p_min:m,p_sort:((X.cats||[]).length+1),p_active:true});if(!fail(error)){toast('Categoria criada.');await loadReview()}})}
+function auditHtml(){
+  const l=X.audit||[];if(!l.length)return '';
+  const nm={resultado_informado:'Resultado informado',resultado_confirmado:'Resultado confirmado',resultado_contestado:'Resultado contestado',resultado_retirado:'Resultado retirado',ranking_aplicado:'Ranking atualizado',admin_confirmar:'Admin confirmou',admin_corrigir:'Admin corrigiu',admin_anular:'Admin anulou',categoria_alterada:'Categoria alterada',categoria_salva:'Categoria salva',nivel_definido_pelo_admin:'Nível definido pelo admin'};
+  return `<details style="margin:0 0 20px"><summary style="cursor:pointer;font-weight:700">📜 Auditoria (últimas ${l.length} ações)</summary><div style="display:grid;gap:6px;margin-top:10px">${l.map(a=>`<div class="small">${new Date(a.at).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})} · <b>${escapeHtml(nm[a.action]||a.action)}</b></div>`).join('')}</div></details>`;
+}
+
 /* ===== AJUDA EM CADA ABA ===== */
 const HELP={
   inicio:{t:'Bem-vindo ao Beach Tennis Club',
     intro:'Este app serve para você encontrar gente para jogar beach tennis perto de você, marcar a partida, registrar o resultado e acompanhar o seu ranking. É grátis e funciona no celular.',
-    flow:[['📝','Crie sua conta','Informe nome, estado, município e nível. Assim as listas já mostram a sua cidade.'],['🎾','Marque um jogo','Em Membros, publique que quer jogar ou convide alguém para formar a dupla.'],['🏆','Jogue e registre','Depois da partida, informe o placar. O adversário confirma e o ranking atualiza.']],
+    flow:[['📝','Crie sua conta','Informe nome, estado, município e nível. Assim as listas já mostram a sua cidade.'],['🏖','Marque um jogo','Em Membros, publique que quer jogar ou convide alguém para formar a dupla.'],['🏆','Jogue e registre','Depois da partida, informe o placar. O adversário confirma e o ranking atualiza.']],
     mock:[['btn-primary','Quero jogar agora','Leva para a lista de quem procura partida.'],['btn-outline','Ver jogadores','Mostra quem está na sua cidade.']],
     rules:['Seus dados (cidade, nível e WhatsApp) ficam no seu perfil, na engrenagem ⚙️.','Cada nome é único no app. Se o seu já existir, acrescente o sobrenome.','Para receber avisos de convite e resultado, ative os avisos nas configurações.','No iPhone, instale o app na tela inicial para os avisos funcionarem.']},
   membros:{t:'Membros: quem quer jogar',
     intro:'Aqui estão os jogadores da sua cidade que querem partida. Você pode convidar alguém ou publicar o seu próprio horário.',
     flow:[['👀','Encontre alguém','Use os filtros de nível, formato e cidade. Toque em Ver perfil para conhecer a pessoa.'],['📨','Envie o convite','Toque em Convidar para jogar. A pessoa recebe um aviso.'],['✅','Aguarde a resposta','Quando ela aceitar, o jogo aparece em Meus jogos.']],
-    mock:[['btn-primary','🎾 Convidar para jogar','Manda o pedido de partida.'],['btn-outline','Ver perfil','Pontos, histórico de jogos e fair play.'],['btn-soft','💬 Conversar','Abre o chat para combinar detalhes.']],
+    mock:[['btn-primary','🏖 Convidar para jogar','Manda o pedido de partida.'],['btn-outline','Ver perfil','Pontos, histórico de jogos e fair play.'],['btn-soft','💬 Conversar','Abre o chat para combinar detalhes.']],
     rules:['Vale ranking: o resultado muda os pontos dos dois. Amistoso: só diversão, não muda o ranking.','Convites e jogos somem sozinhos depois do horário marcado.','Se não puder ir, avise a pessoa. Faltas aparecem no perfil e podem ser denunciadas.','Em jogos de duplas, cada lado tem um parceiro(a): alguém do app (ganha e perde pontos) ou sem cadastro (não pontua). O mais forte da dupla ganha menos ao vencer e perde mais ao perder.','Use o botão Denunciar no perfil se alguém se comportar mal.','Menu Membros piscando em azul: tem gente procurando jogo na sua cidade. Filtro de cidade piscando em azul: só há gente procurando em outras cidades. Toque no aviso para ver.']},
   ranking:{t:'Ranking: como os pontos funcionam',img:['assets/imagens/ranking-regras.svg?v=1','Infográfico com as regras do ranking: pontos iniciais por nível, exemplos de ganho e perda, o que conta, peso de jogos repetidos e bônus de torneio'],
     intro:'O ranking mostra quem está jogando melhor. Todo mundo começa pelo nível que escolheu e sobe ou desce conforme os resultados.',
     flow:[['🎯','Ponto de partida','Iniciante 1000 pontos, Intermediário 1200, Avançado 1400.'],['⚖️','Vale mais vencer os fortes','Ganhar de alguém com mais pontos rende mais. Perder para alguém com menos tira mais.'],['📈','Acompanhe','O gráfico mostra a sua evolução jogo a jogo.']],
     mock:[['btn-soft','Meu perfil','Veja sua posição, estatísticas e conquistas.']],
-    rules:['Só jogos confirmados e marcados como Vale ranking contam.','Jogar muitas vezes com a mesma pessoa na mesma semana vale menos, para evitar abuso.','Amistosos nunca mudam seus pontos.','Os pontos de pódio de torneio entram como bônus.','O ranking já abre com a sua cidade. Troque o filtro para ver outras.']},
+    rules:['Só jogos confirmados e marcados como Vale ranking contam.','Jogar muitas vezes com a mesma pessoa na mesma semana vale menos, para evitar abuso.','Amistosos nunca mudam seus pontos.','Os pontos de pódio de torneio entram como bônus.','Novo jogador começa com 0 pontos. Pontos não expiram: quem fica 90 dias sem jogar só aparece como inativo.','O ranking é separado por modalidade: individual, duplas (geral, masculinas, femininas e mistas) e duplas fixas (cada combinação de parceiros).','A categoria (Iniciante, Intermediário, Avançado...) segue os seus pontos depois de 5 partidas confirmadas, e só muda após 2 partidas seguidas na nova faixa.','O ranking já abre com a sua cidade. Troque o filtro para ver outras.']},
   quadras:{t:'Quadras e reservas',
     intro:'Veja as quadras da sua cidade, os valores e reserve o horário sem precisar ligar.',
     flow:[['🏟️','Escolha a quadra','Veja preço por hora e informações do local.'],['🕒','Reserve o horário','Toque em Reservar horário e selecione dia e hora livres.'],['📲','Divulgue','Mande o link da quadra para os amigos.']],
@@ -2649,9 +2827,9 @@ const HELP={
     rules:['Suas reservas ficam listadas na própria página de Quadras.','Para mudar ou cancelar, fale com a quadra pelo WhatsApp.','Quem administra uma quadra gerencia horários e reservas por aqui.']},
   jogos:{t:'Meus jogos: convites e resultados',
     intro:'Aqui você responde convites, vê os jogos marcados e registra o resultado depois da partida.',
-    flow:[['📨','Convites','Aceite ou recuse os convites recebidos. Toque em Ver perfil para conhecer quem convidou.'],['🎾','Jogue','Na data combinada, vá à quadra e jogue.'],['📝','Informe o placar','Toque em Eu ganhei ou Eu perdi e preencha os sets (e o tie-break, se houver).'],['👍','Confirmação','O adversário confirma. Depois, avalie como foi: tudo certo ou não compareceu.']],
+    flow:[['📨','Convites','Aceite ou recuse os convites recebidos. Toque em Ver perfil para conhecer quem convidou.'],['🏖','Jogue','Na data combinada, vá à quadra e jogue.'],['📝','Informe o placar','Toque em Eu ganhei ou Eu perdi e preencha os sets (e o tie-break, se houver).'],['👍','Confirmação','O adversário confirma. Depois, avalie como foi: tudo certo ou não compareceu.']],
     mock:[['btn-primary','Eu ganhei','Abre a janela para informar o placar.'],['btn-outline','Eu perdi','Mesma janela, resultado invertido.'],['btn-primary','Confirmar','Aparece quando o outro jogador informou o resultado.'],['btn-outline','Contestar','Use se o resultado informado estiver errado.']],
-    rules:['Se o adversário não responder em 48 horas, vale o resultado informado.','Se você contestar, o resultado é apagado e vocês combinam de novo.','Jogos antigos saem da lista sozinhos.','A avaliação de fair play aparece no perfil do adversário.']},
+    rules:['Se o adversário não responder em 48 horas, vale o resultado informado.','Se você contestar, o resultado vai para a análise do administrador e ninguém pontua até ele decidir. Quem informou também pode retirar o resultado e combinarem de novo.','Desistência conta com 75% do peso e W.O. com 50%. Partida interrompida não vale pontos.','Jogos antigos saem da lista sozinhos.','A avaliação de fair play aparece no perfil do adversário.']},
   professores:{t:'Aulas e professores',
     intro:'Encontre professores da sua cidade, veja os valores e peça uma aula direto pelo app.',
     flow:[['🔎','Escolha o professor','Veja local, preços (individual e em grupo) e pacotes.'],['📅','Peça o horário','Toque em Ver horários e valores e escolha dia e hora.'],['✅','Aguarde a resposta','O professor aceita ou recusa. Você recebe o aviso.']],
@@ -2719,6 +2897,13 @@ function openDeep(){
     goPage('membros');showPlayer(id);
   }
 }
+function applyGender(){
+  if(!S.me||S.me.gender)return;
+  let g=null;try{g=localStorage.getItem('btc-gender')}catch(e){}
+  if(!g||(g!=='M'&&g!=='F'))return;
+  try{localStorage.removeItem('btc-gender')}catch(e){}
+  sb.from('profiles').update({gender:g}).eq('id',S.me.id).then(()=>{S.me.gender=g},()=>{});
+}
 function applyRef(){
   if(!S.me)return;
   let r=null;try{r=localStorage.getItem('btc-ref')}catch(e){}
@@ -2727,7 +2912,7 @@ function applyRef(){
   if(r===S.me.id)return;
   sb.rpc('set_referrer',{p_ref:r}).then(()=>{},()=>{});
 }
-function renderAll(){applyRef();if(DEEP&&S.me)setTimeout(openDeep,0);renderOnboard();fillCityFilters();renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges();renderPulses();renderChatBadge();renderRankChart();renderRanking();renderArenas();renderMyBookings();renderPkgPanel();renderMyPackages()}
+function renderAll(){applyRef();applyGender();if(DEEP&&S.me)setTimeout(openDeep,0);renderOnboard();fillCityFilters();renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges();renderPulses();renderChatBadge();renderRankChart();renderRanking();renderArenas();renderMyBookings();renderPkgPanel();renderMyPackages()}
 
 ['member-search','member-location','member-level','member-format','member-sort'].forEach(id=>$(id).addEventListener('input',renderMembers));
 $('member-location').addEventListener('input',()=>renderPulses());
