@@ -336,6 +336,17 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .sb-tools .btn{flex:1;min-width:130px;padding:14px 10px}
 .sb-win{background:#e0f7ec;color:#14502f;border-radius:16px;padding:16px;text-align:center;font-weight:800;font-size:18px;margin-bottom:12px}
 @media(max-width:560px){.sb-modal{padding:16px;max-height:100vh;border-radius:20px}.sb-row{grid-template-columns:1fr repeat(var(--cols,3),36px) 64px}.sb-name{font-size:17px}.sb-cell{font-size:24px}.sb-pts{font-size:28px}.sb-pt{padding:34px 6px}}
+.sb-modal{overflow-x:hidden;box-sizing:border-box}
+.sb-modal *{box-sizing:border-box}
+.sb-set>div,.sb-grid>div{display:grid;gap:5px;min-width:0}
+.sb-set label{display:block}
+.sb-set .field,.sb-set select,.sb-set input{width:100%;max-width:100%;min-width:0}
+.sb-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.sb-set .small{overflow-wrap:anywhere}
+.sb-head-btns{display:flex;gap:8px}
+.sb-fab{position:fixed;right:14px;bottom:104px;z-index:44;display:none;align-items:center;gap:8px;background:#12382a;color:#fff;border:2px solid #d4f23a;border-radius:99px;padding:10px 16px;font:800 15px var(--body);box-shadow:0 8px 22px #0006;cursor:pointer;max-width:calc(100vw - 28px)}
+.sb-fab.on{display:flex}
+.sb-fab b{color:#d4f23a}
 /* ===== AJUSTES PARA CELULAR ===== */
 .dashboard>*,.panel,.cards>*,.page{min-width:0}
 @media(max-width:960px){.dashboard{grid-template-columns:minmax(0,1fr)}}
@@ -990,7 +1001,7 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 <div class="modal-backdrop" id="reset-modal"><div class="modal"><div class="modal-head"><h3>Criar nova senha</h3><button class="close" onclick="closeModal('reset-modal')" aria-label="Fechar">×</button></div><form id="reset-form"><div class="form-group"><label for="r-pass">Nova senha</label><input class="field" id="r-pass" type="password" minlength="6" required autocomplete="new-password"></div><p id="reset-err" role="alert" style="color:#b3261e;font-weight:700;font-size:13px;min-height:18px;margin:0 0 10px"></p><button class="btn btn-primary" style="width:100%">Salvar nova senha</button></form></div></div>
 <div class="modal-backdrop" id="tv-modal"><div class="modal modal-wide"><div class="modal-head"><h3>Professor</h3><button class="close" onclick="closeModal('tv-modal')" aria-label="Fechar">×</button></div><div id="tv-body"></div></div></div>
 <div class="modal-backdrop" id="book-modal" style="z-index:40"><div class="modal"><div class="modal-head"><h3>Pedir aula</h3><button class="close" onclick="closeModal('book-modal')" aria-label="Fechar">×</button></div><div id="book-body"></div></div></div>
-<div class="modal-backdrop" id="sb-modal" style="z-index:46"><div class="modal sb-modal"><div class="modal-head"><h3>🔢 Contador de placar</h3><button class="close" onclick="closeModal('sb-modal')" aria-label="Fechar">×</button></div><div id="sb-body"></div></div></div><div class="modal-backdrop" id="message-modal" style="z-index:45"><div class="modal"><div class="modal-head"><h3 id="message-title">Entrar em contato</h3><button class="close" onclick="closeModal('message-modal')">×</button></div><p id="message-text" style="font-size:13px;line-height:1.6;color:var(--muted)"></p><div id="message-actions"></div></div></div><div class="toast" id="toast"></div>
+<div class="modal-backdrop" id="sb-modal" style="z-index:46"><div class="modal sb-modal"><div class="modal-head"><h3>🔢 Contador de placar</h3><div class="sb-head-btns"><button class="close" onclick="sbMin()" aria-label="Minimizar" title="Minimizar">–</button><button class="close" onclick="closeModal('sb-modal')" aria-label="Fechar">×</button></div></div><div id="sb-body"></div></div></div><div class="modal-backdrop" id="message-modal" style="z-index:45"><div class="modal"><div class="modal-head"><h3 id="message-title">Entrar em contato</h3><button class="close" onclick="closeModal('message-modal')">×</button></div><p id="message-text" style="font-size:13px;line-height:1.6;color:var(--muted)"></p><div id="message-actions"></div></div></div><div class="toast" id="toast"></div>
 
 <script>
 /* ===== SUPABASE ===== */
@@ -2840,7 +2851,7 @@ function auditHtml(){
 /* ===== CONTADOR DE PLACAR (regras do tênis: 15-30-40, vantagem, tie-break, troca de lado, simples e duplas) ===== */
 let SB=null;
 function sbLoad(){try{const x=JSON.parse(localStorage.getItem('tcc-sb')||'null');SB=x&&x.cfg?x:null;if(SB){SB.st.pl=SB.st.pl||[0,0];SB.st.tbPl=SB.st.tbPl||[0,0];SB.cfg.pn=SB.cfg.pn||null}}catch(e){SB=null}}
-function sbSave(){try{if(SB)localStorage.setItem('tcc-sb',JSON.stringify(SB));else localStorage.removeItem('tcc-sb')}catch(e){}}
+function sbSave(){try{setTimeout(sbFabUpdate,0);if(SB)localStorage.setItem('tcc-sb',JSON.stringify(SB));else localStorage.removeItem('tcc-sb')}catch(e){}}
 function sbOpen(){sbLoad();sbRender();openModal('sb-modal')}
 function sbModeSet(){const d=$('sb-mode').value==='double';document.querySelectorAll('.sb-dbl').forEach(e=>e.style.display=d?'':'none')}
 function sbStart(){
@@ -3019,6 +3030,22 @@ function sbPrint(){
     toast('Print salvo na sua galeria/downloads.');
   },'image/png');
 }
+
+
+function sbMin(){closeModal('sb-modal')}
+function sbFabUpdate(){
+  let f=document.getElementById('sb-fab');
+  if(!f){f=document.createElement('button');f.id='sb-fab';f.className='sb-fab';f.type='button';f.setAttribute('aria-label','Abrir contador de placar');f.onclick=()=>{const m=$('sb-modal');if(m.classList.contains('open'))sbMin();else sbOpen()};document.body.appendChild(f)}
+  const m=$('sb-modal'),open=m&&m.classList.contains('open');
+  if(!SB||open){f.classList.remove('on');return}
+  const st=SB.st,c=SB.cfg;
+  f.innerHTML=st.over?'🏆 <b>'+escapeHtml(c.names[st.winner])+'</b> venceu':'🔢 sets <b>'+st.won[0]+'-'+st.won[1]+'</b> · games <b>'+st.g[0]+'-'+st.g[1]+'</b> · <b>'+sbDisp(st,c,0)+'-'+sbDisp(st,c,1)+'</b>';
+  f.classList.add('on');
+}
+(function(){
+  const go=()=>{try{sbLoad();sbFabUpdate();const m=document.getElementById('sb-modal');if(m)new MutationObserver(sbFabUpdate).observe(m,{attributes:true,attributeFilter:['class']})}catch(e){}};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else setTimeout(go,0);
+})();
 
 /* ===== AJUDA EM CADA ABA ===== */
 const HELP={
