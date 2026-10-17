@@ -2088,7 +2088,7 @@ function renderRankChart(){
   const series=[{v:base,l:'Início',tip:'Início: '+base+' pts'}];let run=base;
   gs.forEach((g,i)=>{run+=pts[i];series.push({v:run,l:fmtDate(g.day),w:teamWon(g,me),tip:fmtDate(g.day)+': '+run+' pts ('+(pts[i]>0?'+':'')+pts[i]+(teamWon(g,me)?' vitória':' derrota')+')'})});
   if(series.length>1&&series[series.length-1].v!==cur)series.push({v:cur,l:'Hoje',tip:'Hoje: '+cur+' pts'});
-  const board=S.profiles.filter(p=>p.role!=='professor'&&!p.is_admin).sort((a,b)=>(b.rank||0)-(a.rank||0));
+  const board=S.profiles.filter(p=>p.role==='jogador').sort((a,b)=>(b.rank||0)-(a.rank||0));
   const pos=board.findIndex(p=>p.id===me)+1;
   const pct=mine.length?Math.round(wins*100/mine.length)+'%':'—';
   const stats=`<div class="rk-stats"><div class="rk-stat"><b>${cur}</b><span>pontos</span></div><div class="rk-stat"><b>${pos?('#'+pos):'—'}</b><span>posição${board.length?' de '+board.length:''}</span></div><div class="rk-stat"><b>${wins}</b><span>vitórias</span></div><div class="rk-stat"><b>${losses}</b><span>derrotas</span></div><div class="rk-stat"><b>${pct}</b><span>aproveitamento</span></div></div>`;
@@ -2113,7 +2113,7 @@ function renderRankChart(){
 }
 
 /* ===== RANKING (classificacao geral) ===== */
-function rkBoard(){return (S.profiles||[]).filter(p=>p.role!=='professor'&&!p.is_admin).sort((a,b)=>((b.rank||0)-(a.rank||0))||String(a.name).localeCompare(String(b.name)))}
+function rkBoard(){return (S.profiles||[]).filter(p=>p.role==='jogador').sort((a,b)=>((b.rank||0)-(a.rank||0))||String(a.name).localeCompare(String(b.name)))}
 function rkPos(board,id){const p=board.find(x=>x.id===id);if(!p)return 0;return 1+board.filter(x=>(x.rank||0)>(p.rank||0)).length}
 function rkAvatar(p,size){return p.photo_url?`<img src="${escapeHtml(p.photo_url)}" alt="" style="width:${size}px;height:${size}px;border-radius:50%;object-fit:cover">`:`<div class="person-avatar" style="background:${colorOf(p.name)};width:${size}px;height:${size}px;border-radius:50%;font-size:${Math.round(size*.34)}px">${escapeHtml(ini(p.name))}</div>`}
 /* ===== RANKING v2: abas, modalidades, período, duplas fixas e histórico ===== */
@@ -2772,7 +2772,7 @@ function teamLabel(g,side){
   const pn=p2?(prof(p2).name||n2):n2;
   return pn?cap+' e '+pn:cap;
 }
-function ppPool(){return (S.profiles||[]).filter(p=>p.role!=='professor'&&!p.is_admin&&S.me&&p.id!==S.me.id)}
+function ppPool(){return (S.profiles||[]).filter(p=>p.role==='jogador'&&S.me&&p.id!==S.me.id)}
 function ppInit(box,opts){PP[box]={mode:'friends',q:'',sel:null,gname:'',glevel:'Intermediário',exclude:(opts&&opts.exclude)||[]};ppRender(box)}
 function ppSetFromRow(box,row){
   if(!PP[box])PP[box]={mode:'friends',q:'',sel:null,gname:'',glevel:'Intermediário',exclude:[]};
