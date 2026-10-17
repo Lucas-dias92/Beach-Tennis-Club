@@ -347,6 +347,21 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .sb-fab{position:fixed;right:14px;bottom:104px;z-index:44;display:none;align-items:center;gap:8px;background:#12382a;color:#fff;border:2px solid #d4f23a;border-radius:99px;padding:10px 16px;font:800 15px var(--body);box-shadow:0 8px 22px #0006;cursor:pointer;max-width:calc(100vw - 28px)}
 .sb-fab.on{display:flex}
 .sb-fab b{color:#d4f23a}
+@media(max-width:820px){
+.games-table,.games-table tbody{display:block;width:100%;min-width:0}
+.games-table thead{display:none}
+.games-table tr{display:grid;gap:8px;padding:16px;border-bottom:1px solid var(--line)}
+.games-table td{display:block;padding:0;border:0;min-width:0;overflow-wrap:anywhere}
+.games-table td[colspan]{padding:10px 0}
+.games-table td:not([colspan])::before{display:block;font:700 11px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.games-table td:nth-child(2)::before{content:'Data e horário'}
+.games-table td:nth-child(3)::before{content:'Local'}
+.games-table td:nth-child(4)::before{content:'Ranking'}
+.games-table td:nth-child(5)::before{content:'Status'}
+.games-table td:nth-child(1){font-size:16px}
+.games-table td:nth-child(5){padding-top:6px;border-top:1px dashed var(--line)}
+#page-jogos .table-wrap{overflow:visible}
+}
 /* ===== AJUSTES PARA CELULAR ===== */
 .dashboard>*,.panel,.cards>*,.page{min-width:0}
 @media(max-width:960px){.dashboard{grid-template-columns:minmax(0,1fr)}}
