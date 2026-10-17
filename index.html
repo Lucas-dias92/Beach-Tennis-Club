@@ -307,27 +307,35 @@ body{background-image:radial-gradient(900px 520px at 6% -6%,#c9efe6 0,transparen
 .rk-why{color:var(--muted)}
 .feed-nm{background:none;border:0;padding:0;font:inherit;font-weight:700;color:inherit;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}.feed-nm:hover{color:var(--green,#14805a)}.feed-line span{font-weight:700}
 .sec-actions{display:flex;gap:8px;flex-wrap:wrap}
-.sb-modal{max-width:480px}
-.sb-set{display:grid;gap:10px}
-.sb-set label{font-size:12px;font-weight:700;color:var(--muted)}
-.sb-board{border-radius:16px;background:#12382a;color:#fff;padding:12px 14px;display:grid;gap:6px;margin-bottom:10px}
-.sb-row{display:grid;grid-template-columns:1fr repeat(var(--cols,3),34px) 58px;gap:6px;align-items:center}
-.sb-row.head{font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.65}
+.sb-modal{max-width:620px;width:100%;max-height:94vh;overflow:auto;padding:22px}
+.sb-set{display:grid;gap:12px}
+.sb-set label{font-size:13px;font-weight:700;color:var(--muted)}
+.sb-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sb-board{border-radius:20px;background:#12382a;color:#fff;padding:16px 18px;display:grid;gap:10px;margin-bottom:12px}
+.sb-row{display:grid;grid-template-columns:1fr repeat(var(--cols,3),44px) 76px;gap:8px;align-items:center}
+.sb-row.head{font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.65}
 .sb-row.head span{text-align:center}.sb-row.head span:first-child{text-align:left}
-.sb-name{font:700 15px var(--body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sb-name i{font-style:normal;margin-right:4px}
-.sb-cell{text-align:center;font:800 18px var(--display)}
+.sb-name{font:700 19px var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-name i{font-style:normal;margin-right:5px}
+.sb-cell{text-align:center;font:800 28px var(--display)}
 .sb-cell.dim{opacity:.55}
 .sb-cell.win{color:#d4f23a}
-.sb-pts{background:#d4f23a;color:#12382a;border-radius:10px;padding:4px 0;text-align:center;font:800 20px var(--display)}
-.sb-info{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.sb-tag{font:700 12px var(--body);padding:5px 10px;border-radius:99px;background:#eef6ee;color:#14502f}
+.sb-pts{background:#d4f23a;color:#12382a;border-radius:12px;padding:6px 0;text-align:center;font:800 32px var(--display)}
+.sb-serve{border:2px solid #14805a;background:#eaf8f0;border-radius:18px;padding:12px 16px;text-align:center;margin-bottom:12px}
+.sb-serve-top{font:700 12px var(--body);letter-spacing:.08em;text-transform:uppercase;color:#14805a}
+.sb-serve-name{font:800 26px var(--display);color:#12382a;margin:2px 0}
+.sb-serve-side{font:600 17px var(--body);color:#12382a}
+.sb-serve-side b{background:#12382a;color:#d4f23a;border-radius:8px;padding:2px 8px}
+.sb-change{background:#ffe3d6;color:#a8400f;font:800 18px var(--body);text-align:center;border-radius:14px;padding:12px;margin-bottom:12px}
+.sb-info{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.sb-tag{font:700 13px var(--body);padding:6px 11px;border-radius:99px;background:#eef6ee;color:#14502f}
 .sb-tag.warn{background:#fff1d1;color:#8c6212}.sb-tag.hot{background:#ffe3d6;color:#a8400f}
-.sb-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
-.sb-pt{padding:18px 8px;font-size:15px;border-radius:14px}
+.sb-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.sb-pt{padding:30px 8px;font-size:17px;border-radius:18px}
 .sb-tools{display:flex;gap:8px;flex-wrap:wrap}
-.sb-tools .btn{flex:1;min-width:120px}
-.sb-win{background:#e0f7ec;color:#14502f;border-radius:14px;padding:12px;text-align:center;font-weight:800;margin-bottom:10px}
+.sb-tools .btn{flex:1;min-width:130px;padding:14px 10px}
+.sb-win{background:#e0f7ec;color:#14502f;border-radius:16px;padding:16px;text-align:center;font-weight:800;font-size:18px;margin-bottom:12px}
+@media(max-width:560px){.sb-modal{padding:16px;max-height:100vh;border-radius:20px}.sb-row{grid-template-columns:1fr repeat(var(--cols,3),36px) 64px}.sb-name{font-size:17px}.sb-cell{font-size:24px}.sb-pts{font-size:28px}.sb-pt{padding:34px 6px}}
 /* ===== AJUSTES PARA CELULAR ===== */
 .dashboard>*,.panel,.cards>*,.page{min-width:0}
 @media(max-width:960px){.dashboard{grid-template-columns:minmax(0,1fr)}}
@@ -2829,19 +2837,26 @@ function auditHtml(){
   return `<details style="margin:0 0 20px"><summary style="cursor:pointer;font-weight:700">📜 Auditoria (últimas ${l.length} ações)</summary><div style="display:grid;gap:6px;margin-top:10px">${l.map(a=>`<div class="small">${new Date(a.at).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})} · <b>${escapeHtml(nm[a.action]||a.action)}</b></div>`).join('')}</div></details>`;
 }
 
-/* ===== CONTADOR DE PLACAR (regras do tênis: 15-30-40, vantagem, tie-break, troca de lado) ===== */
+/* ===== CONTADOR DE PLACAR (regras do tênis: 15-30-40, vantagem, tie-break, troca de lado, simples e duplas) ===== */
 let SB=null;
-function sbLoad(){try{const x=JSON.parse(localStorage.getItem('tcc-sb')||'null');SB=x&&x.cfg?x:null}catch(e){SB=null}}
+function sbLoad(){try{const x=JSON.parse(localStorage.getItem('tcc-sb')||'null');SB=x&&x.cfg?x:null;if(SB){SB.st.pl=SB.st.pl||[0,0];SB.st.tbPl=SB.st.tbPl||[0,0];SB.cfg.pn=SB.cfg.pn||null}}catch(e){SB=null}}
 function sbSave(){try{if(SB)localStorage.setItem('tcc-sb',JSON.stringify(SB));else localStorage.removeItem('tcc-sb')}catch(e){}}
 function sbOpen(){sbLoad();sbRender();openModal('sb-modal')}
+function sbModeSet(){const d=$('sb-mode').value==='double';document.querySelectorAll('.sb-dbl').forEach(e=>e.style.display=d?'':'none')}
 function sbStart(){
-  const n1=($('sb-n1').value||'').trim()||'Jogador 1',n2=($('sb-n2').value||'').trim()||'Jogador 2';
-  const cfg={names:[n1.slice(0,18),n2.slice(0,18)],fmt:$('sb-fmt').value,noAd:$('sb-ad').value==='no',tb:$('sb-tb').value==='yes',super:$('sb-sup').value==='yes'};
-  const first=Number($('sb-first').value)||0;
-  SB={cfg,stack:[],st:{sets:[],won:[0,0],g:[0,0],p:[0,0],tb:false,sup:false,tbp:[0,0],tbFirst:0,server:first,change:false,over:false,winner:null,startedAt:Date.now()}};
+  const dbl=$('sb-mode').value==='double',v=id=>($(id).value||'').trim();
+  let names,pn=null;
+  if(dbl){
+    pn=[[v('sb-n1')||'Jogador 1',v('sb-n1b')||'Parceiro 1'],[v('sb-n2')||'Jogador 2',v('sb-n2b')||'Parceiro 2']].map(t=>t.map(x=>x.slice(0,14)));
+    names=pn.map(t=>t.map(x=>x.split(' ')[0]).join(' / '));
+  }else names=[(v('sb-n1')||'Jogador 1').slice(0,18),(v('sb-n2')||'Jogador 2').slice(0,18)];
+  const cfg={names,pn,dbl,fmt:$('sb-fmt').value,noAd:$('sb-ad').value==='no',tb:$('sb-tb').value==='yes',super:$('sb-sup').value==='yes'};
+  const first=Number($('sb-first').value)||0,p1=Number(($('sb-p1')||{}).value)||0,p2=Number(($('sb-p2')||{}).value)||0;
+  SB={cfg,stack:[],st:{sets:[],won:[0,0],g:[0,0],p:[0,0],tb:false,sup:false,tbp:[0,0],tbFirst:0,tbPl:[0,0],pl:dbl?[p1,p2]:[0,0],server:first,change:false,over:false,winner:null,startedAt:Date.now()}};
   sbSave();sbRender();
 }
 function sbSnap(){SB.stack.push(JSON.stringify(SB.st));if(SB.stack.length>400)SB.stack.shift()}
+function sbTbTurn(st,n){const k=Math.floor((n+1)/2);return {team:(st.tbFirst+k)%2,turns:Math.floor(k/2)}}
 function sbPoint(w){
   const st=SB.st,c=SB.cfg;if(st.over)return;
   sbSnap();st.change=false;const o=1-w;
@@ -2856,31 +2871,36 @@ function sbPoint(w){
     if(!won)return sbSave(),sbRender();
     st.g[w]++;st.p=[0,0];
     const gw=st.g[w],go=st.g[o];
+    st.pl[st.server]=1-st.pl[st.server];
     if(gw>=6&&gw-go>=2)return sbEndSet(w,false);
     if((st.g[0]+st.g[1])%2===1)st.change=true;
     st.server=1-st.server;
-    if(gw===6&&go===6&&c.tb){st.tb=true;st.tbp=[0,0];st.tbFirst=st.server}
+    if(gw===6&&go===6&&c.tb){st.tb=true;st.tbp=[0,0];st.tbFirst=st.server;st.tbPl=st.pl.slice()}
   }
   sbSave();sbRender();
 }
 function sbEndSet(w,wasTb){
-  const st=SB.st,c=SB.cfg,o=1-w;
+  const st=SB.st,c=SB.cfg;
+  const inTb=wasTb;
+  if(inTb){
+    const n=st.tbp[0]+st.tbp[1],kLast=Math.floor(n/2),cnt=[0,0];
+    for(let k=0;k<=kLast;k++){cnt[(st.tbFirst+k)%2]++}
+    st.pl=[(st.tbPl[0]+cnt[0])%2,(st.tbPl[1]+cnt[1])%2];
+  }
   if(st.sup){st.sets.push({g:[st.tbp[0],st.tbp[1]],sup:true})}
   else if(wasTb){const g=[st.g[0],st.g[1]];g[w]++;st.sets.push({g,tb:[st.tbp[0],st.tbp[1]],loser:Math.min(st.tbp[0],st.tbp[1])})}
   else st.sets.push({g:[st.g[0],st.g[1]]});
   st.won[w]++;
   const need=c.fmt==='bo3'?2:1;
-  const tot=st.sup||wasTb?0:st.g[0]+st.g[1];
+  const tot=wasTb?0:st.g[0]+st.g[1];
   if(st.won[w]>=need){st.over=true;st.winner=w;st.change=false}
   else{
-    const lastTb=wasTb&&!st.sup;
-    st.server=lastTb?1-st.tbFirst:1-st.server;
-    if(wasTb&&!st.sup)st.change=true;else st.change=tot%2===1;
+    st.server=wasTb&&!st.sup?1-st.tbFirst:1-st.server;
+    st.change=wasTb&&!st.sup?true:tot%2===1;
     st.g=[0,0];st.p=[0,0];st.tb=false;st.tbp=[0,0];
-    if(c.fmt==='bo3'&&c.super&&st.won[0]===1&&st.won[1]===1){st.sup=true;st.tbFirst=st.server}else st.sup=false;
-    if(st.sup)st.change=false;
+    if(c.fmt==='bo3'&&c.super&&st.won[0]===1&&st.won[1]===1){st.sup=true;st.tbFirst=st.server;st.tbPl=st.pl.slice();st.change=false}else st.sup=false;
   }
-  st.sup=st.over?false:st.sup;
+  if(st.over)st.sup=false;
   sbSave();sbRender();
 }
 function sbUndo(){if(!SB||!SB.stack.length)return;SB.st=JSON.parse(SB.stack.pop());sbSave();sbRender()}
@@ -2894,40 +2914,55 @@ function sbDisp(st,c,i){
 }
 function sbSetText(x){return x.sup?'['+x.g[0]+'-'+x.g[1]+']':x.g[0]+'-'+x.g[1]+(x.tb?'('+x.loser+')':'')}
 function sbResultText(){return SB.st.sets.map(sbSetText).join(' ')}
+function sbServer(){
+  const st=SB.st,c=SB.cfg;let team,pi,pts;
+  if(st.tb||st.sup){const n=st.tbp[0]+st.tbp[1],t=sbTbTurn(st,n);team=t.team;pi=(st.tbPl[team]+t.turns)%2;pts=n}
+  else{team=st.server;pi=st.pl[team];pts=st.p[0]+st.p[1]}
+  const name=c.dbl&&c.pn?c.pn[team][pi]:c.names[team];
+  const side=pts%2===0?'DIREITO':'ESQUERDO';
+  const rt=1-team,rcv=c.dbl&&c.pn?c.pn[rt].join(' ou '):c.names[rt];
+  return {team,pi,name,side,rcv,decisive:c.noAd&&!st.tb&&!st.sup&&st.p[0]>=3&&st.p[1]>=3};
+}
 function sbRender(){
   const el=$('sb-body');if(!el)return;
   if(!SB){
     const me=(S.me&&S.me.name)?S.me.name.split(' ')[0]:'Eu';
-    el.innerHTML=`<div class="sb-set"><div class="small" style="line-height:1.5">Conte os pontos do jogo como na quadra: 15, 30, 40, vantagem, tie-break e aviso de troca de lado. Fica salvo neste aparelho.</div>
-<div><label for="sb-n1">Jogador 1</label><input class="field" id="sb-n1" maxlength="18" value="${escapeHtml(me)}"></div>
-<div><label for="sb-n2">Jogador 2</label><input class="field" id="sb-n2" maxlength="18" placeholder="Adversário" value="Adversário"></div>
+    el.innerHTML=`<div class="sb-set"><div class="small" style="line-height:1.5">Conte os pontos do jogo como na quadra: 15, 30, 40, vantagem, tie-break, troca de lado e o lado do saque. Fica salvo neste aparelho.</div>
+<div><label for="sb-mode">Tipo de jogo</label><select class="field" id="sb-mode" onchange="sbModeSet()"><option value="single">Simples (2 jogadores)</option><option value="double">Duplas (4 jogadores)</option></select></div>
+<div class="sb-grid"><div><label for="sb-n1">Jogador 1</label><input class="field" id="sb-n1" maxlength="18" value="${escapeHtml(me)}"></div>
+<div class="sb-dbl" style="display:none"><label for="sb-n1b">Parceiro do 1</label><input class="field" id="sb-n1b" maxlength="14" placeholder="Parceiro"></div>
+<div><label for="sb-n2">Jogador 2</label><input class="field" id="sb-n2" maxlength="18" value="Adversário"></div>
+<div class="sb-dbl" style="display:none"><label for="sb-n2b">Parceiro do 2</label><input class="field" id="sb-n2b" maxlength="14" placeholder="Parceiro"></div></div>
 <div><label for="sb-fmt">Formato</label><select class="field" id="sb-fmt"><option value="bo3">Melhor de 3 sets</option><option value="one">Set único</option></select></div>
 <div><label for="sb-ad">Quando chega em 40-40</label><select class="field" id="sb-ad"><option value="ad">Com vantagem (2 pontos seguidos)</option><option value="no">Ponto decisivo (sem vantagem)</option></select></div>
 <div><label for="sb-tb">Em 6-6 no set</label><select class="field" id="sb-tb"><option value="yes">Tie-break de 7 pontos</option><option value="no">Continuar até abrir 2 games</option></select></div>
 <div><label for="sb-sup">3º set (melhor de 3)</label><select class="field" id="sb-sup"><option value="no">Set normal</option><option value="yes">Super tie-break de 10 pontos</option></select></div>
-<div><label for="sb-first">Quem saca primeiro</label><select class="field" id="sb-first"><option value="0">Jogador 1</option><option value="1">Jogador 2</option></select></div>
-<button class="btn btn-primary" onclick="sbStart()">Começar jogo</button></div>`;
+<div><label for="sb-first">Quem saca primeiro</label><select class="field" id="sb-first"><option value="0">Lado 1</option><option value="1">Lado 2</option></select></div>
+<div class="sb-dbl sb-grid" style="display:none"><div><label for="sb-p1">Saca primeiro na dupla 1</label><select class="field" id="sb-p1"><option value="0">Jogador 1</option><option value="1">Parceiro do 1</option></select></div>
+<div><label for="sb-p2">Saca primeiro na dupla 2</label><select class="field" id="sb-p2"><option value="0">Jogador 2</option><option value="1">Parceiro do 2</option></select></div></div>
+<button class="btn btn-primary" style="padding:16px" onclick="sbStart()">Começar jogo</button></div>`;
     return;
   }
   const st=SB.st,c=SB.cfg,nSets=Math.max(st.sets.length+(st.over?0:1),1);
-  const head=`<div class="sb-row head" style="--cols:${nSets}"><span>Jogador</span>${[...Array(nSets).keys()].map(i=>`<span>${i<st.sets.length?'S'+(i+1):(st.sup?'S'+(i+1):'Games')}</span>`).join('')}<span>${st.tb||st.sup?'TB':'Pts'}</span></div>`;
+  const head=`<div class="sb-row head" style="--cols:${nSets}"><span>${c.dbl?'Duplas':'Jogador'}</span>${[...Array(nSets).keys()].map(i=>`<span>${i<st.sets.length?'S'+(i+1):(st.sup?'S'+(i+1):'Games')}</span>`).join('')}<span>${st.tb||st.sup?'TB':'Pts'}</span></div>`;
+  const sv=st.over?null:sbServer();
   const row=i=>{
     const cells=[...Array(nSets).keys()].map(k=>{
-      if(k<st.sets.length){const x=st.sets[k];const win=x.g[i]>x.g[1-i];return `<span class="sb-cell${win?' win':' dim'}">${x.g[i]}${x.tb&&x.g[i]<x.g[1-i]?'<sup style="font-size:9px">'+x.loser+'</sup>':''}</span>`}
+      if(k<st.sets.length){const x=st.sets[k];const win=x.g[i]>x.g[1-i];return `<span class="sb-cell${win?' win':' dim'}">${x.g[i]}${x.tb&&x.g[i]<x.g[1-i]?'<sup style="font-size:11px">'+x.loser+'</sup>':''}</span>`}
       return `<span class="sb-cell">${st.sup?'':st.g[i]}</span>`;
     }).join('');
-    const srv=!st.over&&(((st.tb||st.sup)?(st.tbp[0]+st.tbp[1]===0?st.tbFirst:(st.tbFirst+Math.floor((st.tbp[0]+st.tbp[1]+1)/2))%2):st.server)===i);
-    return `<div class="sb-row" style="--cols:${nSets}"><span class="sb-name">${srv?'<i title="Sacando">🎾</i>':''}${escapeHtml(c.names[i])}</span>${cells}<span class="sb-pts">${st.over?'':sbDisp(st,c,i)}</span></div>`;
+    return `<div class="sb-row" style="--cols:${nSets}"><span class="sb-name">${sv&&sv.team===i?'<i title="Sacando">🎾</i>':''}${escapeHtml(c.names[i])}</span>${cells}<span class="sb-pts">${st.over?'':sbDisp(st,c,i)}</span></div>`;
   };
   const tags=[];
   if(st.sup)tags.push('<span class="sb-tag warn">Super tie-break (até 10)</span>');
   else if(st.tb)tags.push('<span class="sb-tag warn">Tie-break (até 7)</span>');
-  if(!st.over&&!st.tb&&!st.sup&&c.noAd&&st.p[0]>=3&&st.p[1]>=3)tags.push('<span class="sb-tag hot">Ponto decisivo</span>');
+  if(sv&&sv.decisive)tags.push('<span class="sb-tag hot">Ponto decisivo · quem recebe escolhe o lado</span>');
   if(!st.over&&!st.tb&&!st.sup&&!c.noAd&&st.p[0]>=3&&st.p[0]===st.p[1])tags.push('<span class="sb-tag warn">Iguais (deuce)</span>');
-  if(st.change)tags.push('<span class="sb-tag hot">🔄 Troquem de lado</span>');
-  const need=c.fmt==='bo3'?2:1;
-  tags.push(`<span class="sb-tag">${c.fmt==='bo3'?'Melhor de 3':'Set único'} · sets ${st.won[0]}-${st.won[1]}</span>`);
-  let h=`<div class="sb-board">${head}${row(0)}${row(1)}</div><div class="sb-info">${tags.join('')}</div>`;
+  tags.push(`<span class="sb-tag">${c.dbl?'Duplas · ':''}${c.fmt==='bo3'?'Melhor de 3':'Set único'} · sets ${st.won[0]}-${st.won[1]}</span>`);
+  let h=`<div class="sb-board">${head}${row(0)}${row(1)}</div>`;
+  if(st.change)h+=`<div class="sb-change">🔄 Troquem de lado da quadra</div>`;
+  if(sv)h+=`<div class="sb-serve"><div class="sb-serve-top">🎾 Saca agora</div><div class="sb-serve-name">${escapeHtml(sv.name)}</div><div class="sb-serve-side">pelo lado <b>${sv.side}</b> da quadra</div><div class="small">Recebe: ${escapeHtml(sv.rcv)}${sv.decisive?'':''}</div></div>`;
+  h+=`<div class="sb-info">${tags.join('')}</div>`;
   if(st.over){
     h+=`<div class="sb-win">🏆 ${escapeHtml(c.names[st.winner])} venceu! ${escapeHtml(sbResultText())}</div>
 <div class="sb-tools"><button class="btn btn-primary" onclick="sbPrint()">📸 Salvar print do resultado</button><button class="btn btn-outline" onclick="sbUndo()">↩ Desfazer último ponto</button><button class="btn btn-outline" onclick="sbRestart()">🗑 Novo jogo</button></div>`;
@@ -2951,14 +2986,17 @@ function sbPrint(){
   x.fillText(st.over?'RESULTADO FINAL':'PLACAR DO JOGO',W/2,250);
   const sets=st.sets.slice();
   const colW=130,left=110,top=330,rowH=170,cols=Math.max(sets.length,1);
-  const tableW=W-2*left;
+  const tableW=W-2*left,nameMax=tableW-60-cols*colW;
   x.textAlign='left';
   [0,1].forEach(i=>{
     const y=top+i*rowH;
     x.fillStyle='#ffffff14';x.beginPath();x.roundRect(left,y,tableW,rowH-20,26);x.fill();
     const win=st.over&&st.winner===i;
-    x.fillStyle=win?'#d4f23a':'#ffffff';x.font='800 50px sans-serif';
-    x.fillText((win?'🏆 ':'')+c.names[i],left+30,y+82);
+    x.fillStyle=win?'#d4f23a':'#ffffff';
+    let fs=50;x.font='800 '+fs+'px sans-serif';
+    const label=(win?'🏆 ':'')+c.names[i];
+    while(x.measureText(label).width>nameMax&&fs>22){fs-=2;x.font='800 '+fs+'px sans-serif'}
+    x.fillText(label,left+30,y+82);
     x.textAlign='center';
     sets.forEach((s2,k)=>{
       const cx=left+tableW-30-(cols-k)*colW+colW/2,w2=s2.g[i]>s2.g[1-i];
@@ -2969,9 +3007,9 @@ function sbPrint(){
     x.textAlign='left';
   });
   x.textAlign='center';x.fillStyle='#ffffffcc';x.font='600 34px sans-serif';
-  const fmt=c.fmt==='bo3'?'Melhor de 3 sets':'Set único';
+  const fmt=(c.dbl?'Duplas · ':'')+(c.fmt==='bo3'?'Melhor de 3 sets':'Set único');
   x.fillText(fmt+(c.noAd?' · ponto decisivo':'')+(c.super&&c.fmt==='bo3'?' · super tie-break':''),W/2,top+2*rowH+40);
-  if(st.over){x.fillStyle='#d4f23a';x.font='800 44px sans-serif';x.fillText(c.names[st.winner]+' venceu  '+sbResultText(),W/2,top+2*rowH+120)}
+  if(st.over){x.fillStyle='#d4f23a';x.font='800 44px sans-serif';let t=c.names[st.winner]+' venceu  '+sbResultText();let f2=44;while(x.measureText(t).width>W-120&&f2>24){f2-=2;x.font='800 '+f2+'px sans-serif'}x.fillText(t,W/2,top+2*rowH+120)}
   x.fillStyle='#ffffff77';x.font='500 28px sans-serif';x.fillText(location.host,W/2,H-60);
   const nameFile='placar-'+new Date().toISOString().slice(0,10)+'.png';
   cv.toBlob(async b=>{
