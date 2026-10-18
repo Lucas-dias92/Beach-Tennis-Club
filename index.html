@@ -2733,14 +2733,14 @@ function arenaFreeToggle(){
 }
 function invArenas(){
   const F=$('invite-form').elements,city=F.city?F.city.value:'';
-  return (X.arenas||[]).filter(a=>a.active!==false&&(!city||sameCity(a.city,city)));
+  return (X.arenas||[]).filter(a=>a.active!==false&&(!city||!a.city||sameCity(a.city,city)));
 }
 function renderInvArenas(){
   const box=$('inv-arena-box'),inp=$('inv-place');if(!box||!inp)return;
-  const list=invArenas(),cur=inp.value.trim();
-  if(!list.length){box.innerHTML='';inp.style.display='';return}
+  const list=invArenas(),cur=inp.value.trim(),city=($('invite-form').elements.city||{}).value||'';
   const hit=list.find(a=>a.name.trim().toLowerCase()===cur.toLowerCase());
-  box.innerHTML=`<select class="field" id="inv-arena" onchange="invPickArena(this.value)" style="margin-bottom:8px"><option value="">Escolha uma quadra cadastrada…</option>${list.map(a=>`<option value="${a.id}"${hit&&hit.id===a.id?' selected':''}>${escapeHtml(a.name)} · ${a.free?'Grátis':(a.price_hour>0?money(a.price_hour)+'/h':'consulte o valor')}</option>`).join('')}<option value="__outro"${cur&&!hit?' selected':''}>Outro local (digitar)</option></select><div id="inv-arena-prev"></div>`;
+  const lab=a=>escapeHtml(a.name)+' · '+(a.free?'Grátis':(a.price_hour>0?money(a.price_hour)+'/h':'consulte o valor'));
+  box.innerHTML=`<select class="field" id="inv-arena" onchange="invPickArena(this.value)" style="margin-bottom:8px"><option value="">${list.length?'Toque para escolher uma quadra cadastrada…':'Nenhuma quadra cadastrada nesta cidade ainda'}</option>${list.map(a=>`<option value="${a.id}"${hit&&hit.id===a.id?' selected':''}>${lab(a)}</option>`).join('')}<option value="__outro"${cur&&!hit?' selected':''}>✏️ Escrever outro local</option></select><div id="inv-arena-prev"></div>${list.length?'':`<div class="small" style="margin-bottom:8px;line-height:1.5">${city?'Ainda não há quadras em '+escapeHtml(city)+'. ':''}Escreva o local abaixo ou cadastre a quadra na aba Quadras para ela aparecer aqui.</div>`}`;
   invPickArena(hit?hit.id:(cur?'__outro':''),true);
 }
 function invPickArena(v,keep){
@@ -2756,7 +2756,7 @@ function renderArenas(){
   const el=$('arenas-list');if(!el)return;
   const nb=$('btn-new-arena');if(nb){nb.style.display=S.me?'':'none';nb.textContent='+ Cadastrar arena'}
   if(X.ok.arenas===false){el.innerHTML='<div class="empty"><b>🏟️</b>As quadras ainda não foram ativadas no banco de dados.<br>Avise o administrador.</div>';return}
-  const al=$('arena-location')?.value||'';const list=X.arenas.filter(a=>(a.active||arenaManager(a))&&(!al||sameCity(a.city,al)));
+  const al=$('arena-location')?.value||'';const list=X.arenas.filter(a=>(a.active||arenaManager(a))&&(!al||!a.city||sameCity(a.city,al)));
   if(!list.length){el.innerHTML='<div class="empty"><b>🏟️</b>Nenhuma quadra cadastrada ainda.'+(S.me?'<br>Cadastre a primeira no botão acima.':'<br>Entre para cadastrar uma quadra.')+'</div>';return}
   el.innerHTML=list.map(a=>{
     const mgr=arenaManager(a),adm=S.me&&eff()==='admin',num=String(a.whatsapp||'').replace(/\D/g,'');
@@ -2827,7 +2827,7 @@ function editArena(id){
   if(!S.me)return;
   const a=id?X.arenas.find(x=>x.id===id):null,F=$('arena-form').elements,adm=eff()==='admin';
   $('arena-modal-title').textContent=a?'Editar arena':'Cadastrar arena';
-  F.id.value=a?a.id:'';F.name.value=a?a.name:'';F.city.value=a?(a.city||''):'Caraguatatuba';F.address.value=a?(a.address||''):'';F.whatsapp.value=a?(a.whatsapp||''):'';
+  F.id.value=a?a.id:'';F.name.value=a?a.name:'';if(F.city._setCity)F.city._setCity(a?(a.city||''):userCity());else F.city.value=a?(a.city||''):'';F.address.value=a?(a.address||''):'';F.whatsapp.value=a?(a.whatsapp||''):'';
   F.price_hour.value=a?a.price_hour:'';F.courts.value=a?a.courts:2;F.open_time.value=a?a.open_time:'06:00';F.close_time.value=a?a.close_time:'22:00';F.slot_min.value=a?a.slot_min:60;F.note.value=a?(a.note||''):'';F.active.checked=a?a.active:true;F.photo_url.value=a?(a.photo_url||''):'';F.free.checked=!!(a&&a.free);F.reservable.checked=a?a.reservable!==false:true;arenaPhotoPrev();arenaFreeToggle();
   const og=$('arena-owner-group');og.style.display=adm?'':'none';
   F.owner.innerHTML='<option value="">Sem gestor (só o administrador)</option>'+S.profiles.filter(p=>!p.is_admin).map(p=>`<option value="${p.id}">${escapeHtml(p.name)}${p.role==='professor'?' · professor':''}</option>`).join('');
@@ -2839,9 +2839,10 @@ async function saveArena(e){
   const f=new FormData(e.target),id=f.get('id'),adm=eff()==='admin';
   const name=String(f.get('name')).trim(),ot=String(f.get('open_time')),ct=String(f.get('close_time'));
   if(name.length<2){toast('Informe o nome da arena.');return}
+  if(!String(f.get('city')||'').trim()){toast('Escolha o estado e o município da arena.');return}
   if(!/^\d{2}:\d{2}$/.test(ot)||!/^\d{2}:\d{2}$/.test(ct)||ct<=ot){toast('Confira os horários de abertura e fechamento.');return}
   const row={name,city:f.get('city')||null,address:String(f.get('address')||'').trim()||null,whatsapp:String(f.get('whatsapp')||'').replace(/\D/g,'')||null,price_hour:f.get('free')?0:(Number(f.get('price_hour'))||0),photo_url:String(f.get('photo_url')||'')||null,free:!!f.get('free'),reservable:!!f.get('reservable'),courts:Math.max(1,Math.min(20,parseInt(f.get('courts'),10)||1)),open_time:ot,close_time:ct,slot_min:parseInt(f.get('slot_min'),10)||60,note:String(f.get('note')||'').trim()||null,active:!!f.get('active')};
-  if(adm)row.owner=f.get('owner')||null;else if(!id)row.owner=S.me.id;
+  if(adm)row.owner=f.get('owner')||(id?null:S.me.id);else if(!id)row.owner=S.me.id;
   await run(async()=>{
     const go=r=>id?sb.from('arenas').update(r).eq('id',id):sb.from('arenas').insert(r);
     let {error}=await go(row);
