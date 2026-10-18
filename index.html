@@ -1897,88 +1897,159 @@ function loadImg(url){return new Promise(res=>{if(!/^https?:\/\//i.test(String(u
 async function tPoster(id){
   const t=S.tournaments.find(x=>x.id===id);if(!t)return;
   toast('Montando o cartaz…');
-  const W=1080,H=1350,cv=document.createElement('canvas');cv.width=W;cv.height=H;const x=cv.getContext('2d');
-  const LIME='#d4f23a',PAD=80;
-  const g2=x.createLinearGradient(0,0,W,H);g2.addColorStop(0,'#17623a');g2.addColorStop(.55,'#11452a');g2.addColorStop(1,'#07200f');
-  x.fillStyle=g2;x.fillRect(0,0,W,H);
+  try{await document.fonts.load('800 120px "Barlow Condensed"');await document.fonts.load('700 32px Inter');await document.fonts.ready}catch(e){}
+  const W=1080,H=1350,M=86,LIME='#d8f24a',cv=document.createElement('canvas');cv.width=W;cv.height=H;const x=cv.getContext('2d');
+  const DISP=w=>w+' "Barlow Condensed", Inter, sans-serif';
+  const BODY=w=>w+' Inter, system-ui, sans-serif';
+  const limpa=s=>String(s||'').replace(/[\u{1F000}-\u{1FAFF}\u{2190}-\u{2BFF}\u{FE0F}\u{2700}-\u{27BF}]/gu,'').replace(/\s+/g,' ').trim();
+  const sp=s=>String(s).split('').join(' ');
+  const fit=(txt,max,start,font)=>{let f=start;x.font=font(f);while(x.measureText(txt).width>max&&f>14){f-=2;x.font=font(f)}return f};
+  const wrap=(txt,max,start,font)=>{
+    let f=start,lines;
+    for(;;){
+      x.font=font(f);lines=[];let cur='';
+      for(const w of String(txt).split(' ')){const tst=cur?cur+' '+w:w;if(x.measureText(tst).width>max&&cur){lines.push(cur);cur=w}else cur=tst}
+      if(cur)lines.push(cur);
+      if(lines.length<=3&&lines.every(l=>x.measureText(l).width<=max))break;
+      f-=3;if(f<34)break;
+    }
+    return {f,lines:lines.slice(0,3)};
+  };
+  const fD=w=>(s=>DISP(w+' '+s+'px')),fB=w=>(s=>BODY(w+' '+s+'px'));
+  const card=(cx,cy,cw,ch,r,fill)=>{x.fillStyle=fill;x.beginPath();x.roundRect(cx,cy,cw,ch,r);x.fill()};
+
+  const bg=x.createLinearGradient(0,0,W*0.35,H);
+  bg.addColorStop(0,'#16603a');bg.addColorStop(.5,'#0d3f27');bg.addColorStop(1,'#06200f');
+  x.fillStyle=bg;x.fillRect(0,0,W,H);
   const bn=await loadImg(t.banner);
-  if(bn){const r=Math.max(W/bn.width,460/bn.height);x.save();x.beginPath();x.rect(0,0,W,460);x.clip();x.globalAlpha=.5;x.drawImage(bn,(W-bn.width*r)/2,(460-bn.height*r)/2,bn.width*r,bn.height*r);x.restore();
-    const gg=x.createLinearGradient(0,190,0,460);gg.addColorStop(0,'rgba(17,69,42,0)');gg.addColorStop(1,'#11452a');x.fillStyle=gg;x.fillRect(0,190,W,270)}
-  x.textAlign='center';
-  const fit=(txt,max,start,weight)=>{let f=start;x.font=weight+' '+f+'px sans-serif';while(x.measureText(txt).width>max&&f>20){f-=2;x.font=weight+' '+f+'px sans-serif'}return f};
-  const sp=(txt,px)=>{let o='';for(const ch of String(txt))o+=ch+' ';return o.trim()};
-  /* marca do clube */
-  x.fillStyle=LIME;x.font='800 26px sans-serif';x.fillText(sp(APP_NAME.toUpperCase()),W/2,92);
-  /* tipo de torneio */
-  x.fillStyle='#ffffff99';x.font='700 27px sans-serif';
-  x.fillText('TORNEIO DE '+(t.format==='simples'?'SIMPLES':'DUPLAS'),W/2,142);
-  /* nome */
-  const nm=String(t.name||'').toUpperCase(),fs=fit(nm,W-2*PAD,92,'800');
-  const lines=[];let cur='';
-  for(const w of nm.split(' ')){const tst=cur?cur+' '+w:w;if(x.measureText(tst).width>W-2*PAD&&cur){lines.push(cur);cur=w}else cur=tst}
-  if(cur)lines.push(cur);
-  const use=lines.slice(0,3),lh=Math.round(fs*1.08);
-  x.fillStyle='#fff';let y=272-(use.length-1)*lh/2;
-  use.forEach(l=>{x.fillText(l,W/2,y);y+=lh});
-  x.fillStyle=LIME;x.beginPath();x.roundRect(W/2-55,y-18,110,7,4);x.fill();
-  /* data */
+  if(bn){const r=Math.max(W/bn.width,H/bn.height);x.save();x.globalAlpha=.3;x.drawImage(bn,(W-bn.width*r)/2,(H-bn.height*r)/2,bn.width*r,bn.height*r);x.restore();
+    x.fillStyle='rgba(8,40,24,.55)';x.fillRect(0,0,W,H)}
+  const glow=x.createRadialGradient(W*0.86,120,0,W*0.86,120,640);
+  glow.addColorStop(0,'rgba(216,242,74,.20)');glow.addColorStop(1,'rgba(216,242,74,0)');
+  x.fillStyle=glow;x.fillRect(0,0,W,H);
+  x.save();x.strokeStyle='rgba(255,255,255,.055)';x.lineWidth=2;
+  for(let i=0;i<5;i++){const yy=980+i*95;x.beginPath();x.moveTo(-40,yy);x.lineTo(W+40,yy);x.stroke()}
+  x.beginPath();x.moveTo(W*0.5-70,980);x.lineTo(-120,H+40);x.stroke();
+  x.beginPath();x.moveTo(W*0.5+70,980);x.lineTo(W+120,H+40);x.stroke();
+  x.restore();
+  x.save();x.fillStyle='rgba(255,255,255,.035)';
+  for(let i=0;i<1100;i++){x.fillRect(Math.random()*W|0,Math.random()*H|0,2,2)}
+  x.restore();
+
+  x.save();
+  x.fillStyle=LIME;x.beginPath();x.arc(M+24,96,24,0,7);x.fill();
+  x.strokeStyle='#0d3f27';x.lineWidth=3.5;x.lineCap='round';
+  x.beginPath();x.arc(M-6,96,30,-0.78,0.78);x.stroke();
+  x.beginPath();x.arc(M+54,96,30,Math.PI-0.78,Math.PI+0.78);x.stroke();
+  x.restore();
+  x.textAlign='left';x.textBaseline='alphabetic';
+  x.fillStyle='#fff';x.font=BODY('800 21px');
+  x.fillText(sp(APP_NAME.toUpperCase()),M+62,103);
+  const aberto=t.status==='aberto';
+  const stTxt=aberto?'INSCRIÇÕES ABERTAS':(t.status==='encerrado'?'ENCERRADO':'CANCELADO');
+  x.font=BODY('800 19px');
+  const stW=x.measureText(sp(stTxt)).width+44;
+  card(W-M-stW,74,stW,46,23,aberto?LIME:'rgba(255,255,255,.14)');
+  x.fillStyle=aberto?'#0d3f27':'#ffffffcc';x.textAlign='center';
+  x.fillText(sp(stTxt),W-M-stW/2,104);
+
+  x.textAlign='left';
+  x.fillStyle=LIME;x.font=BODY('800 25px');
+  x.fillText(sp('TORNEIO DE '+(t.format==='simples'?'SIMPLES':'DUPLAS')),M,250);
+  const nm=limpa(t.name).toUpperCase(),H1=wrap(nm,W-2*M,108,fD('800'));
+  x.fillStyle='#fff';x.font=DISP('800 '+H1.f+'px');
+  const lh=Math.round(H1.f*.92),TOP=288,TH=292,bh0=lh*H1.lines.length,y0=TOP+Math.round((TH-bh0)/2);
+  let y=y0+Math.round(H1.f*0.76);
+  H1.lines.forEach(l=>{x.fillText(l,M,y);y+=lh});
+  card(M,y0+bh0+12,132,9,5,LIME);
+
   const d=new Date(String(t.day)+'T12:00:00');
-  const dia=d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long'}).toUpperCase();
+  const dia=String(d.getDate()).padStart(2,'0');
+  const mes=d.toLocaleDateString('pt-BR',{month:'short'}).replace('.','').toUpperCase();
   const sem=d.toLocaleDateString('pt-BR',{weekday:'long'});
-  x.fillStyle='#fff';fit(dia+'  ·  '+String(t.time||''),W-2*PAD,54,'800');
-  x.fillText(dia+'  ·  '+String(t.time||''),W/2,460);
-  x.fillStyle='#ffffffb0';x.font='500 32px sans-serif';
-  x.fillText(sem.charAt(0).toUpperCase()+sem.slice(1),W/2,508);
-  /* local e inscrição */
-  x.fillStyle='#ffffff14';x.beginPath();x.roundRect(PAD,566,W-2*PAD,198,28);x.fill();
-  x.fillStyle='#ffffff80';x.font='800 20px sans-serif';x.fillText(sp('ONDE'),W/2,610);
-  x.fillStyle='#fff';fit(String(t.arena||''),W-2*PAD-60,42,'700');x.fillText(String(t.arena||''),W/2,658);
-  x.fillStyle='#ffffffb0';x.font='500 30px sans-serif';x.fillText(String(t.city||''),W/2,700);
-  x.fillStyle=LIME;x.font='800 34px sans-serif';
-  x.fillText(t.fee>0?'INSCRIÇÃO '+money(t.fee):'INSCRIÇÃO GRATUITA',W/2,748);
-  /* premiação */
-  let cy=800;
-  if(t.prize){
-    x.fillStyle=LIME;x.beginPath();x.roundRect(PAD,cy,W-2*PAD,112,24);x.fill();
-    x.fillStyle='#0d3a22';x.font='800 20px sans-serif';x.fillText(sp('PREMIAÇÃO'),W/2,cy+42);
-    fit(String(t.prize),W-2*PAD-56,38,'800');x.fillText(String(t.prize),W/2,cy+88);
-    cy+=140;
+  const DY=608,DH=176;
+  card(M,DY,W-2*M,DH,30,'rgba(255,255,255,.08)');
+  card(M,DY,10,DH,5,LIME);
+  x.fillStyle='#fff';x.font=DISP('800 136px');x.textAlign='left';
+  x.fillText(dia,M+46,DY+130);
+  const dw=x.measureText(dia).width;
+  x.fillStyle=LIME;x.font=BODY('800 30px');x.fillText(mes,M+64+dw,DY+76);
+  x.fillStyle='#ffffffb3';x.font=BODY('600 25px');
+  x.fillText(sem.charAt(0).toUpperCase()+sem.slice(1),M+64+dw,DY+114);
+  x.textAlign='right';
+  x.fillStyle='#ffffff80';x.font=BODY('800 17px');x.fillText(sp('HORÁRIO'),W-M-46,DY+70);
+  x.fillStyle='#fff';x.font=DISP('800 76px');x.fillText(String(t.time||''),W-M-46,DY+140);
+
+  const IY=806,IH=160,g1=22,cw=W-2*M-g1,lw=Math.round(cw*0.60),rw=cw-lw;
+  card(M,IY,lw,IH,28,'rgba(255,255,255,.08)');
+  card(M+lw+g1,IY,rw,IH,28,'rgba(255,255,255,.08)');
+  x.textAlign='left';
+  x.fillStyle='#ffffff80';x.font=BODY('800 17px');x.fillText(sp('ONDE'),M+36,IY+52);
+  const an=limpa(t.arena);
+  x.fillStyle='#fff';x.font=fD('800')(fit(an,lw-72,50,fD('800')));x.fillText(an,M+36,IY+104);
+  const ci=limpa(t.city);
+  x.fillStyle='#ffffffb3';x.font=fB('600')(fit(ci,lw-72,24,fB('600')));x.fillText(ci,M+36,IY+140);
+  x.fillStyle='#ffffff80';x.font=BODY('800 17px');x.fillText(sp('INSCRIÇÃO'),M+lw+g1+34,IY+52);
+  const fee=t.fee>0?money(t.fee):'GRÁTIS';
+  x.fillStyle=LIME;x.font=fD('800')(fit(fee,rw-68,72,fD('800')));x.fillText(fee,M+lw+g1+34,IY+112);
+  const vagas=Math.max(0,(t.max_players||0)-tEntries(t.id).length);
+  x.fillStyle='#ffffffb3';x.font=BODY('600 22px');
+  x.fillText(aberto?(vagas>0?vagas+' vaga'+(vagas>1?'s':'')+' restante'+(vagas>1?'s':''):'Vagas esgotadas'):'',M+lw+g1+34,IY+144);
+
+  let PY=992;
+  const prize=limpa(t.prize);
+  if(prize){
+    const PH=100;card(M,PY,W-2*M,PH,26,LIME);
+    x.fillStyle='rgba(13,63,39,.62)';x.font=BODY('800 17px');x.textAlign='left';
+    x.fillText(sp('PREMIAÇÃO'),M+36,PY+38);
+    x.fillStyle='#0b3a22';x.font=fD('800')(fit(prize,W-2*M-72,48,fD('800')));
+    x.fillText(prize,M+36,PY+82);
   }
-  /* vagas */
-  const es=tEntries(t.id),vagas=Math.max(0,(t.max_players||0)-es.length);
-  x.fillStyle='#ffffffcc';x.font='600 30px sans-serif';
-  x.fillText(t.status==='aberto'?(vagas>0?vagas+' vaga'+(vagas>1?'s':'')+' de '+t.max_players+'  ·  inscrições abertas':'Vagas esgotadas'):'Torneio '+String(t.status||''),W/2,cy+32);
-  /* patrocínio */
-  const list=tSponsors(t),legado=!list.length&&t.sponsor?[{name:t.sponsor}]:[];
-  const all=(list.length?list:legado).slice(0,3);
-  if(all.length){
-    x.fillStyle='#ffffff80';x.font='800 21px sans-serif';x.fillText(sp('PATROCÍNIO'),W/2,1086);
-    const imgs=await Promise.all(all.map(s=>loadImg(s.logo)));
-    const gap=22,bw=Math.min(300,(W-2*PAD-gap*(all.length-1))/all.length),bh=132;
-    const total=bw*all.length+gap*(all.length-1),bx0=(W-total)/2;
-    all.forEach((s,i)=>{
-      const px=bx0+i*(bw+gap);
-      x.fillStyle='#fff';x.beginPath();x.roundRect(px,1120,bw,bh,20);x.fill();
-      const im=imgs[i];
-      if(im){const r=Math.min((bw-36)/im.width,(bh-36)/im.height);x.drawImage(im,px+(bw-im.width*r)/2,1120+(bh-im.height*r)/2,im.width*r,im.height*r)}
-      else{x.fillStyle='#0d3a22';const f2=fit(String(s.name||''),bw-32,27,'800');
-        const ws=String(s.name||'').split(' ');let l2=[],c2='';
-        for(const w of ws){const tt=c2?c2+' '+w:w;if(x.measureText(tt).width>bw-32&&c2){l2.push(c2);c2=w}else c2=tt}
-        if(c2)l2.push(c2);l2=l2.slice(0,2);
-        let yy=1120+bh/2-(l2.length-1)*(f2*0.6);
-        l2.forEach(l=>{x.fillText(l,px+bw/2,yy+f2*0.35);yy+=f2*1.15});
-      }
+
+  const lista=tSponsors(t),legado=!lista.length&&t.sponsor?[{name:t.sponsor}]:[];
+  const marcas=(lista.length?lista:legado).slice(0,3);
+  const BH=marcas.length?222:92,BY=H-BH;
+  x.fillStyle='rgba(4,24,13,.55)';x.fillRect(0,BY,W,BH);
+  x.fillStyle='rgba(216,242,74,.30)';x.fillRect(0,BY,W,2);
+  x.textAlign='center';
+  if(marcas.length){
+    x.fillStyle='#ffffff8c';x.font=BODY('800 17px');
+    x.fillText(sp('PATROCÍNIO'),W/2,BY+44);
+    const imgs=await Promise.all(marcas.map(s=>loadImg(s.logo)));
+    const g2=20,bh=104,alt=bh-32,maxW=(W-2*M-g2*(marcas.length-1))/marcas.length;
+    const larg=imgs.map((im,i)=>{
+      if(!im)return Math.min(maxW,240);
+      return Math.max(120,Math.min(maxW,im.width*(alt/im.height)+56));
     });
+    const total=larg.reduce((a,b)=>a+b,0)+g2*(marcas.length-1);
+    let px=(W-total)/2;
+    marcas.forEach((s,i)=>{
+      const bw=larg[i];
+      card(px,BY+62,bw,bh,20,'#fff');
+      const im=imgs[i];
+      if(im){const r=Math.min((bw-44)/im.width,alt/im.height);x.drawImage(im,px+(bw-im.width*r)/2,BY+62+(bh-im.height*r)/2,im.width*r,im.height*r)}
+      else{
+        const nmS=limpa(s.name),w2=wrap(nmS,bw-32,30,fD('800'));
+        x.fillStyle='#0b3a22';x.font=DISP('800 '+w2.f+'px');
+        let yy=BY+62+bh/2-(w2.lines.length-1)*w2.f*0.55+w2.f*0.34;
+        w2.lines.forEach(l=>{x.fillText(l,px+bw/2,yy);yy+=w2.f*1.1});
+      }
+      px+=bw+g2;
+    });
+    x.fillStyle='#ffffff73';x.font=BODY('600 22px');
+    x.fillText('Inscreva-se pelo app  ·  '+location.host,W/2,H-30);
+  }else{
+    x.fillStyle='#ffffff99';x.font=BODY('600 24px');
+    x.fillText('Inscreva-se pelo app  ·  '+location.host,W/2,BY+56);
   }
-  x.fillStyle='#ffffff8c';x.font='600 25px sans-serif';
-  x.fillText('Inscreva-se pelo app  ·  '+location.host,W/2,1300);
-  const file='torneio-'+String(t.name||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,30)+'.jpg';
+
+  const file='torneio-'+limpa(t.name).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,30)+'.jpg';
   cv.toBlob(async b=>{
     if(!b){toast('Não foi possível gerar o cartaz.');return}
     try{const f=new File([b],file,{type:'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:t.name});return}}catch(e){if(e&&e.name==='AbortError')return}
     const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=file;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
     toast('Cartaz salvo! Poste e marque os patrocinadores.');
-  },'image/jpeg',0.92);
+  },'image/jpeg',0.93);
 }
 function shareArena(id){
   const a=X.arenas.find(x=>x.id===id);if(!a)return;
