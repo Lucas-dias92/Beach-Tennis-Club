@@ -1410,15 +1410,15 @@ function gameCell(g){
   if(g.cancelled)return `<span class="status" style="background:#eceff0;color:#5f7a82">Anulada pelo administrador</span>`;
   if(!cap&&!g.done)return `<span class="status">O capitão da sua dupla informa o resultado</span>`;
   if(g.done){
-    const w=teamLabel(g,g.winner===g.a?'a':'b'),d=S.me&&g.deltas&&g.deltas[S.me.id]!=null?g.deltas[S.me.id]:null;
-    return `<span class="status">Encerrado</span><div class="small" style="margin-top:6px">Vencedor: ${escapeHtml(w)}${g.ranked===false?' · amistoso (sem pontos)':''}${outTag(g)}</div>${g.score?`<div class="scoreline">${escapeHtml(g.score)}</div>`:''}${d!=null?`<div class="small" style="margin-top:4px"><b style="color:${d>=0?'#14805a':'#b3261e'}">${d>0?'+':''}${d} pts</b> para você</div>`:''}${(g.suspicious&&S.me&&S.me.is_admin)?'<div class="small">🚩 marcada como suspeita</div>':''}${fbBox(g)}`;
+    const w=teamLink(g,g.winner===g.a?'a':'b'),d=S.me&&g.deltas&&g.deltas[S.me.id]!=null?g.deltas[S.me.id]:null;
+    return `<span class="status">Encerrado</span><div class="small" style="margin-top:6px">Vencedor: ${w}${g.ranked===false?' · amistoso (sem pontos)':''}${outTag(g)}</div>${g.score?`<div class="scoreline">${escapeHtml(g.score)}</div>`:''}${d!=null?`<div class="small" style="margin-top:4px"><b style="color:${d>=0?'#14805a':'#b3261e'}">${d>0?'+':''}${d} pts</b> para você</div>`:''}${(g.suspicious&&S.me&&S.me.is_admin)?'<div class="small">🚩 marcada como suspeita</div>':''}${fbBox(g)}`;
   }
   if(g.disputed){
     const eu=g.disputed_by===(S.me&&S.me.id);
     return `<span class="status" style="background:#ffe9d6;color:#8a4b00">⚖️ Em análise pelo administrador</span><div class="small" style="margin-top:6px">${eu?'Você contestou':'O adversário contestou'} o resultado${g.dispute_note?': “'+escapeHtml(g.dispute_note)+'”':''}. Ninguém pontua até a decisão.</div>${(S.me&&g.reported_by===S.me.id)?`<button class="btn btn-outline" style="margin-top:8px" onclick="retractResult('${g.id}')">Retirar meu resultado</button>`:''}`;
   }
   if(!g.winner)return `<div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-primary" onclick="reportWin('${g.id}')">Eu ganhei</button><button class="btn btn-outline" onclick="reportLoss('${g.id}')">Eu perdi</button></div>`;
-  const w=escapeHtml(teamLabel(g,g.winner===g.a?'a':'b'));
+  const w=teamLink(g,g.winner===g.a?'a':'b');
   const lim=g.reported_at?new Date(new Date(g.reported_at).getTime()+48*3600*1000):null;
   const prazo=lim?`<div class="small" style="margin-top:6px">Sem resposta até ${lim.toLocaleDateString('pt-BR')} ${lim.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}, vale o informado.</div>`:'';
   if(g.reported_by===S.me.id)return `<span class="status" style="background:#fff1d1;color:#8c6212">Aguardando adversário</span><div class="small" style="margin-top:6px">Você informou: ${w} venceu${outTag(g)}.</div>${g.score?`<div class="scoreline">${escapeHtml(g.score)}</div>`:''}${prazo}<button class="btn btn-outline" style="margin-top:8px" onclick="retractResult('${g.id}')">Retirar meu resultado</button>`;
@@ -1433,7 +1433,7 @@ function renderGames(){
   if(!html)html='<div class="small">Nenhum convite pendente no momento.</div>';
   if(S.sent.length)html+=`<div class="small" style="margin-top:16px;font-weight:700">Convites que você enviou</div>`+S.sent.map(r=>{const o=prof(r.invite.owner);return `<div class="agenda-item"><div class="person-avatar" style="background:${colorOf(o.name)}">${escapeHtml(ini(o.name))}</div><div style="flex:1"><strong style="font-size:13px">${escapeHtml(o.name)}</strong><div class="small">${fmtDate(r.invite.day)}, ${escapeHtml(r.invite.time)} · ${escapeHtml(r.invite.local)}</div><div style="margin-top:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="tag">Aguardando resposta</span><button class="btn btn-soft" style="padding:6px 12px" onclick="showPlayer('${r.invite.owner}')">Ver perfil</button></div></div></div>`}).join('');
   box.innerHTML=html;
-  body.innerHTML=S.games.length?[...S.games].sort((x,y)=>String(y.day).localeCompare(String(x.day))||String(y.time).localeCompare(String(x.time))).map(g=>{const a=prof(g.a),b=prof(g.b);return `<tr><td><strong>${escapeHtml(teamLabel(g,'a'))}</strong> × <strong>${escapeHtml(teamLabel(g,'b'))}</strong>${g.format?`<br><span class="fm">${FM[g.format]||''}</span>`:'<br>'}<span class="fm" style="background:${g.ranked===false?'#fff1d1;color:#8c6212':'#e0f7ec;color:#14805a'}">${g.ranked===false?'😎 Amistoso':'🏆 Vale ranking'}</span></td><td>${fmtDate(g.day)}<br>${escapeHtml(g.time)}</td><td>${escapeHtml(g.local)}${g.city?', '+escapeHtml(g.city):''}</td><td>${a.rank||0} pts × ${b.rank||0} pts</td><td>${gameCell(g)}</td></tr>`}).join(''):'<tr><td colspan="5" style="text-align:center;color:#688087;padding:30px">Nenhuma partida confirmada ainda. Convide alguém para começar!</td></tr>';
+  body.innerHTML=S.games.length?[...S.games].sort((x,y)=>String(y.day).localeCompare(String(x.day))||String(y.time).localeCompare(String(x.time))).map(g=>{const a=prof(g.a),b=prof(g.b);return `<tr><td><strong>${teamLink(g,'a')}</strong> × <strong>${teamLink(g,'b')}</strong>${g.format?`<br><span class="fm">${FM[g.format]||''}</span>`:'<br>'}<span class="fm" style="background:${g.ranked===false?'#fff1d1;color:#8c6212':'#e0f7ec;color:#14805a'}">${g.ranked===false?'😎 Amistoso':'🏆 Vale ranking'}</span></td><td>${fmtDate(g.day)}<br>${escapeHtml(g.time)}</td><td>${escapeHtml(g.local)}${g.city?', '+escapeHtml(g.city):''}</td><td>${a.rank||0} pts × ${b.rank||0} pts</td><td>${gameCell(g)}</td></tr>`}).join(''):'<tr><td colspan="5" style="text-align:center;color:#688087;padding:30px">Nenhuma partida confirmada ainda. Convide alguém para começar!</td></tr>';
 }
 function acceptInvite(reqId){
   const r=S.incoming.find(x=>x.id===reqId);if(!r)return;
@@ -2396,7 +2396,7 @@ function rkMine(){
     const d=g.deltas&&g.deltas[S.me.id]!=null?g.deltas[S.me.id]:null;
     const st=g.cancelled?'Anulada':g.disputed?'⚖️ Em análise':g.done?(g.ranked===false?'Amistoso':'Confirmada'):g.winner?'Aguardando confirmação':'Marcada';
     const won=g.done&&g.winner&&!g.cancelled?teamWon(g,S.me.id):null;
-    return `<div class="rk-game"><div class="rk-g-top"><b>${escapeHtml(teamLabel(g,'a'))} × ${escapeHtml(teamLabel(g,'b'))}</b><span class="tag">${st}</span></div><div class="small">${fmtDate(g.day)} · ${escapeHtml(g.time)} · ${escapeHtml(g.local||'')}${outTag(g)}</div>${g.score?`<div class="scoreline">${escapeHtml(g.score)}</div>`:''}${won!==null?`<div class="small"><b style="color:${won?'#14805a':'#b3261e'}">${won?'Vitória':'Derrota'}</b>${d!=null?` · ${d>0?'+':''}${d} pts`:''}</div>`:''}</div>`}).join('')}</div>`;
+    return `<div class="rk-game"><div class="rk-g-top"><b class="feed-line">${teamLink(g,'a')} × ${teamLink(g,'b')}</b><span class="tag">${st}</span></div><div class="small">${fmtDate(g.day)} · ${escapeHtml(g.time)} · ${escapeHtml(g.local||'')}${outTag(g)}</div>${g.score?`<div class="scoreline">${escapeHtml(g.score)}</div>`:''}${won!==null?`<div class="small"><b style="color:${won?'#14805a':'#b3261e'}">${won?'Vitória':'Derrota'}</b>${d!=null?` · ${d>0?'+':''}${d} pts`:''}</div>`:''}</div>`}).join('')}</div>`;
 }
 async function rkHist(my){
   const el=$('ranking-body'),mod=$('rk-hmod')?.value||'individual';
@@ -2974,6 +2974,12 @@ const PP={};
 function ppNorm(t){return String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim()}
 function inG(g,id){return !!id&&(g.a===id||g.b===id||g.a2===id||g.b2===id)}
 function teamWon(g,id){return (id===g.a||id===g.a2)?g.winner===g.a:g.winner===g.b}
+function teamLink(g,side){
+  const cid=side==='a'?g.a:g.b,p2=side==='a'?g.a2:g.b2,n2=side==='a'?g.a2_name:g.b2_name;
+  const nm=id=>`<button type="button" class="feed-nm" onclick="event.stopPropagation();showPlayer('${id}')">${escapeHtml(prof(id).name||'Jogador')}</button>`;
+  const cap=nm(cid),dup=p2?nm(p2):(n2?`<span>${escapeHtml(n2)}</span>`:'');
+  return dup?cap+' e '+dup:cap;
+}
 function teamLabel(g,side){
   const cap=prof(side==='a'?g.a:g.b).name||'Jogador',p2=side==='a'?g.a2:g.b2,n2=side==='a'?g.a2_name:g.b2_name;
   const pn=p2?(prof(p2).name||n2):n2;
