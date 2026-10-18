@@ -1728,7 +1728,7 @@ async function enablePush(){
   try{
     const perm=await Notification.requestPermission();
     if(perm!=='granted'){toast('Os avisos foram bloqueados. Libere a notificação do site nas configurações do navegador.');renderPushBox();return}
-    const reg=await navigator.serviceWorker.register('assets/sw.js',{scope:'/'});await navigator.serviceWorker.ready;
+    const reg=await navigator.serviceWorker.register('/assets/sw.js',{scope:'/'});await navigator.serviceWorker.ready;
     const sub=(await reg.pushManager.getSubscription())||(await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlB64(VAPID_PUBLIC)}));
     const j=sub.toJSON();
     const {error}=await sb.from('push_subscriptions').upsert({user_id:S.me.id,endpoint:j.endpoint,p256dh:j.keys.p256dh,auth:j.keys.auth},{onConflict:'endpoint'});
