@@ -1956,9 +1956,9 @@ async function tPoster(id){
   x.textAlign='left';
   x.fillStyle=LIME;x.font=BODY('800 25px');
   x.fillText(sp('TORNEIO DE '+(t.format==='simples'?'SIMPLES':'DUPLAS')),M,250);
-  const nm=limpa(t.name).toUpperCase(),H1=wrap(nm,W-2*M,108,fD('800'));
+  const nm=limpa(t.name).toUpperCase(),H1=wrap(nm,W-2*M,nm.length>30?92:108,fD('800'));
   x.fillStyle='#fff';x.font=DISP('800 '+H1.f+'px');
-  const lh=Math.round(H1.f*.92),TOP=288,TH=292,bh0=lh*H1.lines.length,y0=TOP+Math.round((TH-bh0)/2);
+  const lh=Math.round(H1.f*.92),TOP=268,TH=236,bh0=lh*H1.lines.length,y0=TOP+Math.round((TH-bh0)/2);
   let y=y0+Math.round(H1.f*0.76);
   H1.lines.forEach(l=>{x.fillText(l,M,y);y+=lh});
   card(M,y0+bh0+12,132,9,5,LIME);
@@ -1967,7 +1967,7 @@ async function tPoster(id){
   const dia=String(d.getDate()).padStart(2,'0');
   const mes=d.toLocaleDateString('pt-BR',{month:'short'}).replace('.','').toUpperCase();
   const sem=d.toLocaleDateString('pt-BR',{weekday:'long'});
-  const DY=608,DH=176;
+  const DY=520,DH=176;
   card(M,DY,W-2*M,DH,30,'rgba(255,255,255,.08)');
   card(M,DY,10,DH,5,LIME);
   x.fillStyle='#fff';x.font=DISP('800 136px');x.textAlign='left';
@@ -1980,7 +1980,7 @@ async function tPoster(id){
   x.fillStyle='#ffffff80';x.font=BODY('800 17px');x.fillText(sp('HORÁRIO'),W-M-46,DY+70);
   x.fillStyle='#fff';x.font=DISP('800 76px');x.fillText(String(t.time||''),W-M-46,DY+140);
 
-  const IY=806,IH=160,g1=22,cw=W-2*M-g1,lw=Math.round(cw*0.60),rw=cw-lw;
+  const IY=720,IH=160,g1=22,cw=W-2*M-g1,lw=Math.round(cw*0.60),rw=cw-lw;
   card(M,IY,lw,IH,28,'rgba(255,255,255,.08)');
   card(M+lw+g1,IY,rw,IH,28,'rgba(255,255,255,.08)');
   x.textAlign='left';
@@ -1996,7 +1996,7 @@ async function tPoster(id){
   x.fillStyle='#ffffffb3';x.font=BODY('600 22px');
   x.fillText(aberto?(vagas>0?vagas+' vaga'+(vagas>1?'s':'')+' restante'+(vagas>1?'s':''):'Vagas esgotadas'):'',M+lw+g1+34,IY+144);
 
-  let PY=992;
+  let PY=904;
   const prize=limpa(t.prize);
   if(prize){
     const PH=100;card(M,PY,W-2*M,PH,26,LIME);
@@ -2008,36 +2008,36 @@ async function tPoster(id){
 
   const lista=tSponsors(t),legado=!lista.length&&t.sponsor?[{name:t.sponsor}]:[];
   const marcas=(lista.length?lista:legado).slice(0,3);
-  const BH=marcas.length?222:92,BY=H-BH;
+  const BH=marcas.length?322:92,BY=H-BH;
   x.fillStyle='rgba(4,24,13,.55)';x.fillRect(0,BY,W,BH);
   x.fillStyle='rgba(216,242,74,.30)';x.fillRect(0,BY,W,2);
   x.textAlign='center';
   if(marcas.length){
-    x.fillStyle='#ffffff8c';x.font=BODY('800 17px');
-    x.fillText(sp('PATROCÍNIO'),W/2,BY+44);
+    x.fillStyle='#ffffffa6';x.font=BODY('800 21px');
+    x.fillText(sp('PATROCÍNIO'),W/2,BY+56);
     const imgs=await Promise.all(marcas.map(s=>loadImg(s.logo)));
-    const g2=20,bh=104,alt=bh-32,maxW=(W-2*M-g2*(marcas.length-1))/marcas.length;
+    const g2=22,bh=176,alt=bh-36,maxW=Math.min(560,(W-2*M-g2*(marcas.length-1))/marcas.length);
     const larg=imgs.map((im,i)=>{
-      if(!im)return Math.min(maxW,240);
-      return Math.max(120,Math.min(maxW,im.width*(alt/im.height)+56));
+      if(!im)return Math.min(maxW,320);
+      return Math.max(190,Math.min(maxW,im.width*(alt/im.height)+72));
     });
     const total=larg.reduce((a,b)=>a+b,0)+g2*(marcas.length-1);
     let px=(W-total)/2;
     marcas.forEach((s,i)=>{
       const bw=larg[i];
-      card(px,BY+62,bw,bh,20,'#fff');
+      card(px,BY+86,bw,bh,26,'#fff');
       const im=imgs[i];
-      if(im){const r=Math.min((bw-44)/im.width,alt/im.height);x.drawImage(im,px+(bw-im.width*r)/2,BY+62+(bh-im.height*r)/2,im.width*r,im.height*r)}
+      if(im){const r=Math.min((bw-56)/im.width,alt/im.height);x.drawImage(im,px+(bw-im.width*r)/2,BY+86+(bh-im.height*r)/2,im.width*r,im.height*r)}
       else{
-        const nmS=limpa(s.name),w2=wrap(nmS,bw-32,30,fD('800'));
+        const nmS=limpa(s.name),w2=wrap(nmS,bw-40,52,fD('800'));
         x.fillStyle='#0b3a22';x.font=DISP('800 '+w2.f+'px');
-        let yy=BY+62+bh/2-(w2.lines.length-1)*w2.f*0.55+w2.f*0.34;
+        let yy=BY+86+bh/2-(w2.lines.length-1)*w2.f*0.55+w2.f*0.34;
         w2.lines.forEach(l=>{x.fillText(l,px+bw/2,yy);yy+=w2.f*1.1});
       }
       px+=bw+g2;
     });
     x.fillStyle='#ffffff73';x.font=BODY('600 22px');
-    x.fillText('Inscreva-se pelo app  ·  '+location.host,W/2,H-30);
+    x.fillText('Inscreva-se pelo app  ·  '+location.host,W/2,H-36);
   }else{
     x.fillStyle='#ffffff99';x.font=BODY('600 24px');
     x.fillText('Inscreva-se pelo app  ·  '+location.host,W/2,BY+56);
