@@ -413,6 +413,9 @@ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 .q-head span{font:800 22px var(--display);color:#14805a}
 .q-head small{font:600 12px var(--body);color:var(--muted)}
 .q-card ul{margin:0 0 12px;padding-left:18px;font-size:13.5px;line-height:1.55;color:var(--ink)}
+body:has(.modal-backdrop.open) .botnav,body:has(.modal-backdrop.open) .help-fab,body:has(.modal-backdrop.open) #chat-fab,body:has(.modal-backdrop.open) .sb-fab{display:none!important}
+.modal form>.btn-primary{position:sticky;bottom:-2px;z-index:4;box-shadow:0 -16px 16px 8px #fff,0 8px 20px #c0592b40}
+.modal{padding-bottom:max(22px,env(safe-area-inset-bottom,0px))}
 /* ===== AJUSTES PARA CELULAR ===== */
 .dashboard>*,.panel,.cards>*,.page{min-width:0}
 @media(max-width:960px){.dashboard{grid-template-columns:minmax(0,1fr)}}
