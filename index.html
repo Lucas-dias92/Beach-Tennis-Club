@@ -1792,6 +1792,7 @@ async function payLessonPix(id){
 
 /* ===== TORNEIOS ===== */
 function tEntries(id){return S.entries.filter(e=>e.tournament_id===id)}
+function semColunaNova(e){const m=((e&&(e.message||e.details))||'')+'';return /prize|sponsors|banner/.test(m)&&/column|schema cache/i.test(m)}
 function tSponsors(t){try{const a=t.sponsors;return Array.isArray(a)?a.filter(s=>s&&(s.name||s.logo)).slice(0,6):[]}catch(e){return []}}
 function sponsorStrip(t){
   const sp=tSponsors(t);const legado=!sp.length&&t.sponsor?[{name:t.sponsor}]:[];
@@ -1872,7 +1873,9 @@ function editSponsors(id){
     const list=[0,1,2].map(i=>({name:($('sp-n-'+i).value||'').trim(),logo:($('sp-u-'+i).value||'').trim(),link:($('sp-l-'+i).value||'').trim()})).filter(s=>s.name||s.logo);
     const prize=($('sp-prize').value||'').trim()||null,banner=($('sp-banner').value||'').trim()||null;
     closeModal('message-modal');
-    run(async()=>{const {error}=await sb.from('tournaments').update({sponsors:list,prize,banner}).eq('id',id);if(!fail(error))toast('Patrocinadores salvos.')});
+    run(async()=>{const {error}=await sb.from('tournaments').update({sponsors:list,prize,banner}).eq('id',id);
+      if(error&&semColunaNova(error)){toast('Rode a atualização do banco de dados para usar os patrocinadores.');return}
+      if(!fail(error))toast('Patrocinadores salvos.')});
   };
   a.appendChild(b);openModal('message-modal');
 }
@@ -2004,7 +2007,12 @@ $('tournament-form').addEventListener('submit',e=>{e.preventDefault();
   if(!date){toast('Use a data no formato dia/mês/ano, ex.: 20/12/2026.');return}
   run(async()=>{
     const row={name:String(f.get('name')).trim(),day:date,time:f.get('time'),arena:String(f.get('arena')).trim(),city:f.get('city'),format:f.get('format'),fee:Number(f.get('fee')||0),max_players:Number(f.get('max')||16),sponsor:String(f.get('sponsor')||'').trim()||null,prize:String(f.get('prize')||'').trim()||null,description:String(f.get('description')||'').trim()||null,pix_key:String(f.get('pix')||'').trim()||null,created_by:S.me.id};
-    const {error}=await sb.from('tournaments').insert(row);
+    let {error}=await sb.from('tournaments').insert(row);
+    if(error&&semColunaNova(error)){
+      const {prize,sponsors,banner,...basico}=row;
+      ({error}=await sb.from('tournaments').insert(basico));
+      if(!error)toast('Torneio criado. A premiação só aparece depois de atualizar o banco de dados.');
+    }
     if(fail(error))return;
     e.target.reset();closeModal('tournament-modal');toast('Torneio criado!');
   });
