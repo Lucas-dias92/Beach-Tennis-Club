@@ -22,6 +22,26 @@
     {
       "source": "/sitemap.xml",
       "destination": "/assets/seo/sitemap.xml"
+    },
+    {
+      "source": "/t/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/q/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/p/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/j/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/c/:id",
+      "destination": "/index.html"
     }
   ]
 }

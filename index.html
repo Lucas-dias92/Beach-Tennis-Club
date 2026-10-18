@@ -1756,7 +1756,11 @@ function isPro(p){return !!p&&(proForAll()||p.plan==='pro')}
 const pixCache={};
 async function loadPix(tid){if(!tid)return '';if(tid in pixCache)return pixCache[tid];try{const r=await sb.rpc('get_lesson_pix',{p_teacher:tid});pixCache[tid]=r.data||''}catch(e){pixCache[tid]=''}return pixCache[tid]}
 function copyText(txt,msg){try{navigator.clipboard.writeText(txt).then(()=>toast(msg||'Copiado!'),()=>toast('Não foi possível copiar. Selecione e copie manualmente.'))}catch(e){toast('Não foi possível copiar.')}}
-function siteLink(k,id){return location.origin+'/?'+k+'='+encodeURIComponent(id)+(S.me?'&ref='+encodeURIComponent(S.me.id):'')}
+function siteLink(k,id){
+  const PR={torneio:'t',quadra:'q',professor:'p',jogador:'j',convite:'c'},s=String(id).slice(0,8);
+  const base=location.origin+'/'+(PR[k]||'t')+'/'+s;
+  return base+(S.me?'?r='+String(S.me.id).slice(0,8):'');
+}
 function teacherLink(id){return location.origin+location.pathname.replace(/index\.html$/,'')+'?professor='+id}
 function renderProPanel(){
   const box=$('pro-panel');if(!box)return;
@@ -3398,30 +3402,34 @@ function openHelp(){
 let DEEP=null;
 function netBanner(){const b=document.getElementById('net-banner');if(b)b.hidden=navigator.onLine!==false}
 addEventListener('online',()=>{netBanner();try{refresh().then(renderAll)}catch(e){}});addEventListener('offline',netBanner);setTimeout(netBanner,0);
+function deepFind(list,short){const s=String(short||'').toLowerCase();return (list||[]).find(x=>String(x.id).toLowerCase()===s)||(s.length>=6?(list||[]).find(x=>String(x.id).toLowerCase().startsWith(s)):null)}
 function openDeep(tries){
   if(!DEEP)return;
   const {k,id}=DEEP,n=tries||0;
   const retry=msg=>{if(n<15){setTimeout(()=>openDeep(n+1),400);return}DEEP=null;if(msg)toast(msg)};
   if(k==='torneio'||k==='quadra'){
     if(n===0)goPage(k==='torneio'?'torneios':'quadras');
-    const el=document.getElementById((k==='torneio'?'t-':'a-')+id);
+    const alvo=deepFind(k==='torneio'?S.tournaments:X.arenas,id);
+    const el=alvo?document.getElementById((k==='torneio'?'t-':'a-')+alvo.id):null;
     if(!el)return retry(k==='torneio'?'Esse torneio não está mais disponível.':'Essa quadra não está mais disponível.');
     DEEP=null;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('deep-hit');return;
   }
   if(k==='professor'){
     if(n===0)goPage('professores');
-    if(!(S.profiles||[]).some(p=>p.id===id))return retry('Esse professor não está mais disponível.');
-    DEEP=null;openTeacherView(id);return;
+    const p=deepFind(S.profiles,id);
+    if(!p)return retry('Esse professor não está mais disponível.');
+    DEEP=null;openTeacherView(p.id);return;
   }
   if(!S.me){if(n===0){toast('Entre ou cadastre-se para ver o convite.');openAuth('login')}return}
   if(k==='convite'){
-    const i=(S.invites||[]).find(x=>x.id===id);
+    const i=deepFind(S.invites,id);
     if(!i)return retry('Esse convite não está mais disponível.');
     DEEP=null;goPage('membros');showPlayer(i.owner);return;
   }
   if(k==='jogador'){
-    if(!(S.profiles||[]).some(p=>p.id===id))return retry('Perfil não encontrado.');
-    DEEP=null;goPage('membros');showPlayer(id);
+    const p=deepFind(S.profiles,id);
+    if(!p)return retry('Perfil não encontrado.');
+    DEEP=null;goPage('membros');showPlayer(p.id);
   }
 }
 function applyGender(){
@@ -3435,9 +3443,11 @@ function applyRef(){
   if(!S.me)return;
   let r=null;try{r=localStorage.getItem('btc-ref')}catch(e){}
   if(!r)return;
+  const p=deepFind(S.profiles,r);
+  if(!p){if((S.profiles||[]).length)try{localStorage.removeItem('btc-ref')}catch(e){};return}
   try{localStorage.removeItem('btc-ref')}catch(e){}
-  if(r===S.me.id)return;
-  sb.rpc('set_referrer',{p_ref:r}).then(()=>{},()=>{});
+  if(p.id===S.me.id)return;
+  sb.rpc('set_referrer',{p_ref:p.id}).then(()=>{},()=>{});
 }
 function renderAll(){applyRef();applyGender();if(DEEP)setTimeout(()=>openDeep(),0);renderOnboard();fillCityFilters();renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges();renderPulses();renderChatBadge();renderRankChart();renderRanking();renderArenas();renderMyBookings();renderPkgPanel();renderMyPackages()}
 
@@ -3469,8 +3479,15 @@ sb.auth.onAuthStateChange(ev=>{if(ev==='PASSWORD_RECOVERY'){reset-modal.classLis
 document.querySelectorAll('form select[name=city]').forEach(sel=>makeCityPicker(sel,{noRequired:!!sel.closest('#auth-form')}));
 fillCityFilters();
 syncAuth();
-(async()=>{try{await refresh()}catch(e){toast('Não foi possível conectar ao banco.')}renderAll();try{const sp=new URLSearchParams(location.search);const rf=sp.get('ref');if(rf&&/^[0-9a-f-]{36}$/i.test(rf)){try{localStorage.setItem('btc-ref',rf)}catch(e){}}
-  const k=['professor','convite','jogador','torneio','quadra'].find(x=>sp.get(x));if(k){DEEP={k,id:sp.get(k)};openDeep()}
-  if(k||rf)history.replaceState(null,'',location.pathname)}catch(e){}})();
+(async()=>{try{await refresh()}catch(e){toast('Não foi possível conectar ao banco.')}renderAll();try{
+  const sp=new URLSearchParams(location.search),PR={t:'torneio',q:'quadra',p:'professor',j:'jogador',c:'convite'};
+  let k=null,id=null;
+  const mp=/^\/([tqpjc])\/([0-9a-f][0-9a-f-]{5,35})\/?$/i.exec(location.pathname);
+  if(mp){k=PR[mp[1].toLowerCase()];id=mp[2]}
+  else{k=['professor','convite','jogador','torneio','quadra'].find(x=>sp.get(x));if(k)id=sp.get(k)}
+  const rf=sp.get('r')||sp.get('ref');
+  if(rf&&/^[0-9a-f-]{6,36}$/i.test(rf)){try{localStorage.setItem('btc-ref',rf)}catch(e){}}
+  if(k&&id){DEEP={k,id};openDeep()}
+  if(k||rf)history.replaceState(null,'','/')}catch(e){}})();
 
 </script></body></html>
