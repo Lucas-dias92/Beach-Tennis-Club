@@ -406,6 +406,13 @@ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 .t-sell-n span{font-size:11.5px;color:#ffffffbb}
 .sp-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:end;margin-bottom:8px}
 .sp-row .sp-file{grid-column:1/-1}
+.q-card{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;background:var(--white)}
+.q-card.q-top{border-color:#12382a;background:#f3faf0}
+.q-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.q-head b{font:800 20px var(--display);color:var(--navy)}
+.q-head span{font:800 22px var(--display);color:#14805a}
+.q-head small{font:600 12px var(--body);color:var(--muted)}
+.q-card ul{margin:0 0 12px;padding-left:18px;font-size:13.5px;line-height:1.55;color:var(--ink)}
 /* ===== AJUSTES PARA CELULAR ===== */
 .dashboard>*,.panel,.cards>*,.page{min-width:0}
 @media(max-width:960px){.dashboard{grid-template-columns:minmax(0,1fr)}}
@@ -1843,26 +1850,59 @@ function sellNums(city){
 }
 function sellHtml(){
   const n=sellNums($('tour-location')?.value||'');
-  return `<div class="t-sell"><h3>🤝 Sua marca na quadra</h3><p>Os torneios do ${APP_NAME} reúnem jogadores da região em um só lugar. Quem patrocina aparece no cartaz do torneio, na página de inscrição e em cada divulgação no WhatsApp e nas redes.</p><div class="t-sell-n"><div><b>${n.jog}</b><span>jogadores no app</span></div><div><b>${n.torneios}</b><span>torneios criados</span></div><div><b>${n.inscritos}</b><span>inscrições feitas</span></div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="openSponsorKit()">Quero patrocinar</button>${eff()==='admin'?'<button class="btn btn-soft" onclick="copySponsorPitch()">Copiar proposta</button>':''}</div></div>`;
+  return `<div class="t-sell"><h3>🤝 Sua marca na quadra</h3><p>Os torneios do ${APP_NAME} reúnem jogadores da região em um só lugar. Quem patrocina aparece no cartaz do torneio, na página de inscrição e em cada divulgação no WhatsApp e nas redes.</p><div class="t-sell-n"><div><b>${n.jog}</b><span>jogadores no app</span></div><div><b>${n.torneios}</b><span>torneios criados</span></div><div><b>${n.inscritos}</b><span>inscrições feitas</span></div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="openSponsorKit()">Quero patrocinar</button>${eff()==='admin'?'<button class="btn btn-soft" onclick="copySponsorPitch()">Copiar proposta</button><button class="btn btn-soft" onclick="editQuotas()">Valores das cotas</button>':''}</div></div>`;
 }
+const QUOTA_DEF=[
+  {k:'apoio',n:'Apoio',p:150,ben:['Logo no cartaz do torneio','Logo na página de inscrição']},
+  {k:'oficial',n:'Oficial',p:325,ben:['Logo grande no cartaz','Logo e link na página de inscrição','Citação em toda divulgação do torneio','Entrega da premiação']},
+  {k:'principal',n:'Principal',p:650,vaga:'Apenas 1 por torneio',ben:['Nome da marca no título do torneio','Destaque máximo no cartaz','Logo e link na página de inscrição','Citação em toda divulgação','Entrega da premiação','Post exclusivo da marca nas redes']}
+];
+function sponsorQuotas(){
+  let ov={};try{ov=JSON.parse((S.settings&&S.settings.sponsor_quotas)||'{}')||{}}catch(e){}
+  return QUOTA_DEF.map(q=>({...q,p:Number(ov[q.k]&&ov[q.k].p)>0?Number(ov[q.k].p):q.p}));
+}
+function sponsorPack(){let d=15;try{const v=Number(JSON.parse((S.settings&&S.settings.sponsor_quotas)||'{}').desc);if(v>=0&&v<=50)d=v}catch(e){}return d}
 function sponsorPitch(){
-  const n=sellNums('');
-  return `Patrocínio ${APP_NAME}\n\nO ${APP_NAME} reúne a comunidade de ${APP_SPORT} da região: ${n.jog} jogadores cadastrados, ${n.torneios} torneios criados e ${n.inscritos} inscrições feitas.\n\nO que a sua marca recebe:\n• Logo no cartaz oficial do torneio (usado no Instagram e no WhatsApp)\n• Logo e link na página de inscrição, vista por todos os inscritos\n• Citação em cada divulgação do torneio\n• Presença na entrega da premiação\n\nFormatos de apoio: dinheiro, produtos para a premiação, bolas, espaço ou brindes.\n\nFale comigo para montar a cota do seu negócio.`;
+  const n=sellNums(''),qs=sponsorQuotas(),d=sponsorPack();
+  return `Patrocínio ${APP_NAME}\n\nO ${APP_NAME} reúne a comunidade de ${APP_SPORT} da região: ${n.jog} jogadores cadastrados, ${n.torneios} torneios criados e ${n.inscritos} inscrições feitas.\n\n`+
+    qs.map(q=>`*Cota ${q.n} — ${money(q.p)} por torneio*${q.vaga?' ('+q.vaga+')':''}\n`+q.ben.map(b=>'• '+b).join('\n')).join('\n\n')+
+    `\n\nPacote de 3 torneios: ${d}% de desconto.\nAceitamos também produtos e serviços para a premiação, no valor equivalente.\n\nFale comigo para montar a cota do seu negócio.`;
 }
 function copySponsorPitch(){copyText(sponsorPitch(),'Proposta copiada! É só colar no WhatsApp.')}
-function openSponsorKit(){
-  const n=sellNums('');
-  $('message-title').textContent='Patrocinar um torneio';
-  $('message-text').innerHTML=`<div style="line-height:1.65">A sua marca aparece no <b>cartaz do torneio</b>, na <b>página de inscrição</b> e em cada divulgação feita pelos jogadores.<br><br><b>Hoje o app tem:</b><br>• ${n.jog} jogadores cadastrados<br>• ${n.torneios} torneios criados<br>• ${n.inscritos} inscrições feitas<br>• ${n.jogos} partidas registradas<br><br><b>Como apoiar:</b> dinheiro, produtos para a premiação, bolas, brindes ou o espaço da quadra.<br><br>Toque abaixo para falar com a organização.</div>`;
-  const a=$('message-actions');a.innerHTML='';
+function sponsorAsk(k){
+  const q=sponsorQuotas().find(x=>x.k===k)||sponsorQuotas()[0];
   const admin=(S.profiles||[]).find(p=>p.is_admin&&p.contact);
-  const b=document.createElement('button');b.className='btn btn-primary';b.style.width='100%';b.textContent='Falar com a organização';
-  b.onclick=()=>{closeModal('message-modal');if(admin&&admin.contact)openWhatsApp(String(admin.contact).replace(/\D/g,''),'Olá! Tenho interesse em patrocinar um torneio do '+APP_NAME+'.');else copyText(sponsorPitch(),'Proposta copiada! Envie para a organização.')};
-  a.appendChild(b);
-  const c=document.createElement('button');c.className='btn btn-outline';c.style.cssText='width:100%;margin-top:8px';c.textContent='Copiar proposta de patrocínio';
-  c.onclick=()=>copyText(sponsorPitch(),'Proposta copiada!');
-  a.appendChild(c);
+  const msg='Olá! Tenho interesse na cota '+q.n+' ('+money(q.p)+') de patrocínio de um torneio do '+APP_NAME+'.';
+  closeModal('message-modal');
+  if(admin&&admin.contact)openWhatsApp(String(admin.contact).replace(/\D/g,''),msg);else copyText(msg,'Mensagem copiada! Envie para a organização.');
+}
+function openSponsorKit(){
+  const n=sellNums(''),qs=sponsorQuotas(),d=sponsorPack();
+  $('message-title').textContent='Patrocinar um torneio';
+  $('message-text').innerHTML=`<div style="line-height:1.55;margin-bottom:12px">Sua marca no <b>cartaz</b>, na <b>página de inscrição</b> e em cada divulgação. Hoje o app tem <b>${n.jog} jogadores</b>, <b>${n.torneios} torneios</b> e <b>${n.inscritos} inscrições</b>.</div>`+
+    qs.map((q,i)=>`<div class="q-card${i===2?' q-top':''}"><div class="q-head"><b>${escapeHtml(q.n)}</b><span>${money(q.p)}<small> / torneio</small></span></div>${q.vaga?`<div class="small" style="margin-bottom:4px">${escapeHtml(q.vaga)}</div>`:''}<ul>${q.ben.map(b=>'<li>'+escapeHtml(b)+'</li>').join('')}</ul><button class="btn ${i===1?'btn-primary':'btn-outline'}" style="width:100%" onclick="sponsorAsk('${q.k}')">Quero a cota ${escapeHtml(q.n)}</button></div>`).join('')+
+    `<div class="small" style="line-height:1.5">Pacote de 3 torneios com <b>${d}% de desconto</b>. Aceitamos também produtos e serviços para a premiação, no valor equivalente.</div>`;
+  const a=$('message-actions');a.innerHTML='';
+  const c=document.createElement('button');c.className='btn btn-outline';c.style.cssText='width:100%;margin-top:6px';c.textContent='Copiar proposta completa';
+  c.onclick=()=>copyText(sponsorPitch(),'Proposta copiada!');a.appendChild(c);
   openModal('message-modal');
+}
+function editQuotas(){
+  const qs=sponsorQuotas(),d=sponsorPack();
+  $('message-title').textContent='Valores das cotas';
+  $('message-text').innerHTML=`<div class="small" style="margin-bottom:10px;line-height:1.5">Os valores aparecem para quem toca em "Quero patrocinar" e na proposta copiada.</div>`+
+    qs.map(q=>`<div style="margin-bottom:8px"><label class="small" for="qp-${q.k}">Cota ${escapeHtml(q.n)} (R$ por torneio)</label><input class="field" id="qp-${q.k}" type="number" min="0" step="10" value="${q.p}"></div>`).join('')+
+    `<div><label class="small" for="qp-desc">Desconto do pacote de 3 torneios (%)</label><input class="field" id="qp-desc" type="number" min="0" max="50" value="${d}"></div>`;
+  const a=$('message-actions');a.innerHTML='';
+  const b=document.createElement('button');b.className='btn btn-primary';b.style.cssText='width:100%;margin-top:10px';b.textContent='Salvar valores';
+  b.onclick=()=>{
+    const o={desc:Math.max(0,Math.min(50,Number($('qp-desc').value)||0))};
+    QUOTA_DEF.forEach(q=>{o[q.k]={p:Math.max(0,Number($('qp-'+q.k).value)||q.p)}});
+    closeModal('message-modal');
+    run(async()=>{const {error}=await sb.rpc('admin_set_setting',{p_key:'sponsor_quotas',p_value:JSON.stringify(o)});
+      if(!fail(error)){S.settings=S.settings||{};S.settings.sponsor_quotas=JSON.stringify(o);toast('Valores salvos.');renderTournaments()}});
+  };
+  a.appendChild(b);openModal('message-modal');
 }
 function editSponsors(id){
   const t=S.tournaments.find(x=>x.id===id);if(!t)return;
