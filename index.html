@@ -3398,30 +3398,30 @@ function openHelp(){
 let DEEP=null;
 function netBanner(){const b=document.getElementById('net-banner');if(b)b.hidden=navigator.onLine!==false}
 addEventListener('online',()=>{netBanner();try{refresh().then(renderAll)}catch(e){}});addEventListener('offline',netBanner);setTimeout(netBanner,0);
-function openDeep(){
+function openDeep(tries){
   if(!DEEP)return;
-  const {k,id}=DEEP;
-  if(k==='professor'){DEEP=null;if(S.profiles.some(p=>p.id===id)){goPage('professores');openTeacherView(id)}return}
-  if(k==='quadra'){
-    DEEP=null;goPage('quadras');
-    setTimeout(()=>{const el=document.getElementById('a-'+id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('deep-hit')}else toast('Essa quadra não está mais disponível.')},500);
-    return;
+  const {k,id}=DEEP,n=tries||0;
+  const retry=msg=>{if(n<15){setTimeout(()=>openDeep(n+1),400);return}DEEP=null;if(msg)toast(msg)};
+  if(k==='torneio'||k==='quadra'){
+    if(n===0)goPage(k==='torneio'?'torneios':'quadras');
+    const el=document.getElementById((k==='torneio'?'t-':'a-')+id);
+    if(!el)return retry(k==='torneio'?'Esse torneio não está mais disponível.':'Essa quadra não está mais disponível.');
+    DEEP=null;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('deep-hit');return;
   }
-  if(k==='torneio'){
-    DEEP=null;goPage('torneios');
-    setTimeout(()=>{const el=document.getElementById('t-'+id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('deep-hit')}else toast('Esse torneio não está mais disponível.')},350);
-    return;
+  if(k==='professor'){
+    if(n===0)goPage('professores');
+    if(!(S.profiles||[]).some(p=>p.id===id))return retry('Esse professor não está mais disponível.');
+    DEEP=null;openTeacherView(id);return;
   }
-  if(!S.me){toast('Entre ou cadastre-se para ver o convite.');openAuth('login');return}
-  DEEP=null;
+  if(!S.me){if(n===0){toast('Entre ou cadastre-se para ver o convite.');openAuth('login')}return}
   if(k==='convite'){
-    const i=S.invites.find(x=>x.id===id);
-    if(!i){toast('Esse convite não está mais disponível.');goPage('membros');return}
-    goPage('membros');showPlayer(i.owner);return;
+    const i=(S.invites||[]).find(x=>x.id===id);
+    if(!i)return retry('Esse convite não está mais disponível.');
+    DEEP=null;goPage('membros');showPlayer(i.owner);return;
   }
   if(k==='jogador'){
-    if(!S.profiles.some(p=>p.id===id)){toast('Perfil não encontrado.');return}
-    goPage('membros');showPlayer(id);
+    if(!(S.profiles||[]).some(p=>p.id===id))return retry('Perfil não encontrado.');
+    DEEP=null;goPage('membros');showPlayer(id);
   }
 }
 function applyGender(){
@@ -3439,7 +3439,7 @@ function applyRef(){
   if(r===S.me.id)return;
   sb.rpc('set_referrer',{p_ref:r}).then(()=>{},()=>{});
 }
-function renderAll(){applyRef();applyGender();if(DEEP&&S.me)setTimeout(openDeep,0);renderOnboard();fillCityFilters();renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges();renderPulses();renderChatBadge();renderRankChart();renderRanking();renderArenas();renderMyBookings();renderPkgPanel();renderMyPackages()}
+function renderAll(){applyRef();applyGender();if(DEEP)setTimeout(()=>openDeep(),0);renderOnboard();fillCityFilters();renderPushGlobal();renderViewBar();renderProfileBox();renderStats();renderMembers();renderHomeMembers();renderTeachers();renderGames();renderArea();renderMyLessons();renderEarnings();renderTournaments();renderProPanel();renderPeople();renderBadges();renderPulses();renderChatBadge();renderRankChart();renderRanking();renderArenas();renderMyBookings();renderPkgPanel();renderMyPackages()}
 
 ['member-search','member-location','member-level','member-format','member-sort'].forEach(id=>$(id).addEventListener('input',renderMembers));
 $('member-location').addEventListener('input',()=>renderPulses());
